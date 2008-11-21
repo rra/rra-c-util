@@ -95,7 +95,7 @@ extern xmalloc_handler_t xmalloc_error_handler;
 /* Miscellaneous utility functions. */
 extern void *concat(const char *, ...);
 extern ssize_t xwrite(int fd, const void *buffer, size_t size);
-extern ssize_t xwritev(int fd, const struct iovec iov[], int iovcnt);
+extern ssize_t xwritev(int fd, const struct iovec *iov, int iovcnt);
 
 END_DECLS
 

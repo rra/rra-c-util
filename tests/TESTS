@@ -1,0 +1,8 @@
+portable/inet_aton
+portable/inet_ntoa
+portable/setenv
+portable/snprintf
+util/concat
+util/error
+util/xmalloc
+util/xwrite
