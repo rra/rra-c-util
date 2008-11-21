@@ -1,27 +1,26 @@
-/* $Id$
+/*
+ * Replacement for a missing or broken inet_ntoa.
+ *
+ * Provides the same functionality as the standard library routine inet_ntoa
+ * for those platforms that don't have it or where it doesn't work right (such
+ * as on IRIX when using gcc to compile).  inet_ntoa is not thread-safe since
+ * it uses static storage (inet_ntop should be used instead when available).
+ *
+ * Written by Russ Allbery <rra@stanford.edu>
+ * This work is hereby placed in the public domain by its author.
+ */
 
-   Replacement for a missing or broken inet_ntoa.
+#include <config.h>
+#include <portable/system.h>
+#include <portable/socket.h>
 
-   Written by Russ Allbery <rra@stanford.edu>
-   This work is hereby placed in the public domain by its author.
-
-   Provides the same functionality as the standard library routine inet_ntoa
-   for those platforms that don't have it or where it doesn't work right
-   (such as on IRIX when using gcc to compile).  inet_ntoa is not
-   thread-safe since it uses static storage (inet_ntop should be used
-   instead when available). */
-
-#include "config.h"
-
-/* BSDI needs sys/types.h before netinet/in.h. */
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <stdio.h>
-
-/* If we're running the test suite, rename inet_ntoa to avoid conflicts with
-   the system version. */
+/*
+ * If we're running the test suite, rename inet_ntoa to avoid conflicts with
+ * the system version.
+ */
 #if TESTING
 # define inet_ntoa test_inet_ntoa
+const char *test_inet_ntoa(const struct in_addr);
 #endif
 
 const char *

@@ -1,12 +1,33 @@
-/* $Id$ */
-/* Test suite for xwrite and xwritev. */
+/*
+ * Test suite for xwrite and xwritev.
+ *
+ * Copyright (c) 2004, 2005, 2006
+ *     by Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
+ *     2002, 2003 by The Internet Software Consortium and Rich Salz
+ *
+ * This code is derived from software contributed to the Internet Software
+ * Consortium by Rich Salz.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND ISC DISCLAIMS ALL WARRANTIES WITH
+ * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS.  IN NO EVENT SHALL ISC BE LIABLE FOR ANY SPECIAL, DIRECT,
+ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+ * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
+ * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
 
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
+#include <config.h>
+#include <portable/system.h>
+#include <portable/uio.h>
 
-#include "librutil.h"
+#include <tests/libtest.h>
+#include <util/util.h>
 
 /* The data array we'll use to do testing. */
 char data[256];
@@ -17,8 +38,9 @@ extern size_t write_offset;
 extern int write_interrupt;
 extern int write_fail;
 
+
 static void
-ok(int n, int status, int total)
+test_write(int n, int status, int total)
 {
     int success;
 
@@ -28,49 +50,60 @@ ok(int n, int status, int total)
         printf("  status %d, total %d\n", status, total);
 }
 
+
 int
 main(void)
 {
     int i;
     struct iovec iov[4];
 
-    puts("11");
-    for (i = 0; i < 256; i++) data[i] = i;
-    ok(1, xwrite(0, data, 256), 256);
+    test_init(19);
+
+    /* Test xwrite. */
+    for (i = 0; i < 256; i++)
+        data[i] = i;
+    test_write(1, xwrite(0, data, 256), 256);
     write_offset = 0;
     write_interrupt = 1;
     memset(data, 0, 256);
-    ok(2, xwrite(0, data, 256), 256);
+    test_write(2, xwrite(0, data, 256), 256);
     write_offset = 0;
-    for (i = 0; i < 32; i++) data[i] = i * 2;
-    ok(3, xwrite(0, data, 32), 32);
-    for (i = 32; i < 65; i++) data[i] = i * 2;
-    ok(4, xwrite(0, data + 32, 33), 33);
+    for (i = 0; i < 32; i++)
+        data[i] = i * 2;
+    test_write(3, xwrite(0, data, 32), 32);
+    for (i = 32; i < 65; i++)
+        data[i] = i * 2;
+    test_write(4, xwrite(0, data + 32, 33), 33);
     write_offset = 0;
     write_interrupt = 0;
+
+    /* Test xwritev. */
     memset(data, 0, 256);
     iov[0].iov_base = data;
     iov[0].iov_len = 256;
-    ok(5, xwritev(0, iov, 1), 256);
+    test_write(5, xwritev(0, iov, 1), 256);
     write_offset = 0;
-    for (i = 0; i < 256; i++) data[i] = i;
+    for (i = 0; i < 256; i++)
+        data[i] = i;
     iov[0].iov_len = 128;
     iov[1].iov_base = &data[128];
     iov[1].iov_len = 16;
     iov[2].iov_base = &data[144];
     iov[2].iov_len = 112;
-    ok(6, xwritev(0, iov, 3), 256);
+    test_write(6, xwritev(0, iov, 3), 256);
     write_offset = 0;
     write_interrupt = 1;
     memset(data, 0, 256);
     iov[0].iov_len = 32;
     iov[1].iov_base = &data[32];
     iov[1].iov_len = 224;
-    ok(7, xwritev(0, iov, 2), 256);
-    for (i = 0; i < 32; i++) data[i] = i * 2;
+    test_write(7, xwritev(0, iov, 2), 256);
+    for (i = 0; i < 32; i++)
+        data[i] = i * 2;
     write_offset = 0;
-    ok(8, xwritev(0, iov, 1), 32);
-    for (i = 32; i < 65; i++) data[i] = i * 2;
+    test_write(8, xwritev(0, iov, 1), 32);
+    for (i = 32; i < 65; i++)
+        data[i] = i * 2;
     iov[0].iov_base = &data[32];
     iov[0].iov_len = 16;
     iov[1].iov_base = &data[48];
@@ -79,13 +112,39 @@ main(void)
     iov[2].iov_len = 8;
     iov[3].iov_base = &data[57];
     iov[3].iov_len = 8;
-    ok(9, xwritev(0, iov, 4), 33);
+    test_write(9, xwritev(0, iov, 4), 33);
     write_offset = 0;
     write_interrupt = 0;
+
+    /* Test xpwrite. */
+    for (i = 0; i < 256; i++)
+        data[i] = i;
+    test_write(10, xpwrite(0, data, 256, 0), 256);
+    write_interrupt = 1;
+    memset(data + 1, 0, 255);
+    test_write(11, xpwrite(0, data + 1, 255, 1), 255);
+    for (i = 0; i < 32; i++)
+        data[i + 32] = i * 2;
+    test_write(12, xpwrite(0, data + 32, 32, 32), 32);
+    for (i = 32; i < 65; i++)
+        data[i + 32] = i * 2;
+    test_write(13, xpwrite(0, data + 64, 33, 64), 33);
+    write_interrupt = 0;
+
+    /* Test failures. */
     write_fail = 1;
-    ok(10, xwrite(0, data + 1, 255), -1);
+    test_write(14, xwrite(0, data + 1, 255), -1);
     iov[0].iov_base = data + 1;
     iov[0].iov_len = 255;
-    ok(11, xwritev(0, iov, 1), -1);
+    test_write(15, xwritev(0, iov, 1), -1);
+    test_write(16, xpwrite(0, data + 1, 255, 0), -1);
+
+    /* Test zero-length writes. */
+    test_write(17, xwrite(0, "   ", 0), 0);
+    test_write(18, xpwrite(0, "   ", 0, 2), 0);
+    iov[0].iov_base = data + 1;
+    iov[0].iov_len = 2;
+    test_write(19, xwritev(0, iov, 0), 0);
+
     return 0;
 }

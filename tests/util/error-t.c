@@ -18,7 +18,7 @@
 # include <unistd.h>
 #endif
 
-#include "librutil.h"
+#include "portable/system.h"
 
 #define END     (char *) 0
 
