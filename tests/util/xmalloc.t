@@ -40,7 +40,7 @@ runfailure () {
 
 # Find where the helper program is.
 xmalloc=xmalloc
-for file in ./xmalloc t/xmalloc ../xmalloc ; do
+for file in ./xmalloc tests/util/xmalloc util/xmalloc ; do
     [ -x $file ] && xmalloc=$file
 done
 

@@ -9,7 +9,7 @@
 
 # Find where the test suite is.
 setenv=setenv.tr
-for file in ./setenv.tr replace/setenv.tr t/replace/setenv.tr ; do
+for file in ./setenv.tr portable/setenv.tr tests/portable/setenv.tr ; do
     [ -x $file ] && setenv=$file
 done
 
