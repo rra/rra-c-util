@@ -1,5 +1,4 @@
 #! /bin/sh
-# $Id$
 #
 # mkusage -- Generate usage.c from from USAGE.
 #
