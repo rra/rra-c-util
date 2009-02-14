@@ -15,20 +15,7 @@ dnl     by Internet Systems Consortium, Inc. ("ISC")
 dnl Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
 dnl     2002, 2003 by The Internet Software Consortium and Rich Salz
 dnl
-dnl This code is derived from software contributed to the Internet Software
-dnl Consortium by Rich Salz.
-dnl
-dnl Permission to use, copy, modify, and distribute this software for any
-dnl purpose with or without fee is hereby granted, provided that the above
-dnl copyright notice and this permission notice appear in all copies.
-dnl
-dnl THE SOFTWARE IS PROVIDED "AS IS" AND ISC DISCLAIMS ALL WARRANTIES WITH
-dnl REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-dnl MERCHANTABILITY AND FITNESS.  IN NO EVENT SHALL ISC BE LIABLE FOR ANY
-dnl SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-dnl WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-dnl ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-dnl OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+dnl See LICENSE for licensing terms.
 
 dnl Source used by RRA_FUNC_GETADDRINFO_ADDRCONFIG.
 AC_DEFUN([_RRA_FUNC_GETADDRINFO_ADDRCONFIG_SOURCE], [[
