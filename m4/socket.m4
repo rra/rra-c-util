@@ -3,14 +3,14 @@ dnl
 dnl This is a collection of various Autoconf macros for checking networking
 dnl and socket properties.  The macros provided are:
 dnl
+dnl     RRA_FUNC_GETADDRINFO_ADDRCONFIG
 dnl     RRA_MACRO_IN6_ARE_ADDR_EQUAL
 dnl     RRA_MACRO_SA_LEN
 dnl
-dnl Most of them use a separate internal source macro to make the code easier
-dnl to read.
+dnl They use a separate internal source macro to make the code easier to read.
 dnl
 dnl Copyright 2008, 2009 Board of Trustees, Leland Stanford Jr. University
-dnl Copyright (c) 2004, 2005, 2006, 2007
+dnl Copyright (c) 2004, 2005, 2006, 2007, 2008, 2009
 dnl     by Internet Systems Consortium, Inc. ("ISC")
 dnl Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
 dnl     2002, 2003 by The Internet Software Consortium and Rich Salz
@@ -29,6 +29,36 @@ dnl SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 dnl WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 dnl ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 dnl OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+dnl Source used by RRA_FUNC_GETADDRINFO_ADDRCONFIG.
+AC_DEFUN([_RRA_FUNC_GETADDRINFO_ADDRCONFIG_SOURCE], [[
+#include <netdb.h>
+#include <sys/socket.h>
+
+int
+main(void) {
+    struct addrinfo hints, *ai;
+
+    memset(&hints, 0, sizeof(hints));
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_ADDRCONFIG;
+    return (getaddrinfo("localhost", NULL, &hints, &ai) != 0);
+}
+]])
+
+dnl Check whether the AI_ADDRCONFIG flag works properly with getaddrinfo.
+dnl If so, set HAVE_GETADDRINFO_ADDRCONFIG.
+AC_DEFUN([RRA_FUNC_GETADDRINFO_ADDRCONFIG],
+[AC_CACHE_CHECK([for working AI_ADDRCONFIG flag],
+    [rra_cv_func_getaddrinfo_addrconfig_works],
+    [AC_RUN_IFELSE(AC_LANG_SOURCE([_RRA_FUNC_GETADDRINFO_ADDRCONFIG_SOURCE]),
+        [rra_cv_func_getaddrinfo_addrconfig_works=yes],
+        [rra_cv_func_getaddrinfo_addrconfig_works=no],
+        [rra_cv_func_getaddrinfo_addrconfig_works=no])])
+ AS_IF([test x"$rra_cv_func_getaddrinfo_addrconfig_works" = xyes],
+    [AC_DEFINE([HAVE_GETADDRINFO_ADDRCONFIG], 1,
+        [Define if the AI_ADDRCONFIG flag works with getaddrinfo.])])])
 
 dnl Source used by INN_IN6_EQ_BROKEN.  Test borrowed from a bug report by
 dnl tmoestl@gmx.net for glibc.

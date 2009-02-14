@@ -188,9 +188,19 @@ struct sockaddr_storage {
 #endif /* !HAVE_SA_LEN_MACRO */
 
 /*
+ * AI_ADDRCONFIG results in an error from getaddrinfo on BSD/OS and possibly
+ * other platforms.  If configure determined it didn't work, pretend it
+ * doesn't exist.
+ */
+#if !defined(HAVE_GETADDRINFO_ADDRCONFIG) && defined(AI_ADDRCONFIG)
+# undef AI_ADDRCONFIG
+#endif
+
+/*
  * POSIX requires AI_ADDRCONFIG and AI_NUMERICSERV, but some implementations
- * don't have them yet.  It's only used in a bitwise OR of flags, so defining
- * them to 0 makes them harmlessly go away.
+ * don't have them yet.  We also may have hidden AI_ADDRCONFIG if it doesn't
+ * work.  It's only used in a bitwise OR of flags, so defining them to 0 makes
+ * them harmlessly go away.
  */
 #ifndef AI_ADDRCONFIG
 # define AI_ADDRCONFIG 0

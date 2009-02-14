@@ -63,9 +63,12 @@ RRA_MACRO_IN6_ARE_ADDR_EQUAL
 RRA_MACRO_SA_LEN
 RRA_FUNC_INET_NTOA
 RRA_FUNC_SNPRINTF
+AC_CHECK_FUNCS([getaddrinfo],
+    [RRA_FUNC_GETADDRINFO_ADDRCONFIG],
+    [AC_LIBOBJ([getaddrinfo])])
 AC_CHECK_FUNCS([setrlimit setsid])
-AC_REPLACE_FUNCS([asprintf daemon getaddrinfo getnameinfo getopt inet_aton \
-                  inet_ntop setenv strlcat strlcpy])
+AC_REPLACE_FUNCS([asprintf daemon getnameinfo getopt inet_aton inet_ntop \
+                  setenv strlcat strlcpy])
 
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_HEADER([config.h])
