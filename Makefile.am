@@ -23,7 +23,8 @@ portable_libportable_a_SOURCES = portable/dummy.c portable/getaddrinfo.h \
 	portable/uio.h
 portable_libportable_a_LIBADD = $(LIBOBJS)
 util_libutil_a_SOURCES = util/concat.c util/fdflag.c util/messages.c \
-	util/network.c util/vector.c util/xmalloc.c util/xwrite.c
+	util/messages-die.c util/network.c util/vector.c util/xmalloc.c \
+	util/xwrite.c
 
 # Work around the GNU Coding Standards, which leave all the Autoconf and
 # Automake stuff around after make maintainer-clean, thus making that command

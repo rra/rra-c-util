@@ -1,5 +1,5 @@
 /*
- * Message and error reporting (possibly fatal).
+ * Message and error reporting (non-fatal).
  *
  * Usage:
  *
@@ -104,10 +104,6 @@ static message_handler_func stderr_handlers[2] = {
 static message_handler_func *debug_handlers  = NULL;
 static message_handler_func *notice_handlers = stdout_handlers;
 static message_handler_func *warn_handlers   = stderr_handlers;
-static message_handler_func *die_handlers    = stderr_handlers;
-
-/* If non-NULL, called before exit and its return value passed to exit. */
-int (*message_fatal_cleanup)(void) = NULL;
 
 /* If non-NULL, prepended (followed by ": ") to messages. */
 const char *message_program_name = NULL;
@@ -149,7 +145,6 @@ message_handlers(message_handler_func **list, int count, va_list args)
 HANDLER_FUNCTION(debug)
 HANDLER_FUNCTION(notice)
 HANDLER_FUNCTION(warn)
-HANDLER_FUNCTION(die)
 
 
 /*
@@ -346,43 +341,4 @@ syswarn(const char *format, ...)
         (**log)(length, format, args, error);
         va_end(args);
     }
-}
-
-void
-die(const char *format, ...)
-{
-    va_list args;
-    message_handler_func *log;
-    int length;
-
-    va_start(args, format);
-    length = vsnprintf(NULL, 0, format, args);
-    va_end(args);
-    if (length >= 0)
-        for (log = die_handlers; *log != NULL; log++) {
-            va_start(args, format);
-            (**log)(length, format, args, 0);
-            va_end(args);
-        }
-    exit(message_fatal_cleanup ? (*message_fatal_cleanup)() : 1);
-}
-
-void
-sysdie(const char *format, ...)
-{
-    va_list args;
-    message_handler_func *log;
-    int length;
-    int error = errno;
-
-    va_start(args, format);
-    length = vsnprintf(NULL, 0, format, args);
-    va_end(args);
-    if (length >= 0)
-        for (log = die_handlers; *log != NULL; log++) {
-            va_start(args, format);
-            (**log)(length, format, args, error);
-            va_end(args);
-        }
-    exit(message_fatal_cleanup ? (*message_fatal_cleanup)() : 1);
 }
