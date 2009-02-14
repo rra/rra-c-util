@@ -8,10 +8,10 @@ dnl dependencies is requested.
 dnl
 dnl Provides the macro RRA_LIB_KRB5 and sets the substitution variables
 dnl KRB5_CPPFLAGS, KRB5_LDFLAGS, and KRB5_LIBS.  Also provides
-dnl RRA_LIB_KRB5_SET to set CPPFLAGS, LDFLAGS, and LIBS to include the
-dnl Kerberos libraries; RRA_LIB_KRB5_SWITCH to do the same but save the
-dnl current values first; and RRA_LIB_KRB5_RESTORE to restore those settings
-dnl to before the last RRA_LIB_KRB5_SWITCH.
+dnl RRA_LIB_KRB5_SWITCH to set CPPFLAGS, LDFLAGS, and LIBS to include the
+dnl Kerberos libraries, saving the current values first, and
+dnl RRA_LIB_KRB5_RESTORE to restore those settings to before the last
+dnl RRA_LIB_KRB5_SWITCH.
 dnl
 dnl Provides the RRA_LIB_KRB5_OPTIONAL macro, which should be used if Kerberos
 dnl support is optional.  This macro will still always set the substitution
@@ -31,13 +31,6 @@ dnl     Board of Trustees, Leland Stanford Jr. University
 dnl
 dnl See LICENSE for licensing terms.
 
-dnl Set CPPFLAGS, LDFLAGS, and LIBS to values including the Kerberos v5
-dnl settings.
-AC_DEFUN([RRA_LIB_KRB5_SET],
-[CPPFLAGS="$KRB5_CPPFLAGS $CPPFLAGS"
- LDFLAGS="$KRB5_LDFLAGS $LDFLAGS"
- LIBS="$KRB5_LIBS $LIBS"])
-
 dnl Save the current CPPFLAGS, LDFLAGS, and LIBS settings and switch to
 dnl versions that include the Kerberos v5 flags.  Used as a wrapper, with
 dnl RRA_LIB_KRB5_RESTORE, around tests.
@@ -45,7 +38,9 @@ AC_DEFUN([RRA_LIB_KRB5_SWITCH],
 [rra_krb5_save_CPPFLAGS="$CPPFLAGS"
  rra_krb5_save_LDFLAGS="$LDFLAGS"
  rra_krb5_save_LIBS="$LIBS"
- RRA_LIB_KRB5_SET])
+ CPPFLAGS="$KRB5_CPPFLAGS $CPPFLAGS"
+ LDFLAGS="$KRB5_LDFLAGS $LDFLAGS"
+ LIBS="$KRB5_LIBS $LIBS"])
 
 dnl Restore CPPFLAGS, LDFLAGS, and LIBS to their previous values (before
 dnl RRA_LIB_KRB5_SWITCH was called).

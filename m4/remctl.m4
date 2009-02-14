@@ -7,10 +7,10 @@ dnl libraries.
 dnl
 dnl Provides the macro RRA_LIB_REMCTL and sets the substitution variables
 dnl REMCTL_CPPFLAGS, REMCTL_LDFLAGS, and REMCTL_LIBS.  Also provides
-dnl RRA_LIB_REMCTL_SET to set CPPFLAGS, LDFLAGS, and LIBS to include the
-dnl remctl libraries; RRA_LIB_REMCTL_SWITCH to do the same but save the
-dnl current values first; and RRA_LIB_REMCTL_RESTORE to restore those settings
-dnl to before the last RRA_LIB_REMCTL_SWITCH.
+dnl RRA_LIB_REMCTL_SWITCH to set CPPFLAGS, LDFLAGS, and LIBS to include the
+dnl remctl libraries, saving the current values first, and
+dnl RRA_LIB_REMCTL_RESTORE to restore those settings to before the last
+dnl RRA_LIB_REMCTL_SWITCH.
 dnl
 dnl Depends on RRA_ENABLE_REDUCED_DEPENDS, RRA_SET_LDFLAGS, and
 dnl RRA_LIB_GSSAPI.
@@ -20,13 +20,6 @@ dnl Copyright 2008, 2009 Board of Trustees, Leland Stanford Jr. University
 dnl
 dnl See LICENSE for licensing terms.
 
-dnl Set CPPFLAGS, LDFLAGS, and LIBS to values including the Kerberos v5
-dnl settings.
-AC_DEFUN([RRA_LIB_REMCTL_SET],
-[CPPFLAGS="$REMCTL_CPPFLAGS $CPPFLAGS"
- LDFLAGS="$REMCTL_LDFLAGS $LDFLAGS"
- LIBS="$REMCTL_LIBS $LIBS"])
-
 dnl Save the current CPPFLAGS, LDFLAGS, and LIBS settings and switch to
 dnl versions that include the Kerberos v5 flags.  Used as a wrapper, with
 dnl RRA_LIB_REMCTL_RESTORE, around tests.
@@ -34,7 +27,9 @@ AC_DEFUN([RRA_LIB_REMCTL_SWITCH],
 [rra_remctl_save_CPPFLAGS="$CPPFLAGS"
  rra_remctl_save_LDFLAGS="$LDFLAGS"
  rra_remctl_save_LIBS="$LIBS"
- RRA_LIB_REMCTL_SET])
+ CPPFLAGS="$REMCTL_CPPFLAGS $CPPFLAGS"
+ LDFLAGS="$REMCTL_LDFLAGS $LDFLAGS"
+ LIBS="$REMCTL_LIBS $LIBS"])
 
 dnl Restore CPPFLAGS, LDFLAGS, and LIBS to their previous values (before
 dnl RRA_LIB_REMCTL_SWITCH was called).

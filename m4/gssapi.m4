@@ -7,10 +7,9 @@ dnl Uses krb5-config where available unless reduced dependencies is requested.
 dnl
 dnl Provides the macro RRA_LIB_GSSAPI and sets the substitution variables
 dnl GSSAPI_CPPFLAGS, GSSAPI_LDFLAGS, and GSSAPI_LIBS.  Also provides
-dnl RRA_LIB_GSSAPI_SET to set CPPFLAGS, LDFLAGS, and LIBS to include the
-dnl GSS-API libraries; RRA_LIB_GSSAPI_SWITCH to do the same but save the
-dnl current values first; and RRA_LIB_GSSAPI_RESTORE to restore those settings
-dnl to before the last RRA_LIB_GSSAPI_SWITCH.
+dnl RRA_LIB_GSSAPI_SWITCH to set CPPFLAGS, LDFLAGS, and LIBS to include the
+dnl GSS-API libraries, saving the ecurrent values, and RRA_LIB_GSSAPI_RESTORE
+dnl to restore those settings to before the last RRA_LIB_GSSAPI_SWITCH.
 dnl
 dnl Depends on RRA_ENABLE_REDUCED_DEPENDS and RRA_SET_LDFLAGS.
 dnl
@@ -20,12 +19,6 @@ dnl     Board of Trustees, Leland Stanford Jr. University
 dnl
 dnl See LICENSE for licensing terms.
 
-dnl Set CPPFLAGS, LDFLAGS, and LIBS to values including the GSS-API settings.
-AC_DEFUN([RRA_LIB_GSSAPI_SET],
-[CPPFLAGS="$GSSAPI_CPPFLAGS $CPPFLAGS"
- LDFLAGS="$GSSAPI_LDFLAGS $LDFLAGS"
- LIBS="$GSSAPI_LIBS $LIBS"])
-
 dnl Save the current CPPFLAGS, LDFLAGS, and LIBS settings and switch to
 dnl versions that include the GSS-API flags.  Used as a wrapper, with
 dnl RRA_LIB_GSSAPI_RESTORE, around tests.
@@ -33,7 +26,9 @@ AC_DEFUN([RRA_LIB_GSSAPI_SWITCH],
 [rra_gssapi_save_CPPFLAGS="$CPPFLAGS"
  rra_gssapi_save_LDFLAGS="$LDFLAGS"
  rra_gssapi_save_LIBS="$LIBS"
- RRA_LIB_GSSAPI_SET])
+ CPPFLAGS="$GSSAPI_CPPFLAGS $CPPFLAGS"
+ LDFLAGS="$GSSAPI_LDFLAGS $LDFLAGS"
+ LIBS="$GSSAPI_LIBS $LIBS"])
 
 dnl Restore CPPFLAGS, LDFLAGS, and LIBS to their previous values (before
 dnl RRA_LIB_GSSAPI_SWITCH was called).
