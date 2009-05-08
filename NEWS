@@ -1,0 +1,32 @@
+                     User-Visible rra-c-util Changes
+
+rra-c-util 1.0
+
+    Initial public release based on the portability code that shipped with
+    remctl 2.13 with some additional files from other current releases of
+    my software packages.  The changes below are relative to that version.
+
+    Separate out the message functions that call exit to a separate source
+    file and therefore a separate object file.  This will mean that shared
+    libraries that don't call die won't link this file and hence won't
+    include a reference to exit, which will avoid errors from some package
+    test tools.
+
+    On BSD/OS, despite the AI_ADDRCONFIG flag being present in the system
+    headers, passing it into getaddrinfo results in an error.  Test for
+    this at configure time and, if it doesn't work, hide the system
+    AI_ADDRCONFIG definition.
+
+    Remove RRA_LIB_*_SET functions.  When using Automake, one should never
+    put one's own flags into the CPPFLAGS, CFLAGS, and LDFLAGS variables,
+    since the user may override them.  Instead, AM_* versions should be
+    set in Makefile.am.  This can be done using the existing substitution
+    variables, so the *_SET functions were always wrong.
+
+    Declare message_fatal_cleanup extern in util.h.  Fixes compilation
+    problems on Mac OS X and probably elsewhere.
+
+    Change from AC_TRY_* to AC_*_IFELSE for all Autoconf macros.
+
+    Specify a mode when creating a sentinel in the daemon test.  This
+    fixes compiler warnings with newer gcc.
