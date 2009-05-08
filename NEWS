@@ -28,5 +28,9 @@ rra-c-util 1.0
 
     Change from AC_TRY_* to AC_*_IFELSE for all Autoconf macros.
 
+    Update the example configure.ac for Autoconf 2.63, adding
+    AC_CONFIG_MACRO_DIR and using AC_USE_SYSTEM_EXTENSIONS instead of
+    AC_AIX and AC_GNU_SOURCE.
+
     Specify a mode when creating a sentinel in the daemon test.  This
     fixes compiler warnings with newer gcc.
