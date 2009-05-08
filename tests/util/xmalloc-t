@@ -93,28 +93,28 @@ runsuccess "v" "3500000" "0"
 # We assume that there are enough miscellaneous allocations that an allocation
 # exactly as large as the limit will always fail.
 runfailure "m" "3500000" "3500000" \
-    "failed to malloc 3500000 bytes at xmalloc.c line 61"
+    "failed to malloc 3500000 bytes at xmalloc.c line 48"
 runfailure "r" "3500000" "3500000" \
-    "failed to realloc 3500000 bytes at xmalloc.c line 89"
+    "failed to realloc 3500000 bytes at xmalloc.c line 76"
 runfailure "s" "3500000" "3500000" \
-    "failed to strdup 3500000 bytes at xmalloc.c line 120"
+    "failed to strdup 3500000 bytes at xmalloc.c line 107"
 runfailure "n" "3500000" "3500000" \
-    "failed to strndup 3500000 bytes at xmalloc.c line 147"
+    "failed to strndup 3500000 bytes at xmalloc.c line 134"
 runfailure "c" "3500000" "3500000" \
-    "failed to calloc 3500000 bytes at xmalloc.c line 171"
+    "failed to calloc 3500000 bytes at xmalloc.c line 158"
 runfailure "a" "3500000" "3500000" \
-    "failed to asprintf 3500000 bytes at xmalloc.c line 196"
+    "failed to asprintf 3500000 bytes at xmalloc.c line 183"
 runfailure "v" "3500000" "3500000" \
-    "failed to vasprintf 3500000 bytes at xmalloc.c line 216"
+    "failed to vasprintf 3500000 bytes at xmalloc.c line 203"
 
 # Check our custom error handler.
-runfailure "M" "3500000" "3500000" "malloc 3500000 xmalloc.c 61"
-runfailure "R" "3500000" "3500000" "realloc 3500000 xmalloc.c 89"
-runfailure "S" "3500000" "3500000" "strdup 3500000 xmalloc.c 120"
-runfailure "N" "3500000" "3500000" "strndup 3500000 xmalloc.c 147"
-runfailure "C" "3500000" "3500000" "calloc 3500000 xmalloc.c 171"
-runfailure "A" "3500000" "3500000" "asprintf 3500000 xmalloc.c 196"
-runfailure "V" "3500000" "3500000" "vasprintf 3500000 xmalloc.c 216"
+runfailure "M" "3500000" "3500000" "malloc 3500000 xmalloc.c 48"
+runfailure "R" "3500000" "3500000" "realloc 3500000 xmalloc.c 76"
+runfailure "S" "3500000" "3500000" "strdup 3500000 xmalloc.c 107"
+runfailure "N" "3500000" "3500000" "strndup 3500000 xmalloc.c 134"
+runfailure "C" "3500000" "3500000" "calloc 3500000 xmalloc.c 158"
+runfailure "A" "3500000" "3500000" "asprintf 3500000 xmalloc.c 183"
+runfailure "V" "3500000" "3500000" "vasprintf 3500000 xmalloc.c 203"
 
 # Check the smaller ones again just for grins.
 runsuccess "m" "21" "3500000"
