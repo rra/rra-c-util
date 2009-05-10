@@ -33,6 +33,14 @@ AC_SEARCH_LIBS([socket], [socket], ,
     [AC_CHECK_LIB([nsl], [socket], [LIBS="-lnsl -lsocket $LIBS"], ,
         [-lsocket])])
 
+dnl Probe for Kerberos.  This is only needed for packages that use Kerberos,
+dnl of course.
+RRA_LIB_KRB5
+RRA_LIB_KRB5_SWITCH
+AC_CHECK_FUNCS([krb5_get_init_creds_opt_set_default_flags])
+AC_CHECK_TYPES([krb5_realm], , , [#include <krb5.h>])
+RRA_LIB_KRB5_RESTORE
+
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
 dnl only used by fdflag.
