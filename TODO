@@ -1,5 +1,10 @@
                           rra-c-util To-Do List
 
+portable:
+
+ * Include the krbafs portability layer from kstart and pam-afs-session
+   and add a test suite for it.
+
 util:
 
  * Include messages-krb5.c from the kstart distribution.  Consider
