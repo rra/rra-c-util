@@ -34,3 +34,8 @@ rra-c-util 1.0
 
     Specify a mode when creating a sentinel in the daemon test.  This
     fixes compiler warnings with newer gcc.
+
+    Updated test suite to the current version of C TAP Harness and its C
+    TAP library.  Rewrite the extra functions that were in libtest as
+    add-ons to the TAP library and rewrite the Kerberos initialization
+    function to use the native Kerberos library functions.
