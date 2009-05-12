@@ -96,17 +96,17 @@ ok_xmalloc "vasprintf fail" 1 \
 
 # Check our custom error handler.
 ok_xmalloc "malloc custom"    1 "malloc 3500000 tests/util/xmalloc.c 48" \
-    "M" "3500000" "3500000" 
+    "M" "3500000" "3500000"
 ok_xmalloc "realloc custom"   1 "realloc 3500000 tests/util/xmalloc.c 76" \
-    "R" "3500000" "3500000" 
+    "R" "3500000" "3500000"
 ok_xmalloc "strdup custom"    1 "strdup 3500000 tests/util/xmalloc.c 107" \
-    "S" "3500000" "3500000" 
+    "S" "3500000" "3500000"
 ok_xmalloc "strndup custom"   1 "strndup 3500000 tests/util/xmalloc.c 134" \
-    "N" "3500000" "3500000" 
+    "N" "3500000" "3500000"
 ok_xmalloc "calloc custom"    1 "calloc 3500000 tests/util/xmalloc.c 158" \
-    "C" "3500000" "3500000" 
+    "C" "3500000" "3500000"
 ok_xmalloc "asprintf custom"  1 "asprintf 3500000 tests/util/xmalloc.c 183" \
-    "A" "3500000" "3500000" 
+    "A" "3500000" "3500000"
 ok_xmalloc "vasprintf custom" 1 "vasprintf 3500000 tests/util/xmalloc.c 203" \
     "V" "3500000" "3500000"
 
