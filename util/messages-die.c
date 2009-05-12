@@ -43,7 +43,7 @@
  * functions aren't linked with code that will never call exit().  This helps
  * automated analysis ensure that shared libraries don't call exit().
  *
- * Copyright 2009 Russ Allbery
+ * Copyright 2009 Russ Allbery <rra@stanford.edu>
  * Copyright 2008 Board of Trustees, Leland Stanford Jr. University
  * Copyright (c) 2004, 2005, 2006
  *     by Internet Systems Consortium, Inc. ("ISC")
