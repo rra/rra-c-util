@@ -34,12 +34,13 @@ AC_SEARCH_LIBS([socket], [socket], ,
         [-lsocket])])
 
 dnl Probe for Kerberos.  This is only needed for packages that use Kerberos,
-dnl of course.
-RRA_LIB_KRB5
-RRA_LIB_KRB5_SWITCH
-AC_CHECK_FUNCS([krb5_get_init_creds_opt_set_default_flags])
-AC_CHECK_TYPES([krb5_realm], , , [#include <krb5.h>])
-RRA_LIB_KRB5_RESTORE
+dnl of course.  This is the necessary minimum probes for building the native
+dnl kerberos.c TAP library add-on.
+dnl RRA_LIB_KRB5
+dnl RRA_LIB_KRB5_SWITCH
+dnl AC_CHECK_FUNCS([krb5_get_init_creds_opt_set_default_flags])
+dnl AC_CHECK_TYPES([krb5_realm], , , [#include <krb5.h>])
+dnl RRA_LIB_KRB5_RESTORE
 
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is

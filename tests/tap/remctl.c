@@ -36,7 +36,7 @@ remctld_start(const char *remctld, const char *principal, const char *config)
     struct timeval tv;
     size_t n;
 
-    pidfile = concatpath(getenv("BUILD"), "data/remctl.pid");
+    pidfile = concatpath(getenv("BUILD"), "data/remctld.pid");
     if (access(pidfile, F_OK) == 0)
         if (unlink(pidfile) != 0)
             sysbail("cannot delete %s", pidfile);
@@ -71,10 +71,16 @@ void
 remctld_stop(pid_t child)
 {
     char *pidfile;
+    struct timeval tv;
 
-    kill(child, SIGTERM);
-    waitpid(child, NULL, 0);
-    pidfile = concatpath(getenv("BUILD"), "data/remctl.pid");
+    tv.tv_sec = 0;
+    tv.tv_usec = 10000;
+    select(0, NULL, NULL, NULL, &tv);
+    if (waitpid(child, NULL, WNOHANG) == 0) {
+        kill(child, SIGTERM);
+        waitpid(child, NULL, 0);
+    }
+    pidfile = concatpath(getenv("BUILD"), "data/remctld.pid");
     unlink(pidfile);
     free(pidfile);
 }

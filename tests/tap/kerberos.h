@@ -23,6 +23,9 @@ BEGIN_DECLS
  */
 char *kerberos_setup(void);
 
+/* Clean up at the end of a test. */
+void kerberos_cleanup(void);
+
 END_DECLS
 
 #endif /* !TAP_MESSAGES_H */

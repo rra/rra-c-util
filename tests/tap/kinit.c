@@ -50,32 +50,6 @@ find_file(const char *file)
 
 
 /*
- * Given a context and a principal, get the realm.  Used to be sure that we
- * get a TGT for the realm matching the principal name we were given.  This
- * works differently in MIT Kerberos and Heimdal, unfortunately.
- */
-static char *
-get_realm(krb5_context ctx UNUSED, krb5_principal princ)
-{
-#ifdef HAVE_KRB5_REALM
-    krb5_realm *realm;
-
-    realm = krb5_princ_realm(ctx, princ);
-    if (realm == NULL)
-        bail("cannot get Kerberos realm");
-    return krb5_realm_data(*realm);
-#else
-    krb5_data *data;
-
-    data = krb5_princ_realm(ctx, princ);
-    if (data == NULL || data->data == NULL)
-        bail("cannot get Kerberos realm");
-    return data->data;
-#endif
-}
-
-
-/*
  * Obtain Kerberos tickets for the principal specified in test.principal using
  * the keytab specified in test.keytab, both of which are presumed to be in
  * tests/data in either the build or the source tree.
@@ -83,25 +57,22 @@ get_realm(krb5_context ctx UNUSED, krb5_principal princ)
  * Returns the contents of test.principal in newly allocated memory or NULL if
  * Kerberos tests are apparently not configured.  If Kerberos tests are
  * configured but something else fails, calls bail().
- *
- * The error handling here is not great.  We should have a bail_krb5 that uses
- * the same logic as messages-krb5.c, which hasn't yet been imported into
- * rra-c-util.
  */
 char *
 kerberos_setup(void)
 {
-    char *path, *realm, *krbtgt;
-    const char *build;
+    static const char format1[]
+        = "kinit -k -t %s %s >/dev/null 2>&1 </dev/null";
+    static const char format2[]
+        = "kinit -t %s %s >/dev/null 2>&1 </dev/null";
+    static const char format3[]
+        = "kinit -k -K %s %s >/dev/null 2>&1 </dev/null";
     FILE *file;
-    char principal[BUFSIZ];
-    krb5_error_code code;
-    krb5_context ctx;
-    krb5_ccache ccache;
-    krb5_principal kprinc;
-    krb5_keytab keytab;
-    krb5_get_init_creds_opt opts;
-    krb5_creds creds;
+    char *path;
+    const char *build;
+    char principal[BUFSIZ], *command;
+    size_t length;
+    int status;
 
     /* Read the principal name and find the keytab file. */
     path = find_file("data/test.principal");
@@ -133,45 +104,28 @@ kerberos_setup(void)
     putenv(concat("KRB5_KTNAME=", path, (char *) 0));
 
     /* Now do the Kerberos initialization. */
-    code = krb5_init_context(&ctx);
-    if (code != 0)
-        bail("error initializing Kerberos");
-    code = krb5_cc_default(ctx, &ccache);
-    if (code != 0)
-        bail("error setting ticket cache");
-    code = krb5_parse_name(ctx, principal, &kprinc);
-    if (code != 0)
-        bail("error parsing principal %s", principal);
-    realm = get_realm(ctx, kprinc);
-    krbtgt = concat("krbtgt/", realm, "@", realm, (char *) 0);
-    code = krb5_kt_resolve(ctx, path, &keytab);
-    if (code != 0)
-        bail("cannot open keytab %s", path);
-    memset(&opts, 0, sizeof(opts));
-    krb5_get_init_creds_opt_init(&opts);
-#ifdef HAVE_KRB5_GET_INIT_CREDS_OPT_SET_DEFAULT_FLAGS
-    krb5_get_init_creds_opt_set_default_flats(ctx, NULL, realm, &opts);
-#endif
-    krb5_get_init_creds_opt_set_forwardable(&opts, 0);
-    krb5_get_init_creds_opt_set_proxiable(&opts, 0);
-    code = krb5_get_init_creds_keytab(ctx, &creds, kprinc, keytab, 0, krbtgt,
-                                      &opts);
-    if (code != 0)
-        bail("cannot get Kerberos tickets");
-    code = krb5_cc_initialize(ctx, ccache, kprinc);
-    if (code != 0)
-        bail("error initializing ticket cache");
-    code = krb5_cc_store_cred(ctx, ccache, &creds);
-    if (code != 0)
-        bail("error storing credentials");
-    krb5_cc_close(ctx, ccache);
-    krb5_free_cred_contents(ctx, &creds);
-    krb5_kt_close(ctx, keytab);
-    krb5_free_principal(ctx, kprinc);
-    krb5_free_context(ctx);
-    free(krbtgt);
+    length = strlen(format1) + strlen(path) + strlen(principal);
+    command = xmalloc(length);
+    snprintf(command, length, format1, path, principal);
+    status = system(command);
+    free(command);
+    if (status == -1 || WEXITSTATUS(status) != 0) {
+        length = strlen(format2) + strlen(path) + strlen(principal);
+        command = xmalloc(length);
+        snprintf(command, length, format2, path, principal);
+        status = system(command);
+        free(command);
+    }
+    if (status == -1 || WEXITSTATUS(status) != 0) {
+        length = strlen(format3) + strlen(path) + strlen(principal);
+        command = xmalloc(length);
+        snprintf(command, length, format3, path, principal);
+        status = system(command);
+        free(command);
+    }
+    if (status == -1 || WEXITSTATUS(status) != 0)
+        return NULL;
     free(path);
-
     return xstrdup(principal);
 }
 

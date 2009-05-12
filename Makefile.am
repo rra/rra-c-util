@@ -8,6 +8,7 @@
 AUTOMAKE_OPTIONS = foreign subdir-objects
 ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST = LICENSE autogen portable/winsock.c tests/TESTS \
+	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/kinit.c \
 	tests/tap/libtap.sh tests/util/xmalloc-t
 
 CPPFLAGS = -I$(srcdir)/include
@@ -53,10 +54,10 @@ check_PROGRAMS = tests/runtests tests/portable/asprintf-t \
 check_LIBRARIES = tests/tap/libtap.a
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
-tests_tap_libtap_a_CPPFLAGS = -I$(abs_top_srcdir)/tests $(KRB5_CPPFLAGS)
+tests_tap_libtap_a_CPPFLAGS = -I$(abs_top_srcdir)/tests
 tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h \
-	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/messages.c \
-	tests/tap/messages.h tests/tap/remctl.c tests/tap/remctl.h
+	tests/tap/messages.c tests/tap/messages.h tests/tap/remctl.c \
+	tests/tap/remctl.h
 
 # All of the test programs.
 tests_portable_asprintf_t_SOURCES = tests/portable/asprintf-t.c \
