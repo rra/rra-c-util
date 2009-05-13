@@ -12,6 +12,9 @@ rra-c-util 1.0
     include a reference to exit, which will avoid errors from some package
     test tools.
 
+    Add a vector_addn function that adds a counted string to a vector
+    (similar to strndup).  There is no cvector equivalent.
+
     On BSD/OS, despite the AI_ADDRCONFIG flag being present in the system
     headers, passing it into getaddrinfo results in an error.  Test for
     this at configure time and, if it doesn't work, hide the system
