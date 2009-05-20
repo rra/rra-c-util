@@ -52,3 +52,6 @@ rra-c-util 1.0
 
     Add TAP shell libraries for initializing Kerberos and starting and
     stopping remctld.
+
+    Make the xmalloc test suite robust against builddir != srcdir builds
+    that change the default file name of the test program.
