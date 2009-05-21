@@ -35,12 +35,41 @@ AC_SEARCH_LIBS([socket], [socket], ,
 
 dnl Probe for Kerberos.  This is only needed for packages that use Kerberos,
 dnl of course.  This is the necessary minimum probes for building the native
-dnl kerberos.c TAP library add-on.
+dnl kerberos.c TAP library add-on.  This should possibly move into krb5.m4.
 dnl RRA_LIB_KRB5
 dnl RRA_LIB_KRB5_SWITCH
 dnl AC_CHECK_FUNCS([krb5_get_init_creds_opt_set_default_flags])
 dnl AC_CHECK_TYPES([krb5_realm], , , [#include <krb5.h>])
 dnl RRA_LIB_KRB5_RESTORE
+
+dnl Probe for GSS-API.  This is only needed for packages that use GSS-API, of
+dnl course.  These are the probes needed for portable/gssapi.h and
+dnl portable/gssapi-mech.c.  This should possibly move into gssapi.m4.
+dnl RRA_LIB_GSSAPI
+dnl RRA_LIB_GSSAPI_SWITCH
+dnl AC_CHECK_HEADERS([gssapi.h])
+dnl AC_CHECK_DECL([GSS_C_NT_USER_NAME],
+dnl     [AC_DEFINE([HAVE_GSS_RFC_OIDS], 1,
+dnl        [Define to 1 if the GSS-API library uses RFC-compliant OIDs.])], ,
+dnl [[
+dnl #if defined(HAVE_GSSAPI_H)
+dnl # include <gssapi.h>
+dnl #else
+dnl # include <gssapi/gssapi.h>
+dnl #endif
+dnl ]])
+dnl AC_CHECK_DECLS([GSS_KRB5_MECHANISM], ,
+dnl     [AC_CHECK_DECLS([gss_mech_krb5], ,
+dnl         [AC_LIBOBJ([gssapi-mech])],
+dnl         [#include <gssapi/gssapi_krb5.h>])],
+dnl [[
+dnl #if defined(HAVE_GSSAPI_H)
+dnl # include <gssapi.h>
+dnl #else
+dnl # include <gssapi/gssapi.h>
+dnl #endif
+dnl ]])
+dnl RRA_LIB_GSSAPI_RESTORE
 
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is

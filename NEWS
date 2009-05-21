@@ -29,6 +29,9 @@ rra-c-util 1.0
     Declare message_fatal_cleanup extern in util.h.  Fixes compilation
     problems on Mac OS X and probably elsewhere.
 
+    Update GSS-API probes for portability to Solaris 10's native generic
+    GSS-API libraries.  Thanks, Peter Eriksson.
+
     Change from AC_TRY_* to AC_*_IFELSE for all Autoconf macros.
 
     Update the example configure.ac for Autoconf 2.63, adding
