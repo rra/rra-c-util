@@ -8,7 +8,7 @@
 AUTOMAKE_OPTIONS = foreign subdir-objects
 ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST = LICENSE autogen m4/gssapi.m4 m4/krb5.m4 m4/lib-depends.m4 \
-	m4/lib-pathname.m4 m4/remctl.m4 portable/gssapi-mech.c \
+	m4/lib-pathname.m4 m4/remctl.m4 mkusage portable/gssapi-mech.c \
 	portable/gssapi.h portable/winsock.c tests/TESTS \
 	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/kinit.c \
 	tests/tap/libtap.sh tests/util/xmalloc-t
