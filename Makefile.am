@@ -10,8 +10,9 @@ ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST = LICENSE autogen m4/gssapi.m4 m4/krb5.m4 m4/lib-depends.m4 \
 	m4/lib-pathname.m4 m4/remctl.m4 mkusage portable/gssapi-mech.c \
 	portable/gssapi.h portable/winsock.c tests/TESTS \
-	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/kinit.c \
-	tests/tap/libtap.sh tests/util/xmalloc-t
+	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/kerberos.sh \
+	tests/tap/kinit.c tests/tap/libtap.sh tests/tap/remctl.sh \
+	tests/util/xmalloc-t
 
 CPPFLAGS = -I$(srcdir)/include
 
