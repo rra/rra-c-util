@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 1.0
+rra-c-util 1.0 (2009-05-22)
 
     Initial public release based on the portability code that shipped with
     remctl 2.13 with some additional files from other current releases of
