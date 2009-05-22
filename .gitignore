@@ -8,6 +8,7 @@
 /config.log
 /config.status
 /configure
+/rra-c-util-*
 /stamp-h1
 /tests/portable/asprintf-t
 /tests/portable/daemon-t
