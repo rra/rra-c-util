@@ -73,17 +73,17 @@ AC_DEFUN([RRA_LIB_REMCTL],
  AC_SUBST([REMCTL_LIBS])
 
  AC_ARG_WITH([remctl],
-    [AC_HELP_STRING([--with-remctl=DIR],
+    [AS_HELP_STRING([--with-remctl=DIR],
         [Location of remctl headers and libraries])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_remctl_root="$withval"])])
  AC_ARG_WITH([remctl-include],
-    [AC_HELP_STRING([--with-remctl-include=DIR],
+    [AS_HELP_STRING([--with-remctl-include=DIR],
         [Location of remctl headers])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_remctl_includedir="$withval"])])
  AC_ARG_WITH([remctl-lib],
-    [AC_HELP_STRING([--with-remctl-lib=DIR],
+    [AS_HELP_STRING([--with-remctl-lib=DIR],
         [Location of remctl libraries])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_remctl_libdir="$withval"])])

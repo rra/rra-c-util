@@ -125,17 +125,17 @@ AC_DEFUN([RRA_LIB_GSSAPI],
  AC_SUBST([GSSAPI_LIBS])
 
  AC_ARG_WITH([gssapi],
-    [AC_HELP_STRING([--with-gssapi=DIR],
+    [AS_HELP_STRING([--with-gssapi=DIR],
         [Location of GSS-API headers and libraries])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_gssapi_root="$withval"])])
  AC_ARG_WITH([gssapi-include],
-    [AC_HELP_STRING([--with-gssapi-include=DIR],
+    [AS_HELP_STRING([--with-gssapi-include=DIR],
         [Location of GSS-API headers])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_gssapi_includedir="$withval"])])
  AC_ARG_WITH([gssapi-lib],
-    [AC_HELP_STRING([--with-gssapi-lib=DIR],
+    [AS_HELP_STRING([--with-gssapi-lib=DIR],
         [Location of GSS-API libraries])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_gssapi_libdir="$withval"])])

@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 1.1 (unreleased)
+
+    Use AS_HELP_STRING instead of the deprecated AC_HELP_STRING in all
+    Autoconf m4 files.
+
 rra-c-util 1.0 (2009-05-22)
 
     Initial public release based on the portability code that shipped with

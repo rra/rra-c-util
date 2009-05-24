@@ -207,17 +207,17 @@ AC_DEFUN([RRA_LIB_KRB5],
  AC_SUBST([KRB5_LIBS])
 
  AC_ARG_WITH([krb5],
-    [AC_HELP_STRING([--with-krb5=DIR],
+    [AS_HELP_STRING([--with-krb5=DIR],
         [Location of Kerberos v5 headers and libraries])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_krb5_root="$withval"])])
  AC_ARG_WITH([krb5-include],
-    [AC_HELP_STRING([--with-krb5-include=DIR],
+    [AS_HELP_STRING([--with-krb5-include=DIR],
         [Location of Kerberos v5 headers])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_krb5_includedir="$withval"])])
  AC_ARG_WITH([krb5-lib],
-    [AC_HELP_STRING([--with-krb5-lib=DIR],
+    [AS_HELP_STRING([--with-krb5-lib=DIR],
         [Location of Kerberos v5 libraries])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_krb5_libdir="$withval"])])
@@ -237,19 +237,19 @@ AC_DEFUN([RRA_LIB_KRB5_OPTIONAL],
  AC_SUBST([KRB5_LIBS])
 
  AC_ARG_WITH([krb5],
-    [AC_HELP_STRING([--with-krb5@<:@=DIR@:>@],
+    [AS_HELP_STRING([--with-krb5@<:@=DIR@:>@],
         [Location of Kerberos v5 headers and libraries])],
     [AS_IF([test x"$withval" = xno],
         [rra_use_kerberos=false],
         [AS_IF([test x"$withval" != xyes], [rra_krb5_root="$withval"])
          rra_use_kerberos=true])])
  AC_ARG_WITH([krb5-include],
-    [AC_HELP_STRING([--with-krb5-include=DIR],
+    [AS_HELP_STRING([--with-krb5-include=DIR],
         [Location of Kerberos v5 headers])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_krb5_includedir="$withval"])])
  AC_ARG_WITH([krb5-lib],
-    [AC_HELP_STRING([--with-krb5-lib=DIR],
+    [AS_HELP_STRING([--with-krb5-lib=DIR],
         [Location of Kerberos v5 libraries])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_krb5_libdir="$withval"])])
