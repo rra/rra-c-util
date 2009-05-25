@@ -123,6 +123,11 @@ AC_CHECK_FUNCS([getaddrinfo],
     [AC_LIBOBJ([getaddrinfo])])
 AC_REPLACE_FUNCS([getnameinfo inet_aton inet_ntop])
 
+dnl Additional probes for UNIX domain socket support.  These are only needed
+dnl by packages that want to use UNIX domain sockets.
+RRA_SYS_UNIX_SOCKETS
+RRA_MACRO_SUN_LEN
+
 dnl Output section.  This is generally the same for all packages.
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_HEADER([config.h])

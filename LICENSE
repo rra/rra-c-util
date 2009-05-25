@@ -59,17 +59,18 @@ code, although I would strongly prefer that any improvements or
 modifications be sent to me (rra@stanford.edu) so that I can continue to
 maintain a canonical version.
 
-The files m4/inet-nota.m4, m4/socket.m4, portable/socket.h,
-tests/libtest.c, tests/libtest.h, tests/portable/getaddrinfo-t.c,
-tests/portable/getnameinfo-t.c, tests/portable/inet_aton.c,
-tests/portable/inet_ntoa.c, tests/portable/inet_ntop.c,
-tests/portable/setenv.c, tests/portable/snprintf.c,
-tests/portable/strlcat.c, tests/portable/strlcpy.c, tests/util/concat-t.c,
-tests/util/fakewrite.c, tests/util/messages-t.c, tests/util/network-t.c,
-tests/util/vector-t.c, tests/util/xmalloc-t, tests/util/xmalloc.c,
-tests/util/xwrite-t.c, util/fdflag.c, util/messages-die.c,
-util/messages.c, util/network.c, util/util.h, util/xmalloc.c, and
-util/xwrite.c are released under the following copyright and license:
+The files m4/inet-nota.m4, m4/socket-unix.m4, m4/socket.m4,
+portable/socket.h, tests/libtest.c, tests/libtest.h,
+tests/portable/getaddrinfo-t.c, tests/portable/getnameinfo-t.c,
+tests/portable/inet_aton.c, tests/portable/inet_ntoa.c,
+tests/portable/inet_ntop.c, tests/portable/setenv.c,
+tests/portable/snprintf.c, tests/portable/strlcat.c,
+tests/portable/strlcpy.c, tests/util/concat-t.c, tests/util/fakewrite.c,
+tests/util/messages-t.c, tests/util/network-t.c, tests/util/vector-t.c,
+tests/util/xmalloc-t, tests/util/xmalloc.c, tests/util/xwrite-t.c,
+util/fdflag.c, util/messages-die.c, util/messages.c, util/network.c,
+util/util.h, util/xmalloc.c, and util/xwrite.c are released under the
+following copyright and license:
 
   Copyright 2009 Russ Allbery <rra@stanford.edu>
   Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009
