@@ -168,7 +168,7 @@ AC_DEFUN([_RRA_LIB_KRB5_INTERNAL],
              [AS_IF(["$KRB5_CONFIG" | grep krb5 > /dev/null 2>&1],
                  [rra_cv_lib_krb5_config=yes],
                  [rra_cv_lib_krb5_config=no])])
-          AS_IF([test "$rra_cv_lib_krb5_config" = yes],
+          AS_IF([test x"$rra_cv_lib_krb5_config" = xyes],
               [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags krb5`
                KRB5_LIBS=`"$KRB5_CONFIG" --libs krb5`],
               [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags`

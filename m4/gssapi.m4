@@ -154,7 +154,7 @@ AC_DEFUN([RRA_LIB_GSSAPI],
              [AS_IF(["$KRB5_CONFIG" | grep gssapi > /dev/null 2>&1],
                  [rra_cv_lib_gssapi_config=yes],
                  [rra_cv_lib_gssapi_config=no])])
-          AS_IF([test "$rra_cv_lib_gssapi_config" = yes],
+          AS_IF([test x"$rra_cv_lib_gssapi_config" = xyes],
               [GSSAPI_CPPFLAGS=`"$KRB5_CONFIG" --cflags gssapi`
                GSSAPI_LIBS=`"$KRB5_CONFIG" --libs gssapi`],
               [GSSAPI_CPPFLAGS=`"$KRB5_CONFIG" --cflags`
