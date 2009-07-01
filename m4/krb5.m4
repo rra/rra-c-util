@@ -137,17 +137,18 @@ AC_DEFUN([_RRA_LIB_KRB5_MANUAL],
  RRA_LIB_KRB5_RESTORE])
 
 dnl Sanity-check the results of krb5-config and be sure we can really link a
-dnl Kerberos program.  The first option says whether to fail if Kerberos was
-dnl not found.  If we shouldn't fail, clear KRB5_CPPFLAGS and KRB5_LIBS so
-dnl that we know we don't have usable flags.
+dnl Kerberos program.  If that fails, clear KRB5_CPPFLAGS and KRB5_LIBS so
+dnl that we know we don't have usable flags and fall back on the manual
+dnl check.
 AC_DEFUN([_RRA_LIB_KRB5_CHECK],
 [RRA_LIB_KRB5_SWITCH
- AC_CHECK_FUNC([krb5_init_context], ,
-    [AS_IF([test x"$1" = xtrue],
-        [AC_MSG_FAILURE([krb5-config results fail for Kerberos v5])])
+ AC_CHECK_FUNC([krb5_init_context],
+    [RRA_LIB_KRB5_RESTORE],
+    [RRA_LIB_KRB5_RESTORE
      KRB5_CPPFLAGS=
-     KRB5_LIBS=])
- RRA_LIB_KRB5_RESTORE])
+     KRB5_LIBS=
+     _RRA_LIB_KRB5_PATHS
+     _RRA_LIB_KRB5_MANUAL([$1])])])
 
 dnl The core of the library checking, shared between RRA_LIB_KRB5 and
 dnl RRA_LIB_KRB5_OPTIONAL.  The single argument, if "true", says to fail if
@@ -165,14 +166,14 @@ AC_DEFUN([_RRA_LIB_KRB5_INTERNAL],
      AS_IF([test x"$KRB5_CONFIG" != x && test -x "$KRB5_CONFIG"],
          [AC_CACHE_CHECK([for krb5 support in krb5-config],
              [rra_cv_lib_krb5_config],
-             [AS_IF(["$KRB5_CONFIG" | grep krb5 > /dev/null 2>&1],
+             [AS_IF(["$KRB5_CONFIG" 2>&1 | grep krb5 >/dev/null 2>&1],
                  [rra_cv_lib_krb5_config=yes],
                  [rra_cv_lib_krb5_config=no])])
           AS_IF([test x"$rra_cv_lib_krb5_config" = xyes],
-              [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags krb5`
-               KRB5_LIBS=`"$KRB5_CONFIG" --libs krb5`],
-              [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags`
-               KRB5_LIBS=`"$KRB5_CONFIG" --libs`])
+              [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags krb5 2>/dev/null`
+               KRB5_LIBS=`"$KRB5_CONFIG" --libs krb5 2>/dev/null`],
+              [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags 2>/dev/null`
+               KRB5_LIBS=`"$KRB5_CONFIG" --libs 2>/dev/null`])
           KRB5_CPPFLAGS=`echo "$KRB5_CPPFLAGS" | sed 's%-I/usr/include ?%%'`
           _RRA_LIB_KRB5_CHECK([$1])
           RRA_LIB_KRB5_SWITCH

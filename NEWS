@@ -2,6 +2,19 @@
 
 rra-c-util 1.1 (unreleased)
 
+    If krb5-config produces results that don't work for Kerberos v5 of
+    GSS-API probes, fall back on manual library probing rather than just
+    failing.  This fixes problems with GSS-API probes on Solaris where
+    krb5-config is present but doesn't know about GSS-API.  Thanks to Andy
+    Cobaugh for the report.
+
+    Suppress error output from krb5-config in Kerberos v5 and GSS-API
+    probes so that it's not mixed in with configure output.
+
+    Do not try to use a non-executable krb5-config for GSS-API probes and
+    prefer the KRB5_CONFIG environment variable over a path constructed
+    from the --with-gssapi argument.
+
     Add m4/socket-unix.m4, which contains some probes for UNIX domain
     socket support taken from INN with modifications by Julien ÉLIE.
 
