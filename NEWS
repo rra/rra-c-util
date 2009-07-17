@@ -18,6 +18,9 @@ rra-c-util 1.1 (unreleased)
     Add m4/socket-unix.m4, which contains some probes for UNIX domain
     socket support taken from INN with modifications by Julien ÉLIE.
 
+    Enable GCC format string checking for the replacement asprintf
+    function.
+
     Use AS_HELP_STRING instead of the deprecated AC_HELP_STRING in all
     Autoconf m4 files.
 
