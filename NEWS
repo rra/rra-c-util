@@ -2,6 +2,11 @@
 
 rra-c-util 1.1 (unreleased)
 
+    Revert the separation of the message functions that call exit into a
+    separate source file.  Unfortunately, even as a separate source file,
+    it's still linked into shared libraries, so the additional code
+    duplication isn't worth it.
+
     If krb5-config produces results that don't work for Kerberos v5 of
     GSS-API probes, fall back on manual library probing rather than just
     failing.  This fixes problems with GSS-API probes on Solaris where
