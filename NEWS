@@ -7,6 +7,8 @@ rra-c-util 1.1 (unreleased)
     it's still linked into shared libraries, so the additional code
     duplication isn't worth it.
 
+    Add a replacement for mkstemp on systems that don't have it.
+
     If krb5-config produces results that don't work for Kerberos v5 of
     GSS-API probes, fall back on manual library probing rather than just
     failing.  This fixes problems with GSS-API probes on Solaris where

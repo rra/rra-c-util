@@ -44,18 +44,19 @@ warnings:
 	$(MAKE) CFLAGS='$(WARNINGS)' $(check_PROGRAMS)
 
 # The bits below are for the test suite, not for the main package.
-check_PROGRAMS = tests/runtests tests/portable/asprintf-t \
-	tests/portable/daemon-t tests/portable/getaddrinfo-t \
-	tests/portable/getnameinfo-t tests/portable/getopt-t \
-	tests/portable/inet_aton-t tests/portable/inet_ntoa-t \
-	tests/portable/inet_ntop-t tests/portable/setenv-t \
-	tests/portable/snprintf-t tests/portable/strlcat-t \
-	tests/portable/strlcpy-t tests/util/concat-t tests/util/fdflag-t \
-	tests/util/messages-t tests/util/network-t tests/util/vector-t \
-	tests/util/xmalloc tests/util/xwrite-t
-check_LIBRARIES = tests/tap/libtap.a
+check_PROGRAMS = tests/runtests tests/portable/asprintf-t		\
+	tests/portable/daemon-t tests/portable/getaddrinfo-t		\
+	tests/portable/getnameinfo-t tests/portable/getopt-t		\
+	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		\
+	tests/portable/inet_ntop-t tests/portable/mkstemp-t		\
+	tests/portable/setenv-t tests/portable/snprintf-t		\
+	tests/portable/strlcat-t tests/portable/strlcpy-t		\
+	tests/util/concat-t tests/util/fdflag-t tests/util/messages-t	\
+	tests/util/network-t tests/util/vector-t tests/util/xmalloc	\
+	tests/util/xwrite-t
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
+check_LIBRARIES = tests/tap/libtap.a
 tests_tap_libtap_a_CPPFLAGS = -I$(abs_top_srcdir)/tests
 tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h \
 	tests/tap/messages.c tests/tap/messages.h tests/tap/remctl.c \
@@ -93,6 +94,10 @@ tests_portable_inet_ntoa_t_LDADD = tests/tap/libtap.a util/libutil.a \
 tests_portable_inet_ntop_t_SOURCES = tests/portable/inet_ntop-t.c \
 	tests/portable/inet_ntop.c
 tests_portable_inet_ntop_t_LDADD = tests/tap/libtap.a util/libutil.a \
+	portable/libportable.a
+tests_portable_mkstemp_t_SOURCES = tests/portable/mkstemp-t.c \
+	tests/portable/mkstemp.c
+tests_portable_mkstemp_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 tests_portable_setenv_t_SOURCES = tests/portable/setenv-t.c \
 	tests/portable/setenv.c
