@@ -1,4 +1,4 @@
-dnl krb5.m4 -- Find the compiler and linker flags for Kerberos v5.
+dnl Find the compiler and linker flags for Kerberos v5.
 dnl
 dnl Finds the compiler and linker flags for linking with Kerberos v5
 dnl libraries.  Provides the --with-krb5, --with-krb5-include, and

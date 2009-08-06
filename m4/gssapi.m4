@@ -1,4 +1,4 @@
-dnl gssapi.m4 -- Find the compiler and linker flags for GSS-API.
+dnl Find the compiler and linker flags for GSS-API.
 dnl
 dnl Finds the compiler and linker flags for linking with GSS-API libraries.
 dnl Provides the --with-gssapi, --with-gssapi-include, and --with-gssapi-lib

@@ -1,4 +1,4 @@
-dnl remctl.m4 -- Find the compiler and linker flags for remctl.
+dnl Find the compiler and linker flags for remctl.
 dnl
 dnl Finds the compiler and linker flags for linking with remctl libraries.
 dnl Provides the --with-remctl, --with-remctl-include, and --with-remctl-lib
