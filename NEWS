@@ -22,6 +22,9 @@ rra-c-util 1.1 (unreleased)
     prefer the KRB5_CONFIG environment variable over a path constructed
     from the --with-gssapi argument.
 
+    Add m4/krb4.m4, which probes for Kerberos v4 libraries in the same
+    ways that m4/krb5.m4 probes for Kerberos v5 libraries.
+
     Add m4/socket-unix.m4, which contains some probes for UNIX domain
     socket support taken from INN with modifications by Julien ÉLIE.
 
