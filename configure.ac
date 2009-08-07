@@ -71,6 +71,15 @@ dnl #endif
 dnl ]])
 dnl RRA_LIB_GSSAPI_RESTORE
 
+dnl Probe for Kerberos v4.  This is only needed for packages that use
+dnl Kerberos, of course.  This code includes probing for the lifetime support
+dnl functions, for which we have a replacement in portable/lifetime.c.
+dnl RRA_LIB_KRB4_OPTIONAL
+dnl AS_IF([test x"$rra_use_krb4" = xyes],
+dnl     [RRA_LIB_KRB4_SWITCH
+dnl      AC_CHECK_FUNCS([krb_life_to_time], , [AC_LIBOBJ([lifetime])])
+dnl      RRA_LIB_KRB4_RESTORE]
+
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
 dnl only used by fdflag.
