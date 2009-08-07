@@ -32,6 +32,11 @@ rra-c-util 1.1 (unreleased)
     Add m4/socket-unix.m4, which contains some probes for UNIX domain
     socket support taken from INN with modifications by Julien ÉLIE.
 
+    RRA_SET_LDFLAGS (m4/lib-pathname.m4) now appends to the variable
+    rather than only setting it and takes an optional third argument
+    naming a subdirectory of the library directory to add to the library
+    search path.
+
     Enable GCC format string checking for the replacement asprintf
     function.
 
