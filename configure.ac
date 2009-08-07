@@ -80,6 +80,10 @@ dnl     [RRA_LIB_KRB4_SWITCH
 dnl      AC_CHECK_FUNCS([krb_life_to_time], , [AC_LIBOBJ([lifetime])])
 dnl      RRA_LIB_KRB4_RESTORE]
 
+dnl Probe for libkafs.  Do this so that we can test the libkafs portability
+dnl library.
+RRA_LIB_KAFS
+
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
 dnl only used by fdflag.

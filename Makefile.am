@@ -25,6 +25,21 @@ portable_libportable_a_LIBADD = $(LIBOBJS)
 util_libutil_a_SOURCES = util/concat.c util/fdflag.c util/messages.c \
 	util/network.c util/util.h util/vector.c util/xmalloc.c util/xwrite.c
 
+# Conditionally build the replacement kafs library.
+if NEED_KAFS
+noinst_LIBRARIES += kafs/libkafs.a
+kafs_libkafs_a_SOURCES = kafs/api.c
+if NEED_KAFS_LINUX
+kafs_libkafs_a_SOURCES += kafs/linux.c
+endif
+if NEED_KAFS_SYSCALL
+kafs_libkafs_a_SOURCES += kafs/syscall.c
+endif
+kafs_libkafs_a_CPPFLAGS = $(KAFS_CPPFLAGS)
+kafs_libkafs_a_LIBADD = $(KAFS_SYSCALL_OBJECTS)
+kafs_libkafs_a_DEPENDENCIES = $(KAFS_SYSCALL_OBJECTS)
+endif
+
 # Work around the GNU Coding Standards, which leave all the Autoconf and
 # Automake stuff around after make maintainer-clean, thus making that command
 # mostly worthless.

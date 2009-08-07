@@ -1,6 +1,16 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 1.1 (unreleased)
+rra-c-util 2.0 (unreleased)
+
+    Add a replacement for the libkafs library for AFS PAG and token
+    manipulation.  This is a minimal version of the library with no
+    external dependencies on Linux and only minimal AFS dependencies on
+    other platforms that implements just enough of libkafs functionality
+    to support pam-afs-session and kstart.  This is a somewhat-modified
+    version of the kafs replacement files in kstart 3.14 that uses a
+    separate library directory and Automake conditionals rather than
+    AC_LIBOBJ and the portable directory and supports more specific
+    configure options.
 
     Revert the separation of the message functions that call exit into a
     separate source file.  Unfortunately, even as a separate source file,
