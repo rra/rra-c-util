@@ -25,6 +25,10 @@ rra-c-util 1.1 (unreleased)
     Add m4/krb4.m4, which probes for Kerberos v4 libraries in the same
     ways that m4/krb5.m4 probes for Kerberos v5 libraries.
 
+    Add a portability wrapper around Kerberos v4 headers and replacements
+    for Kerberos v4 lifetime functions for implementations that don't have
+    them.
+
     Add m4/socket-unix.m4, which contains some probes for UNIX domain
     socket support taken from INN with modifications by Julien ÉLIE.
 
