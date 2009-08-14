@@ -14,8 +14,6 @@ EXTRA_DIST = LICENSE autogen m4/gssapi.m4 m4/krb5.m4 m4/lib-depends.m4	    \
 	tests/tap/kinit.c tests/tap/libtap.sh tests/tap/remctl.sh	    \
 	tests/util/xmalloc-t
 
-CPPFLAGS = -I$(srcdir)/include
-
 noinst_LIBRARIES = portable/libportable.a util/libutil.a
 portable_libportable_a_SOURCES = portable/dummy.c portable/getaddrinfo.h \
 	portable/getnameinfo.h portable/getopt.h portable/macros.h \
