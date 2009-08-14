@@ -38,9 +38,9 @@ endif
 # Work around the GNU Coding Standards, which leave all the Autoconf and
 # Automake stuff around after make maintainer-clean, thus making that command
 # mostly worthless.
-MAINTAINERCLEANFILES = Makefile.in aclocal.m4 build-aux/depcomp \
-        build-aux/install-sh build-aux/missing config.h.in config.h.in~ \
-	configure
+MAINTAINERCLEANFILES = Makefile.in aclocal.m4 build-aux/config.guess	\
+        build-aux/config.sub build-aux/depcomp build-aux/install-sh	\
+        build-aux/missing config.h.in config.h.in~ configure
 
 # A set of flags for warnings.  Add -O because gcc won't find some warnings
 # without optimization turned on, and add -DDEBUG=1 so we'll also compile all
