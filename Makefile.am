@@ -7,11 +7,11 @@
 
 AUTOMAKE_OPTIONS = foreign subdir-objects
 ACLOCAL_AMFLAGS = -I m4
-EXTRA_DIST = LICENSE autogen m4/gssapi.m4 m4/krb5.m4 m4/lib-depends.m4 \
-	m4/lib-pathname.m4 m4/remctl.m4 mkusage portable/gssapi-mech.c \
-	portable/gssapi.h portable/winsock.c tests/TESTS \
-	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/kerberos.sh \
-	tests/tap/kinit.c tests/tap/libtap.sh tests/tap/remctl.sh \
+EXTRA_DIST = LICENSE autogen m4/gssapi.m4 m4/krb5.m4 m4/lib-depends.m4	    \
+	m4/lib-pathname.m4 m4/remctl.m4 mkusage portable/gssapi-mech.c	    \
+	portable/gssapi.h portable/winsock.c tests/TESTS tests/kafs/basic-t \
+	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/kerberos.sh	    \
+	tests/tap/kinit.c tests/tap/libtap.sh tests/tap/remctl.sh	    \
 	tests/util/xmalloc-t
 
 CPPFLAGS = -I$(srcdir)/include
@@ -54,15 +54,15 @@ warnings:
 	$(MAKE) CFLAGS='$(WARNINGS)' $(check_PROGRAMS)
 
 # The bits below are for the test suite, not for the main package.
-check_PROGRAMS = tests/runtests tests/portable/asprintf-t		\
-	tests/portable/daemon-t tests/portable/getaddrinfo-t		\
-	tests/portable/getnameinfo-t tests/portable/getopt-t		\
-	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		\
-	tests/portable/inet_ntop-t tests/portable/mkstemp-t		\
-	tests/portable/setenv-t tests/portable/snprintf-t		\
-	tests/portable/strlcat-t tests/portable/strlcpy-t		\
-	tests/util/concat-t tests/util/fdflag-t tests/util/messages-t	\
-	tests/util/network-t tests/util/vector-t tests/util/xmalloc	\
+check_PROGRAMS = tests/runtests tests/kafs/basic tests/portable/asprintf-t \
+	tests/portable/daemon-t tests/portable/getaddrinfo-t		   \
+	tests/portable/getnameinfo-t tests/portable/getopt-t		   \
+	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		   \
+	tests/portable/inet_ntop-t tests/portable/mkstemp-t		   \
+	tests/portable/setenv-t tests/portable/snprintf-t		   \
+	tests/portable/strlcat-t tests/portable/strlcpy-t		   \
+	tests/util/concat-t tests/util/fdflag-t tests/util/messages-t	   \
+	tests/util/network-t tests/util/vector-t tests/util/xmalloc	   \
 	tests/util/xwrite-t
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
@@ -71,6 +71,17 @@ tests_tap_libtap_a_CPPFLAGS = -I$(abs_top_srcdir)/tests
 tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h \
 	tests/tap/messages.c tests/tap/messages.h tests/tap/remctl.c \
 	tests/tap/remctl.h
+
+# kafs tests are buit differently depending on whether we use our local
+# libkafs replacement.
+if NEED_KAFS
+tests_kafs_basic_CPPFLAGS = $(KAFS_CPPFLAGS)
+tests_kafs_basic_LDFLAGS = $(KAFS_LDFLAGS)
+tests_kafs_basic_LDADD = kafs/libkafs.a util/libutil.a \
+	portable/libportable.a $(KAFS_LIBS)
+else
+tests_kafs_basic_LDADD = util/libutil.a portable/libportable.a $(KAFS_LIBS)
+endif
 
 # All of the test programs.
 tests_portable_asprintf_t_SOURCES = tests/portable/asprintf-t.c \
