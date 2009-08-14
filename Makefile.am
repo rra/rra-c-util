@@ -29,8 +29,6 @@ noinst_LIBRARIES += kafs/libkafs.a
 EXTRA_kafs_libkafs_a_SOURCES = kafs/sys-linux.c kafs/sys-syscall.c
 kafs_libkafs_a_SOURCES = kafs/kafs.c kafs/kafs.h
 kafs_libkafs_a_CPPFLAGS = $(KAFS_CPPFLAGS)
-kafs_libkafs_a_LIBADD = $(KAFS_SYSCALL_OBJECTS)
-kafs_libkafs_a_DEPENDENCIES = $(KAFS_SYSCALL_OBJECTS)
 endif
 
 # Work around the GNU Coding Standards, which leave all the Autoconf and
