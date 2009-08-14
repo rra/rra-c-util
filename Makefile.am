@@ -79,7 +79,7 @@ else
 tests_kafs_basic_LDADD = util/libutil.a portable/libportable.a $(KAFS_LIBS)
 endif
 
-# All of the test programs.
+# All of the other test programs.
 tests_portable_asprintf_t_SOURCES = tests/portable/asprintf-t.c \
 	tests/portable/asprintf.c
 tests_portable_asprintf_t_LDADD = tests/tap/libtap.a util/libutil.a \
