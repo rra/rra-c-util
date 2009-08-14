@@ -15,14 +15,15 @@ dnl needed, LIBS and LDFLAGS must already be set appropriately before calling
 dnl this.  Also provides RRA_LIB_KAFS_SWITCH to set CPPFLAGS, LDFLAGS, and
 dnl LIBS to include libkafs, saving the current values first, and
 dnl RRA_LIB_KAFS_RESTORE to restore those settings to before the last
-dnl RRA_LIB_KFS_SWITCH.  Sets the Automake conditional NEED_KAFS if building
-dnl the replacement for the libkafs library and the conditionals
-dnl NEED_KAFS_LINUX or NEED_KAFS_SYSCALL based on which syscall implementation
-dnl to use.
+dnl RRA_LIB_KFS_SWITCH.
 dnl
-dnl Depends on kafs/api.c, kafs/linux.c, and kafs/syscall.c for the
-dnl implementation in the absence of a libkafs library.  Depends on
-dnl RRA_SET_LDFLAGS.
+dnl Sets HAVE_K_HASAFS if the k_hasafs function was found in a libkafs
+dnl library.  Sets HAVE_LSETPAG if building against the AFS libraries and the
+dnl lsetpag function is present.  Sets the Automake conditional NEED_KAFS if
+dnl building the replacement for the libkafs library and defines
+dnl HAVE_KAFS_LINUX or HAVE_KAFS_SYSCALL as appropriate.
+dnl
+dnl Depends on RRA_SET_LDFLAGS.
 dnl
 dnl Written by Russ Allbery <rra@stanford.edu>
 dnl Copyright 2008, 2009 Board of Trustees, Leland Stanford Jr. University
@@ -168,17 +169,14 @@ AC_DEFUN([RRA_LIB_KAFS],
 
  dnl If we found a libkafs, we have k_hasafs.  Set the appropriate
  dnl preprocessor define.  Otherwise, we'll use our portability layer.
- rra_libkafs_linux=false
- rra_libkafs_syscall=false
  AS_IF([test x"$rra_libkafs" = xtrue],
     [AC_DEFINE([HAVE_K_HASAFS], 1,
         [Define to 1 if you have the k_hasafs function.])],
     [AS_CASE([$host],
         [*-linux*],
         [rra_build_kafs=true
-         rra_libkafs_linux=true
          AC_CHECK_HEADERS([sys/ioccom.h])
-         AC_DEFINE([HAVE_LINUX_AFS], [1],
+         AC_DEFINE([HAVE_KAFS_LINUX], [1],
             [Define to 1 to use the Linux AFS /proc interface.])],
 
         [*-aix*|*-irix*],
@@ -186,14 +184,13 @@ AC_DEFUN([RRA_LIB_KAFS],
 
         [*],
         [rra_build_kafs=true
-         rra_libkafs_syscall=true
          _RRA_LIB_KAFS_PATHS
          RRA_LIB_KAFS_SWITCH
          AC_CHECK_HEADERS([afs/param.h sys/ioccom.h])
          RRA_LIB_KAFS_RESTORE
+         AC_DEFINE([HAVE_KAFS_SYSCALL], [1],
+            [Define to 1 to use the AFS syscall interface.])
          AC_DEFINE([_REENTRANT], [1],
             [Define to 1 on Solaris for correct threaded errno handling.])])])
  AM_CONDITIONAL([NEED_KAFS], [test x"$rra_build_kafs" = xtrue])
- AM_CONDITIONAL([NEED_KAFS_LINUX], [test x"$rra_libkafs_linux" = xtrue])
- AM_CONDITIONAL([NEED_KAFS_SYSCALL], [test x"$rra_libkafs_syscall" = xtrue])
  AC_SUBST([KAFS_SYSCALL_OBJECTS])])

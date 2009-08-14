@@ -4,8 +4,7 @@
  * This is a simple implementation of the k_hasafs, k_setpag, and k_unlog
  * functions.  It is for use on systems that don't have libkafs or
  * libkopenafs, or where a dependency on those libraries is not desirable for
- * some reason.  It relies on an implementation of k_syscall.  Versions of
- * this are provided in linux.c and syscall.c and selected by configure.
+ * some reason.
  *
  * A more robust implementation of the full kafs interface would have a
  * separate header file with the various system call constants and would
@@ -39,7 +38,22 @@
 #define UNUSED __attribute__((__unused__))
 
 /* Provided by the relevant sys-*.c file. */
-extern int k_syscall(long, long, long, long, long, int *);
+static int k_syscall(long, long, long, long, long, int *);
+
+/*
+ * Include the syscall implementation for this host, based on the configure
+ * results.  An include of the C source is easier to handle in the build
+ * machinery than lots of Automake conditionals.
+ *
+ * The included file must provide a k_syscall implementation.
+ */
+#if defined(HAVE_KAFS_LINUX)
+# include <kafs/sys-linux.c>
+#elif defined(HAVE_KAFS_SYSCALL)
+# include <kafs/sys-syscall.c>
+#else
+# error "Unknown AFS system call implementation"
+#endif
 
 /*
  * The struct passed to unlog as an argument.  All the values are NULL or 0,

@@ -28,13 +28,8 @@ util_libutil_a_SOURCES = util/concat.c util/fdflag.c util/messages.c \
 # Conditionally build the replacement kafs library.
 if NEED_KAFS
 noinst_LIBRARIES += kafs/libkafs.a
-kafs_libkafs_a_SOURCES = kafs/api.c
-if NEED_KAFS_LINUX
-kafs_libkafs_a_SOURCES += kafs/linux.c
-endif
-if NEED_KAFS_SYSCALL
-kafs_libkafs_a_SOURCES += kafs/syscall.c
-endif
+EXTRA_kafs_libkafs_a_SOURCES = kafs/sys-linux.c kafs/sys-syscall.c
+kafs_libkafs_a_SOURCES = kafs/kafs.c kafs/kafs.h
 kafs_libkafs_a_CPPFLAGS = $(KAFS_CPPFLAGS)
 kafs_libkafs_a_LIBADD = $(KAFS_SYSCALL_OBJECTS)
 kafs_libkafs_a_DEPENDENCIES = $(KAFS_SYSCALL_OBJECTS)
