@@ -25,10 +25,10 @@ util_libutil_a_SOURCES = util/concat.c util/fdflag.c util/messages.c \
 
 # Conditionally build the replacement kafs library.
 if NEED_KAFS
-noinst_LIBRARIES += kafs/libkafs.a
-EXTRA_kafs_libkafs_a_SOURCES = kafs/sys-linux.c kafs/sys-syscall.c
-kafs_libkafs_a_SOURCES = kafs/kafs.c kafs/kafs.h
-kafs_libkafs_a_CPPFLAGS = $(KAFS_CPPFLAGS)
+    noinst_LIBRARIES += kafs/libkafs.a
+    EXTRA_kafs_libkafs_a_SOURCES = kafs/sys-linux.c kafs/sys-syscall.c
+    kafs_libkafs_a_SOURCES = kafs/kafs.c kafs/kafs.h
+    kafs_libkafs_a_CPPFLAGS = $(KAFS_CPPFLAGS)
 endif
 
 # Work around the GNU Coding Standards, which leave all the Autoconf and
@@ -71,12 +71,13 @@ tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h \
 # kafs tests are buit differently depending on whether we use our local
 # libkafs replacement.
 if NEED_KAFS
-tests_kafs_basic_CPPFLAGS = $(KAFS_CPPFLAGS)
-tests_kafs_basic_LDFLAGS = $(KAFS_LDFLAGS)
-tests_kafs_basic_LDADD = kafs/libkafs.a util/libutil.a \
+    tests_kafs_basic_CPPFLAGS = $(KAFS_CPPFLAGS)
+    tests_kafs_basic_LDFLAGS = $(KAFS_LDFLAGS)
+    tests_kafs_basic_LDADD = kafs/libkafs.a util/libutil.a \
 	portable/libportable.a $(KAFS_LIBS)
 else
-tests_kafs_basic_LDADD = util/libutil.a portable/libportable.a $(KAFS_LIBS)
+    tests_kafs_basic_LDADD = util/libutil.a portable/libportable.a \
+	$(KAFS_LIBS)
 endif
 
 # All of the other test programs.
