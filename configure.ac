@@ -9,12 +9,12 @@ dnl See LICENSE for licensing terms.
 
 dnl I use this introductory boilerplate for all configure.ac files, changing
 dnl the AC_INIT arguments as appropriate.
-AC_PREREQ([2.63])
+AC_PREREQ([2.64])
 AC_INIT([rra-c-util], [1.0], [rra@stanford.edu])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_LIBOBJ_DIR([portable])
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE([1.10])
+AM_INIT_AUTOMAKE([1.11 check-news silent-rules])
 AM_MAINTAINER_MODE
 
 dnl Standard probes for the basic compilation environment.  These are

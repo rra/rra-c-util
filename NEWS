@@ -56,6 +56,9 @@ rra-c-util 2.0 (unreleased)
     Fix network test suite failures when IPv6 is available but disabled
     in the kernel.
 
+    Enable Automake silent rules.  For a quieter build, pass the
+    --enable-silent-rules option to configure or build with make V=0.
+
     Update to C TAP Harness 1.1:
 
     * Summarize results at the end of test executions.
