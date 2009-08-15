@@ -19,9 +19,13 @@ dnl RRA_LIB_KFS_SWITCH.
 dnl
 dnl Sets HAVE_K_HASAFS if the k_hasafs function was found in a libkafs
 dnl library.  Sets HAVE_LSETPAG if building against the AFS libraries and the
-dnl lsetpag function is present.  Sets the Automake conditional NEED_KAFS if
-dnl building the replacement for the libkafs library and defines
-dnl HAVE_KAFS_LINUX or HAVE_KAFS_SYSCALL as appropriate.
+dnl lsetpag function is present.  Defines HAVE_KAFS_LINUX or HAVE_KAFS_SYSCALL
+dnl as appropriate if the replacement kafs library is needed.
+dnl
+dnl If building a replacement library is needed, sets rra_build_kafs to true.
+dnl Otherwise, sets it to false.  This is intended for use with an Automake
+dnl conditional, but the Automake conditional isn't set directly by this macro
+dnl since AFS support may be optional in the larger package.
 dnl
 dnl Depends on RRA_SET_LDFLAGS.
 dnl
@@ -191,6 +195,4 @@ AC_DEFUN([RRA_LIB_KAFS],
          AC_DEFINE([HAVE_KAFS_SYSCALL], [1],
             [Define to 1 to use the AFS syscall interface.])
          AC_DEFINE([_REENTRANT], [1],
-            [Define to 1 on Solaris for correct threaded errno handling.])])])
- AM_CONDITIONAL([NEED_KAFS], [test x"$rra_build_kafs" = xtrue])
- AC_SUBST([KAFS_SYSCALL_OBJECTS])])
+            [Define to 1 on Solaris for threaded errno handling.])])])])

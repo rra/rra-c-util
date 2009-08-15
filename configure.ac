@@ -81,8 +81,11 @@ dnl      AC_CHECK_FUNCS([krb_life_to_time], , [AC_LIBOBJ([lifetime])])
 dnl      RRA_LIB_KRB4_RESTORE]
 
 dnl Probe for libkafs.  Do this so that we can test the libkafs portability
-dnl library.
+dnl library.  If AFS support should be conditional, set rra_build_kafs
+dnl explicitly to false, conditionally run RRA_LIB_KAFS, and then always set
+dnl the Automake conditional.
 RRA_LIB_KAFS
+AM_CONDITIONAL([NEED_KAFS], [test x"$rra_build_kafs" = xtrue])
 
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
