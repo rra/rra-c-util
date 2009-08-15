@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 2.0 (unreleased)
+rra-c-util 2.0 (2009-08-15)
 
     Add a replacement for the libkafs library for AFS PAG and token
     manipulation.  This is a minimal version of the library with no
