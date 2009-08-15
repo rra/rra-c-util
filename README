@@ -41,9 +41,15 @@ DESCRIPTION
 REQUIREMENTS
 
   Everything requires a C compiler to build and expects an ISO C89 or
-  later C compiler.  Currently, there are no other requirements, although
-  with time some utility functions that require other packages will be
-  included here.
+  later C compiler and libraries.
+
+  The configure probes for the kafs libraries are run unconditionally,
+  which on Linux requires the kafs library that comes with either Heimdal
+  or KTH Kerberos, AFS header files (on any other platform besides AIX or
+  IRIX), or AFS libraries (on AIX and IRIX).  On platforms without
+  transitive shared library dependencies, you may need to enable the
+  Kerberos v5 library probes in configure to be able to link the libkafs
+  library.  The other code will run fine without those requirements.
 
   To bootstrap from a Git checkout, or if you change the Automake files
   and need to regenerate Makefile.in, you will need Automake 1.10 or
@@ -106,6 +112,10 @@ USING THIS CODE
     xmalloc.c if you copy anything over at all, since most of the rest of
     the library uses those.  You'll also want to copy over util.h and
     remove the declarations for anything that you're not including.
+
+  * If you're using the kafs portability code, copy over the kafs
+    directory, m4/kafs.m4, the code to build kafs from Makefile.am, and
+    the relevant fragments of configure.ac.
 
   * Copy m4/vamacros.m4 to your package if you use the messages utility
     functions.
