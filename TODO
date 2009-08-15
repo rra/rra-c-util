@@ -6,6 +6,9 @@ util:
    providing an API to retrieve the most recent Kerberos error message in
    addition to just die_krb5() and warn_krb5().
 
+ * Rather than distributing a single large util.h, break it up into
+   separate header files per source file or related functionality group.
+
 Test Suite:
 
  * Add a bail_krb5() function to tests/tap/kerberos.c that bails out but
