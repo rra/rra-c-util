@@ -1,10 +1,5 @@
                           rra-c-util To-Do List
 
-portable:
-
- * Include the krbafs portability layer from kstart and pam-afs-session
-   and add a test suite for it.
-
 util:
 
  * Include messages-krb5.c from the kstart distribution.  Consider
@@ -19,3 +14,5 @@ Test Suite:
 
  * The xmalloc test suite doesn't fully comply with the TAP output
    protocol when reporting diagnostics from the xmalloc helper program.
+
+ * Incorporate the Perl utility library from kstart's test suite.
