@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 2.1 (unreleased)
+
+    Add a new Autoconf macro, RRA_SET_LIBDIR, which sets the libdir
+    variable based on the size of an integer in the compilation
+    environment and whether /usr/lib32 or /usr/lib64 exist.
+
 rra-c-util 2.0 (2009-08-15)
 
     Add a replacement for the libkafs library for AFS PAG and token
