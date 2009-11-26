@@ -21,6 +21,7 @@
 
 #include <config.h>
 #include <portable/macros.h>
+#include <portable/socket.h>
 #include <portable/stdbool.h>
 
 #include <stdarg.h>
