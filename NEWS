@@ -13,6 +13,9 @@ rra-c-util 2.1 (unreleased)
     INVALID_SOCKET define instead of -1.  Fixes portability issues to
     64-bit Windows.  Thanks, Jeffrey Altman.
 
+    Add a cast to the log handler for Windows so that it works properly on
+    64-bit Windows.  Thanks, Jeffrey Altman.
+
 rra-c-util 2.0 (2009-08-15)
 
     Add a replacement for the libkafs library for AFS PAG and token
