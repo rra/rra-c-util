@@ -6,7 +6,7 @@
  *
  * Written by Russ Allbery <rra@stanford.edu>
  * Based on prior work by Anton Ushakov
- * Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008
+ * Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009
  *     Board of Trustees, Leland Stanford Jr. University
  * Copyright (c) 2004, 2005, 2006, 2007
  *     by Internet Systems Consortium, Inc. ("ISC")
@@ -64,8 +64,8 @@ ssize_t xwritev(int fd, const struct iovec *iov, int iovcnt);
  * are reported using warn/syswarn.  To bind to all interfaces, use "any" or
  * "all" for address.
  */
-int network_bind_ipv4(const char *address, unsigned short port);
-int network_bind_ipv6(const char *address, unsigned short port);
+socket_type network_bind_ipv4(const char *address, unsigned short port);
+socket_type network_bind_ipv6(const char *address, unsigned short port);
 
 /*
  * Create and bind sockets for every local address (normally two, one for IPv4
@@ -74,7 +74,7 @@ int network_bind_ipv6(const char *address, unsigned short port);
  * fds will be set to an array containing the resulting file descriptors, with
  * count holding the count returned.
  */
-void network_bind_all(unsigned short port, int **fds, int *count);
+void network_bind_all(unsigned short port, socket_type **fds, int *count);
 
 /*
  * Create a socket and connect it to the remote service given by the linked
@@ -82,14 +82,14 @@ void network_bind_all(unsigned short port, int **fds, int *count);
  * -1 on failure, with the error left in errno.  Takes an optional source
  * address.
  */
-int network_connect(struct addrinfo *, const char *source);
+socket_type network_connect(struct addrinfo *, const char *source);
 
 /*
  * Like network_connect but takes a host and port instead.  If host lookup
  * fails, errno may not be set to anything useful.
  */
-int network_connect_host(const char *host, unsigned short port,
-                         const char *source);
+socket_type network_connect_host(const char *host, unsigned short port,
+                                 const char *source);
 
 /*
  * Creates a socket of the specified domain and type and binds it to the
@@ -101,7 +101,7 @@ int network_connect_host(const char *host, unsigned short port,
  * This is a lower-level function intended primarily for the use of clients
  * that will then go on to do a non-blocking connect.
  */
-int network_client_create(int domain, int type, const char *source);
+socket_type network_client_create(int domain, int type, const char *source);
 
 /*
  * Put an ASCII representation of the address in a sockaddr into the provided

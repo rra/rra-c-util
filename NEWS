@@ -6,6 +6,13 @@ rra-c-util 2.1 (unreleased)
     variable based on the size of an integer in the compilation
     environment and whether /usr/lib32 or /usr/lib64 exist.
 
+    Use a socket_type typedef rather than int directly to store the file
+    descriptors of sockets and, on Windows, typedef that to SOCKET instead
+    of int.  Update the function signatures of the network utility
+    functions appropriately.  Compare socket_type variables against an
+    INVALID_SOCKET define instead of -1.  Fixes portability issues to
+    64-bit Windows.  Thanks, Jeffrey Altman.
+
 rra-c-util 2.0 (2009-08-15)
 
     Add a replacement for the libkafs library for AFS PAG and token
