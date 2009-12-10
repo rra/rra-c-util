@@ -6,6 +6,10 @@ rra-c-util 2.2 (unreleased)
     prototypes for utility functions where appropriate, and add the format
     attribute to xasprintf.
 
+    Switch to AC_TYPE_LONG_LONG_INT instead of AC_CHECK_TYPES([long long])
+    as provided by newer Autoconfs, and change the snprintf replacement to
+    assume the compiler provides long double.
+
 rra-c-util 2.1 (2009-11-25)
 
     Add a new Autoconf macro, RRA_SET_LIBDIR, which sets the libdir
