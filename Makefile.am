@@ -83,56 +83,44 @@ endif
 # All of the other test programs.
 tests_portable_asprintf_t_SOURCES = tests/portable/asprintf-t.c \
 	tests/portable/asprintf.c
-tests_portable_asprintf_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a 
+tests_portable_asprintf_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_daemon_t_SOURCES = tests/portable/daemon-t.c \
 	tests/portable/daemon.c
-tests_portable_daemon_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_daemon_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_getaddrinfo_t_SOURCES = tests/portable/getaddrinfo-t.c \
 	tests/portable/getaddrinfo.c
-tests_portable_getaddrinfo_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a 
+tests_portable_getaddrinfo_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_getnameinfo_t_SOURCES = tests/portable/getnameinfo-t.c \
 	tests/portable/getnameinfo.c
 tests_portable_getnameinfo_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 tests_portable_getopt_t_SOURCES = tests/portable/getopt-t.c \
 	tests/portable/getopt.c
-tests_portable_getopt_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_getopt_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_inet_aton_t_SOURCES = tests/portable/inet_aton-t.c \
 	tests/portable/inet_aton.c
-tests_portable_inet_aton_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_inet_aton_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_inet_ntoa_t_SOURCES = tests/portable/inet_ntoa-t.c \
 	tests/portable/inet_ntoa.c
-tests_portable_inet_ntoa_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_inet_ntoa_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_inet_ntop_t_SOURCES = tests/portable/inet_ntop-t.c \
 	tests/portable/inet_ntop.c
-tests_portable_inet_ntop_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_inet_ntop_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_mkstemp_t_SOURCES = tests/portable/mkstemp-t.c \
 	tests/portable/mkstemp.c
-tests_portable_mkstemp_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_mkstemp_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_setenv_t_SOURCES = tests/portable/setenv-t.c \
 	tests/portable/setenv.c
-tests_portable_setenv_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_setenv_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_snprintf_t_SOURCES = tests/portable/snprintf-t.c \
 	tests/portable/snprintf.c
-tests_portable_snprintf_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_snprintf_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_strlcat_t_SOURCES = tests/portable/strlcat-t.c \
 	tests/portable/strlcat.c
-tests_portable_strlcat_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_strlcat_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_strlcpy_t_SOURCES = tests/portable/strlcpy-t.c \
 	tests/portable/strlcpy.c
-tests_portable_strlcpy_t_LDADD = tests/tap/libtap.a util/libutil.a \
-	portable/libportable.a
+tests_portable_strlcpy_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_util_concat_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 tests_util_fdflag_t_LDADD = tests/tap/libtap.a util/libutil.a \
