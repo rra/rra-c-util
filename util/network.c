@@ -8,7 +8,7 @@
  * All of the portability difficulties with supporting IPv4 and IPv6 should be
  * encapsulated in the combination of this code and replacement
  * implementations for functions that aren't found on some pre-IPv6 systems.
- * No other part of remctl should have to care about IPv4 vs. IPv6.
+ * No other part of the source tree should have to care about IPv4 vs. IPv6.
  *
  * Copyright 2009 Board of Trustees, Leland Stanford Jr. University
  * Copyright (c) 2004, 2005, 2006, 2007, 2008
