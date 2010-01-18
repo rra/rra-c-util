@@ -25,7 +25,9 @@
 
 #include <errno.h>
 
-#include <util/util.h>
+#include <util/messages.h>
+#include <util/network.h>
+#include <util/xmalloc.h>
 
 /* Macros to set the len attribute of sockaddrs. */
 #if HAVE_STRUCT_SOCKADDR_SA_LEN

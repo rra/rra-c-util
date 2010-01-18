@@ -2,6 +2,11 @@
 
 rra-c-util 2.2 (unreleased)
 
+    Break util/util.h apart into separate header files for every utility
+    function grouping.  This requires include changes in all packages
+    importing rra-c-util, but makes it much easier to update header file
+    changes for only those components that a downstream package users.
+
     Add the GCC function attributes alloc_size, malloc, and nonnull to the
     prototypes for utility functions where appropriate, and add the format
     attribute to xasprintf.
