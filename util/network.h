@@ -99,7 +99,7 @@ unsigned short network_sockaddr_port(const struct sockaddr *)
  * they're equal, false otherwise or on a parse error.
  */
 bool network_addr_match(const char *, const char *, const char *mask)
-    __attribute__((__nonnull__));
+    __attribute__((__nonnull__(1, 2)));
 
 /* Undo default visibility change. */
 #pragma GCC visibility pop
