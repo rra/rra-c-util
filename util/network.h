@@ -65,10 +65,9 @@ socket_type network_connect_host(const char *host, unsigned short port,
 
 /*
  * Creates a socket of the specified domain and type and binds it to the
- * appropriate source address, either the one supplied or the appropriate
- * innconf setting if the provided source address is NULL.  To bind to all
- * interfaces, use "all" for address.  Returns the newly created file
- * descriptor or -1 on error.
+ * appropriate source address, either the one supplied or all addresses if the
+ * source address is NULL or "all".  Returns the newly created file descriptor
+ * or -1 on error.
  *
  * This is a lower-level function intended primarily for the use of clients
  * that will then go on to do a non-blocking connect.

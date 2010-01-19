@@ -231,20 +231,18 @@ network_bind_all(unsigned short port, socket_type **fds, int *count)
 
 
 /*
- * Binds the given socket to an appropriate source address for its family,
- * using innconf information or the provided source address.  Returns true on
- * success and false on failure.
+ * Binds the given socket to an appropriate source address for its family
+ * using the provided source address.  Returns true on success and false on
+ * failure.
  */
 static int
 network_source(socket_type fd, int family, const char *source)
 {
-    if (source == NULL)
+    if (source == NULL || strcmp(source, "all") == 0)
         return 1;
     if (family == AF_INET) {
         struct sockaddr_in saddr;
 
-        if (source == NULL || strcmp(source, "all") == 0)
-            return 1;
         memset(&saddr, 0, sizeof(saddr));
         saddr.sin_family = AF_INET;
         if (!inet_aton(source, &saddr.sin_addr))
@@ -255,8 +253,6 @@ network_source(socket_type fd, int family, const char *source)
     else if (family == AF_INET6) {
         struct sockaddr_in6 saddr;
 
-        if (source == NULL || strcmp(source, "all") == 0)
-            return 1;
         memset(&saddr, 0, sizeof(saddr));
         saddr.sin6_family = AF_INET6;
         if (inet_pton(AF_INET6, source, &saddr.sin6_addr) < 1)
@@ -264,8 +260,14 @@ network_source(socket_type fd, int family, const char *source)
         return bind(fd, (struct sockaddr *) &saddr, sizeof(saddr)) == 0;
     }
 #endif
-    else
-        return 1;
+    else {
+#ifdef _WIN32
+        socket_set_errno(WSAEINVAL);
+#else
+        socket_set_errno(EINVAL);
+#endif
+        return 0;
+    }
 }
 
 

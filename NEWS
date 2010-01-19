@@ -17,6 +17,9 @@ rra-c-util 2.2 (2010-01-18)
     opposed to available on the current system, which is what k_hasafs
     determines).
 
+    Improve error handling when network_connect or network_client_create
+    are called with an unknown address domain for the source address.
+
     Switch to AC_TYPE_LONG_LONG_INT instead of AC_CHECK_TYPES([long long])
     as provided by newer Autoconfs, and change the snprintf replacement to
     assume the compiler provides long double.
