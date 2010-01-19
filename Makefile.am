@@ -20,8 +20,10 @@ portable_libportable_a_SOURCES = portable/dummy.c portable/getaddrinfo.h \
 	portable/socket.h portable/stdbool.h portable/system.h \
 	portable/uio.h
 portable_libportable_a_LIBADD = $(LIBOBJS)
-util_libutil_a_SOURCES = util/concat.c util/fdflag.c util/messages.c \
-	util/network.c util/util.h util/vector.c util/xmalloc.c util/xwrite.c
+util_libutil_a_SOURCES = util/concat.c util/concat.h util/fdflag.c	\
+	util/fdflag.h util/macros.h util/messages.c util/messages.h	\
+	util/network.c util/network.h util/vector.c util/vector.h	\
+	util/xmalloc.c util/xmalloc.h util/xwrite.c util/xwrite.h
 
 # Conditionally build the replacement kafs library.
 if NEED_KAFS
