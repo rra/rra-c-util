@@ -11,6 +11,12 @@ rra-c-util 2.2 (unreleased)
     prototypes for utility functions where appropriate, and add the format
     attribute to xasprintf.
 
+    kafs/kafs.h now defines HAVE_KAFS if any form of AFS support is
+    available.  This allows programs using it to, for instance, display
+    different help output based on whether AFS support is compiled in (as
+    opposed to available on the current system, which is what k_hasafs
+    determines).
+
     Switch to AC_TYPE_LONG_LONG_INT instead of AC_CHECK_TYPES([long long])
     as provided by newer Autoconfs, and change the snprintf replacement to
     assume the compiler provides long double.
