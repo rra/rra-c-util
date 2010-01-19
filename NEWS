@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 2.2 (unreleased)
+rra-c-util 2.2 (2010-01-18)
 
     Break util/util.h apart into separate header files for every utility
     function grouping.  This requires include changes in all packages

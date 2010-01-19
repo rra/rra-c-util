@@ -1,11 +1,11 @@
-                              rra-c-util 2.1
+                              rra-c-util 2.2
                  (Russ Allbery's utility libraries for C)
 
                 Written by Russ Allbery <rra@stanford.edu>
 
-  Copyright 2000, 2009 Russ Allbery <rra@stanford.edu>.  This software is
-  distributed under a BSD-style license.  Please see the file LICENSE in
-  the distribution for more information.
+  Copyright 2000, 2009, 2010 Russ Allbery <rra@stanford.edu>.  This
+  software is distributed under a BSD-style license.  Please see the file
+  LICENSE in the distribution for more information.
 
 BLURB
 
