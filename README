@@ -51,6 +51,10 @@ REQUIREMENTS
   Kerberos v5 library probes in configure to be able to link the libkafs
   library.  The other code will run fine without those requirements.
 
+  To enable tests that may be sensitive to the local environment or that
+  produce a lot of false positives without uncovering many problems, set
+  RRA_MAINTAINER_TESTS to a true value.
+
   To bootstrap from a Git checkout, or if you change the Automake files
   and need to regenerate Makefile.in, you will need Automake 1.11 or
   later.  For bootstrap or if you change configure.ac or any of the m4

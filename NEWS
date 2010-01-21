@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 2.3 (unreleased)
+
+    Disable the xmalloc test except for maintainers.  It's too fragile,
+    and isn't catching problems with xmalloc itself.
+
 rra-c-util 2.2 (2010-01-18)
 
     Break util/util.h apart into separate header files for every utility
