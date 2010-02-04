@@ -6,16 +6,15 @@
  * obtains Kerberos credentials, sets up a ticket cache, and sets the
  * environment variable pointing to the Kerberos keytab to use for testing.
  *
- * Copyright 2006, 2007, 2009
+ * Copyright 2006, 2007, 2009, 2010
  *     Board of Trustees, Leland Stanford Jr. University
  *
  * See LICENSE for licensing terms.
  */
 
 #include <config.h>
+#include <portable/krb5.h>
 #include <portable/system.h>
-
-#include <krb5.h>
 
 #include <tests/tap/basic.h>
 #include <tests/tap/kerberos.h>
@@ -50,32 +49,6 @@ find_file(const char *file)
 
 
 /*
- * Given a context and a principal, get the realm.  Used to be sure that we
- * get a TGT for the realm matching the principal name we were given.  This
- * works differently in MIT Kerberos and Heimdal, unfortunately.
- */
-static char *
-get_realm(krb5_context ctx UNUSED, krb5_principal princ)
-{
-#ifdef HAVE_KRB5_REALM
-    krb5_realm *realm;
-
-    realm = krb5_princ_realm(ctx, princ);
-    if (realm == NULL)
-        bail("cannot get Kerberos realm");
-    return krb5_realm_data(*realm);
-#else
-    krb5_data *data;
-
-    data = krb5_princ_realm(ctx, princ);
-    if (data == NULL || data->data == NULL)
-        bail("cannot get Kerberos realm");
-    return data->data;
-#endif
-}
-
-
-/*
  * Obtain Kerberos tickets for the principal specified in test.principal using
  * the keytab specified in test.keytab, both of which are presumed to be in
  * tests/data in either the build or the source tree.
@@ -100,7 +73,7 @@ kerberos_setup(void)
     krb5_ccache ccache;
     krb5_principal kprinc;
     krb5_keytab keytab;
-    krb5_get_init_creds_opt opts;
+    krb5_get_init_creds_opt *opts;
     krb5_creds creds;
 
     /* Read the principal name and find the keytab file. */
@@ -142,16 +115,15 @@ kerberos_setup(void)
     code = krb5_parse_name(ctx, principal, &kprinc);
     if (code != 0)
         bail("error parsing principal %s", principal);
-    realm = get_realm(ctx, kprinc);
+    realm = krb5_principal_get_realm(ctx, kprinc);
     krbtgt = concat("krbtgt/", realm, "@", realm, (char *) 0);
     code = krb5_kt_resolve(ctx, path, &keytab);
     if (code != 0)
         bail("cannot open keytab %s", path);
-    memset(&opts, 0, sizeof(opts));
-    krb5_get_init_creds_opt_init(&opts);
-#ifdef HAVE_KRB5_GET_INIT_CREDS_OPT_SET_DEFAULT_FLAGS
+    code = krb5_get_init_creds_opt_alloc(ctx, &opts);
+    if (code != 0)
+        bail("cannot allocate credential options");
     krb5_get_init_creds_opt_set_default_flats(ctx, NULL, realm, &opts);
-#endif
     krb5_get_init_creds_opt_set_forwardable(&opts, 0);
     krb5_get_init_creds_opt_set_proxiable(&opts, 0);
     code = krb5_get_init_creds_keytab(ctx, &creds, kprinc, keytab, 0, krbtgt,

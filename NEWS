@@ -2,6 +2,11 @@
 
 rra-c-util 2.3 (unreleased)
 
+    Add a portability layer for the Kerberos API, which supplies something
+    close to the Heimdal Kerberos API on either MIT or Heimdal and adjusts
+    with functions missing from older versions.  Use it in the Kerberos
+    TAP test module.
+
     Disable the xmalloc test except for maintainers.  It's too fragile,
     and isn't catching problems with xmalloc itself.
 

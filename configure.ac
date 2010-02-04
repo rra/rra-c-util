@@ -34,12 +34,20 @@ AC_SEARCH_LIBS([socket], [socket], ,
         [-lsocket])])
 
 dnl Probe for Kerberos.  This is only needed for packages that use Kerberos,
-dnl of course.  This is the necessary minimum probes for building the native
-dnl kerberos.c TAP library add-on.  This should possibly move into krb5.m4.
+dnl of course.  These are the necessary probes for building the full
+dnl portability layer and the kerberos.c TAP library add-on.  Many packages
+dnl will need less than this.  This should possibly move into krb5.m4.
 dnl RRA_LIB_KRB5
 dnl RRA_LIB_KRB5_SWITCH
-dnl AC_CHECK_FUNCS([krb5_get_init_creds_opt_set_default_flags])
-dnl AC_CHECK_TYPES([krb5_realm], , , [#include <krb5.h>])
+dnl AC_CHECK_FUNCS([krb5_cc_copy_cache \
+dnl     krb5_get_init_creds_opt_alloc \
+dnl     krb5_get_init_creds_opt_set_default_flags \
+dnl     krb5_kt_free_entry \
+dnl     krb5_principal_get_realm \
+dnl     krb5_xfree])
+dnl AC_CHECK_FUNCS([krb5_get_renewed_creds], ,
+dnl     [AC_CHECK_FUNCS([krb5_copy_creds_contents])
+dnl      AC_LIBOBJ([krb5-renew])])
 dnl RRA_LIB_KRB5_RESTORE
 
 dnl Probe for GSS-API.  This is only needed for packages that use GSS-API, of
