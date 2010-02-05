@@ -43,7 +43,10 @@ dnl AC_CHECK_FUNCS([krb5_cc_copy_cache \
 dnl     krb5_get_init_creds_opt_alloc \
 dnl     krb5_get_init_creds_opt_set_default_flags \
 dnl     krb5_kt_free_entry \
+dnl     krb5_principal_get_comp_string \
+dnl     krb5_principal_get_num_comp \
 dnl     krb5_principal_get_realm \
+dnl     krb5_principal_set_realm \
 dnl     krb5_xfree])
 dnl AC_CHECK_FUNCS([krb5_get_renewed_creds], ,
 dnl     [AC_CHECK_FUNCS([krb5_copy_creds_contents])

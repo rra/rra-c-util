@@ -94,6 +94,30 @@ krb5_error_code krb5_get_renewed_creds(krb5_context, krb5_creds *,
 const char *krb5_principal_get_realm(krb5_context, krb5_const_principal);
 #endif
 
+/*
+ * Adjust for other MIT versus Heimdal differences for principal data
+ * extraction and manipulation.  The krb5_principal_* functions are all
+ * Heimdal and the other interfaces are MIT.
+ *
+ * Some versions of Heimdal don't export krb5_principal_get_num_comp from
+ * libkrb5.  In that case, just look in the data structure.
+ */
+#ifndef HAVE_KRB5_PRINCIPAL_SET_REALM
+# define krb5_principal_set_realm(c, p, r) \
+    krb5_set_principal_realm((c), (p), (r))
+#endif
+#ifndef HAVE_KRB5_PRINCIPAL_GET_COMP_STRING
+# define krb5_principal_get_comp_string(c, p, n) \
+    ((krb5_princ_component((c), (p), (n)))->data)
+#endif
+#ifndef HAVE_KRB5_PRINCIPAL_GET_NUM_COMP
+# if defined(HAVE_KRB5_PRINC_SIZE) || defined(krb5_princ_size)
+#  define krb5_principal_get_num_comp(c, p) krb5_princ_size((c), (p))
+# else
+#  define krb5_principal_get_num_comp(c, p) ((p)->name.name_string.len)
+# endif
+#endif
+
 /* Undo default visibility change. */
 #pragma GCC visibility pop
 
