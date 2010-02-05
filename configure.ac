@@ -37,21 +37,21 @@ dnl Probe for Kerberos.  This is only needed for packages that use Kerberos,
 dnl of course.  These are the necessary probes for building the full
 dnl portability layer and the kerberos.c TAP library add-on.  Many packages
 dnl will need less than this.  This should possibly move into krb5.m4.
-dnl RRA_LIB_KRB5
-dnl RRA_LIB_KRB5_SWITCH
-dnl AC_CHECK_FUNCS([krb5_cc_copy_cache \
-dnl     krb5_get_init_creds_opt_alloc \
-dnl     krb5_get_init_creds_opt_set_default_flags \
-dnl     krb5_kt_free_entry \
-dnl     krb5_principal_get_comp_string \
-dnl     krb5_principal_get_num_comp \
-dnl     krb5_principal_get_realm \
-dnl     krb5_principal_set_realm \
-dnl     krb5_xfree])
-dnl AC_CHECK_FUNCS([krb5_get_renewed_creds], ,
-dnl     [AC_CHECK_FUNCS([krb5_copy_creds_contents])
-dnl      AC_LIBOBJ([krb5-renew])])
-dnl RRA_LIB_KRB5_RESTORE
+RRA_LIB_KRB5
+RRA_LIB_KRB5_SWITCH
+AC_CHECK_FUNCS([krb5_cc_copy_cache \
+    krb5_get_init_creds_opt_alloc \
+    krb5_get_init_creds_opt_set_default_flags \
+    krb5_kt_free_entry \
+    krb5_principal_get_comp_string \
+    krb5_principal_get_num_comp \
+    krb5_principal_get_realm \
+    krb5_principal_set_realm \
+    krb5_xfree])
+AC_CHECK_FUNCS([krb5_get_renewed_creds], ,
+    [AC_CHECK_FUNCS([krb5_copy_creds_contents])
+     AC_LIBOBJ([krb5-renew])])
+RRA_LIB_KRB5_RESTORE
 
 dnl Probe for GSS-API.  This is only needed for packages that use GSS-API, of
 dnl course.  These are the probes needed for portable/gssapi.h and

@@ -17,14 +17,17 @@ EXTRA_DIST = .gitignore LICENSE autogen m4/gssapi.m4 m4/krb4.m4 m4/krb5.m4 \
 
 noinst_LIBRARIES = portable/libportable.a util/libutil.a
 portable_libportable_a_SOURCES = portable/dummy.c portable/getaddrinfo.h \
-	portable/getnameinfo.h portable/getopt.h portable/macros.h \
-	portable/socket.h portable/stdbool.h portable/system.h \
-	portable/uio.h
+	portable/getnameinfo.h portable/getopt.h portable/krb5-extra.c	 \
+	portable/krb5.h portable/macros.h portable/socket.h		 \
+	portable/stdbool.h portable/system.h portable/uio.h
+portable_libportable_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 portable_libportable_a_LIBADD = $(LIBOBJS)
-util_libutil_a_SOURCES = util/concat.c util/concat.h util/fdflag.c	\
-	util/fdflag.h util/macros.h util/messages.c util/messages.h	\
-	util/network.c util/network.h util/vector.c util/vector.h	\
-	util/xmalloc.c util/xmalloc.h util/xwrite.c util/xwrite.h
+util_libutil_a_SOURCES = util/concat.c util/concat.h util/fdflag.c	    \
+	util/fdflag.h util/macros.h util/messages-krb5.c		    \
+	util/messages-krb5.h util/messages.c util/messages.h util/network.c \
+	util/network.h util/vector.c util/vector.h util/xmalloc.c	    \
+	util/xmalloc.h util/xwrite.c util/xwrite.h
+util_libutil_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 
 # Conditionally build the replacement kafs library.
 if NEED_KAFS
@@ -66,10 +69,10 @@ check_PROGRAMS = tests/runtests tests/kafs/basic tests/portable/asprintf-t \
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
 check_LIBRARIES = tests/tap/libtap.a
-tests_tap_libtap_a_CPPFLAGS = -I$(abs_top_srcdir)/tests
-tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h \
-	tests/tap/messages.c tests/tap/messages.h tests/tap/remctl.c \
-	tests/tap/remctl.h
+tests_tap_libtap_a_CPPFLAGS = -I$(abs_top_srcdir)/tests $(KRB5_CPPFLAGS)
+tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h	\
+	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/messages.c	\
+	tests/tap/messages.h tests/tap/remctl.c tests/tap/remctl.h
 
 # kafs tests are buit differently depending on whether we use our local
 # libkafs replacement.

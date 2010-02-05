@@ -7,6 +7,8 @@ rra-c-util 2.3 (unreleased)
     with functions missing from older versions.  Use it in the Kerberos
     TAP test module.
 
+    Add die and warn wrappers for Kerberos errors to the utility library.
+
     Disable the xmalloc test except for maintainers.  It's too fragile,
     and isn't catching problems with xmalloc itself.
 
