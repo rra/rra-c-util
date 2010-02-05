@@ -18,7 +18,8 @@
 
 #include <tests/tap/basic.h>
 #include <tests/tap/kerberos.h>
-#include <util/util.h>
+#include <util/concat.h>
+#include <util/xmalloc.h>
 
 
 /*
@@ -64,8 +65,8 @@ find_file(const char *file)
 char *
 kerberos_setup(void)
 {
-    char *path, *realm, *krbtgt;
-    const char *build;
+    char *path, *krbtgt;
+    const char *build, *realm;
     FILE *file;
     char principal[BUFSIZ];
     krb5_error_code code;
@@ -123,11 +124,11 @@ kerberos_setup(void)
     code = krb5_get_init_creds_opt_alloc(ctx, &opts);
     if (code != 0)
         bail("cannot allocate credential options");
-    krb5_get_init_creds_opt_set_default_flats(ctx, NULL, realm, &opts);
-    krb5_get_init_creds_opt_set_forwardable(&opts, 0);
-    krb5_get_init_creds_opt_set_proxiable(&opts, 0);
+    krb5_get_init_creds_opt_set_default_flags(ctx, NULL, realm, opts);
+    krb5_get_init_creds_opt_set_forwardable(opts, 0);
+    krb5_get_init_creds_opt_set_proxiable(opts, 0);
     code = krb5_get_init_creds_keytab(ctx, &creds, kprinc, keytab, 0, krbtgt,
-                                      &opts);
+                                      opts);
     if (code != 0)
         bail("cannot get Kerberos tickets");
     code = krb5_cc_initialize(ctx, ccache, kprinc);
