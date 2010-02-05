@@ -10,6 +10,9 @@ rra-c-util 2.3 (unreleased)
     Disable the xmalloc test except for maintainers.  It's too fragile,
     and isn't catching problems with xmalloc itself.
 
+    Adjust the Kerberos TAP test library add-ons for the split of
+    util/util.h.
+
 rra-c-util 2.2 (2010-01-18)
 
     Break util/util.h apart into separate header files for every utility
