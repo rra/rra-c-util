@@ -15,6 +15,7 @@ portable/strlcpy
 util/concat
 util/fdflag
 util/messages
+util/messages-krb5
 util/network
 util/vector
 util/xmalloc

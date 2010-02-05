@@ -27,6 +27,7 @@
 /tests/runtests
 /tests/util/concat-t
 /tests/util/fdflag-t
+/tests/util/messages-krb5-t
 /tests/util/messages-t
 /tests/util/network-t
 /tests/util/vector-t

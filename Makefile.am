@@ -56,23 +56,24 @@ warnings:
 	$(MAKE) V=0 CFLAGS='$(WARNINGS)' $(check_PROGRAMS)
 
 # The bits below are for the test suite, not for the main package.
-check_PROGRAMS = tests/runtests tests/kafs/basic tests/portable/asprintf-t \
-	tests/portable/daemon-t tests/portable/getaddrinfo-t		   \
-	tests/portable/getnameinfo-t tests/portable/getopt-t		   \
-	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		   \
-	tests/portable/inet_ntop-t tests/portable/mkstemp-t		   \
-	tests/portable/setenv-t tests/portable/snprintf-t		   \
-	tests/portable/strlcat-t tests/portable/strlcpy-t		   \
-	tests/util/concat-t tests/util/fdflag-t tests/util/messages-t	   \
-	tests/util/network-t tests/util/vector-t tests/util/xmalloc	   \
-	tests/util/xwrite-t
+check_PROGRAMS = tests/runtests tests/kafs/basic tests/portable/asprintf-t  \
+	tests/portable/daemon-t tests/portable/getaddrinfo-t		    \
+	tests/portable/getnameinfo-t tests/portable/getopt-t		    \
+	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		    \
+	tests/portable/inet_ntop-t tests/portable/mkstemp-t		    \
+	tests/portable/setenv-t tests/portable/snprintf-t		    \
+	tests/portable/strlcat-t tests/portable/strlcpy-t		    \
+	tests/util/concat-t tests/util/fdflag-t tests/util/messages-t	    \
+	tests/util/messages-krb5-t tests/util/network-t tests/util/vector-t \
+	tests/util/xmalloc tests/util/xwrite-t
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
 check_LIBRARIES = tests/tap/libtap.a
 tests_tap_libtap_a_CPPFLAGS = -I$(abs_top_srcdir)/tests $(KRB5_CPPFLAGS)
 tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h	\
 	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/messages.c	\
-	tests/tap/messages.h tests/tap/remctl.c tests/tap/remctl.h
+	tests/tap/messages.h tests/tap/process.c tests/tap/process.h	\
+	tests/tap/remctl.c tests/tap/remctl.h
 
 # kafs tests are buit differently depending on whether we use our local
 # libkafs replacement.
@@ -133,6 +134,10 @@ tests_util_fdflag_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 tests_util_messages_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
+tests_util_messages_krb5_t_CPPFLAGS = $(KRB5_CPPFLAGS)
+tests_util_messages_krb5_t_LDFLAGS = $(KRB5_LDFLAGS)
+tests_util_messages_krb5_t_LDADD = tests/tap/libtap.a util/libutil.a \
+	portable/libportable.a $(KRB5_LIBS)
 tests_util_network_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 tests_util_vector_t_LDADD = tests/tap/libtap.a util/libutil.a \
