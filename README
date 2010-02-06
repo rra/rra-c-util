@@ -43,13 +43,12 @@ REQUIREMENTS
   Everything requires a C compiler to build and expects an ISO C89 or
   later C compiler and libraries.
 
-  The configure probes for the kafs libraries are run unconditionally,
-  which on Linux requires the kafs library that comes with either Heimdal
-  or KTH Kerberos, AFS header files (on any other platform besides AIX or
-  IRIX), or AFS libraries (on AIX and IRIX).  On platforms without
-  transitive shared library dependencies, you may need to enable the
-  Kerberos v5 library probes in configure to be able to link the libkafs
-  library.  The other code will run fine without those requirements.
+  A Kerberos library, either MIT Kerberos or Heimdal, is required since
+  the Kerberos portability layer is built and tested by default.  The kafs
+  portability layer is also built by default, which on Linux requires the
+  kafs library that comes with either Heimdal or KTH Kerberos, AFS header
+  files (on any other platform besides AIX or IRIX), or AFS libraries (on
+  AIX and IRIX).  The other code will run fine without those requirements.
 
   To enable tests that may be sensitive to the local environment or that
   produce a lot of false positives without uncovering many problems, set
@@ -72,6 +71,33 @@ BUILDING AND TESTING
   Pass --enable-silent-rules to configure for a quieter build (similar to
   the Linux kernel).  Use make warnings instead of make to build with full
   GCC compiler warnings (requires a relatively current version of GCC).
+
+  Normally, configure will use krb5-config to determine the flags to use
+  to compile with your Kerberos libraries.  If krb5-config isn't found, it
+  will look for the standard Kerberos libraries in locations already
+  searched by your compiler.  If the the krb5-config script first in your
+  path is not the one corresponding to the Kerberos libraries you want to
+  use or if your Kerberos libraries and includes aren't in a location
+  searched by default by your compiler, you need to specify
+  --with-krb5=PATH:
+
+      ./configure --with-krb5=/usr/pubsw
+
+  You can also individually set the paths to the include directory and the
+  library directory with --with-krb5-include and --with-krb5-lib.  You may
+  need to do this if Autoconf can't figure out whether to use lib, lib32,
+  or lib64 on your platform.  Note that these settings aren't used if a
+  krb5-config script is found.
+
+  To specify a particular krb5-config script to use, either set the
+  KRB5_CONFIG environment variable or pass it to configure like:
+
+      ./configure KRB5_CONFIG=/path/to/krb5-config
+
+  To not use krb5-config and force library probing even if there is a
+  krb5-config script on your path, set KRB5_CONFIG to a nonexistent path:
+
+      ./configure KRB5_CONFIG=/nonexistent
 
   If a test fails, you can run a single test with verbose output via:
 
@@ -113,14 +139,26 @@ USING THIS CODE
     the targets.
 
   * Create a util directory and copy over the portions of the utility
-    library that you want.  You will probably need messages*.c and
-    xmalloc.c if you copy anything over at all, since most of the rest of
-    the library uses those.  You'll also want to copy over util.h and
-    remove the declarations for anything that you're not including.
+    library that you want.  You will probably need messages.[ch] and
+    xmalloc.[ch] if you copy anything over at all, since most of the rest
+    of the library uses those.
+
+  * If you're using the Kerberos portability code, copy over
+    portable/krb5.h, portable/krb5-extra.c, m4/krb5.m4, m4/lib-depends.m4,
+    m4/lib-pathname.m4, and optionally util/messages-krb5.[ch].  You'll
+    also need the relevant fragments of configure.ac.  Also see the
+    kerberos.* libraries in tests/tap for a Kerberos test suite.  You may
+    want to remove some things from krb5.h and krb5-extra.c the
+    corresponding configure checks if your code doesn't need all of those
+    functions.  If you need krb5_get_renewed_creds, also copy over
+    krb5-renew.c.
 
   * If you're using the kafs portability code, copy over the kafs
-    directory, m4/kafs.m4, the code to build kafs from Makefile.am, and
-    the relevant fragments of configure.ac.
+    directory, m4/kafs.m4, m4/lib-pathname.m4, the code to build kafs from
+    Makefile.am, and the relevant fragments of configure.ac.
+
+  * If you're using the PAM portability code, copy over portable/pam*,
+    m4/pam-const.m4, and the relevant fragments of configure.ac.
 
   * Copy m4/vamacros.m4 to your package if you use the messages utility
     functions.
