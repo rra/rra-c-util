@@ -9,6 +9,9 @@ rra-c-util 2.3 (unreleased)
 
     Add die and warn wrappers for Kerberos errors to the utility library.
 
+    Add a portability wrapper around PAM libraries and replacements for
+    pam_syslog and pam_vsyslog.
+
     Add a new TAP add-on for running a function in a separate process and
     then checking its exit status and output.
 

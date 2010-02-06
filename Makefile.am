@@ -10,7 +10,8 @@ ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST = .gitignore LICENSE autogen m4/gssapi.m4 m4/krb4.m4 m4/krb5.m4 \
 	m4/lib-depends.m4 m4/lib-pathname.m4 m4/remctl.m4 mkusage	   \
 	portable/gssapi-mech.c portable/gssapi.h portable/krb4.h	   \
-	portable/lifetime.c portable/winsock.c tests/TESTS		   \
+	portable/lifetime.c portable/pam.h portable/pam_syslog.c	   \
+	portable/pam_vsyslog.c portable/winsock.c tests/TESTS		   \
 	tests/kafs/basic-t tests/tap/kerberos.c tests/tap/kerberos.h	   \
 	tests/tap/kerberos.sh tests/tap/kinit.c tests/tap/libtap.sh	   \
 	tests/tap/remctl.sh tests/util/xmalloc-t

@@ -82,8 +82,8 @@ dnl #endif
 dnl ]])
 dnl RRA_LIB_GSSAPI_RESTORE
 
-dnl Probe for Kerberos v4.  This is only needed for packages that use
-dnl Kerberos, of course.  This code includes probing for the lifetime support
+dnl Probe for Kerberos v4.  This is only needed for packages that use Kerberos
+dnl v4, of course.  This code includes probing for the lifetime support
 dnl functions, for which we have a replacement in portable/lifetime.c.
 dnl RRA_LIB_KRB4_OPTIONAL
 dnl AS_IF([test x"$rra_use_krb4" = xyes],
@@ -97,6 +97,22 @@ dnl explicitly to false, conditionally run RRA_LIB_KAFS, and then always set
 dnl the Automake conditional.
 RRA_LIB_KAFS
 AM_CONDITIONAL([NEED_KAFS], [test x"$rra_build_kafs" = xtrue])
+
+dnl Probe for PAM.  These are the tests required for portable/pam.h and its
+dnl replacement functions.
+dnl AC_SEARCH_LIBS([pam_set_data], [pam])
+dnl AC_CHECK_FUNCS([pam_modutil_getpwnam])
+dnl AC_REPLACE_FUNCS([pam_syslog pam_vsyslog])
+dnl AC_CHECK_HEADERS([security/pam_modutil.h], ,
+dnl     [AC_CHECK_HEADERS([pam/pam_modutil.h])])
+dnl AC_CHECK_HEADERS([security/pam_appl.h], ,
+dnl     [AC_CHECK_HEADERS([pam/pam_appl.h], ,
+dnl         [AC_MSG_ERROR([No PAM header files found])])])
+dnl AC_CHECK_HEADERS([security/pam_ext.h], ,
+dnl     [AC_CHECK_HEADERS([pam/pam_ext.h])])
+dnl RRA_HEADER_PAM_CONST
+dnl AC_DEFINE([MODULE_NAME], ["pam_example"],
+dnl     [The name of the PAM module, used by the pam_vsyslog replacement.])
 
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
