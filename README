@@ -38,20 +38,22 @@ DESCRIPTION
   other packages.
 
   This package uses the infrastructure of C TAP Harness for testing, but
-  is not the canonical version of tests/runtests.c or tests/tap/*.  Those
-  files should be pulled from C TAP Harness instead.
+  is not the canonical version of tests/runtests.c, tests/tap/basic.[ch],
+  or tests/tap/libtap.sh.  Those files should be pulled from C TAP Harness
+  instead.
 
 REQUIREMENTS
 
   Everything requires a C compiler to build and expects an ISO C89 or
   later C compiler and libraries.
 
-  A Kerberos library, either MIT Kerberos or Heimdal, is required since
-  the Kerberos portability layer is built and tested by default.  The kafs
-  portability layer is also built by default, which on Linux requires the
-  kafs library that comes with either Heimdal or KTH Kerberos, AFS header
-  files (on any other platform besides AIX or IRIX), or AFS libraries (on
-  AIX and IRIX).  The other code will run fine without those requirements.
+  A Kerberos library, either MIT Kerberos or Heimdal, is required to build
+  this package as-is, since the Kerberos portability layer is built and
+  tested by default.  The kafs portability layer is also built by default,
+  which on Linux requires the kafs library that comes with either Heimdal
+  or KTH Kerberos, AFS header files (on any other platform besides AIX or
+  IRIX), or AFS libraries (on AIX and IRIX).  The other code will run fine
+  without those requirements when copied into other packages.
 
   To enable tests that may be sensitive to the local environment or that
   produce a lot of false positives without uncovering many problems, set
@@ -63,13 +65,12 @@ REQUIREMENTS
   files it includes and need to regenerate configure or config.h.in, you
   will need Autoconf 2.64 or later.
 
-BUILDING AND TESTING
+BUILDING
 
   You can build rra-c-util and run its internal test suite with:
 
       ./configure
       make
-      make check
 
   Pass --enable-silent-rules to configure for a quieter build (similar to
   the Linux kernel).  Use make warnings instead of make to build with full
@@ -81,8 +82,8 @@ BUILDING AND TESTING
   searched by your compiler.  If the the krb5-config script first in your
   path is not the one corresponding to the Kerberos libraries you want to
   use or if your Kerberos libraries and includes aren't in a location
-  searched by default by your compiler, you need to specify
-  --with-krb5=PATH:
+  searched by default by your compiler, you need to specify a different
+  Kerberos installation root via --with-krb5=PATH.  For example:
 
       ./configure --with-krb5=/usr/pubsw
 
@@ -90,7 +91,8 @@ BUILDING AND TESTING
   library directory with --with-krb5-include and --with-krb5-lib.  You may
   need to do this if Autoconf can't figure out whether to use lib, lib32,
   or lib64 on your platform.  Note that these settings aren't used if a
-  krb5-config script is found.
+  krb5-config script is found, so you may need to disable the krb5-config
+  script as described below.
 
   To specify a particular krb5-config script to use, either set the
   KRB5_CONFIG environment variable or pass it to configure like:
@@ -102,6 +104,13 @@ BUILDING AND TESTING
 
       ./configure KRB5_CONFIG=/nonexistent
 
+TESTING
+
+  rra-c-util comes with an extensive test suite, which you can run after
+  building with:
+
+      make check
+
   If a test fails, you can run a single test with verbose output via:
 
       tests/runtests -o <name-of-test>
@@ -112,8 +121,8 @@ BUILDING AND TESTING
 USING THIS CODE
 
   While there is an install target, it's present only because Automake
-  provides it automatically and it doesn't do anything useful.  Instead,
-  the code in this package is intended to be copied into your package and
+  provides it automatically.  Its use is not recommended.  Instead, the
+  code in this package is intended to be copied into your package and
   refreshed from the latest release of rra-c-util for each release.
 
   You can obviously copy the code and integrate it however works best for
@@ -126,35 +135,47 @@ USING THIS CODE
     util directory (see below), you'll need asprintf.c, snprintf.c,
     strlcat.c, and strlcpy.c at least.  If you use util/network.c, you'll
     also need getaddrinfo.c, getaddrinfo.h, getnameinfo.c, getnameinfo.h,
-    inet_*.c, and socket.h.
+    inet_*.c, and socket.h.  You'll need winsock.c for networking
+    portability to Windows.
 
-  * Copy the bulk of configure.ac from this package into your package.
-    configure.ac is commented to try to give you a guide for what you need
-    to copy over.  You will also need to make an m4 subdirectory, add the
-    code to configure.ac to load Autoconf macros from m4, and copy over
-    m4/snprintf.m4 and possibly m4/socket.m4 and m4/inet-ntoa.m4.
+  * Copy the necessary portions of configure.ac from this package into
+    your package.  configure.ac is commented to try to give you a guide
+    for what you need to copy over.  You will also need to make an m4
+    subdirectory, add the code to configure.ac to load Autoconf macros
+    from m4, and copy over m4/snprintf.m4 and possibly m4/socket.m4 and
+    m4/inet-ntoa.m4.
 
   * Copy the code from Makefile.am for building libportable.a into your
     package and be sure to link your package binaries with libportable.a.
     If you include this code in a shared library, you'll need to build
     libportable.la instead; see the Automake manual for the differences.
-    You'll need to use LTLIBRARIES and LTLIBOBJS in addition to renaming
-    the targets.
+    You'll need to change LIBRARIES to LTLIBRARIES and LIBOBJS to
+    LTLIBOBJS in addition to renaming the targets.
 
   * Create a util directory and copy over the portions of the utility
     library that you want.  You will probably need messages.[ch] and
     xmalloc.[ch] if you copy anything over at all, since most of the rest
-    of the library uses those.
+    of the library uses those.  You will also need m4/vamacros.m4 if you
+    use messages.[ch].
+
+  * Copy the code from Makefile.am for building libutil.a into your
+    package and be sure to link your package binaries with libutil.a.  As
+    with libportable.a, if you want to use the utility functions in a
+    shared library, you'll need to instead build libutil.la and change
+    some of the Automake variables.
 
   * If you're using the Kerberos portability code, copy over
     portable/krb5.h, portable/krb5-extra.c, m4/krb5.m4, m4/lib-depends.m4,
     m4/lib-pathname.m4, and optionally util/messages-krb5.[ch].  You'll
     also need the relevant fragments of configure.ac.  Also see the
-    kerberos.* libraries in tests/tap for a Kerberos test suite.  You may
-    want to remove some things from krb5.h and krb5-extra.c the
+    kerberos.* libraries in tests/tap for a Kerberos-enabled test suite.
+    You may want to remove some things from krb5.h and krb5-extra.c the
     corresponding configure checks if your code doesn't need all of those
     functions.  If you need krb5_get_renewed_creds, also copy over
-    krb5-renew.c.
+    krb5-renew.c.  Don't forget to add $(KRB5_CPPFLAGS) to CPPFLAGS for
+    libportable and possibly libutil, and if you're building a shared
+    library, also add $(KRB5_LDFLAGS) to LDFLAGS and $(KRB5_LIBS) to
+    LIBADD for those libraries.
 
   * If you're using the kafs portability code, copy over the kafs
     directory, m4/kafs.m4, m4/lib-pathname.m4, the code to build kafs from
@@ -162,14 +183,6 @@ USING THIS CODE
 
   * If you're using the PAM portability code, copy over portable/pam*,
     m4/pam-const.m4, and the relevant fragments of configure.ac.
-
-  * Copy m4/vamacros.m4 to your package if you use the messages utility
-    functions.
-
-  * Copy the code from Makefile.am for building libutil.a into your
-    package and be sure to link your package binaries with libutil.a.  As
-    with libportable.a, if you want to use the utility functions in a
-    shared library, you'll need to instead build libutil.la.
 
   * Copy over any other Autoconf macros that you want to use in your
     package.
@@ -196,3 +209,5 @@ HOMEPAGE AND SOURCE REPOSITORY
   or view the repository via the web at:
 
       http://git.eyrie.org/?p=devel/rra-c-util.git
+
+  Please send any bug reports, patches, or questions to rra@stanford.edu.
