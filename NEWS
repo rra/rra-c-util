@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 3.0 (2010-02-10)
+rra-c-util 2.3 (2010-02-12)
 
     Add a portability layer for the Kerberos API, which supplies something
     close to the Heimdal Kerberos API on either MIT or Heimdal and adjusts
