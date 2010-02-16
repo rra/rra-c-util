@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 2.4 (unreleased)
+
+    Fix definition of replacement krb5_free_error_message to not be
+    static.
+
 rra-c-util 2.3 (2010-02-15)
 
     Add a portability layer for the Kerberos API, which supplies something
