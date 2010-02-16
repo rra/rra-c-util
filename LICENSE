@@ -57,11 +57,11 @@ portable/krb5.h, portable/macros.h, portable/mkstemp.c, portable/pam.h,
 portable/pam_syslog.c, portable/pam_vsyslog.c, portable/setenv.c,
 portable/seteuid.c, portable/stdbool.h, portable/strlcat.c,
 portable/strlcpy.c, portable/system.h, portable/uio.h, portable/winsock.c,
-util/concat.c, util/concat.h, util/vector.c, and util/vector.h have been
-placed in the public domain by their author.  You may do anything you like
-with that code, although I would strongly prefer that any improvements or
-modifications be sent to me (rra@stanford.edu) so that I can continue to
-maintain a canonical version.
+util/concat.c, util/concat.h, util/macros.h, util/vector.c, and
+util/vector.h have been placed in the public domain by their author.  You
+may do anything you like with that code, although I would strongly prefer
+that any improvements or modifications be sent to me (rra@stanford.edu) so
+that I can continue to maintain a canonical version.
 
 The files m4/inet-nota.m4, m4/socket-unix.m4, m4/socket.m4,
 portable/socket.h, tests/libtest.c, tests/libtest.h,
