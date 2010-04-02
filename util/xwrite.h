@@ -10,8 +10,8 @@
  * See LICENSE for licensing terms.
  */
 
-#ifndef UTIL_XMALLOC_H
-#define UTIL_XMALLOC_H 1
+#ifndef UTIL_XWRITE_H
+#define UTIL_XWRITE_H 1
 
 #include <config.h>
 #include <portable/macros.h>
