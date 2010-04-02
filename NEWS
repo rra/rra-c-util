@@ -5,6 +5,10 @@ rra-c-util 2.4 (unreleased)
     Fix definition of replacement krb5_free_error_message to not be
     static.
 
+    Update to C TAP Harness 1.2:
+
+    * Add the GCC nonnull attribute to the TAP library bail functions.
+
 rra-c-util 2.3 (2010-02-15)
 
     Add a portability layer for the Kerberos API, which supplies something
