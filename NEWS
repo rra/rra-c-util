@@ -10,6 +10,8 @@ rra-c-util 2.4 (unreleased)
 
     Update to C TAP Harness 1.2:
 
+    * Add diag and sysdiag functions to the basic TAP library.
+    * Clean up data types in the basic C TAP library.
     * Add the GCC nonnull attribute to the TAP library bail functions.
 
 rra-c-util 2.3 (2010-02-15)

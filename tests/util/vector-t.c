@@ -211,7 +211,7 @@ main(void)
     vector = vector_new();
     vector_add(vector, "/bin/sh");
     vector_add(vector, "-c");
-    snprintf(buffer, sizeof(buffer), "echo ok %d - vector_exec", testnum++);
+    snprintf(buffer, sizeof(buffer), "echo ok %lu - vector_exec", testnum++);
     vector_add(vector, buffer);
     child = fork();
     if (child < 0)
@@ -225,7 +225,7 @@ main(void)
     cvector = cvector_new();
     cvector_add(cvector, "/bin/sh");
     cvector_add(cvector, "-c");
-    snprintf(buffer, sizeof(buffer), "echo ok %d - cvector_exec", testnum++);
+    snprintf(buffer, sizeof(buffer), "echo ok %lu - cvector_exec", testnum++);
     cvector_add(cvector, buffer);
     child = fork();
     if (child < 0)
