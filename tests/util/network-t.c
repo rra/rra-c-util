@@ -42,14 +42,14 @@ listener(socket_type fd)
     client = accept(fd, NULL, NULL);
     close(fd);
     if (client == INVALID_SOCKET) {
-        sysnotice("# cannot accept connection from socket");
+        sysdiag("cannot accept connection from socket");
         ok_block(2, 0, "...socket read test");
         return;
     }
     ok(1, "...socket accept");
     out = fdopen(client, "r");
     if (fgets(buffer, sizeof(buffer), out) == NULL) {
-        sysnotice("# cannot read from socket");
+        sysdiag("cannot read from socket");
         ok(0, "...socket read");
     }
     is_string("socket test\r\n", buffer, "...socket read");
@@ -95,7 +95,7 @@ test_ipv4(const char *source)
     if (fd == INVALID_SOCKET)
         sysbail("cannot create or bind socket");
     if (listen(fd, 1) < 0) {
-        sysnotice("# cannot listen to socket");
+        sysdiag("cannot listen to socket");
         ok_block(3, 0, "IPv4 server test");
     } else {
         ok(1, "IPv4 server test");
@@ -135,7 +135,7 @@ test_ipv6(const char *source)
             sysbail("cannot create socket");
     }
     if (listen(fd, 1) < 0) {
-        sysnotice("# cannot listen to socket");
+        sysdiag("cannot listen to socket");
         ok_block(3, 0, "IPv6 server test");
     } else {
         ok(1, "IPv6 server test");
@@ -177,13 +177,13 @@ test_all(const char *source_ipv4, const char *source_ipv6 UNUSED)
     if (count == 0)
         sysbail("cannot create or bind socket");
     if (count > 2) {
-        notice("# got more than two sockets, using just the first two");
+        diag("got more than two sockets, using just the first two");
         count = 2;
     }
     for (i = 0; i < count; i++) {
         fd = fds[i];
         if (listen(fd, 1) < 0) {
-            sysnotice("# cannot listen to socket %d", fd);
+            sysdiag("cannot listen to socket %d", fd);
             ok_block(3, 0, "all address server test");
         } else {
             ok(1, "all address server test (part %d)", i);
@@ -228,7 +228,7 @@ test_create_ipv4(const char *source)
     if (fd == INVALID_SOCKET)
         sysbail("cannot create or bind socket");
     if (listen(fd, 1) < 0) {
-        sysnotice("# cannot listen to socket");
+        sysdiag("cannot listen to socket");
         ok_block(3, 0, "IPv4 network client");
     } else {
         ok(1, "IPv4 network client");
