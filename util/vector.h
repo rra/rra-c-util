@@ -73,24 +73,30 @@ void cvector_free(struct cvector *)
 
 /*
  * Split functions build a vector from a string.  vector_split splits on a
- * specified character, while vector_split_space splits on any sequence of
- * spaces or tabs (not any sequence of whitespace, as just spaces or tabs is
- * more useful).  The cvector versions destructively modify the provided
- * string in-place to insert nul characters between the strings.  If the
- * vector argument is NULL, a new vector is allocated; otherwise, the provided
- * one is reused.
+ * specified character, vector_split_multi splits on a set of characters, and
+ * vector_split_space splits on any sequence of spaces or tabs (not any
+ * sequence of whitespace, as just spaces or tabs is more useful).  The
+ * cvector versions destructively modify the provided string in-place to
+ * insert nul characters between the strings.  If the vector argument is NULL,
+ * a new vector is allocated; otherwise, the provided one is reused.
  *
  * Empty strings will yield zero-length vectors.  Adjacent delimiters are
- * treated as a single delimiter by *_split_space, but *not* by *_split, so
- * callers of *_split should be prepared for zero-length strings in the
- * vector.
+ * treated as a single delimiter by *_split_space and *_split_multi, but *not*
+ * by *_split, so callers of *_split should be prepared for zero-length
+ * strings in the vector.
  */
 struct vector *vector_split(const char *string, char sep, struct vector *)
     __attribute((__nonnull__(1)));
+struct vector *vector_split_multi(const char *string, const char *seps,
+                                  struct vector *)
+    __attribute((__nonnull__(1, 2)));
 struct vector *vector_split_space(const char *string, struct vector *)
     __attribute((__nonnull__(1)));
 struct cvector *cvector_split(char *string, char sep, struct cvector *)
     __attribute((__nonnull__(1)));
+struct cvector *cvector_split_multi(char *string, const char *seps,
+                                    struct cvector *)
+    __attribute((__nonnull__(1, 2)));
 struct cvector *cvector_split_space(char *string, struct cvector *)
     __attribute((__nonnull__(1)));
 

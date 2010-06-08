@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 2.5 (unreleased)
+
+    Add vector_split_multi and cvector_split_multi functions to
+    util/vector.h, which split a string into a vector using any character
+    found in a string of separators as a separator.
+
 rra-c-util 2.4 (2010-04-22)
 
     Add Autoconf macros to probe for the PCRE library, using pcre-config

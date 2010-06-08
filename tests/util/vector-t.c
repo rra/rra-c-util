@@ -36,7 +36,7 @@ main(void)
     char *p;
     pid_t child;
 
-    plan(95);
+    plan(117);
 
     vector = vector_new();
     ok(vector != NULL, "vector_new returns non-NULL");
@@ -206,6 +206,61 @@ main(void)
     is_int(1, cvector->count, "newline is not space for cvector_split_space");
     is_string("foo\nbar", cvector->strings[0], "...first string");
     cvector_free(cvector);
+    free(string);
+
+    vector = vector_split_space(" \t foo\t", NULL);
+    is_int(1, vector->count, "extra whitespace in vector_split_space");
+    is_string("foo", vector->strings[0], "...first string");
+    vector_free(vector);
+
+    string = xstrdup(" \t foo\t");
+    cvector = cvector_split_space(string, NULL);
+    is_int(1, cvector->count, "extra whitespace in cvector_split_space");
+    is_string("foo", cvector->strings[0], "...first string");
+    cvector_free(cvector);
+    free(string);
+
+    vector = vector_split_space(" \t ", NULL);
+    is_int(0, vector->count, "vector_split_space on all whitespace string");
+    vector_free(vector);
+    string = xstrdup(" \t ");
+    cvector = cvector_split_space(string, NULL);
+    is_int(0, cvector->count, "cvector_split_space on all whitespace string");
+    cvector_free(cvector);
+
+    vector = vector_split_multi("foo, bar, baz", ", ", NULL);
+    is_int(3, vector->count, "vector_split_multi returns right count");
+    is_string("foo", vector->strings[0], "...first string");
+    is_string("bar", vector->strings[1], "...second string");
+    is_string("baz", vector->strings[2], "...third string");
+    vector = vector_split_multi("", ", ", NULL);
+    is_int(0, vector->count, "vector_split_multi reuse with empty string");
+    vector = vector_split_multi(",,,  foo,   ", ", ", vector);
+    is_int(1, vector->count, "vector_split_multi with extra separators");
+    is_string("foo", vector->strings[0], "...first string");
+    vector = vector_split_multi(", ,  ", ", ", vector);
+    is_int(0, vector->count, "vector_split_multi with only separators");
+    vector_free(vector);
+
+    string = xstrdup("foo, bar, baz");
+    cvector = cvector_split_multi(string, ", ", NULL);
+    is_int(3, cvector->count, "cvector_split_multi returns right count");
+    is_string("foo", cvector->strings[0], "...first string");
+    is_string("bar", cvector->strings[1], "...second string");
+    is_string("baz", cvector->strings[2], "...third string");
+    free(string);
+    cvector = cvector_split_multi(empty, ", ", NULL);
+    is_int(0, cvector->count, "cvector_split_multi reuse with empty string");
+    string = xstrdup(",,,  foo,   ");
+    cvector = cvector_split_multi(string, ", ", cvector);
+    is_int(1, cvector->count, "cvector_split_multi with extra separators");
+    is_string("foo", cvector->strings[0], "...first string");
+    free(string);
+    string = xstrdup(", ,  ");
+    cvector = cvector_split_multi(string, ", ", cvector);
+    is_int(0, cvector->count, "cvector_split_multi with only separators");
+    cvector_free(cvector);
+    free(string);
 
     vector = vector_new();
     vector_add(vector, "/bin/sh");
