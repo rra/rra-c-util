@@ -130,8 +130,8 @@ AC_CHECK_TYPE([sig_atomic_t], ,
      #include <signal.h>])
 RRA_FUNC_SNPRINTF
 AC_CHECK_FUNCS([setrlimit setsid])
-AC_REPLACE_FUNCS([asprintf daemon getopt mkstemp setenv seteuid strlcat])
-AC_REPLACE_FUNCS([strlcpy])
+AC_REPLACE_FUNCS([asprintf daemon getopt issetuidgid mkstemp setenv seteuid])
+AC_REPLACE_FUNCS([strlcat strlcpy])
 
 dnl Additional probes for networking portability, used for packages that have
 dnl network code and support IPv6.
