@@ -11,7 +11,7 @@
  * commands all finish, it exits 0.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2009 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2009, 2010 Board of Trustees, Leland Stanford Jr. University
  *
  * See LICENSE for licensing terms.
  */
@@ -19,16 +19,19 @@
 #include <config.h>
 #include <portable/system.h>
 
+#include <errno.h>
+
 #include <kafs/kafs.h>
-#include <util/messages.h>
 
 int
 main(void)
 {
     if (!k_hasafs())
         exit(2);
-    if (k_setpag() != 0)
-        sysdie("k_setpag failed");
+    if (k_setpag() != 0) {
+        fprintf(stderr, "k_setpag failed: %s\n", strerror(errno));
+        exit(1);
+    }
     printf("=== tokens (setpag) ===\n");
     fflush(stdout);
     system("tokens");
@@ -37,8 +40,10 @@ main(void)
     printf("=== tokens (aklog) ===\n");
     fflush(stdout);
     system("tokens");
-    if (k_unlog() != 0)
-        sysdie("k_unlog failed");
+    if (k_unlog() != 0) {
+        fprintf(stderr, "k_unlog failed: %s", strerror(errno));
+        exit(1);
+    }
     printf("=== tokens (unlog) ===\n");
     fflush(stdout);
     system("tokens");
