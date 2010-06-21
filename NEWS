@@ -8,6 +8,13 @@ rra-c-util 2.5 (unreleased)
 
     Add a replacement for the Solaris issetuidgid function.
 
+    The krb5.m4 Autoconf macros now handle the bundled Heimdal on OpenBSD
+    that doesn't have a separate libroken.  If KRB5_CPPFLAGS,
+    KRB5_LDFLAGS, or KRB5_LIBS are set before calling the macro, their
+    values will be preserved and added to whatever the macro sets, which
+    allows the caller to set up custom values for particular operating
+    systems.
+
 rra-c-util 2.4 (2010-04-22)
 
     Add Autoconf macros to probe for the PCRE library, using pcre-config
