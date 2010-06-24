@@ -15,6 +15,10 @@ rra-c-util 2.5 (unreleased)
     allows the caller to set up custom values for particular operating
     systems.
 
+    Restore the default CPPFLAGS, LDFLAGS, and LIBS after probing for
+    GSS-API libraries with --enable-reduced-depends.  Previously, the
+    default variables were left containing extra GSS-API-specific flags.
+
 rra-c-util 2.4 (2010-04-22)
 
     Add Autoconf macros to probe for the PCRE library, using pcre-config
