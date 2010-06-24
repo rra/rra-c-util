@@ -112,12 +112,12 @@ AC_DEFUN([RRA_LIB_PCRE_OPTIONAL],
          rra_use_pcre=true])])
  AC_ARG_WITH([pcre-include],
     [AS_HELP_STRING([--with-pcre-include=DIR],
-        [Location of Kerberos v5 headers])],
+        [Location of PCRE headers])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_pcre_includedir="$withval"])])
  AC_ARG_WITH([pcre-lib],
     [AS_HELP_STRING([--with-pcre-lib=DIR],
-        [Location of Kerberos v5 libraries])],
+        [Location of PCRE libraries])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_pcre_libdir="$withval"])])
 
