@@ -52,7 +52,7 @@ Collected copyright notices for the entire package:
 The files mkusage, portable/asprintf.c, portable/daemon.c,
 portable/dummy.c, portable/getaddrinfo.c, portable/getaddrinfo.h,
 portable/getnameinfo.c, portable/getnameinfo.h, portable/inet_aton.c,
-portable/inet_ntoa.c, portable/inet_ntop.c, portable/issetuidgid.c
+portable/inet_ntoa.c, portable/inet_ntop.c, portable/issetuidgid.c,
 portable/krb5-extra.c, portable/krb5.h, portable/macros.h,
 portable/mkstemp.c, portable/pam.h, portable/pam_syslog.c,
 portable/pam_vsyslog.c, portable/setenv.c, portable/seteuid.c,
@@ -65,20 +65,19 @@ modifications be sent to me (rra@stanford.edu) so that I can continue to
 maintain a canonical version.
 
 The files m4/inet-nota.m4, m4/socket-unix.m4, m4/socket.m4,
-portable/socket.h, tests/libtest.c, tests/libtest.h,
-tests/portable/getaddrinfo-t.c, tests/portable/getnameinfo-t.c,
-tests/portable/inet_aton.c, tests/portable/inet_ntoa.c,
-tests/portable/inet_ntop.c, tests/portable/setenv.c,
-tests/portable/snprintf.c, tests/portable/strlcat.c,
-tests/portable/strlcpy.c, tests/tap/basic.c, tests/tap/basic.h,
-tests/tap/messages.c, tests/tap/messages.h, tests/tap/process.c,
-tests/tap/process.h, tests/util/concat-t.c, tests/util/fakewrite.c,
-tests/util/messages-t.c, tests/util/network-t.c, tests/util/vector-t.c,
-tests/util/xmalloc-t, tests/util/xmalloc.c, tests/util/xwrite-t.c,
-util/fdflag.c, util/fdflag.h, util/messages.c, util/messages.h,
-util/network.c, util/network.h, util/xmalloc.c, util/xmalloc.h,
-util/xwrite.c, and util/xwrite.h are released under the following
-copyright and license:
+portable/socket.h, tests/portable/getaddrinfo-t.c,
+tests/portable/getnameinfo-t.c, tests/portable/inet_aton.c,
+tests/portable/inet_ntoa.c, tests/portable/inet_ntop.c,
+tests/portable/setenv.c, tests/portable/snprintf.c,
+tests/portable/strlcat.c, tests/portable/strlcpy.c, tests/tap/basic.c,
+tests/tap/basic.h, tests/tap/messages.c, tests/tap/messages.h,
+tests/tap/process.c, tests/tap/process.h, tests/util/concat-t.c,
+tests/util/fakewrite.c, tests/util/messages-t.c, tests/util/network-t.c,
+tests/util/vector-t.c, tests/util/xmalloc-t, tests/util/xmalloc.c,
+tests/util/xwrite-t.c, util/fdflag.c, util/fdflag.h, util/messages.c,
+util/messages.h, util/network.c, util/network.h, util/xmalloc.c,
+util/xmalloc.h, util/xwrite.c, and util/xwrite.h are released under the
+following copyright and license:
 
   Copyright 2009, 2010 Russ Allbery <rra@stanford.edu>
   Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010
