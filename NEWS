@@ -8,6 +8,10 @@ rra-c-util 2.5 (unreleased)
 
     Add a replacement for the Solaris issetuidgid function.
 
+    Add Kerberos portability glue for krb5_data_free versus
+    krb5_free_data_contents and improve checking for krb5_kt_free_entry
+    with older versions of MIT Kerberos.
+
     The krb5.m4 Autoconf macros now handle the bundled Heimdal on OpenBSD
     that doesn't have a separate libroken.  If KRB5_CPPFLAGS,
     KRB5_LDFLAGS, or KRB5_LIBS are set before calling the macro, their
@@ -18,6 +22,10 @@ rra-c-util 2.5 (unreleased)
     Restore the default CPPFLAGS, LDFLAGS, and LIBS after probing for
     GSS-API libraries with --enable-reduced-depends.  Previously, the
     default variables were left containing extra GSS-API-specific flags.
+
+    Allow users to suppress including config.h in portable/krb5.h so that
+    the Kerberos portability code can be used in situations where a
+    stripped-down config.h is needed, such as Apache modules.
 
 rra-c-util 2.4 (2010-04-22)
 

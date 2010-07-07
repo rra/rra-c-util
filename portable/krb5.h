@@ -23,7 +23,13 @@
 #ifndef PORTABLE_KRB5_H
 #define PORTABLE_KRB5_H 1
 
-#include <config.h>
+/*
+ * Allow inclusion of config.h to be skipped, since sometimes we have to use a
+ * stripped-down version of config.h with a different name.
+ */
+#ifndef CONFIG_H_INCLUDED
+# include <config.h>
+#endif
 #include <portable/macros.h>
 
 #include <krb5.h>
@@ -36,6 +42,11 @@ BEGIN_DECLS
 /* Heimdal: krb5_cc_copy_cache, MIT: krb5_cc_copy_creds. */
 #ifndef HAVE_KRB5_CC_COPY_CACHE
 # define krb5_cc_copy_cache(c, o, n) krb5_cc_copy_creds((c), (o), (n))
+#endif
+
+/* Heimdal: krb5_data_free, MIT: krb5_free_data_contents. */
+#ifdef HAVE_KRB5_DATA_FREE
+# define krb5_free_data_contents(c, d) krb5_data_free(d)
 #endif
 
 /* Heimdal: krb5_xfree, MIT: krb5_free_unparsed_name. */
@@ -80,8 +91,12 @@ krb5_error_code krb5_get_renewed_creds(krb5_context, krb5_creds *,
                                        const char *);
 #endif
 
-/* Heimdal: krb5_kt_free_entry, MIT: krb5_free_keytab_entry_contents. */
-#ifndef HAVE_KRB5_KT_FREE_ENTRY
+/*
+ * Heimdal: krb5_kt_free_entry, MIT: krb5_free_keytab_entry_contents.  We
+ * check for the declaration rather than the function since the function is
+ * present in older MIT Kerberos libraries but not prototyped.
+ */
+#if !HAVE_DECL_KRB5_KT_FREE_ENTRY
 # define krb5_kt_free_entry(c, e) krb5_free_keytab_entry_contents((c), (e))
 #endif
 
