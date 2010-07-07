@@ -1,7 +1,7 @@
 # Shell function library to initialize Kerberos credentials
 #
 # Written by Russ Allbery <rra@stanford.edu>
-# Copyright 2009 Board of Trustees, Leland Stanford Jr. University
+# Copyright 2009, 2010 Board of Trustees, Leland Stanford Jr. University
 #
 # See LICENSE for licensing terms.
 
@@ -10,18 +10,8 @@
 # configured.  Sets the global principal variable to the principal to use.
 kerberos_setup () {
     local keytab
-    keytab=''
-    for f in "$BUILD/data/test.keytab" "$SOURCE/data/test.keytab" ; do
-        if [ -r "$f" ] ; then
-            keytab="$f"
-        fi
-    done
-    principal=''
-    for f in "$BUILD/data/test.principal" "$SOURCE/data/test.principal" ; do
-        if [ -r "$f" ] ; then
-            principal=`cat "$BUILD/data/test.principal"`
-        fi
-    done
+    keytab=`test_file_path data/test.keytab`
+    principal=`test_file_path data/test.principal`
     if [ -z "$keytab" ] || [ -z "$principal" ] ; then
         return 1
     fi

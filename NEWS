@@ -27,6 +27,12 @@ rra-c-util 2.5 (unreleased)
     the Kerberos portability code can be used in situations where a
     stripped-down config.h is needed, such as Apache modules.
 
+    Update to C TAP Harness 1.4:
+
+    * Add tests/HOWTO from docs/writing-tests in C TAP Harness.
+    * Add okv and test_file_path functions to the basic TAP library.
+    * Use test_file_path in kerberos_setup, kerberos.sh, and remctl.sh.
+
 rra-c-util 2.4 (2010-04-22)
 
     Add Autoconf macros to probe for the PCRE library, using pcre-config
