@@ -2,6 +2,13 @@
 
 rra-c-util 2.5 (unreleased)
 
+    Add an Autoconf macro set to locate the compiler and linker flags for
+    Apache modules, allowing those modules to be built without using apxs
+    to do the compilation and linking.
+
+    Add Autoconf macros for detecting cURL, OpenLDAP, and OpenSSL
+    libraries.
+
     Add vector_split_multi and cvector_split_multi functions to
     util/vector.h, which split a string into a vector using any character
     found in a string of separators as a separator.
