@@ -9,6 +9,10 @@ rra-c-util 2.5 (unreleased)
     Add Autoconf macros for detecting cURL, OpenLDAP, and OpenSSL
     libraries.
 
+    Add an Autoconf macro that checks whether the linker supports the
+    --version-script flag with a simple version script that just assigns
+    symbol versions and marks some symbols as local.
+
     Add vector_split_multi and cvector_split_multi functions to
     util/vector.h, which split a string into a vector using any character
     found in a string of separators as a separator.
