@@ -102,7 +102,7 @@ krb5_error_code krb5_get_renewed_creds(krb5_context, krb5_creds *,
 
 /*
  * Heimdal provides a nice function that just returns a const char *.  On MIT,
- * there's an accessor macro that returns the krb5_data pointer, wihch
+ * there's an accessor macro that returns the krb5_data pointer, which
  * requires more work to get at the underlying char *.
  */
 #ifndef HAVE_KRB5_PRINCIPAL_GET_REALM
