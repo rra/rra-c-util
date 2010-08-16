@@ -123,8 +123,6 @@ dnl only used by fdflag.
 AC_HEADER_STDBOOL
 AC_CHECK_HEADERS([sys/bittypes.h sys/filio.h sys/uio.h syslog.h])
 AC_CHECK_DECLS([snprintf, vsnprintf])
-RRA_C_C99_VAMACROS
-RRA_C_GNU_VAMACROS
 AC_TYPE_LONG_LONG_INT
 AC_CHECK_TYPE([sig_atomic_t], ,
     [AC_DEFINE([sig_atomic_t], [int],
@@ -174,6 +172,11 @@ dnl Additional probes for UNIX domain socket support.  These are only needed
 dnl by packages that want to use UNIX domain sockets.
 RRA_SYS_UNIX_SOCKETS
 RRA_MACRO_SUN_LEN
+
+dnl Additional probes for variadic macros, needed only for packages that want
+dnl to use them.
+RRA_C_C99_VAMACROS
+RRA_C_GNU_VAMACROS
 
 dnl Output section.  This is generally the same for all packages.
 AC_CONFIG_FILES([Makefile])
