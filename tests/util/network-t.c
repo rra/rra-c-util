@@ -168,7 +168,7 @@ static void
 test_all(const char *source_ipv4, const char *source_ipv6 UNUSED)
 {
     socket_type *fds, fd;
-    int count, i;
+    unsigned int count, i;
     pid_t child;
     struct sockaddr_storage saddr;
     socklen_t size = sizeof(saddr);
