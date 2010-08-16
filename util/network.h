@@ -43,7 +43,8 @@ socket_type network_bind_ipv6(const char *address, unsigned short port)
  * fds will be set to an array containing the resulting file descriptors, with
  * count holding the count returned.
  */
-void network_bind_all(unsigned short port, socket_type **fds, int *count)
+void network_bind_all(unsigned short port, socket_type **fds,
+                      unsigned int *count)
     __attribute__((__nonnull__));
 
 /*

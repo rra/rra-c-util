@@ -165,10 +165,11 @@ network_bind_ipv6(const char *address, unsigned short port)
  */
 #if HAVE_INET6
 void
-network_bind_all(unsigned short port, int **fds, int *count)
+network_bind_all(unsigned short port, int **fds, unsigned int *count)
 {
     struct addrinfo hints, *addrs, *addr;
-    int error, size;
+    unsigned int size;
+    int error;
     socket_type fd;
     char service[16], name[INET6_ADDRSTRLEN];
 
@@ -213,7 +214,7 @@ network_bind_all(unsigned short port, int **fds, int *count)
 }
 #else /* HAVE_INET6 */
 void
-network_bind_all(unsigned short port, socket_type **fds, int *count)
+network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
 {
     socket_type fd;
 
@@ -507,7 +508,7 @@ network_addr_match(const char *a, const char *b, const char *mask)
             if (cidr > 32 || *end != '\0')
                 return false;
             for (bits = 0, i = 0; i < cidr; i++)
-                bits |= (1 << (31 - i));
+                bits |= (1UL << (31 - i));
             addr_mask = htonl(bits);
         } else if (inet_aton(mask, &tmp))
             addr_mask = tmp.s_addr;
@@ -536,7 +537,7 @@ network_addr_match(const char *a, const char *b, const char *mask)
                 return false;
         } else {
             for (addr_mask = 0, bits = 0; bits < cidr % 8; bits++)
-                addr_mask |= (1 << (7 - bits));
+                addr_mask |= (1UL << (7 - bits));
             if ((a6.s6_addr[i] & addr_mask) != (b6.s6_addr[i] & addr_mask))
                 return false;
         }
