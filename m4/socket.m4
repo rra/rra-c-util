@@ -21,6 +21,7 @@ dnl Source used by RRA_FUNC_GETADDRINFO_ADDRCONFIG.
 AC_DEFUN([_RRA_FUNC_GETADDRINFO_ADDRCONFIG_SOURCE], [[
 #include <netdb.h>
 #include <stdio.h>
+#include <sys/types.h>
 #include <sys/socket.h>
 
 int

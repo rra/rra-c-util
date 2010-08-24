@@ -42,6 +42,7 @@ AS_IF([test x"$rra_cv_sun_len_macro" = xyes],
 
 dnl Source used by RRA_SYS_UNIX_SOCKETS.
 AC_DEFUN([_RRA_SYS_UNIX_SOCKETS], [[
+#include <sys/types.h>
 #include <sys/socket.h>
 #ifndef AF_UNIX
 error: No UNIX domain sockets!

@@ -9,6 +9,10 @@ rra-c-util 2.6 (unreleased)
     and add it to the preprocessor flags.  Fixes build failures on Red Hat
     Enterprise Linux 4 and 5.
 
+    When probing for UNIX domain sockets, include <sys/types.h> before
+    <sys/socket.h> so that the test program compiles on OpenBSD.  Thanks,
+    Wim Lewis.
+
 rra-c-util 2.5 (2010-07-07)
 
     Add an Autoconf macro set to locate the compiler and linker flags for
