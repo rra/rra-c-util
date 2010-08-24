@@ -22,6 +22,8 @@
 /* Skip this entire file if a system getaddrinfo was detected. */
 #ifndef HAVE_GETADDRINFO
 
+/* OpenBSD likes to have sys/types.h included before sys/socket.h. */
+#include <sys/types.h>
 #include <sys/socket.h>
 
 /* The struct returned by getaddrinfo, from RFC 3493. */
