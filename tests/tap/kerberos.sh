@@ -37,3 +37,18 @@ kerberos_setup () {
 kerberos_cleanup () {
     rm -f "$BUILD/data/test.cache"
 }
+
+# List the contents of a keytab with enctypes and keys.  This adjusts for the
+# difference between MIT Kerberos (which uses klist) and Heimdal (which uses
+# ktutil).  Be careful to try klist first, since the ktutil on MIT Kerberos
+# may just hang.  Takes the keytab to list and the file into which to save the
+# output, and strips off the header containing the file name.
+ktutil_list () {
+    if klist -keK "$1" > ktutil-tmp 2>/dev/null ; then
+        :
+    else
+        ktutil -k "$1" list --keys > ktutil-tmp < /dev/null 2>/dev/null
+    fi
+    sed -e '/Keytab name:/d' -e "/^[^ ]*:/d" ktutil-tmp > "$2"
+    rm -f ktutil-tmp
+}

@@ -13,6 +13,9 @@ rra-c-util 2.6 (unreleased)
     <sys/socket.h> so that the test program compiles on OpenBSD.  Thanks,
     Wim Lewis.
 
+    Add new test library function ktutil_list to output details of the
+    contents of a keytab, used to compare two keytabs.
+
     Fix determination of the test principal in the kerberos.sh and
     remctl.sh test libraries.
 
