@@ -12,6 +12,7 @@ kerberos_setup () {
     local keytab
     keytab=`test_file_path data/test.keytab`
     principal=`test_file_path data/test.principal`
+    principal=`cat "$principal" 2>/dev/null`
     if [ -z "$keytab" ] || [ -z "$principal" ] ; then
         return 1
     fi

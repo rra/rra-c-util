@@ -12,6 +12,7 @@ remctld_start () {
     rm -f "$BUILD/data/remctld.pid"
     keytab=`test_file_path data/test.keytab`
     principal=`test_file_path data/test.principal`
+    principal=`cat "$principal" 2>/dev/null`
     if [ -z "$keytab" ] || [ -z "$principal" ] ; then
         return 1
     fi

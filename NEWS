@@ -13,6 +13,9 @@ rra-c-util 2.6 (unreleased)
     <sys/socket.h> so that the test program compiles on OpenBSD.  Thanks,
     Wim Lewis.
 
+    Fix determination of the test principal in the kerberos.sh and
+    remctl.sh test libraries.
+
 rra-c-util 2.5 (2010-07-07)
 
     Add an Autoconf macro set to locate the compiler and linker flags for
