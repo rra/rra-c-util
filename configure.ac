@@ -123,6 +123,8 @@ dnl only used by fdflag.
 AC_HEADER_STDBOOL
 AC_CHECK_HEADERS([sys/bittypes.h sys/filio.h sys/uio.h syslog.h])
 AC_CHECK_DECLS([snprintf, vsnprintf])
+RRA_C_C99_VAMACROS
+RRA_C_GNU_VAMACROS
 AC_TYPE_LONG_LONG_INT
 AC_CHECK_TYPE([sig_atomic_t], ,
     [AC_DEFINE([sig_atomic_t], [int],
