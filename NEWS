@@ -19,6 +19,9 @@ rra-c-util 2.6 (2010-08-25)
     Fix determination of the test principal in the kerberos.sh and
     remctl.sh test libraries.
 
+    Properly include the Apache, cURL, OpenLDAP, OpenSSL, PCRE, and ld
+    --version-script M4 checks in the distribution.
+
 rra-c-util 2.5 (2010-07-07)
 
     Add an Autoconf macro set to locate the compiler and linker flags for
