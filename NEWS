@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 2.6 (unreleased)
+rra-c-util 2.6 (2010-08-25)
 
     Add portability code for old MIT Kerberos and Heimdal libraries
     without krb5_get_init_creds_opt_free.
