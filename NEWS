@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 2.7 (unreleased)
+
+    For Kerberos and GSS-API checks, look for krb5-config in
+    /usr/kerberos/bin after checking the user's PATH.  This is the default
+    location on Red Hat Enterprise prior to RHEL6.
+
 rra-c-util 2.6 (2010-08-25)
 
     Add portability code for old MIT Kerberos and Heimdal libraries

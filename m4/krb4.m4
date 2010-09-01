@@ -137,7 +137,8 @@ AC_DEFUN([_RRA_LIB_KRB4_INTERNAL],
      AS_IF([test x"$rra_krb4_root" != x && test -z "$KRB5_CONFIG"],
          [AS_IF([test -x "${rra_krb4_root}/bin/krb5-config"],
              [KRB5_CONFIG="${rra_krb4_root}/bin/krb5-config"])],
-         [AC_PATH_PROG([KRB5_CONFIG], [krb5-config])])
+         [AC_PATH_PROG([KRB5_CONFIG], [krb5-config], ,
+             [${PATH}:/usr/kerberos/bin])])
      AS_IF([test x"$KRB5_CONFIG" != x && test -x "$KRB5_CONFIG"],
          [AC_CACHE_CHECK([for krb4 support in krb5-config],
              [rra_cv_lib_krb4_config],

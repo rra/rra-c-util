@@ -152,7 +152,8 @@ AC_DEFUN([RRA_LIB_GSSAPI],
      AS_IF([test x"$rra_gssapi_root" != x && test -z "$KRB5_CONFIG"],
          [AS_IF([test -x "${rra_gssapi_root}/bin/krb5-config"],
              [KRB5_CONFIG="${rra_gssapi_root}/bin/krb5-config"])],
-         [AC_PATH_PROG([KRB5_CONFIG], [krb5-config])])
+         [AC_PATH_PROG([KRB5_CONFIG], [krb5-config], ,
+             [${PATH}:/usr/kerberos/bin])])
      AS_IF([test x"$KRB5_CONFIG" != x && test -x "$KRB5_CONFIG"],
          [AC_CACHE_CHECK([for gssapi support in krb5-config],
              [rra_cv_lib_gssapi_config],
