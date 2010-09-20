@@ -6,6 +6,12 @@ rra-c-util 2.7 (unreleased)
     /usr/kerberos/bin after checking the user's PATH.  This is the default
     location on Red Hat Enterprise prior to RHEL6.
 
+    Enable all configure logic in configure.ac that was previously
+    commented out so that it is tested when building rra-c-util.  Building
+    this package directly will now require working GSS-API libraries, but
+    since it already required working Kerberos libraries, this should not
+    make a noticable difference.
+
 rra-c-util 2.6 (2010-08-25)
 
     Add portability code for old MIT Kerberos and Heimdal libraries

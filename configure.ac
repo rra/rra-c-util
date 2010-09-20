@@ -59,40 +59,40 @@ RRA_LIB_KRB5_RESTORE
 dnl Probe for GSS-API.  This is only needed for packages that use GSS-API, of
 dnl course.  These are the probes needed for portable/gssapi.h and
 dnl portable/gssapi-mech.c.  This should possibly move into gssapi.m4.
-dnl RRA_LIB_GSSAPI
-dnl RRA_LIB_GSSAPI_SWITCH
-dnl AC_CHECK_HEADERS([gssapi.h])
-dnl AC_CHECK_DECL([GSS_C_NT_USER_NAME],
-dnl     [AC_DEFINE([HAVE_GSS_RFC_OIDS], 1,
-dnl        [Define to 1 if the GSS-API library uses RFC-compliant OIDs.])], ,
-dnl [[
-dnl #if defined(HAVE_GSSAPI_H)
-dnl # include <gssapi.h>
-dnl #else
-dnl # include <gssapi/gssapi.h>
-dnl #endif
-dnl ]])
-dnl AC_CHECK_DECLS([GSS_KRB5_MECHANISM], ,
-dnl     [AC_CHECK_DECLS([gss_mech_krb5], ,
-dnl         [AC_LIBOBJ([gssapi-mech])],
-dnl         [#include <gssapi/gssapi_krb5.h>])],
-dnl [[
-dnl #if defined(HAVE_GSSAPI_H)
-dnl # include <gssapi.h>
-dnl #else
-dnl # include <gssapi/gssapi.h>
-dnl #endif
-dnl ]])
-dnl RRA_LIB_GSSAPI_RESTORE
+RRA_LIB_GSSAPI
+RRA_LIB_GSSAPI_SWITCH
+AC_CHECK_HEADERS([gssapi.h])
+AC_CHECK_DECL([GSS_C_NT_USER_NAME],
+    [AC_DEFINE([HAVE_GSS_RFC_OIDS], 1,
+       [Define to 1 if the GSS-API library uses RFC-compliant OIDs.])], ,
+[[
+#if defined(HAVE_GSSAPI_H)
+# include <gssapi.h>
+#else
+# include <gssapi/gssapi.h>
+#endif
+]])
+AC_CHECK_DECLS([GSS_KRB5_MECHANISM], ,
+    [AC_CHECK_DECLS([gss_mech_krb5], ,
+        [AC_LIBOBJ([gssapi-mech])],
+        [#include <gssapi/gssapi_krb5.h>])],
+[[
+#if defined(HAVE_GSSAPI_H)
+# include <gssapi.h>
+#else
+# include <gssapi/gssapi.h>
+#endif
+]])
+RRA_LIB_GSSAPI_RESTORE
 
 dnl Probe for Kerberos v4.  This is only needed for packages that use Kerberos
 dnl v4, of course.  This code includes probing for the lifetime support
 dnl functions, for which we have a replacement in portable/lifetime.c.
-dnl RRA_LIB_KRB4_OPTIONAL
-dnl AS_IF([test x"$rra_use_krb4" = xyes],
-dnl     [RRA_LIB_KRB4_SWITCH
-dnl      AC_CHECK_FUNCS([krb_life_to_time], , [AC_LIBOBJ([lifetime])])
-dnl      RRA_LIB_KRB4_RESTORE]
+RRA_LIB_KRB4_OPTIONAL
+AS_IF([test x"$rra_use_krb4" = xyes],
+    [RRA_LIB_KRB4_SWITCH
+     AC_CHECK_FUNCS([krb_life_to_time], , [AC_LIBOBJ([lifetime])])
+     RRA_LIB_KRB4_RESTORE])
 
 dnl Probe for libkafs.  Do this so that we can test the libkafs portability
 dnl library.  If AFS support should be conditional, set rra_build_kafs
@@ -103,19 +103,19 @@ AM_CONDITIONAL([NEED_KAFS], [test x"$rra_build_kafs" = xtrue])
 
 dnl Probe for PAM.  These are the tests required for portable/pam.h and its
 dnl replacement functions.
-dnl AC_SEARCH_LIBS([pam_set_data], [pam])
-dnl AC_CHECK_FUNCS([pam_modutil_getpwnam])
-dnl AC_REPLACE_FUNCS([pam_syslog pam_vsyslog])
-dnl AC_CHECK_HEADERS([security/pam_modutil.h], ,
-dnl     [AC_CHECK_HEADERS([pam/pam_modutil.h])])
-dnl AC_CHECK_HEADERS([security/pam_appl.h], ,
-dnl     [AC_CHECK_HEADERS([pam/pam_appl.h], ,
-dnl         [AC_MSG_ERROR([No PAM header files found])])])
-dnl AC_CHECK_HEADERS([security/pam_ext.h], ,
-dnl     [AC_CHECK_HEADERS([pam/pam_ext.h])])
-dnl RRA_HEADER_PAM_CONST
-dnl AC_DEFINE([MODULE_NAME], ["pam_example"],
-dnl     [The name of the PAM module, used by the pam_vsyslog replacement.])
+AC_SEARCH_LIBS([pam_set_data], [pam])
+AC_CHECK_FUNCS([pam_modutil_getpwnam])
+AC_REPLACE_FUNCS([pam_syslog pam_vsyslog])
+AC_CHECK_HEADERS([security/pam_modutil.h], ,
+    [AC_CHECK_HEADERS([pam/pam_modutil.h])])
+AC_CHECK_HEADERS([security/pam_appl.h], ,
+    [AC_CHECK_HEADERS([pam/pam_appl.h], ,
+        [AC_MSG_ERROR([No PAM header files found])])])
+AC_CHECK_HEADERS([security/pam_ext.h], ,
+    [AC_CHECK_HEADERS([pam/pam_ext.h])])
+RRA_HEADER_PAM_CONST
+AC_DEFINE([MODULE_NAME], ["pam_example"],
+    [The name of the PAM module, used by the pam_vsyslog replacement.])
 
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
