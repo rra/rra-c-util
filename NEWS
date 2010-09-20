@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 2.7 (unreleased)
+rra-c-util 2.7 (2010-09-20)
 
     For Kerberos and GSS-API checks, look for krb5-config in
     /usr/kerberos/bin after checking the user's PATH.  This is the default
