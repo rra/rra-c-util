@@ -5,7 +5,6 @@
 #
 # See LICENSE for licensing terms.
 
-AUTOMAKE_OPTIONS = foreign subdir-objects
 ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST = .gitignore LICENSE autogen m4/apache.m4 m4/curl.m4 m4/gssapi.m4 \
 	m4/krb4.m4 m4/krb5.m4 m4/ld-version.m4 m4/ldap.m4 m4/lib-depends.m4  \

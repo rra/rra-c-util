@@ -14,7 +14,8 @@ AC_INIT([rra-c-util], [2.7], [rra@stanford.edu])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_LIBOBJ_DIR([portable])
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE([1.11 check-news silent-rules -Wall -Werror])
+AM_INIT_AUTOMAKE([1.11 check-news foreign silent-rules subdir-objects
+    -Wall -Werror])
 AM_MAINTAINER_MODE
 
 dnl Standard probes for the basic compilation environment.  These are
@@ -22,7 +23,7 @@ dnl generally the same for every package, except that ones that include shared
 dnl libraries change AC_PROG_RANLIB to AC_PROG_LIBTOOL.
 AC_PROG_CC
 AC_USE_SYSTEM_EXTENSIONS
-AC_PROG_CC_C_O
+AM_PROG_CC_C_O
 AC_PROG_INSTALL
 AC_PROG_RANLIB
 
