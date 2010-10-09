@@ -176,11 +176,6 @@ dnl by packages that want to use UNIX domain sockets.
 RRA_SYS_UNIX_SOCKETS
 RRA_MACRO_SUN_LEN
 
-dnl Additional probes for variadic macros, needed only for packages that want
-dnl to use them.
-RRA_C_C99_VAMACROS
-RRA_C_GNU_VAMACROS
-
 dnl Output section.  This is generally the same for all packages.
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_HEADER([config.h])
