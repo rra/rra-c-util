@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 2.8 (unreleased)
+
+    Fix broken GCC attribute markers causing problems with compilation on
+    Windows (and likely any non-GCC compiler).
+
 rra-c-util 2.7 (2010-09-20)
 
     For Kerberos and GSS-API checks, look for krb5-config in
