@@ -22,6 +22,9 @@ rra-c-util 2.8 (unreleased)
     Properly include prerequisite Kerberos and ioctl headers before
     including the Heimdal kafs.h header.
 
+    Add handling of krb5_free_default_realm and krb5_init_secure_context
+    to the Kerberos portability layer.
+
     Fix broken GCC attribute markers causing problems with compilation on
     Windows (and likely any non-GCC compiler).
 

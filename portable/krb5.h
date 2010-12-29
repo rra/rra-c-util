@@ -50,6 +50,11 @@ BEGIN_DECLS
 # define krb5_free_data_contents(c, d) krb5_data_free(d)
 #endif
 
+/* MIT-specific.  The Heimdal documentation says to use free(). */
+#ifndef HAVE_KRB5_FREE_DEFAULT_REALM
+# define krb5_free_default_realm(c, r) free(r)
+#endif
+
 /* Heimdal: krb5_xfree, MIT: krb5_free_unparsed_name. */
 #ifdef HAVE_KRB5_XFREE
 # define krb5_free_unparsed_name(c, p) krb5_xfree(p)
@@ -98,6 +103,14 @@ krb5_error_code krb5_get_init_creds_opt_alloc(krb5_context,
 krb5_error_code krb5_get_renewed_creds(krb5_context, krb5_creds *,
                                        krb5_const_principal, krb5_ccache,
                                        const char *);
+#endif
+
+/*
+ * MIT-specific.  Heimdal automatically ignores environment variables if
+ * called in a setuid context.
+ */
+#ifndef HAVE_KRB5_INIT_SECURE_CONTEXT
+# define krb5_init_secure_context(c) krb5_init_context(c)
 #endif
 
 /*
