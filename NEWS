@@ -5,6 +5,12 @@ rra-c-util 2.8 (unreleased)
     Fix broken GCC attribute markers causing problems with compilation on
     Windows (and likely any non-GCC compiler).
 
+    Update to C TAP Harness 1.6:
+
+    * Better error handling if BUILD or SOURCE aren't set.
+    * Flush standard error before results in the C TAP library.
+    * Improve test failure output formatting in some edge cases.
+
 rra-c-util 2.7 (2010-09-20)
 
     For Kerberos and GSS-API checks, look for krb5-config in
