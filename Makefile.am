@@ -12,10 +12,15 @@ EXTRA_DIST = .gitignore LICENSE autogen m4/apache.m4 m4/curl.m4 m4/gssapi.m4 \
 	mkusage portable/gssapi-mech.c portable/gssapi.h portable/krb4.h     \
 	portable/lifetime.c portable/pam.h portable/pam_syslog.c	     \
 	portable/pam_vsyslog.c portable/winsock.c tests/TESTS		     \
-	tests/kafs/basic-t tests/tap/kerberos.sh tests/tap/kinit.c	     \
-	tests/tap/libtap.sh tests/tap/remctl.sh tests/util/xmalloc-t
+	tests/fakepam/README tests/kafs/basic-t tests/tap/kerberos.sh	     \
+	tests/tap/kinit.c tests/tap/libtap.sh tests/tap/remctl.sh	     \
+	tests/util/xmalloc-t
 
-noinst_LIBRARIES = portable/libportable.a util/libutil.a
+noinst_LIBRARIES = pam-util/libpamutil.a portable/libportable.a util/libutil.a
+pam_util_libpamutil_a_SOURCES = pam-util/args.c pam-util/args.h		\
+	pam-util/logging.c pam-util/logging.h pam-util/options.c	\
+	pam-util/options.h pam-util/vector.c pam-util/vector.h
+pam_util_libpamutil_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 portable_libportable_a_SOURCES = portable/dummy.c portable/getaddrinfo.h \
 	portable/getnameinfo.h portable/getopt.h portable/kafs.h	 \
 	portable/krb5-extra.c portable/krb5.h portable/macros.h		 \
@@ -63,20 +68,25 @@ warnings:
 	$(MAKE) V=0 CFLAGS='$(WARNINGS)' $(check_PROGRAMS)
 
 # The bits below are for the test suite, not for the main package.
-check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	 \
-	tests/portable/asprintf-t tests/portable/daemon-t		 \
-	tests/portable/getaddrinfo-t tests/portable/getnameinfo-t	 \
-	tests/portable/getopt-t tests/portable/inet_aton-t		 \
-	tests/portable/inet_ntoa-t tests/portable/inet_ntop-t		 \
-	tests/portable/mkstemp-t tests/portable/setenv-t		 \
-	tests/portable/snprintf-t tests/portable/strlcat-t		 \
-	tests/portable/strlcpy-t tests/util/concat-t tests/util/fdflag-t \
-	tests/util/messages-t tests/util/messages-krb5-t		 \
-	tests/util/network-t tests/util/vector-t tests/util/xmalloc	 \
-	tests/util/xwrite-t
+check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	    \
+	tests/pam-util/args-t tests/pam-util/fakepam-t			    \
+	tests/pam-util/logging-t tests/pam-util/options-t		    \
+	tests/pam-util/vector-t tests/portable/asprintf-t		    \
+	tests/portable/daemon-t tests/portable/getaddrinfo-t		    \
+	tests/portable/getnameinfo-t tests/portable/getopt-t		    \
+	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		    \
+	tests/portable/inet_ntop-t tests/portable/mkstemp-t		    \
+	tests/portable/setenv-t tests/portable/snprintf-t		    \
+	tests/portable/strlcat-t tests/portable/strlcpy-t		    \
+	tests/util/concat-t tests/util/fdflag-t tests/util/messages-t	    \
+	tests/util/messages-krb5-t tests/util/network-t tests/util/vector-t \
+	tests/util/xmalloc tests/util/xwrite-t
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
-check_LIBRARIES = tests/tap/libtap.a
+check_LIBRARIES = tests/fakepam/libfakepam.a tests/tap/libtap.a
+tests_fakepam_libfakepam_a_SOURCES = tests/fakepam/data.c	\
+        tests/fakepam/logging.c tests/fakepam/testing.c		\
+        tests/fakepam/testing.h
 tests_tap_libtap_a_CPPFLAGS = -I$(abs_top_srcdir)/tests $(KRB5_CPPFLAGS)
 tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h	\
 	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/messages.c	\
@@ -100,6 +110,23 @@ else
 endif
 
 # All of the other test programs.
+tests_pam_util_args_t_LDFLAGS = $(KRB5_LDFLAGS)
+tests_pam_util_args_t_LDADD = pam-util/libpamutil.a	\
+	tests/fakepam/libfakepam.a tests/tap/libtap.a	\
+	portable/libportable.a $(KRB5_LIBS)
+tests_pam_util_fakepam_t_LDADD = tests/fakepam/libfakepam.a \
+	tests/tap/libtap.a portable/libportable.a
+tests_pam_util_logging_t_LDFLAGS = $(KRB5_LDFLAGS)
+tests_pam_util_logging_t_LDADD = pam-util/libpamutil.a	\
+	tests/fakepam/libfakepam.a tests/tap/libtap.a	\
+	portable/libportable.a $(KRB5_LIBS)
+tests_pam_util_options_t_LDFLAGS = $(KRB5_LDFLAGS)
+tests_pam_util_options_t_LDADD = pam-util/libpamutil.a	\
+	tests/fakepam/libfakepam.a tests/tap/libtap.a	\
+	portable/libportable.a $(KRB5_LIBS)
+tests_pam_util_vector_t_LDADD = pam-util/libpamutil.a	\
+	tests/fakepam/libfakepam.a tests/tap/libtap.a	\
+	portable/libportable.a
 tests_portable_asprintf_t_SOURCES = tests/portable/asprintf-t.c \
 	tests/portable/asprintf.c
 tests_portable_asprintf_t_LDADD = tests/tap/libtap.a portable/libportable.a

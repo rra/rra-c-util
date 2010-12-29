@@ -1,5 +1,10 @@
 kafs/basic
 kafs/haspag
+pam-util/args
+pam-util/fakepam
+pam-util/logging
+pam-util/options
+pam-util/vector
 portable/asprintf
 portable/daemon
 portable/getaddrinfo

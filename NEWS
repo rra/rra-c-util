@@ -1,6 +1,19 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 2.8 (unreleased)
+rra-c-util 3.0 (unreleased)
+
+    Add a PAM utility library to assist in developing PAM modules.  This
+    utility library provides functions for logging and table-driven option
+    parsing, including reading options from krb5.conf.  It also provides a
+    version of the util/vector.c library that doesn't die on memory
+    allocation failure and hence is suitable for use in PAM modules.
+
+    Add a fake PAM library used for testing PAM modules.  This fake PAM
+    library provides just enough of the PAM library functionality to make
+    PAM module function calls into a single module, but doesn't look at
+    the system-wide configuration, allowing PAM modules to be more easily
+    tested without changes to the system configuration.  It also allows
+    test programs to inspect the internals of the PAM state.
 
     Add untested support for the ioctl AFS system call methods on Mac OS X
     and Solaris 11 to the kafs replacement library.

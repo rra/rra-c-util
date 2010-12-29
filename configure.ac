@@ -59,6 +59,9 @@ AC_CHECK_FUNCS([krb5_get_renewed_creds], ,
      AC_LIBOBJ([krb5-renew])])
 RRA_LIB_KRB5_RESTORE
 
+dnl Make sure we build with Kerberos support where it's optional.
+AC_DEFINE([HAVE_KERBEROS], 1, [Define to enable Kerberos features.])
+
 dnl Probe for GSS-API.  This is only needed for packages that use GSS-API, of
 dnl course.  These are the probes needed for portable/gssapi.h and
 dnl portable/gssapi-mech.c.  This should possibly move into gssapi.m4.
@@ -107,7 +110,7 @@ AM_CONDITIONAL([NEED_KAFS], [test x"$rra_build_kafs" = xtrue])
 dnl Probe for PAM.  These are the tests required for portable/pam.h and its
 dnl replacement functions.
 AC_SEARCH_LIBS([pam_set_data], [pam])
-AC_CHECK_FUNCS([pam_modutil_getpwnam])
+AC_CHECK_FUNCS([pam_getenv pam_getenvlist pam_modutil_getpwnam])
 AC_REPLACE_FUNCS([pam_syslog pam_vsyslog])
 AC_CHECK_HEADERS([security/pam_modutil.h], ,
     [AC_CHECK_HEADERS([pam/pam_modutil.h])])

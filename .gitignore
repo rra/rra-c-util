@@ -12,6 +12,11 @@
 /stamp-h1
 /tests/kafs/basic
 /tests/kafs/haspag-t
+/tests/pam-util/args-t
+/tests/pam-util/fakepam-t
+/tests/pam-util/logging-t
+/tests/pam-util/options-t
+/tests/pam-util/vector-t
 /tests/portable/asprintf-t
 /tests/portable/daemon-t
 /tests/portable/getaddrinfo-t
