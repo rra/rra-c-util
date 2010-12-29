@@ -11,6 +11,7 @@
 /rra-c-util-*
 /stamp-h1
 /tests/kafs/basic
+/tests/kafs/haspag-t
 /tests/portable/asprintf-t
 /tests/portable/daemon-t
 /tests/portable/getaddrinfo-t

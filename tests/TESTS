@@ -1,4 +1,5 @@
 kafs/basic
+kafs/haspag
 portable/asprintf
 portable/daemon
 portable/getaddrinfo

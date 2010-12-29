@@ -17,9 +17,10 @@ EXTRA_DIST = .gitignore LICENSE autogen m4/apache.m4 m4/curl.m4 m4/gssapi.m4 \
 
 noinst_LIBRARIES = portable/libportable.a util/libutil.a
 portable_libportable_a_SOURCES = portable/dummy.c portable/getaddrinfo.h \
-	portable/getnameinfo.h portable/getopt.h portable/krb5-extra.c	 \
-	portable/krb5.h portable/macros.h portable/socket.h		 \
-	portable/stdbool.h portable/system.h portable/uio.h
+	portable/getnameinfo.h portable/getopt.h portable/kafs.h	 \
+	portable/krb5-extra.c portable/krb5.h portable/macros.h		 \
+	portable/socket.h portable/stdbool.h portable/system.h		 \
+	portable/uio.h
 portable_libportable_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 portable_libportable_a_LIBADD = $(LIBOBJS)
 util_libutil_a_SOURCES = util/concat.c util/concat.h util/fdflag.c	    \
@@ -32,8 +33,9 @@ util_libutil_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 # Conditionally build the replacement kafs library.
 if NEED_KAFS
     noinst_LIBRARIES += kafs/libkafs.a
-    EXTRA_kafs_libkafs_a_SOURCES = kafs/sys-linux.c kafs/sys-syscall.c
-    kafs_libkafs_a_SOURCES = kafs/kafs.c kafs/kafs.h
+    EXTRA_kafs_libkafs_a_SOURCES = kafs/sys-darwin10.c kafs/sys-darwin8.c \
+	kafs/sys-linux.c kafs/sys-solaris.c kafs/sys-syscall.c
+    kafs_libkafs_a_SOURCES = kafs/kafs.c
     kafs_libkafs_a_CPPFLAGS = $(KAFS_CPPFLAGS)
 endif
 
@@ -61,16 +63,17 @@ warnings:
 	$(MAKE) V=0 CFLAGS='$(WARNINGS)' $(check_PROGRAMS)
 
 # The bits below are for the test suite, not for the main package.
-check_PROGRAMS = tests/runtests tests/kafs/basic tests/portable/asprintf-t  \
-	tests/portable/daemon-t tests/portable/getaddrinfo-t		    \
-	tests/portable/getnameinfo-t tests/portable/getopt-t		    \
-	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		    \
-	tests/portable/inet_ntop-t tests/portable/mkstemp-t		    \
-	tests/portable/setenv-t tests/portable/snprintf-t		    \
-	tests/portable/strlcat-t tests/portable/strlcpy-t		    \
-	tests/util/concat-t tests/util/fdflag-t tests/util/messages-t	    \
-	tests/util/messages-krb5-t tests/util/network-t tests/util/vector-t \
-	tests/util/xmalloc tests/util/xwrite-t
+check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	 \
+	tests/portable/asprintf-t tests/portable/daemon-t		 \
+	tests/portable/getaddrinfo-t tests/portable/getnameinfo-t	 \
+	tests/portable/getopt-t tests/portable/inet_aton-t		 \
+	tests/portable/inet_ntoa-t tests/portable/inet_ntop-t		 \
+	tests/portable/mkstemp-t tests/portable/setenv-t		 \
+	tests/portable/snprintf-t tests/portable/strlcat-t		 \
+	tests/portable/strlcpy-t tests/util/concat-t tests/util/fdflag-t \
+	tests/util/messages-t tests/util/messages-krb5-t		 \
+	tests/util/network-t tests/util/vector-t tests/util/xmalloc	 \
+	tests/util/xwrite-t
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
 check_LIBRARIES = tests/tap/libtap.a
@@ -86,8 +89,14 @@ if NEED_KAFS
     tests_kafs_basic_CPPFLAGS = $(KAFS_CPPFLAGS)
     tests_kafs_basic_LDFLAGS = $(KAFS_LDFLAGS)
     tests_kafs_basic_LDADD = kafs/libkafs.a portable/libportable.a $(KAFS_LIBS)
+    tests_kafs_haspag_t_CPPFLAGS = $(KAFS_CPPFLAGS)
+    tests_kafs_haspag_t_LDFLAGS = $(KAFS_LDFLAGS)
+    tests_kafs_haspag_t_LDADD = kafs/libkafs.a tests/tap/libtap.a \
+	portable/libportable.a $(KAFS_LIBS)
 else
     tests_kafs_basic_LDADD = portable/libportable.a $(KAFS_LIBS)
+    tests_kafs_haspag_t_LDADD = tests/tap/libtap.a portable/libportable.a \
+	$(KAFS_LIBS)
 endif
 
 # All of the other test programs.
