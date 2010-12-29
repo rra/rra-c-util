@@ -38,6 +38,10 @@ rra-c-util 3.0 (unreleased)
     Add handling of krb5_free_default_realm and krb5_init_secure_context
     to the Kerberos portability layer.
 
+    Add a replacement for missing krb5_appdefault_* functions for
+    compatibility with AIX's included Kerberos, which provides the profile
+    library but not the Kerberos interface to query it.
+
     Fix broken GCC attribute markers causing problems with compilation on
     Windows (and likely any non-GCC compiler).
 

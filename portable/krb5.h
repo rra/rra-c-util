@@ -40,6 +40,18 @@ BEGIN_DECLS
 /* Default to a hidden visibility for all portability functions. */
 #pragma GCC visibility push(hidden)
 
+/*
+ * AIX included Kerberos includes the profile library but not the
+ * krb5_appdefault functions, so we provide replacements that we have to
+ * prototype.
+ */
+#ifndef HAVE_KRB5_APPDEFAULT_STRING
+void krb5_appdefault_boolean(krb5_context, const char *, const krb5_data *,
+                             const char *, int, int *);
+void krb5_appdefault_string(krb5_context, const char *, const krb5_data *,
+                            const char *, const char *, char **);
+#endif
+
 /* Heimdal: krb5_cc_copy_cache, MIT: krb5_cc_copy_creds. */
 #ifndef HAVE_KRB5_CC_COPY_CACHE
 # define krb5_cc_copy_cache(c, o, n) krb5_cc_copy_creds((c), (o), (n))
