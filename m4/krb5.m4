@@ -209,6 +209,7 @@ AC_DEFUN([RRA_LIB_KRB5],
 [rra_krb5_root=
  rra_krb5_libdir=
  rra_krb5_includedir=
+ rra_use_kerberos=true
  AC_SUBST([KRB5_CPPFLAGS])
  AC_SUBST([KRB5_LDFLAGS])
  AC_SUBST([KRB5_LIBS])
