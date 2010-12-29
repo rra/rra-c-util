@@ -2,6 +2,26 @@
 
 rra-c-util 2.8 (unreleased)
 
+    Add untested support for the ioctl AFS system call methods on Mac OS X
+    and Solaris 11 to the kafs replacement library.
+
+    Add a replacement for k_haspag for use with either the kafs
+    replacement library or for systems with a libkafs or libkopenafs that
+    don't have that function.
+
+    Export k_pioctl from the kafs replacement library and provide a
+    definition of struct ViceIoctl.  This is mainly for the use of
+    k_haspag, but may prove useful for making other AFS system calls.
+
+    Move kafs/kafs.h to portable/kafs.h, since it's more a portability
+    header than a header solely for the kafs replacement library.
+
+    Fix the --with-libkafs-lib and --with-libkafs-include configure
+    options to work properly.
+
+    Properly include prerequisite Kerberos and ioctl headers before
+    including the Heimdal kafs.h header.
+
     Fix broken GCC attribute markers causing problems with compilation on
     Windows (and likely any non-GCC compiler).
 

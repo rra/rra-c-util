@@ -17,11 +17,21 @@
  */
 
 #include <config.h>
+#include <portable/kafs.h>
 #include <portable/system.h>
 
 #include <errno.h>
 
-#include <kafs/kafs.h>
+/*
+ * If the program that includes this test case uses aklog for other purposes,
+ * it may have detected a path to aklog during the build and set it as
+ * PATH_AKLOG.  Use that if it's available, falling back on searching the
+ * user's path.
+ */
+#ifndef PATH_AKLOG
+# define PATH_AKLOG "aklog"
+#endif
+
 
 int
 main(void)
@@ -35,7 +45,7 @@ main(void)
     printf("=== tokens (setpag) ===\n");
     fflush(stdout);
     system("tokens");
-    if (system("aklog") != 0)
+    if (system(PATH_AKLOG) != 0)
         exit(3);
     printf("=== tokens (aklog) ===\n");
     fflush(stdout);
