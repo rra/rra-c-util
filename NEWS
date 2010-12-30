@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 3.0 (unreleased)
+rra-c-util 3.0 (2010-12-29)
 
     Add a PAM utility library to assist in developing PAM modules.  This
     utility library provides functions for logging and table-driven option
