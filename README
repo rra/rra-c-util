@@ -55,6 +55,10 @@ REQUIREMENTS
   IRIX), or AFS libraries (on AIX and IRIX).  The other code will run fine
   without those requirements when copied into other packages.
 
+  PAM libraries and headers are required to build the package as-is, since
+  the PAM supporting library is built and tested by default.  Other code
+  can be copied from this package without introducing a PAM dependency.
+
   To enable tests that may be sensitive to the local environment or that
   produce a lot of false positives without uncovering many problems, set
   RRA_MAINTAINER_TESTS to a true value.
