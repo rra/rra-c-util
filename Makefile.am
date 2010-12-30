@@ -12,9 +12,9 @@ EXTRA_DIST = .gitignore LICENSE autogen m4/apache.m4 m4/curl.m4 m4/gssapi.m4 \
 	mkusage portable/gssapi-mech.c portable/gssapi.h portable/krb4.h     \
 	portable/lifetime.c portable/pam.h portable/pam_syslog.c	     \
 	portable/pam_vsyslog.c portable/winsock.c tests/TESTS		     \
-	tests/fakepam/README tests/kafs/basic-t tests/tap/kerberos.sh	     \
-	tests/tap/kinit.c tests/tap/libtap.sh tests/tap/remctl.sh	     \
-	tests/util/xmalloc-t
+	tests/data/krb5.conf tests/fakepam/README tests/kafs/basic-t	     \
+	tests/tap/kerberos.sh tests/tap/kinit.c tests/tap/libtap.sh	     \
+	tests/tap/remctl.sh tests/util/xmalloc-t
 
 noinst_LIBRARIES = pam-util/libpamutil.a portable/libportable.a util/libutil.a
 pam_util_libpamutil_a_SOURCES = pam-util/args.c pam-util/args.h		\
