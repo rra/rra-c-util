@@ -86,11 +86,11 @@ AC_DEFUN([_RRA_LIB_KAFS_LSETPAG],
 [RRA_LIB_KAFS_SWITCH
  LIBS=
  AC_SEARCH_LIBS([pthread_getspecific], [pthread])
- AC_SEARCH_LIBS([res_search], [resolv], ,
+ AC_SEARCH_LIBS([res_search], [resolv], [],
     [AC_SEARCH_LIBS([__res_search], [resolv])])
  AC_SEARCH_LIBS([gethostbyname], [nsl])
- AC_SEARCH_LIBS([socket], [socket], ,
-    [AC_CHECK_LIB([nsl], [socket], [LIBS="-lnsl -lsocket $LIBS"], ,
+ AC_SEARCH_LIBS([socket], [socket], [],
+    [AC_CHECK_LIB([nsl], [socket], [LIBS="-lnsl -lsocket $LIBS"], [],
         [-lsocket])])
  rra_kafs_extra="$LIBS"
  LIBS="$rra_kafs_save_LIBS"
@@ -101,7 +101,7 @@ AC_DEFUN([_RRA_LIB_KAFS_LSETPAG],
     [AC_CHECK_LIB([sys], [lsetpag],
         [KAFS_LIBS="-lsys $rra_kafs_extra"
          AC_DEFINE([HAVE_LSETPAG], [1],
-            [Define to 1 if you have the OpenAFS lsetpag function.])], ,
+            [Define to 1 if you have the OpenAFS lsetpag function.])], [],
         [$rra_kafs_extra])],
     [-lafsrpc $rra_kafs_extra])
  AC_CHECK_HEADERS([afs/afssyscalls.h])

@@ -55,7 +55,7 @@ dnl Sanity-check the results of the remctl library search to be sure we can
 dnl really link a remctl program.
 AC_DEFUN([_RRA_LIB_REMCTL_CHECK],
 [RRA_LIB_REMCTL_SWITCH
- AC_CHECK_FUNC([remctl_open], ,
+ AC_CHECK_FUNC([remctl_open], [],
     [AC_MSG_FAILURE([unable to link with remctl library])])
  RRA_LIB_REMCTL_RESTORE])
 

@@ -77,11 +77,11 @@ AC_DEFUN([_RRA_LIB_KRB4_MANUAL],
 [RRA_LIB_KRB4_SWITCH
  rra_krb4_extra=
  LIBS=
- AC_SEARCH_LIBS([res_search], [resolv], ,
+ AC_SEARCH_LIBS([res_search], [resolv], [],
     [AC_SEARCH_LIBS([__res_search], [resolv])])
  AC_SEARCH_LIBS([gethostbyname], [nsl])
- AC_SEARCH_LIBS([socket], [socket], ,
-    [AC_CHECK_LIB([nsl], [socket], [LIBS="-lnsl -lsocket $LIBS"], ,
+ AC_SEARCH_LIBS([socket], [socket], [],
+    [AC_CHECK_LIB([nsl], [socket], [LIBS="-lnsl -lsocket $LIBS"], [],
         [-lsocket])])
  AC_SEARCH_LIBS([crypt], [crypt])
  rra_krb4_extra="$LIBS"
@@ -101,7 +101,7 @@ AC_DEFUN([_RRA_LIB_KRB4_MANUAL],
                 [rra_krb4_pthread="-lpthread"])])
          AC_CHECK_LIB([krb5support], [krb5int_setspecific],
             [rra_krb4_extra="-lkrb5support $rra_krb4_extra $rra_krb4_pthread"],
-            , [$rra_krb4_pthread])])
+            [], [$rra_krb4_pthread])])
      AC_CHECK_LIB([krb4], [krb_get_svc_in_tkt],
         [KRB4_LIBS="-lkrb4 $rra_krb4_extra"],
         [AS_IF([test x"$1" = xtrue],
@@ -137,7 +137,7 @@ AC_DEFUN([_RRA_LIB_KRB4_INTERNAL],
      AS_IF([test x"$rra_krb4_root" != x && test -z "$KRB5_CONFIG"],
          [AS_IF([test -x "${rra_krb4_root}/bin/krb5-config"],
              [KRB5_CONFIG="${rra_krb4_root}/bin/krb5-config"])],
-         [AC_PATH_PROG([KRB5_CONFIG], [krb5-config], ,
+         [AC_PATH_PROG([KRB5_CONFIG], [krb5-config], [],
              [${PATH}:/usr/kerberos/bin])])
      AS_IF([test x"$KRB5_CONFIG" != x && test -x "$KRB5_CONFIG"],
          [AC_CACHE_CHECK([for krb4 support in krb5-config],
