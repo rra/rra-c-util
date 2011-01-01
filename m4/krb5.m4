@@ -85,7 +85,8 @@ AC_DEFUN([_RRA_LIB_KRB5_REDUCED],
              [AC_CHECK_LIB([ksvc], [krb5_svc_get_msg],
                  [KRB5_LIBS="$KRB5_LIBS -lksvc"
                   AC_DEFINE([HAVE_KRB5_SVC_GET_MSG], [1])
-                  AC_CHECK_HEADERS([ibm_svc/krb5_svc.h])],
+                  AC_CHECK_HEADERS([ibm_svc/krb5_svc.h], [], [],
+                     [#include <krb5.h>])],
                  [AC_CHECK_LIB([com_err], [com_err],
                      [KRB5_LIBS="$KRB5_LIBS -lcom_err"],
                      [AC_MSG_ERROR([cannot find usable com_err library])])
