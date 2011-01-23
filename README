@@ -1,10 +1,10 @@
-                              rra-c-util 3.0
+                              rra-c-util 3.1
                  (Russ Allbery's utility libraries for C)
 
                 Written by Russ Allbery <rra@stanford.edu>
 
   Copyright 2000, 2009, 2010 Russ Allbery <rra@stanford.edu>.  Copyright
-  2009, 2010 The Board of Trustees of the Leland Stanford Junior
+  2009, 2010, 2011 The Board of Trustees of the Leland Stanford Junior
   University.  This software is distributed under a BSD-style license.
   Please see the file LICENSE in the distribution for more information.
 

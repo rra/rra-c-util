@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 3.1 (unreleased)
+rra-c-util 3.1 (2011-01-23)
 
     Add a replacement for a missing strndup (not available on Mac OS X).
 
