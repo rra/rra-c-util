@@ -141,7 +141,8 @@ AC_DEFUN([_RRA_LIB_KRB5_MANUAL],
      [AC_CHECK_FUNCS([krb5_get_error_string], [],
          [AC_CHECK_FUNCS([krb5_get_err_txt], [],
              [AC_CHECK_FUNCS([krb5_svc_get_msg],
-                 [AC_CHECK_HEADERS([ibm_svc/krb5_svc.h])],
+                 [AC_CHECK_HEADERS([ibm_svc/krb5_svc.h], [], [],
+                     [#include <krb5.h>])],
                  [AC_CHECK_HEADERS([et/com_err.h])])])])])
  RRA_LIB_KRB5_RESTORE])
 
@@ -192,7 +193,8 @@ AC_DEFUN([_RRA_LIB_KRB5_INTERNAL],
               [AC_CHECK_FUNCS([krb5_get_error_string], [],
                   [AC_CHECK_FUNCS([krb5_get_err_txt], [],
                       [AC_CHECK_FUNCS([krb5_svc_get_msg],
-                          [AC_CHECK_HEADERS([ibm_svc/krb5_svc.h])],
+                          [AC_CHECK_HEADERS([ibm_svc/krb5_svc.h], [], [],
+                              [#include <krb5.h>])],
                           [AC_CHECK_HEADERS([et/com_err.h])])])])])
           RRA_LIB_KRB5_RESTORE],
          [_RRA_LIB_KRB5_PATHS
