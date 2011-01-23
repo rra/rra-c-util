@@ -1,9 +1,9 @@
 /*
  * getaddrinfo test suite.
  *
- * Written by Russ Allbery <rra@stanford.edu>
  * Copyright 2003, 2004, 2005 Russ Allbery <rra@stanford.edu>
- * Copyright 2009 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2009
+ *     The Board of Trustees of the Leland Stanford Junior University
  *
  * See LICENSE for licensing terms.
  */

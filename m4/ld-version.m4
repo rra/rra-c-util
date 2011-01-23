@@ -6,7 +6,8 @@ dnl HAVE_LD_VERSION_SCRIPT based on whether it is supported.
 dnl
 dnl Written by Russ Allbery <rra@stanford.edu>
 dnl Based on the gnulib ld-version-script macro from Simon Josefsson
-dnl Copyright 2010 Board of Trustees, Leland Stanford Jr. University
+dnl Copyright 2010
+dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl Copyright (C) 2008, 2009, 2010 Free Software Foundation, Inc.
 dnl
 dnl This file is free software; the Free Software Foundation gives unlimited

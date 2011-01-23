@@ -16,7 +16,8 @@ dnl
 dnl Depends on RRA_SET_LDFLAGS and RRA_ENABLE_REDUCED_DEPENDS.
 dnl
 dnl Written by Russ Allbery <rra@stanford.edu>
-dnl Copyright 2010 Board of Trustees, Leland Stanford Jr. University
+dnl Copyright 2010
+dnl     The oard of Trustees of the Leland Stanford Junior University
 dnl
 dnl See LICENSE for licensing terms.
 

@@ -10,7 +10,8 @@
  * to know what that configuration struct looks like.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2010 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2010
+ *     The Board of Trustees of the Leland Stanford Junior University
  *
  * See LICENSE for licensing terms.
  */

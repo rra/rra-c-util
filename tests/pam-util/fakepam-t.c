@@ -6,7 +6,8 @@
  * test the pam-util layer and PAM modules.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2010 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2010
+ *     The Board of Trustees of the Leland Stanford Junior University
  *
  * See LICENSE for licensing terms.
  */

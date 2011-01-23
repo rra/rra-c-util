@@ -1,7 +1,8 @@
 /*
  * Prototypes for setting or clearing file descriptor flags.
  *
- * Copyright 2008, 2010 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2008, 2010
+ *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006
  *     by Internet Systems Consortium, Inc. ("ISC")
  * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,

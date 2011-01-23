@@ -10,7 +10,9 @@
  * implementations for functions that aren't found on some pre-IPv6 systems.
  * No other part of the source tree should have to care about IPv4 vs. IPv6.
  *
- * Copyright 2009 Board of Trustees, Leland Stanford Jr. University
+ * Written by Russ Allbery <rra@stanford.edu>
+ * Copyright 2009
+ *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006, 2007, 2008
  *     by Internet Systems Consortium, Inc. ("ISC")
  * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,

@@ -13,7 +13,8 @@
  * Windows.  It ensures that inet_aton, inet_ntoa, and inet_ntop are available
  * and properly prototyped.
  *
- * Copyright 2008, 2009 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2008, 2009
+ *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006, 2007
  *     by Internet Systems Consortium, Inc. ("ISC")
  * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,

@@ -6,7 +6,8 @@
  * k_haspag will always return true.  But we can at least confirm that.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2010 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2010
+ *     The Board of Trustees of the Leland Stanford Junior University
  *
  * See LICENSE for licensing terms.
  */

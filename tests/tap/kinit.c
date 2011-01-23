@@ -7,7 +7,7 @@
  * environment variable pointing to the Kerberos keytab to use for testing.
  *
  * Copyright 2006, 2007, 2009, 2010
- *     Board of Trustees, Leland Stanford Jr. University
+ *     The Board of Trustees of the Leland Stanford Junior University
  *
  * See LICENSE for licensing terms.
  */

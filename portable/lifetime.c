@@ -7,7 +7,7 @@
  * defined, the normal Kerberos v4 lifetime semantics are used.
  *
  * Copyright 2003, 2004, 2007, 2008
- *     Board of Trustees, Leland Stanford Jr. University
+ *     The Board of Trustees of the Leland Stanford Junior University
  *
  * See LICENSE for licensing terms.
  */

@@ -3,7 +3,8 @@
  *
  * Written by Russ Allbery <rra@stanford.edu>
  * Copyright 2002, 2004, 2005 Russ Allbery <rra@stanford.edu>
- * Copyright 2009, 2010 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2009, 2010
+ *     The Board of Trustees of the Leland Stanford Junior University
  *
  * See LICENSE for licensing terms.
  */

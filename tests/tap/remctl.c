@@ -4,8 +4,9 @@
  * Provides functions to start and stop a remctl daemon that uses the test
  * Kerberos environment and runs on port 14373 instead of the default 4373.
  *
+ * Written by Russ Allbery <rra@stanford.edu>
  * Copyright 2006, 2007, 2009
- *     Board of Trustees, Leland Stanford Jr. University
+ *     The Board of Trustees of the Leland Stanford Junior University
  *
  * See LICENSE for licensing terms.
  */

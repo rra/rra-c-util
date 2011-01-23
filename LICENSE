@@ -2,7 +2,7 @@ The rra-c-util package as a whole is:
 
   Copyright 2000, 2009, 2010 Russ Allbery <rra@stanford.edu>
   Copyright 2009, 2010, 2011
-      Board of Trustees, Leland Stanford Jr. University
+      The Board of Trustees of the Leland Stanford Junior University
 
 The package is collectively released under the following license:
 
@@ -37,8 +37,8 @@ Collected copyright notices for the entire package:
   Copyright 2000, 2001, 2004, 2006, 2007, 2008, 2009, 2010
       Russ Allbery <rra@stanford.edu>
   Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011
-      Board of Trustees, Leland Stanford Jr. University
-  Copyright 2004, 2005, 2006, 2007, 2008, 2009
+      The Board of Trustees of the Leland Stanford Junior University
+  Copyright 2004, 2005, 2006, 2007, 2008, 2009, 2010
       by Internet Systems Consortium, Inc. ("ISC")
   Copyright 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
       2003 by The Internet Software Consortium and Rich Salz
@@ -86,10 +86,9 @@ util/network.c, util/network.h, util/xmalloc.c, util/xmalloc.h,
 util/xwrite.c, and util/xwrite.h are released under the following
 copyright and license:
 
-  Copyright 2009, 2010 Russ Allbery <rra@stanford.edu>
-  Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010
-      Board of Trustees, Leland Stanford Jr. University
-  Copyright (c) 2004, 2005, 2006, 2007, 2008, 2009
+  Copyright 2008, 2009, 2010
+      The Board of Trustees of the Leland Stanford Junior University
+  Copyright (c) 2004, 2005, 2006, 2007, 2008, 2009, 2010
       by Internet Systems Consortium, Inc. ("ISC")
   Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
       2002, 2003 by The Internet Software Consortium and Rich Salz
@@ -183,7 +182,8 @@ following copyright and license:
 The file m4/ld-version.m4 is released under the following copyright and
 license:
 
-  Copyright 2010 Board of Trustees, Leland Stanford Jr. University
+  Copyright 2010
+      The Board of Trustees of the Leland Stanford Junior University
   Copyright (C) 2008, 2009, 2010 Free Software Foundation, Inc.
 
   This file is free software; the Free Software Foundation gives unlimited
