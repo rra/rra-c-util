@@ -10,7 +10,14 @@
  * implemented.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * This work is hereby placed in the public domain by its author.
+ *
+ * The authors hereby relinquish any claim to any copyright that they may have
+ * in this work, whether granted under contract or by operation of law or
+ * international treaty, and hereby commit to the public, at large, that they
+ * shall not, at any time in the future, seek to enforce any copyright in this
+ * work against any person or entity, or prevent any person or entity from
+ * copying, publishing, distributing or creating derivative works of this
+ * work.
  */
 
 #ifndef PAM_UTIL_VECTOR_H
@@ -38,11 +45,18 @@ struct vector *vector_new(void)
     __attribute__((__malloc__));
 
 /*
+ * Create a new vector that's a copy of an existing vector.  Returns NULL on
+ * memory allocation failure.
+ */
+struct vector *vector_copy(const struct vector *)
+    __attribute__((__malloc__, __nonnull__));
+
+/*
  * Add a string to a vector.  Resizes the vector if necessary.  Returns false
  * on failure to allocate memory.
  */
 bool vector_add(struct vector *, const char *string)
-    __attribute((__nonnull__));
+    __attribute__((__nonnull__));
 
 /*
  * Resize the array of strings to hold size entries.  Saves reallocation work
@@ -50,7 +64,7 @@ bool vector_add(struct vector *, const char *string)
  * Returns false on failure to allocate memory.
  */
 bool vector_resize(struct vector *, size_t size)
-    __attribute((__nonnull__));
+    __attribute__((__nonnull__));
 
 /*
  * Reset the number of elements to zero, freeing all of the strings for a
@@ -58,11 +72,11 @@ bool vector_resize(struct vector *, size_t size)
  * allocations if the vector will be reused).
  */
 void vector_clear(struct vector *)
-    __attribute((__nonnull__));
+    __attribute__((__nonnull__));
 
 /* Free the vector and all resources allocated for it. */
 void vector_free(struct vector *)
-    __attribute((__nonnull__));
+    __attribute__((__nonnull__));
 
 /*
  * Split functions build a vector from a string.  vector_split_multi splits on
@@ -76,7 +90,18 @@ void vector_free(struct vector *)
  */
 struct vector *vector_split_multi(const char *string, const char *seps,
                                   struct vector *)
-    __attribute((__nonnull__(1, 2)));
+    __attribute__((__nonnull__(1, 2)));
+
+/*
+ * Exec the given program with the vector as its arguments.  Return behavior
+ * is the same as execv.  Note the argument order is different than the other
+ * vector functions (but the same as execv).  The vector_exec_env variant
+ * calls execve and passes in the environment for the program.
+ */
+int vector_exec(const char *path, struct vector *)
+    __attribute__((__nonnull__));
+int vector_exec_env(const char *path, struct vector *, const char *const env[])
+    __attribute__((__nonnull__));
 
 /* Undo default visibility change. */
 #pragma GCC visibility pop

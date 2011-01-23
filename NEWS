@@ -8,6 +8,12 @@ rra-c-util 3.1 (unreleased)
     hopefully fix detection of whether AFS is present.  Thanks, Andy
     Cobaugh.
 
+    Add vector_copy, vector_exec, and vector_exec_env to the pam-util
+    vector library.  Fix vector_clear to not attempt to free strings that
+    are NULL.  Fix broken GCC attribute markers on the pam-util vector
+    library, which could cause compilation problems with non-GCC
+    compilers.
+
     When probing for <ibm_svc/krb5_svc.h> (part of AIX's bundled Kerberos
     implementation), include <krb5.h> before attempting to include that
     header to quiet confusing Autoconf warnings.  Reported by Wilfried

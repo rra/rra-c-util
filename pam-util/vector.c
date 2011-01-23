@@ -15,7 +15,14 @@
  * implemented.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * This work is hereby placed in the public domain by its author.
+ *
+ * The authors hereby relinquish any claim to any copyright that they may have
+ * in this work, whether granted under contract or by operation of law or
+ * international treaty, and hereby commit to the public, at large, that they
+ * shall not, at any time in the future, seek to enforce any copyright in this
+ * work against any person or entity, or prevent any person or entity from
+ * copying, publishing, distributing or creating derivative works of this
+ * work.
  */
 
 #include <config.h>
@@ -38,6 +45,33 @@ vector_new(void)
     vector->count = 0;
     vector->allocated = 0;
     vector->strings = NULL;
+    return vector;
+}
+
+
+/*
+ * Allocate a new vector that's a copy of an existing vector.  Returns NULL if
+ * memory allocation fails.
+ */
+struct vector *
+vector_copy(const struct vector *old)
+{
+    struct vector *vector;
+    size_t i;
+
+    vector = vector_new();
+    if (!vector_resize(vector, old->count)) {
+        vector_free(vector);
+        return NULL;
+    }
+    vector->count = old->count;
+    for (i = 0; i < old->count; i++) {
+        vector->strings[i] = strdup(old->strings[i]);
+        if (vector->strings[i] == NULL) {
+            vector_free(vector);
+            return NULL;
+        }
+    }
     return vector;
 }
 
@@ -102,7 +136,8 @@ vector_clear(struct vector *vector)
     size_t i;
 
     for (i = 0; i < vector->count; i++)
-        free(vector->strings[i]);
+        if (vector->strings[i] != NULL)
+            free(vector->strings[i]);
     vector->count = 0;
 }
 
@@ -213,4 +248,40 @@ fail:
     if (created)
         vector_free(vector);
     return NULL;
+}
+
+
+/*
+ * Given a vector and a path to a program, exec that program with the vector
+ * as its arguments.  This requires adding a NULL terminator to the vector and
+ * casting it appropriately.  Returns 0 on success and -1 on error, like exec
+ * does.
+ */
+int
+vector_exec(const char *path, struct vector *vector)
+{
+    if (vector->allocated == vector->count)
+        if (!vector_resize(vector, vector->count + 1))
+            return -1;
+    vector->strings[vector->count] = NULL;
+    return execv(path, (char * const *) vector->strings);
+}
+
+
+/*
+ * Given a vector, a path to a program, and the environment, exec that program
+ * with the vector as its arguments and the given environment.  This requires
+ * adding a NULL terminator to the vector and casting it appropriately.
+ * Returns 0 on success and -1 on error, like exec does.
+ */
+int
+vector_exec_env(const char *path, struct vector *vector,
+                const char * const env[])
+{
+    if (vector->allocated == vector->count)
+        if (!vector_resize(vector, vector->count + 1))
+            return -1;
+    vector->strings[vector->count] = NULL;
+    return execve(path, (char * const *) vector->strings,
+                  (char * const *) env);
 }

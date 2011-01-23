@@ -2,7 +2,8 @@
  * PAM utility vector library test suite.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2009, 2010 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2009, 2010, 2011
+ *     Board of Trustees, Leland Stanford Jr. University
  * Copyright (c) 2004, 2005, 2006
  *     by Internet Systems Consortium, Inc. ("ISC")
  * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
@@ -23,11 +24,15 @@
 int
 main(void)
 {
-    struct vector *vector, *ovector;
+    struct vector *vector, *ovector, *copy;
     const char cstring[] = "This is a\ttest.  ";
     char *string;
+    char buffer[BUFSIZ];
+    const char * const env[] = { buffer, NULL };
+    pid_t child;
+    size_t i;
 
-    plan(41);
+    plan(60);
 
     vector = vector_new();
     ok(vector != NULL, "vector_new returns non-NULL");
@@ -49,6 +54,16 @@ main(void)
     ok(vector->strings[2] != vector->strings[3], "each pointer is different");
     ok(vector->strings[3] != vector->strings[0], "each pointer is different");
     ok(vector->strings[0] != cstring, "each pointer is different");
+    copy = vector_copy(vector);
+    ok(copy != NULL, "vector_copy returns non-NULL");
+    is_int(4, copy->count, "...and has right count");
+    is_int(4, copy->allocated, "...and has right allocated count");
+    for (i = 0; i < 4; i++) {
+        is_string(cstring, copy->strings[i], "...and string %d is right", i);
+        ok(copy->strings[i] != vector->strings[i],
+           "...and pointer %d is different", i);
+    }
+    vector_free(copy);
     vector_clear(vector);
     is_int(0, vector->count, "vector_clear works");
     is_int(4, vector->allocated, "...but doesn't free the allocation");
@@ -83,6 +98,35 @@ main(void)
     is_string("foo", vector->strings[0], "...first string");
     vector = vector_split_multi(", ,  ", ", ", vector);
     is_int(0, vector->count, "vector_split_multi with only separators");
+    vector_free(vector);
+
+    vector = vector_new();
+    ok(vector_add(vector, "/bin/sh"), "vector_add succeeds");
+    ok(vector_add(vector, "-c"), "vector_add succeeds");
+    snprintf(buffer, sizeof(buffer), "echo ok %lu - vector_exec", testnum++);
+    ok(vector_add(vector, buffer), "vector_add succeeds");
+    child = fork();
+    if (child < 0)
+        sysbail("unable to fork");
+    else if (child == 0)
+        if (vector_exec("/bin/sh", vector) < 0)
+            sysdiag("unable to exec /bin/sh");
+    waitpid(child, NULL, 0);
+    vector_free(vector);
+
+    vector = vector_new();
+    ok(vector_add(vector, "/bin/sh"), "vector_add succeeds");
+    ok(vector_add(vector, "-c"), "vector_add succeeds");
+    ok(vector_add(vector, "echo ok $NUMBER - vector_exec_env"),
+       "vector_add succeeds");
+    snprintf(buffer, sizeof(buffer), "NUMBER=%lu", testnum++);
+    child = fork();
+    if (child < 0)
+        sysbail("unable to fork");
+    else if (child == 0)
+        if (vector_exec_env("/bin/sh", vector, env) < 0)
+            sysdiag("unable to exec /bin/sh");
+    waitpid(child, NULL, 0);
     vector_free(vector);
 
     return 0;
