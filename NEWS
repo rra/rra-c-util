@@ -2,6 +2,8 @@
 
 rra-c-util 3.1 (unreleased)
 
+    Add a replacement for a missing strndup (not available on Mac OS X).
+
     When probing for <ibm_svc/krb5_svc.h> (part of AIX's bundled Kerberos
     implementation), include <krb5.h> before attempting to include that
     header to quiet confusing Autoconf warnings.  Reported by Wilfried

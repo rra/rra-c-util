@@ -18,6 +18,7 @@ portable/setenv
 portable/snprintf
 portable/strlcat
 portable/strlcpy
+portable/strndup
 util/concat
 util/fdflag
 util/messages
