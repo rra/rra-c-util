@@ -2,12 +2,9 @@
  * PAM utility vector library test suite.
  *
  * Written by Russ Allbery <rra@stanford.edu>
+ * Copyright 2001, 2002, 2004, 2005 Russ Allbery <rra@stanford.edu>
  * Copyright 2009, 2010, 2011
  *     Board of Trustees, Leland Stanford Jr. University
- * Copyright (c) 2004, 2005, 2006
- *     by Internet Systems Consortium, Inc. ("ISC")
- * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
- *     2002, 2003 by The Internet Software Consortium and Rich Salz
  *
  * See LICENSE for licensing terms.
  */

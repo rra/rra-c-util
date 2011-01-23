@@ -80,16 +80,7 @@ In other words, you can do anything you wish with this code, although I
 would strongly prefer that any improvements or modifications be sent to me
 (rra@stanford.edu) so that I can continue to maintain a canonical version.
 
-The files m4/inet-nota.m4, m4/socket-unix.m4, m4/socket.m4,
-portable/socket.h, tests/portable/getaddrinfo-t.c,
-tests/portable/getnameinfo-t.c, tests/portable/inet_aton-t.c,
-tests/portable/inet_ntoa-t.c, tests/portable/inet_ntop-t.c,
-tests/portable/setenv-t.c, tests/portable/snprintf-t.c,
-tests/portable/strlcat-t.c, tests/portable/strlcpy-t.c,
-tests/tap/messages.c, tests/tap/messages.h, tests/tap/process.c,
-tests/tap/process.h, tests/util/concat-t.c, tests/util/fakewrite.c,
-tests/util/messages-t.c, tests/util/network-t.c, tests/util/vector-t.c,
-tests/util/xmalloc-t, tests/util/xmalloc.c, tests/util/xwrite-t.c,
+The files m4/socket-unix.m4, m4/socket.m4, portable/socket.h,
 util/fdflag.c, util/fdflag.h, util/messages.c, util/messages.h,
 util/network.c, util/network.h, util/xmalloc.c, util/xmalloc.h,
 util/xwrite.c, and util/xwrite.h are released under the following

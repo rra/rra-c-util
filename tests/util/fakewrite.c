@@ -1,10 +1,7 @@
 /*
  * Fake write and writev functions for testing xwrite and xwritev.
  *
- * Copyright (c) 2004, 2005, 2006
- *     by Internet Systems Consortium, Inc. ("ISC")
- * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
- *     2002, 2003 by The Internet Software Consortium and Rich Salz
+ * Copyright 2000, 2001, 2002, 2004 Russ Allbery <rra@stanford.edu>
  *
  * See LICENSE for licensing terms.
  */

@@ -2,11 +2,15 @@
  * snprintf test suite.
  *
  * Written by Russ Allbery <rra@stanford.edu>
+ * Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006
+ *     Russ Allbery <rra@stanford.edu>
  * Copyright 2009, 2010 Board of Trustees, Leland Stanford Jr. University
- * Copyright (c) 2004, 2005, 2006
- *     by Internet Systems Consortium, Inc. ("ISC")
- * Copyright (c) 1991, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
- *     2002, 2003 by The Internet Software Consortium and Rich Salz
+ * Copyright 1995 Patrick Powell
+ * Copyright 2001 Hrvoje Niksic
+ *
+ * This code is based on code written by Patrick Powell (papowell@astart.com)
+ * It may be used for any purpose as long as this notice remains intact
+ * on all source code distributions
  *
  * See LICENSE for licensing terms.
  */
