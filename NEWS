@@ -24,6 +24,9 @@ rra-c-util 3.1 (unreleased)
     header to quiet confusing Autoconf warnings.  Reported by Wilfried
     Weiss.
 
+    Add explicit license statements to the files meant to be copied into
+    other packages rather than referring to LICENSE.
+
 rra-c-util 3.0 (2010-12-29)
 
     Add a PAM utility library to assist in developing PAM modules.  This
