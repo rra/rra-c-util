@@ -19,6 +19,11 @@ rra-c-util 3.1 (unreleased)
     (which will be split the way that a PAM option setting would be
     split).
 
+    When probing for Kerberos libraries, always add any supplemental
+    libraries found to that point to the link command.  This will fix
+    configure failures on platforms without working transitive shared
+    library dependencies.
+
     When probing for <ibm_svc/krb5_svc.h> (part of AIX's bundled Kerberos
     implementation), include <krb5.h> before attempting to include that
     header to quiet confusing Autoconf warnings.  Reported by Wilfried
