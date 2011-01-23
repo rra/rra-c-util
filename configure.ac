@@ -5,7 +5,9 @@ dnl Copyright 2000, 2003 Russ Allbery <rra@stanford.edu>
 dnl Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
-dnl See LICENSE for licensing terms.
+dnl This file is free software; the authors give unlimited permission to copy
+dnl and/or distribute it, with or without modifications, as long as this
+dnl notice is preserved.
 
 dnl I use this introductory boilerplate for all configure.ac files, changing
 dnl the AC_INIT arguments as appropriate.

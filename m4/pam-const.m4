@@ -13,7 +13,9 @@ dnl
 dnl Copyright 2007 Russ Allbery <rra@stanford.edu>
 dnl Copyright 2007, 2008 Markus Moeller
 dnl
-dnl See LICENSE for licensing terms.
+dnl This file is free software; the authors give unlimited permission to copy
+dnl and/or distribute it, with or without modifications, as long as this
+dnl notice is preserved.
 
 dnl Source used by RRA_HEADER_PAM_CONST.
 AC_DEFUN([_RRA_HEADER_PAM_CONST_SOURCE],

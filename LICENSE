@@ -25,12 +25,17 @@ The package is collectively released under the following license:
   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Some files have additional copyright dates from earlier releases or may be
-owned by other copyright holders as noted in those files.  Some files are
-individually released under different licenses, all of which are
-compatible with the above general package license provided that the
-copyright notice and license text for those files is preserved (including
-in distributions of binaries containing code built from those files).
+All individual files without an explicit exception below are released
+under this license.  Some files may have additional copyright holders as
+noted in those files.
+
+Some files in this distribution are individually released under different
+licenses, all of which are compatible with the above general package
+license but which may require preservation of additional notices.  All
+required notices are preserved in this file.  Each file intended for
+copying into other software packages contains a copyright and license
+notice at the top of the file.  Please take note of any attribution and
+notice requirements specified in that license.
 
 Collected copyright notices for the entire package:
 
@@ -79,6 +84,22 @@ util/vector.c, and util/vector.h are covered by the following statement:
 In other words, you can do anything you wish with this code, although I
 would strongly prefer that any improvements or modifications be sent to me
 (rra@stanford.edu) so that I can continue to maintain a canonical version.
+
+The files configure.ac, m4/apache.m4, m4/curl.m4, m4/gssapi.m4,
+m4/inet-ntoa.m4, m4/kafs.m4, m4/krb4.m4, m4/krb5.m4, m4/ldap.m4,
+m4/ld-version.m4 m4/lib-depends.m4, m4/lib-pathname.m4, m4/pam-const.m4,
+m4/pcre.m4, m4/remctl.m4, m4/snprintf.m4, m4/ssl.m4, and m4/vamacros.m4
+are released under the following copyright and license:
+
+  Copyright 1999, 2000, 2001, 2003 Russ Allbery <rra@stanford.edu>
+  Copyright 2005, 2006, 2007, 2008, 2009, 2010
+      The Board of Trustees of the Leland Stanford Junior University
+  Copyright 2007, 2008 Markus Moeller
+  Copyright (C) 2008, 2009, 2010 Free Software Foundation, Inc.
+
+  This file is free software; the authors give unlimited permission to
+  copy and/or distribute it, with or without modifications, as long as
+  this notice is preserved.
 
 The files m4/socket-unix.m4, m4/socket.m4, portable/socket.h,
 util/fdflag.c, util/fdflag.h, util/messages.c, util/messages.h,
@@ -151,7 +172,8 @@ distribution and is released under the following copyright and license:
   MIT trademarks in order to convey information (although in doing so,
   recognition of their trademark status should be given).
 
-The file portable/snprintf.c is released under the following license:
+The files portable/snprintf.c and tests/portable/snprintf-t.c are released
+under the following license:
 
   This code is based on code written by Patrick Powell (papowell@astart.com)
   It may be used for any purpose as long as this notice remains intact
@@ -178,17 +200,6 @@ following copyright and license:
   2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation,
   Inc.  This configure script is free software; the Free Software
   Foundation gives unlimited permission to copy, distribute and modify it.
-
-The file m4/ld-version.m4 is released under the following copyright and
-license:
-
-  Copyright 2010
-      The Board of Trustees of the Leland Stanford Junior University
-  Copyright (C) 2008, 2009, 2010 Free Software Foundation, Inc.
-
-  This file is free software; the Free Software Foundation gives unlimited
-  permission to copy and/or distribute it, with or without modifications,
-  as long as this notice is preserved.
 
 The files build-aux/depcomp and build-aux/missing are taken from GNU
 Automake.  The files build-aux/config.guess and build-aux/config.sub are
