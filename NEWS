@@ -14,6 +14,11 @@ rra-c-util 3.1 (unreleased)
     library, which could cause compilation problems with non-GCC
     compilers.
 
+    Add a new type of configuration parameter to the pam-util option
+    parser that stores a vector but takes its default value as a string
+    (which will be split the way that a PAM option setting would be
+    split).
+
     When probing for <ibm_svc/krb5_svc.h> (part of AIX's bundled Kerberos
     implementation), include <krb5.h> before attempting to include that
     header to quiet confusing Autoconf warnings.  Reported by Wilfried

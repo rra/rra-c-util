@@ -7,7 +7,7 @@
  * risk of clashes.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2010 Board of Trustees, Leland Stanford Jr. University
+ * Copyright 2010, 2011 Board of Trustees, Leland Stanford Jr. University
  *
  * See LICENSE for licensing terms.
  */
@@ -27,12 +27,19 @@
 /* Forward declarations to avoid additional includes. */
 struct vector;
 
-/* The types of configuration values possible. */
+/*
+ * The types of configuration values possible.  STRLIST is a list data type
+ * that takes its default from a string value instead of a vector.  For
+ * STRLIST, the default string value will be turned into a vector by splitting
+ * on comma, space, and tab.  (This is the same as would be done with the
+ * value of a PAM setting when the target variable type is a list.)
+ */
 enum type {
     TYPE_BOOLEAN,
     TYPE_NUMBER,
     TYPE_STRING,
-    TYPE_LIST
+    TYPE_LIST,
+    TYPE_STRLIST
 };
 
 /*
@@ -51,10 +58,6 @@ enum type {
  * Note that numbers set in the configuration struct created by this interface
  * must be longs, not ints.  There is currently no provision for unsigned
  * numbers.
- *
- * Default string values are copied into the structure, but default list
- * values are not, so be careful about how memory is freed if you use a
- * default list value other than NULL.
  */
 struct option {
     const char *name;
@@ -74,10 +77,11 @@ struct option {
  * specifies how to convert the configuration into a struct.  They provide an
  * initializer for the type and default fields.
  */
-#define BOOL(def)   TYPE_BOOLEAN, { (def),     0,  NULL,  NULL }
-#define NUMBER(def) TYPE_NUMBER,  {     0, (def),  NULL,  NULL }
-#define STRING(def) TYPE_STRING,  {     0,     0, (def),  NULL }
-#define LIST(def)   TYPE_LIST,    {     0,     0,  NULL, (def) }
+#define BOOL(def)    TYPE_BOOLEAN, { (def),     0,  NULL,  NULL }
+#define NUMBER(def)  TYPE_NUMBER,  {     0, (def),  NULL,  NULL }
+#define STRING(def)  TYPE_STRING,  {     0,     0, (def),  NULL }
+#define LIST(def)    TYPE_LIST,    {     0,     0,  NULL, (def) }
+#define STRLIST(def) TYPE_STRLIST, {     0,     0, (def),  NULL }
 
 /*
  * The user of this file should also define a macro of the following form:
