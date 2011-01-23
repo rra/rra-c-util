@@ -162,7 +162,7 @@ main(void)
     vector_free(vector);
     cvector = cvector_split(empty, ' ', NULL);
     is_int(1, cvector->count, "cvector_split on empty string");
-    is_string("", vector->strings[0], "...returns only empty string");
+    is_string("", cvector->strings[0], "...returns only empty string");
     cvector_free(cvector);
 
     vector = vector_split_space("", NULL);
