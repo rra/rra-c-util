@@ -118,7 +118,7 @@ int
 k_hasafs(void)
 {
     struct ViceIoctl iob;
-    int id, result, err, saved_errno, okay;
+    int rval, saved_errno, okay;
     void (*saved_func)(int);
 
     saved_errno = errno;
@@ -131,14 +131,13 @@ k_hasafs(void)
     iob.in_size = 0;
     iob.out = NULL;
     iob.out_size = 0;
-    id = _IOW('V', 3, struct ViceIoctl);
-    result = k_syscall(20, 0, id, (long) &iob, 0, &err);
+    rval = k_pioctl(NULL, _IOW('V', 3, struct ViceIoctl), &iob, 0);
 
 #ifdef SIGSYS
     signal(SIGSYS, saved_func);
 #endif
 
-    okay = (result == 0 && syscall_okay && err == -1 && errno == EINVAL);
+    okay = (syscall_okay && rval == -1 && errno == EINVAL);
     errno = saved_errno;
     return okay;
 }
