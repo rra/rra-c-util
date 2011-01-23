@@ -1,5 +1,11 @@
                           rra-c-util To-Do List
 
+General:
+
+ * Add notices to every file meant to be copied into other packages saying
+   that the file originated in rra-c-util and pointing to the rra-c-util
+   distribution page.
+
 util:
 
  * Provide an API in util/messages-krb5.c to retrieve the most recent
