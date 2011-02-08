@@ -11,6 +11,9 @@
  * modified version of the vector library that instead returns false on
  * failure to allocate memory, allowing the caller to do appropriate recovery.
  *
+ * Vectors require list of strings, not arbitrary binary data, and cannot
+ * handle data elements containing nul characters.
+ *
  * Only the portions of the vector library used by PAM modules are
  * implemented.
  *

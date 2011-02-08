@@ -11,6 +11,9 @@
  * strings to store.  There are therefore two entry points for every vector
  * function, one for vectors and one for cvectors.
  *
+ * Vectors require list of strings, not arbitrary binary data, and cannot
+ * handle data elements containing nul characters.
+ *
  * There's a whole bunch of code duplication here.  This would be a lot
  * cleaner with C++ features (either inheritance or templates would probably
  * help).  One could probably in some places just cast a cvector to a vector

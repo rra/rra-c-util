@@ -1,6 +1,13 @@
 /*
  * Prototypes for vector handling.
  *
+ * A vector is a list of strings, with dynamic resizing of the list as new
+ * strings are added and support for various operations on strings (such as
+ * splitting them on delimiters).
+ *
+ * Vectors require list of strings, not arbitrary binary data, and cannot
+ * handle data elements containing nul characters.
+ *
  * This is based on the util/vector.c library, but that library uses xmalloc
  * routines to exit the program if memory allocation fails.  This is a
  * modified version of the vector library that instead returns false on

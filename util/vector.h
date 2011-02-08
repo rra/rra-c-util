@@ -1,6 +1,13 @@
 /*
  * Prototypes for vector handling.
  *
+ * A vector is a list of strings, with dynamic resizing of the list as new
+ * strings are added and support for various operations on strings (such as
+ * splitting them on delimiters).
+ *
+ * Vectors require list of strings, not arbitrary binary data, and cannot
+ * handle data elements containing nul characters.
+ *
  * Written by Russ Allbery <rra@stanford.edu>
  *
  * The authors hereby relinquish any claim to any copyright that they may have
