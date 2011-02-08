@@ -45,7 +45,9 @@ DESCRIPTION
 REQUIREMENTS
 
   Everything requires a C compiler to build and expects an ISO C89 or
-  later C compiler and libraries.
+  later C compiler and libraries.  Presence of strdup is also assumed,
+  which is guaranteed by POSIX 2008 but common in many earlier C libraries
+  as well.
 
   A Kerberos library, either MIT Kerberos or Heimdal, is required to build
   this package as-is, since the Kerberos portability layer is built and
