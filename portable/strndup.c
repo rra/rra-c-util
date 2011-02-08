@@ -15,6 +15,8 @@
 #include <config.h>
 #include <portable/system.h>
 
+#include <errno.h>
+
 /*
  * If we're running the test suite, rename the functions to avoid conflicts
  * with the system versions.
@@ -31,6 +33,10 @@ strndup(const char *s, size_t n)
     size_t length;
     char *copy;
 
+    if (s == NULL) {
+        errno = EINVAL;
+        return NULL;
+    }
     length = strlen(s);
     if (length > n)
         length = n;

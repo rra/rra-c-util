@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 3.2 (unreleased)
+
+    In the strndup replacement, check if the string being duplicated is
+    NULL, and if so, return NULL and set errno to EINVAL rather than
+    segfaulting.  Thanks, Carsten Hey.
+
 rra-c-util 3.1 (2011-01-23)
 
     Add a replacement for a missing strndup (not available on Mac OS X).

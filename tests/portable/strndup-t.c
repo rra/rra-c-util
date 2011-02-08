@@ -15,6 +15,8 @@
 #include <config.h>
 #include <portable/system.h>
 
+#include <errno.h>
+
 #include <tests/tap/basic.h>
 
 char *test_strndup(const char *, size_t);
@@ -25,20 +27,24 @@ main(void)
 {
     char *result = NULL;
 
-    plan(4);
+    plan(6);
 
-    result = strndup("foo", 8);
+    result = test_strndup("foo", 8);
     is_string("foo", result, "strndup longer than string");
     free(result);
-    result = strndup("foo", 2);
+    result = test_strndup("foo", 2);
     is_string("fo", result, "strndup shorter than string");
     free(result);
-    result = strndup("foo", 3);
+    result = test_strndup("foo", 3);
     is_string("foo", result, "strndup same size as string");
     free(result);
-    result = strndup("foo", 0);
+    result = test_strndup("foo", 0);
     is_string("", result, "strndup of size 0");
     free(result);
+    errno = 0;
+    result = test_strndup(NULL, 0);
+    is_string(NULL, result, "strndup of NULL");
+    is_int(errno, EINVAL, "...and returns EINVAL");
 
     return 0;
 }
