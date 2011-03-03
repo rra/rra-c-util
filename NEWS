@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 3.2 (unreleased)
+rra-c-util 3.2 (2011-03-03)
 
     In the strndup replacement, check if the string being duplicated is
     NULL, and if so, return NULL and set errno to EINVAL rather than
