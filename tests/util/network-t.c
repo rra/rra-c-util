@@ -116,9 +116,10 @@ test_ipv4(const char *source)
         child = fork();
         if (child < 0)
             sysbail("cannot fork");
-        else if (child == 0)
+        else if (child == 0) {
+            close(fd);
             client("127.0.0.1", source);
-        else {
+        } else {
             listener(fd);
             waitpid(child, NULL, 0);
         }
@@ -156,9 +157,10 @@ test_ipv6(const char *source)
         child = fork();
         if (child < 0)
             sysbail("cannot fork");
-        else if (child == 0)
+        else if (child == 0) {
+            close(fd);
             client("::1", source);
-        else {
+        } else {
             listener(fd);
             waitpid(child, NULL, 0);
         }
