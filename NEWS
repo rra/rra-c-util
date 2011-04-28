@@ -2,6 +2,17 @@
 
 rra-c-util 3.3 (unreleased)
 
+    When binding IPv6 sockets, restrict them to only IPv6 connections
+    rather than also allowing IPv4 connections where possible.  The
+    default behavior, for maximum backward compatibility, is for
+    IPv6-bound sockets to accept IPv4 connections and expose those
+    connections as IPv4 mapped addresses.  This causes various problems,
+    however, such as with reuse of bound ports (which was causing test
+    suite failures) and requirements to handle IPv4 mapped addresses.  The
+    network model (also used by BSD systems) where IPv6 sockets only
+    accept IPv6 connections is cleaner, even if it requires juggling
+    multiple sockets in some situations.
+
     The gssapi.m4 Autoconf macros now handle the bundled Heimdal on
     OpenBSD that doesn't have a separate libroken.  Thanks to Antoine
     Verheijen for the analysis.

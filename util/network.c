@@ -119,10 +119,14 @@ network_bind_ipv4(const char *address, unsigned short port)
 
 /*
  * Create an IPv6 socket and bind it, returning the resulting file descriptor
- * (or INVALID_SOCKET on a failure).  Note that we don't warn (but still
- * return failure) if the reason for the socket creation failure is that IPv6
- * isn't supported; this is to handle systems like many Linux hosts where IPv6
- * is available in userland but the kernel doesn't support it.
+ * (or INVALID_SOCKET on a failure).  This socket will be restricted to IPv6
+ * only if possible (as opposed to the standard behavior of binding IPv6
+ * sockets to both IPv6 and IPv4).
+ *
+ * Note that we don't warn (but still return failure) if the reason for the
+ * socket creation failure is that IPv6 isn't supported; this is to handle
+ * systems like many Linux hosts where IPv6 is available in userland but the
+ * kernel doesn't support it.
  */
 #if HAVE_INET6
 socket_type
@@ -131,6 +135,9 @@ network_bind_ipv6(const char *address, unsigned short port)
     socket_type fd;
     struct sockaddr_in6 server;
     struct in6_addr addr;
+#ifdef IPV6_V6ONLY
+    int flag;
+#endif
 
     /* Create the socket. */
     fd = socket(PF_INET6, SOCK_STREAM, IPPROTO_IP);
@@ -140,6 +147,19 @@ network_bind_ipv6(const char *address, unsigned short port)
         return INVALID_SOCKET;
     }
     network_set_reuseaddr(fd);
+
+    /*
+     * Restrict the socket to IPv6 only if possible.  The default behavior is
+     * to bind IPv6 sockets to both IPv6 and IPv4 for backward compatibility,
+     * but this causes various other problems (such as with reusing sockets
+     * and requiring handling of mapped addresses).  Continue on if this
+     * fails, however.
+     */
+#ifdef IPV6_V6ONLY
+    flag = 1;
+    if (setsockopt(fd, IPPROTO_IPV6, IPV6_V6ONLY, &flag, sizeof(flag)) < 0)
+        syswarn("cannot set IPv6 socket to v6only");
+#endif
 
     /* Accept "any" or "all" in the bind address to mean 0.0.0.0. */
     if (!strcmp(address, "any") || !strcmp(address, "all"))
