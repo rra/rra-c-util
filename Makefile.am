@@ -17,6 +17,12 @@ EXTRA_DIST = .gitignore LICENSE autogen m4/apache.m4 m4/curl.m4 m4/gssapi.m4 \
 	tests/tap/kerberos.sh tests/tap/kinit.c tests/tap/libtap.sh	     \
 	tests/tap/remctl.sh tests/util/xmalloc-t
 
+# This is unfortunately required since we have an object (k_hasafs) defined
+# in LIBOBJS that needs the kafs headers.  There isn't any way in Automake
+# that I can find to define additional CPPFLAGS for a specific LIBOBJS
+# member.
+AM_CPPFLAGS = $(KAFS_CPPFLAGS)
+
 noinst_LIBRARIES = pam-util/libpamutil.a portable/libportable.a util/libutil.a
 pam_util_libpamutil_a_SOURCES = pam-util/args.c pam-util/args.h		\
 	pam-util/logging.c pam-util/logging.h pam-util/options.c	\
@@ -97,12 +103,12 @@ tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h	\
 
 # kafs tests are buit differently depending on whether we use our local
 # libkafs replacement.
+tests_kafs_basic_CPPFLAGS = $(KAFS_CPPFLAGS)
+tests_kafs_basic_LDFLAGS = $(KAFS_LDFLAGS)
+tests_kafs_haspag_t_CPPFLAGS = $(KAFS_CPPFLAGS)
+tests_kafs_haspag_t_LDFLAGS = $(KAFS_LDFLAGS)
 if NEED_KAFS
-    tests_kafs_basic_CPPFLAGS = $(KAFS_CPPFLAGS)
-    tests_kafs_basic_LDFLAGS = $(KAFS_LDFLAGS)
     tests_kafs_basic_LDADD = kafs/libkafs.a portable/libportable.a $(KAFS_LIBS)
-    tests_kafs_haspag_t_CPPFLAGS = $(KAFS_CPPFLAGS)
-    tests_kafs_haspag_t_LDFLAGS = $(KAFS_LDFLAGS)
     tests_kafs_haspag_t_LDADD = kafs/libkafs.a tests/tap/libtap.a \
 	portable/libportable.a $(KAFS_LIBS)
 else
