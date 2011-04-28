@@ -1,7 +1,7 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <rra@stanford.edu
-# Copyright 2008, 2009, 2010
+# Copyright 2008, 2009, 2010, 2011
 #     The Board of Trustees of the Leland Stanford Junior University
 #
 # See LICENSE for licensing terms.

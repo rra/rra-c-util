@@ -11,7 +11,7 @@
  * No other part of the source tree should have to care about IPv4 vs. IPv6.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2009
+ * Copyright 2009, 2011
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006, 2007, 2008
  *     by Internet Systems Consortium, Inc. ("ISC")
