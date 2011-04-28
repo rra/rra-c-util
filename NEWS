@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 3.3 (unreleased)
+
+    Define the KRB5_USES_COM_ERR Automake conditional to false when
+    --without-krb5 is used rather than leaving it undefined, since the
+    latter can cause configure failures.  Patch from Andrew Deason.
+
 rra-c-util 3.2 (2011-03-03)
 
     In the strndup replacement, check if the string being duplicated is
