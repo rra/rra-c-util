@@ -27,6 +27,10 @@ rra-c-util 3.3 (2011-04-28)
     with Heimdal.  Also fix kafs compilation flags to build properly with
     Heimdal kafs if it's in a non-standard path.
 
+    Update to C TAP Harness 1.7:
+
+    * Add more complete usage message and -h option to runtests.
+
 rra-c-util 3.2 (2011-03-03)
 
     In the strndup replacement, check if the string being duplicated is
