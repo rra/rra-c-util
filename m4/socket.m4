@@ -55,7 +55,7 @@ dnl If so, set HAVE_GETADDRINFO_ADDRCONFIG.
 AC_DEFUN([RRA_FUNC_GETADDRINFO_ADDRCONFIG],
 [AC_CACHE_CHECK([for working AI_ADDRCONFIG flag],
     [rra_cv_func_getaddrinfo_addrconfig_works],
-    [AC_RUN_IFELSE(AC_LANG_SOURCE([_RRA_FUNC_GETADDRINFO_ADDRCONFIG_SOURCE]),
+    [AC_RUN_IFELSE([AC_LANG_SOURCE([_RRA_FUNC_GETADDRINFO_ADDRCONFIG_SOURCE])],
         [rra_cv_func_getaddrinfo_addrconfig_works=yes],
         [rra_cv_func_getaddrinfo_addrconfig_works=no],
         [rra_cv_func_getaddrinfo_addrconfig_works=no])])

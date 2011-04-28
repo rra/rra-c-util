@@ -10,6 +10,8 @@ rra-c-util 3.3 (unreleased)
     --without-krb5 is used rather than leaving it undefined, since the
     latter can cause configure failures.  Patch from Andrew Deason.
 
+    Fix underquoting in m4/socket.m4.
+
     Add a test of krb5_realm to configure.ac so that pam-util will compile
     with Heimdal.  Also fix kafs compilation flags to build properly with
     Heimdal kafs if it's in a non-standard path.
