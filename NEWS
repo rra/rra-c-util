@@ -2,6 +2,10 @@
 
 rra-c-util 3.3 (unreleased)
 
+    The gssapi.m4 Autoconf macros now handle the bundled Heimdal on
+    OpenBSD that doesn't have a separate libroken.  Thanks to Antoine
+    Verheijen for the analysis.
+
     Define the KRB5_USES_COM_ERR Automake conditional to false when
     --without-krb5 is used rather than leaving it undefined, since the
     latter can cause configure failures.  Patch from Andrew Deason.

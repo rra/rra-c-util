@@ -77,11 +77,11 @@ AC_DEFUN([_RRA_LIB_GSSAPI_MANUAL],
     [AC_CHECK_LIB([nsl], [socket], [LIBS="-lnsl -lsocket $LIBS"], [],
         [-lsocket])])
  AC_SEARCH_LIBS([crypt], [crypt])
+ AC_SEARCH_LIBS([rk_simple_execve], [roken])
  rra_gssapi_extra="$LIBS"
  LIBS="$rra_gssapi_save_LIBS"
  AC_CHECK_LIB([gssapi], [gss_import_name],
-    [GSSAPI_LIBS="-lgssapi -lkrb5 -lasn1 -lroken -lcrypto -lcom_err"
-     GSSAPI_LIBS="$GSSAPI_LIBS $rra_gssapi_extra"],
+    [GSSAPI_LIBS="-lgssapi -lkrb5 -lasn1 -lcrypto -lcom_err $rra_gssapi_extra"],
     [AC_CHECK_LIB([krb5support], [krb5int_getspecific],
         [rra_gssapi_extra="-lkrb5support $rra_gssapi_extra"],
         [AC_CHECK_LIB([pthreads], [pthread_setspecific],
