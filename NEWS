@@ -10,6 +10,9 @@ rra-c-util 3.3 (unreleased)
     --without-krb5 is used rather than leaving it undefined, since the
     latter can cause configure failures.  Patch from Andrew Deason.
 
+    Add a test of krb5_realm to configure.ac so that pam-util will compile
+    with Heimdal.
+
 rra-c-util 3.2 (2011-03-03)
 
     In the strndup replacement, check if the string being duplicated is

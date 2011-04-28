@@ -42,6 +42,7 @@ dnl portability layer and the kerberos.c TAP library add-on.  Many packages
 dnl will need less than this.  This should possibly move into krb5.m4.
 RRA_LIB_KRB5
 RRA_LIB_KRB5_SWITCH
+AC_CHECK_TYPES([krb5_realm], , , [#include <krb5.h>])
 AC_CHECK_FUNCS([krb5_cc_copy_cache \
     krb5_data_free \
     krb5_free_default_realm \
