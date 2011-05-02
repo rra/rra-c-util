@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 3.4 (unreleased)
+
+    The gssapi.m4 fix for Heimdal without libroken was incomplete.  It now
+    doesn't attempt to link with libroken when probing for GSS-API
+    symbols.  Thanks, Antoine Verheijen.
+
 rra-c-util 3.3 (2011-04-28)
 
     When binding IPv6 sockets, restrict them to only IPv6 connections
