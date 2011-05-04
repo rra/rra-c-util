@@ -199,6 +199,8 @@ test_asprintf(size_t size)
     string[size - 1] = '\0';
     status = xasprintf(&copy, "%s", string);
     free(string);
+    if (status < 0)
+        return 0;
     for (i = 0; i < size - 1; i++)
         if (copy[i] != 42)
             return 0;
@@ -239,6 +241,8 @@ test_vasprintf(size_t size)
     string[size - 1] = '\0';
     status = xvasprintf_wrapper(&copy, "%s", string);
     free(string);
+    if (status < 0)
+        return 0;
     for (i = 0; i < size - 1; i++)
         if (copy[i] != 42)
             return 0;

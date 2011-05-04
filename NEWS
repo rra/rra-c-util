@@ -6,6 +6,9 @@ rra-c-util 3.4 (unreleased)
     doesn't attempt to link with libroken when probing for GSS-API
     symbols.  Thanks, Antoine Verheijen.
 
+    Remove an unused variable in snprintf testing and properly check the
+    return status of xasprintf and xvasprintf.
+
 rra-c-util 3.3 (2011-04-28)
 
     When binding IPv6 sockets, restrict them to only IPv6 connections
