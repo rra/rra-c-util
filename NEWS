@@ -9,6 +9,11 @@ rra-c-util 3.4 (unreleased)
     Remove an unused variable in snprintf testing and properly check the
     return status of xasprintf and xvasprintf.
 
+    Add casts to the pam-util library in places where signed to unsigned
+    conversions have been confirmed to not be bugs, in preparation for
+    using -Wconversion.  This warning flag is still unused by default due
+    a bug in handling htons.
+
 rra-c-util 3.3 (2011-04-28)
 
     When binding IPv6 sockets, restrict them to only IPv6 connections
