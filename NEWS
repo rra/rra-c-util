@@ -6,6 +6,9 @@ rra-c-util 3.4 (unreleased)
     doesn't attempt to link with libroken when probing for GSS-API
     symbols.  Thanks, Antoine Verheijen.
 
+    Update GCC warning flags for make warnings to 4.6.1, adding
+    -Wjump-misses-init, -Wlogical-op, and -Wredundant-decls.
+
     Remove an unused variable in snprintf testing and properly check the
     return status of xasprintf and xvasprintf.
 
