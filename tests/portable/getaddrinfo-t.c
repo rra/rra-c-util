@@ -46,7 +46,7 @@ main(void)
     struct hostent *host;
     struct in_addr addr;
     struct servent *service;
-    int i;
+    int i, result;
     int found;
 
     plan(75);
@@ -228,16 +228,21 @@ main(void)
         test_freeaddrinfo(ai);
     }
 
-    hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags = AI_CANONNAME;
-    ok(test_getaddrinfo("foo.invalid", NULL, NULL, &ai) == EAI_NONAME,
-       "lookup of invalid address");
+    host = gethostbyname("addrinfo-test.invalid");
+    if (host != NULL)
+        skip("lookup of addrinfo-test.invalid succeeded");
+    else {
+        result = test_getaddrinfo("addrinfo-test.invalid", NULL, NULL, &ai);
+        is_int(EAI_NONAME, result, "lookup of invalid address");
+    }
 
     host = gethostbyname("cnn.com");
     if (host == NULL) {
         skip_block(3, "cannot look up cnn.com");
         exit(0);
     }
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_CANONNAME;
     ok(test_getaddrinfo("cnn.com", NULL, &hints, &ai) == 0,
        "lookup of cnn.com");
     saddr = (struct sockaddr_in *) ai->ai_addr;

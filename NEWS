@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 3.5 (unreleased)
+
+    Skip portable/getaddrinfo test on systems where invalid hostnames
+    still resolve.
+
 rra-c-util 3.4 (2011-05-05)
 
     The gssapi.m4 fix for Heimdal without libroken was incomplete.  It now
