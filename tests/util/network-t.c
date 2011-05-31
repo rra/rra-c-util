@@ -94,9 +94,16 @@ listener_any(socket_type fds[], unsigned int count)
 {
     socket_type client;
     unsigned int i;
+    struct sockaddr_storage ss;
+    socklen_t sslen;
 
-    client = network_accept_any(fds, count, NULL, NULL);
+    sslen = sizeof(ss);
+    client = network_accept_any(fds, count, (struct sockaddr *) &ss, &sslen);
     listener_handler(client);
+    is_int(AF_INET, ss.ss_family, "...address family is IPv4");
+    is_int(htonl(INADDR_LOOPBACK),
+           ((struct sockaddr_in *) &ss)->sin_addr.s_addr,
+           "...and client address is 127.0.0.1");
     for (i = 0; i < count; i++)
         close(fds[i]);
 }
@@ -369,7 +376,7 @@ main(void)
     static const char *ipv6_addr = "FEDC:BA98:7654:3210:FEDC:BA98:7654:3210";
 #endif
 
-    plan(89);
+    plan(91);
 
     /*
      * If IPv6 support appears to be available but doesn't work, we have to
