@@ -327,7 +327,10 @@ network_accept_any(socket_type fds[], unsigned int count,
             fd = fds[i];
             break;
         }
-    return accept(fd, addr, addrlen);
+    if (fd == INVALID_SOCKET)
+        return INVALID_SOCKET;
+    else
+        return accept(fd, addr, addrlen);
 }
 
 
