@@ -5,6 +5,9 @@ rra-c-util 3.5 (unreleased)
     Skip portable/getaddrinfo test on systems where invalid hostnames
     still resolve.
 
+    The remctld_start() function of the TAP remctl add-on now takes
+    optional additional arguments to remctld.
+
 rra-c-util 3.4 (2011-05-05)
 
     The gssapi.m4 fix for Heimdal without libroken was incomplete.  It now
