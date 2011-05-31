@@ -2,6 +2,16 @@
 
 rra-c-util 3.5 (unreleased)
 
+    When binding an IPv6-only socket with network_bind_ipv6 and not
+    binding to all local addresses, use IP_FREEBIND if it's available.
+    This allows binding to addresses that are not yet configured, which is
+    much more common with IPv6 given IPv6 autoconfiguration.
+
+    Add new network_accept_any() function, which takes an array of file
+    descriptors (similar to what's returned by network_bind_all) and
+    blocks accepting incoming connections on any of those file
+    descriptors.
+
     Skip portable/getaddrinfo test on systems where invalid hostnames
     still resolve.
 
