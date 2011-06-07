@@ -53,14 +53,16 @@ main(void)
     skip_all("system doesn't support PAM environment");
 #endif
 
-    plan(32);
+    plan(33);
 
     /* Basic environment manipulation. */
     if (pam_start("test", NULL, &conv, &pamh) != PAM_SUCCESS)
         sysbail("Fake PAM initialization failed");
     is_int(PAM_BAD_ITEM, pam_putenv(pamh, "TEST"), "delete when NULL");
     ok(pam_getenv(pamh, "TEST") == NULL, "getenv when NULL");
-    ok(pam_getenvlist(pamh) == NULL, "getenvlist when NULL");
+    env = pam_getenvlist(pamh);
+    ok(env != NULL, "getenvlist when NULL returns non-NULL");
+    is_string(NULL, env[0], "...but first element is NULL");
 
     /* putenv and getenv. */
     is_int(PAM_SUCCESS, pam_putenv(pamh, "TEST=foo"), "putenv TEST");

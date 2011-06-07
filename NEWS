@@ -6,6 +6,10 @@ rra-c-util 3.6 (unreleased)
     error but without setting any of the sockets as ready.  This should be
     a rare edge case.
 
+    Fix pam_getenvlist in the fakepam testing library to return an empty
+    environment instead of NULL when no environment variables have been
+    set.
+
 rra-c-util 3.5 (2011-05-31)
 
     When binding an IPv6-only socket with network_bind_ipv6 and not

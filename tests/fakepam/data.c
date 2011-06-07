@@ -136,8 +136,12 @@ pam_getenvlist(pam_handle_t *pamh)
     char **env;
     size_t i;
 
-    if (pamh->environ == NULL)
-        return NULL;
+    if (pamh->environ == NULL) {
+        pamh->environ = malloc(sizeof(char **));
+        if (pamh->environ == NULL)
+            return NULL;
+        pamh->environ[0] = NULL;
+    }
     for (i = 0; pamh->environ[i] != NULL; i++)
         ;
     env = malloc((i + 1) * sizeof(char *));
