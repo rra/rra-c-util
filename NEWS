@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 3.6 (unreleased)
+rra-c-util 3.6 (2011-06-07)
 
     Fix error handling in network_accept_any if select returns with no
     error but without setting any of the sockets as ready.  This should be
