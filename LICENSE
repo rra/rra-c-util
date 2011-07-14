@@ -100,7 +100,7 @@ m4/pcre.m4, m4/remctl.m4, m4/snprintf.m4, m4/ssl.m4, and m4/vamacros.m4
 are released under the following copyright and license:
 
   Copyright 1999, 2000, 2001, 2003 Russ Allbery <rra@stanford.edu>
-  Copyright 2005, 2006, 2007, 2008, 2009, 2010
+  Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2011
       The Board of Trustees of the Leland Stanford Junior University
   Copyright 2007, 2008 Markus Moeller
   Copyright (C) 2008, 2009, 2010 Free Software Foundation, Inc.
