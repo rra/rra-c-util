@@ -32,6 +32,7 @@
 /tests/portable/strlcpy-t
 /tests/portable/strndup-t
 /tests/runtests
+/tests/util/buffer-t
 /tests/util/concat-t
 /tests/util/fdflag-t
 /tests/util/messages-krb5-t

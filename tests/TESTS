@@ -19,6 +19,7 @@ portable/snprintf
 portable/strlcat
 portable/strlcpy
 portable/strndup
+util/buffer
 util/concat
 util/fdflag
 util/messages

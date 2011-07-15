@@ -35,11 +35,12 @@ portable_libportable_a_SOURCES = portable/dummy.c portable/getaddrinfo.h \
 	portable/uio.h
 portable_libportable_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 portable_libportable_a_LIBADD = $(LIBOBJS)
-util_libutil_a_SOURCES = util/concat.c util/concat.h util/fdflag.c	    \
-	util/fdflag.h util/macros.h util/messages-krb5.c		    \
-	util/messages-krb5.h util/messages.c util/messages.h util/network.c \
-	util/network.h util/vector.c util/vector.h util/xmalloc.c	    \
-	util/xmalloc.h util/xwrite.c util/xwrite.h
+util_libutil_a_SOURCES = util/buffer.c util/buffer.h util/concat.c	\
+	util/concat.h util/fdflag.c util/fdflag.h util/macros.h		\
+	util/messages-krb5.c util/messages-krb5.h util/messages.c	\
+	util/messages.h util/network.c util/network.h util/vector.c	\
+	util/vector.h util/xmalloc.c util/xmalloc.h util/xwrite.c	\
+	util/xwrite.h
 util_libutil_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 
 # Conditionally build the replacement kafs library.
@@ -76,20 +77,20 @@ warnings:
 	$(MAKE) V=0 CFLAGS='$(WARNINGS)' $(check_PROGRAMS)
 
 # The bits below are for the test suite, not for the main package.
-check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	 \
-	tests/pam-util/args-t tests/pam-util/fakepam-t			 \
-	tests/pam-util/logging-t tests/pam-util/options-t		 \
-	tests/pam-util/vector-t tests/portable/asprintf-t		 \
-	tests/portable/daemon-t tests/portable/getaddrinfo-t		 \
-	tests/portable/getnameinfo-t tests/portable/getopt-t		 \
-	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		 \
-	tests/portable/inet_ntop-t tests/portable/mkstemp-t		 \
-	tests/portable/setenv-t tests/portable/snprintf-t		 \
-	tests/portable/strlcat-t tests/portable/strlcpy-t		 \
-	tests/portable/strndup-t tests/util/concat-t tests/util/fdflag-t \
-	tests/util/messages-t tests/util/messages-krb5-t		 \
-	tests/util/network-t tests/util/vector-t tests/util/xmalloc	 \
-	tests/util/xwrite-t
+check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	    \
+	tests/pam-util/args-t tests/pam-util/fakepam-t			    \
+	tests/pam-util/logging-t tests/pam-util/options-t		    \
+	tests/pam-util/vector-t tests/portable/asprintf-t		    \
+	tests/portable/daemon-t tests/portable/getaddrinfo-t		    \
+	tests/portable/getnameinfo-t tests/portable/getopt-t		    \
+	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		    \
+	tests/portable/inet_ntop-t tests/portable/mkstemp-t		    \
+	tests/portable/setenv-t tests/portable/snprintf-t		    \
+	tests/portable/strlcat-t tests/portable/strlcpy-t		    \
+	tests/portable/strndup-t tests/util/buffer-t tests/util/concat-t    \
+	tests/util/fdflag-t tests/util/messages-t			    \
+	tests/util/messages-krb5-t tests/util/network-t tests/util/vector-t \
+	tests/util/xmalloc tests/util/xwrite-t
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
 check_LIBRARIES = tests/fakepam/libfakepam.a tests/tap/libtap.a
@@ -179,6 +180,8 @@ tests_portable_strlcpy_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_strndup_t_SOURCES = tests/portable/strndup-t.c \
 	tests/portable/strndup.c
 tests_portable_strndup_t_LDADD = tests/tap/libtap.a portable/libportable.a
+tests_util_buffer_t_LDADD = tests/tap/libtap.a util/libutil.a \
+	portable/libportable.a
 tests_util_concat_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 tests_util_fdflag_t_LDADD = tests/tap/libtap.a util/libutil.a \

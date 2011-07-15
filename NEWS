@@ -1,5 +1,14 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 3.7 (unreleased)
+
+    Add a new set of utility functions for managing a data buffer.  A
+    buffer dynamically resizes and has a concept of used and unused data,
+    making it suitable for buffering and processing data from an input
+    stream.  It has associated functions for adding data to the buffer in
+    various ways.  Taken from work Russ Allbery did for INN's library,
+    based on buffer code originally found in innd.
+
 rra-c-util 3.6 (2011-06-07)
 
     Fix error handling in network_accept_any if select returns with no
