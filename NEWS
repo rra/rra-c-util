@@ -9,6 +9,9 @@ rra-c-util 3.7 (unreleased)
     various ways.  Taken from work Russ Allbery did for INN's library,
     based on buffer code originally found in innd.
 
+    Add Autoconf macros for finding build flags for the APR and APR-Util
+    libraries.
+
 rra-c-util 3.6 (2011-06-07)
 
     Fix error handling in network_accept_any if select returns with no
