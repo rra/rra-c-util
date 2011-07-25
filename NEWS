@@ -26,6 +26,8 @@ rra-c-util 3.7 (unreleased)
     such as FreeBSD, follow POSIX closely and only define strncasecmp
     here.
 
+    Add ARRAY_SIZE and ARRAY_END macros to util/macros.h.
+
     Prefer gssapi/gssapi.h to gssapi.h in portable/gssapi.h.  On FreeBSD,
     gssapi.h is marked as deprecated and emits a warning.
 
