@@ -68,7 +68,7 @@ putil_args_new(pam_handle_t *pamh, int flags)
     args->pamh = pamh;
     args->config = NULL;
     args->user = NULL;
-    args->silent = (((unsigned int) flags & PAM_SILENT) == PAM_SILENT);
+    args->silent = ((flags & PAM_SILENT) == PAM_SILENT);
 
 #ifdef HAVE_KERBEROS
     args->realm = NULL;
