@@ -29,6 +29,11 @@ rra-c-util 3.7 (unreleased)
     Prefer gssapi/gssapi.h to gssapi.h in portable/gssapi.h.  On FreeBSD,
     gssapi.h is marked as deprecated and emits a warning.
 
+    When building rra-c-util itself, only build kafs support if
+    --enable-kafs is passed to configure.  This avoids having rra-c-util
+    fail to build on platforms that require the OpenAFS headers or
+    libraries when AFS is not installed.
+
 rra-c-util 3.6 (2011-06-07)
 
     Fix error handling in network_accept_any if select returns with no

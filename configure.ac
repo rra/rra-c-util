@@ -108,10 +108,14 @@ AS_IF([test x"$rra_use_krb4" = xyes],
      RRA_LIB_KRB4_RESTORE])
 
 dnl Probe for libkafs.  Do this so that we can test the libkafs portability
-dnl library.  If AFS support should be conditional, set rra_build_kafs
-dnl explicitly to false, conditionally run RRA_LIB_KAFS, and then always set
-dnl the Automake conditional.
-RRA_LIB_KAFS
+dnl library.  For rra-c-util, AFS support is conditional and not built by
+dnl default, so this is an example of that.  For packages where it is not
+dnl conditional, remove the test around RRA_LIB_KAFS and run it
+dnl unconditionally.
+rra_build_kafs=false
+AC_ARG_ENABLE([kafs],
+    [AC_HELP_STRING([--enable-kafs], [Enable kafs library support])],
+    [AS_IF([test x"$enableval" != xno], [RRA_LIB_KAFS])])
 AM_CONDITIONAL([NEED_KAFS], [test x"$rra_build_kafs" = xtrue])
 
 dnl Probe for PAM.  These are the tests required for portable/pam.h and its

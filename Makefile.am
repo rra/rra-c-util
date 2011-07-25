@@ -110,7 +110,8 @@ tests_kafs_basic_LDFLAGS = $(KAFS_LDFLAGS)
 tests_kafs_haspag_t_CPPFLAGS = $(KAFS_CPPFLAGS)
 tests_kafs_haspag_t_LDFLAGS = $(KAFS_LDFLAGS)
 if NEED_KAFS
-    tests_kafs_basic_LDADD = kafs/libkafs.a portable/libportable.a $(KAFS_LIBS)
+    tests_kafs_basic_LDADD = kafs/libkafs.a portable/libportable.a \
+	$(KAFS_LIBS)
     tests_kafs_haspag_t_LDADD = kafs/libkafs.a tests/tap/libtap.a \
 	portable/libportable.a $(KAFS_LIBS)
 else
