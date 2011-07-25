@@ -13,6 +13,7 @@
  *     #include <stddef.h>
  *     #include <stdint.h>
  *     #include <string.h>
+ *     #include <strings.h>
  *     #include <unistd.h>
  *
  * Missing functions are provided via #define or prototyped if available from
@@ -45,6 +46,9 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <string.h>
+#if HAVE_STRINGS_H
+# include <strings.h>
+#endif
 #if HAVE_INTTYPES_H
 # include <inttypes.h>
 #endif

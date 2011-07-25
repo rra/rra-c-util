@@ -22,6 +22,10 @@ rra-c-util 3.7 (unreleased)
     it's better to fail with a descriptive message at configure time than
     with an obscure message at compile time.
 
+    Include strings.h in portable/system.h if it exists.  Some platforms,
+    such as FreeBSD, follow POSIX closely and only define strncasecmp
+    here.
+
     Prefer gssapi/gssapi.h to gssapi.h in portable/gssapi.h.  On FreeBSD,
     gssapi.h is marked as deprecated and emits a warning.
 
