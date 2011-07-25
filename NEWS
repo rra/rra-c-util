@@ -31,6 +31,9 @@ rra-c-util 3.7 (unreleased)
     Prefer gssapi/gssapi.h to gssapi.h in portable/gssapi.h.  On FreeBSD,
     gssapi.h is marked as deprecated and emits a warning.
 
+    Fix compiler warning in util/messages.c when printing an error about
+    failed memory allocation.
+
     When building rra-c-util itself, only build kafs support if
     --enable-kafs is passed to configure.  This avoids having rra-c-util
     fail to build on platforms that require the OpenAFS headers or
