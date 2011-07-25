@@ -192,14 +192,16 @@ USING THIS CODE
     LIBADD for those libraries.
 
   * If you're using the kafs portability code, copy over the kafs
-    directory, m4/kafs.m4, m4/lib-pathname.m4, the code to build kafs from
-    Makefile.am, and the relevant fragments of configure.ac.
+    directory, m4/kafs.m4, m4/lib-pathname.m4, portable/k_haspag.c, the
+    code to build kafs from Makefile.am, and the relevant fragments of
+    configure.ac.
 
-  * If you're using the PAM portability code, copy over portable/pam*,
-    m4/pam-const.m4, and the relevant fragments of configure.ac.
+  * If you're using the PAM portability code, copy over pam-util/*,
+    portable/pam*, m4/pam-const.m4, and the relevant fragments of
+    configure.ac.
 
   * Copy over any other Autoconf macros that you want to use in your
-    package.
+    package from the m4 directory.
 
   I also copy over all the relevant tests from the tests directory and the
   build machinery for them from Makefile.am so that the portability and
