@@ -215,7 +215,8 @@ static void
 default_number(struct pam_args *args, const char *section, const char *realm,
                const char *opt, long *result)
 {
-    char *tmp, *end;
+    char *tmp = NULL;
+    char *end;
     long value;
 #ifdef HAVE_KRB5_REALM
     krb5_const_realm rdata = realm;
@@ -261,7 +262,7 @@ static void
 default_string(struct pam_args *args, const char *section, const char *realm,
                const char *opt, char **result)
 {
-    char *value;
+    char *value = NULL;
 #ifdef HAVE_KRB5_REALM
     krb5_const_realm rdata = realm;
 #else

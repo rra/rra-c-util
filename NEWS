@@ -12,6 +12,10 @@ rra-c-util 3.7 (unreleased)
     Add Autoconf macros for finding build flags for the APR and APR-Util
     libraries.
 
+    Fix error handling when krb5_appdefault_string returns without setting
+    the result string.  Fixes a possible segfault during configuration
+    parsing on Mac OS X 10.7.
+
 rra-c-util 3.6 (2011-06-07)
 
     Fix error handling in network_accept_any if select returns with no
