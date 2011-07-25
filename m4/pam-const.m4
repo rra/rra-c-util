@@ -31,7 +31,7 @@ AC_DEFUN([_RRA_HEADER_PAM_CONST_SOURCE],
 
 AC_DEFUN([RRA_HEADER_PAM_CONST],
 [AC_CACHE_CHECK([whether PAM prefers const], [rra_cv_header_pam_const],
-    [AC_EGREP_CPP([const void \*\* *item], _RRA_HEADER_PAM_CONST_SOURCE(),
+    [AC_EGREP_CPP([const void \*\* *_?item], _RRA_HEADER_PAM_CONST_SOURCE(),
         [rra_cv_header_pam_const=yes], [rra_cv_header_pam_const=no])])
 AS_IF([test x"$rra_cv_header_pam_const" = xyes],
     [rra_header_pam_const=const], [rra_header_pam_const=])

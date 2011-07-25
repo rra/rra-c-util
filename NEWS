@@ -34,6 +34,9 @@ rra-c-util 3.7 (unreleased)
     Fix compiler warning in util/messages.c when printing an error about
     failed memory allocation.
 
+    Fix detection of whether the PAM API uses const on FreeBSD.  Thanks to
+    Julien ÉLIE for the report and testing.
+
     When building rra-c-util itself, only build kafs support if
     --enable-kafs is passed to configure.  This avoids having rra-c-util
     fail to build on platforms that require the OpenAFS headers or
