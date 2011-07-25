@@ -11,10 +11,10 @@
 
 #include <config.h>
 
-#ifdef HAVE_GSSAPI_H
-# include <gssapi.h>
-#else
+#ifdef HAVE_GSSAPI_GSSAPI_H
 # include <gssapi/gssapi.h>
+#else
+# include <gssapi.h>
 #endif
 
 /* Handle compatibility to older versions of MIT Kerberos. */

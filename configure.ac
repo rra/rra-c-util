@@ -74,7 +74,7 @@ dnl course.  These are the probes needed for portable/gssapi.h and
 dnl portable/gssapi-mech.c.  This should possibly move into gssapi.m4.
 RRA_LIB_GSSAPI
 RRA_LIB_GSSAPI_SWITCH
-AC_CHECK_HEADERS([gssapi.h])
+AC_CHECK_HEADERS([gssapi/gssapi.h])
 AC_CHECK_DECL([GSS_C_NT_USER_NAME],
     [AC_DEFINE([HAVE_GSS_RFC_OIDS], 1,
        [Define to 1 if the GSS-API library uses RFC-compliant OIDs.])], ,

@@ -16,6 +16,9 @@ rra-c-util 3.7 (unreleased)
     the result string.  Fixes a possible segfault during configuration
     parsing on Mac OS X 10.7.
 
+    Prefer gssapi/gssapi.h to gssapi.h in portable/gssapi.h.  On FreeBSD,
+    gssapi.h is marked as deprecated and emits a warning.
+
 rra-c-util 3.6 (2011-06-07)
 
     Fix error handling in network_accept_any if select returns with no
