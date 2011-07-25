@@ -229,7 +229,8 @@ AC_DEFUN([RRA_LIB_KAFS],
         [rra_build_kafs=true
          _RRA_LIB_KAFS_PATHS
          RRA_LIB_KAFS_SWITCH
-         AC_CHECK_HEADERS([afs/param.h sys/ioccom.h])
+         AC_CHECK_HEADERS([afs/param.h], [],
+            [AC_MSG_ERROR([need afs/param.h to build libkafs replacement])])
          RRA_LIB_KAFS_RESTORE
          AC_DEFINE([HAVE_KAFS_REPLACEMENT], [1],
             [Define to 1 if the libkafs replacement is built.])

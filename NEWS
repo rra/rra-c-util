@@ -16,6 +16,12 @@ rra-c-util 3.7 (unreleased)
     the result string.  Fixes a possible segfault during configuration
     parsing on Mac OS X 10.7.
 
+    Abort during configure if building the replacement kafs library on a
+    platform that uses regular system calls and afs/param.h is not found.
+    The system call interface can't be built without the AFS headers, and
+    it's better to fail with a descriptive message at configure time than
+    with an obscure message at compile time.
+
     Prefer gssapi/gssapi.h to gssapi.h in portable/gssapi.h.  On FreeBSD,
     gssapi.h is marked as deprecated and emits a warning.
 

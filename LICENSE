@@ -61,25 +61,25 @@ Collected copyright notices for the entire package:
       Free Software Foundation, Inc.
   Copyright 1994 X Consortium
 
-The files mkusage, pam-util/vector.c, pam-util/vector.h,
-portable/asprintf.c, portable/daemon.c, portable/dummy.c,
-portable/getaddrinfo.c, portable/getaddrinfo.h, portable/getnameinfo.c,
-portable/getnameinfo.h, portable/inet_aton.c, portable/inet_ntoa.c,
-portable/inet_ntop.c, portable/issetuidgid.c, portable/krb5-extra.c,
-portable/krb5.h, portable/macros.h, portable/mkstemp.c, portable/pam.h,
-portable/pam_syslog.c, portable/pam_vsyslog.c, portable/setenv.c,
-portable/seteuid.c, portable/stdbool.h, portable/strlcat.c,
-portable/strlcpy.c, portable/strndup.c, portable/system.h, portable/uio.h,
-portable/winsock.c, tests/pam-util/vector-t.c,
-tests/portable/asprintf-t.c, tests/portable/daemon-t.c,
-tests/portable/getaddrinfo-t.c, tests/portable/getnameinfo-t.c,
-tests/portable/inet_aton-t.c, tests/portable/inet_ntoa-t.c,
-tests/portable/inet_ntop-t.c, tests/portable/mkstemp-t.c,
-tests/portable/setenv-t.c, tests/portable/strlcat-t.c,
-tests/portable/strlcpy-t.c, tests/portable/strndup-t.c,
-tests/util/buffer-t.c, tests/util/concat-t.c, tests/util/vector-t.c,
-util/concat.c, util/concat.h, util/macros.h, util/vector.c, and
-util/vector.h are covered by the following statement:
+The files kafs/sys-syscall.c, mkusage, pam-util/vector.c,
+pam-util/vector.h, portable/asprintf.c, portable/daemon.c,
+portable/dummy.c, portable/getaddrinfo.c, portable/getaddrinfo.h,
+portable/getnameinfo.c, portable/getnameinfo.h, portable/inet_aton.c,
+portable/inet_ntoa.c, portable/inet_ntop.c, portable/issetuidgid.c,
+portable/krb5-extra.c, portable/krb5.h, portable/macros.h,
+portable/mkstemp.c, portable/pam.h, portable/pam_syslog.c,
+portable/pam_vsyslog.c, portable/setenv.c, portable/seteuid.c,
+portable/stdbool.h, portable/strlcat.c, portable/strlcpy.c,
+portable/strndup.c, portable/system.h, portable/uio.h, portable/winsock.c,
+tests/pam-util/vector-t.c, tests/portable/asprintf-t.c,
+tests/portable/daemon-t.c, tests/portable/getaddrinfo-t.c,
+tests/portable/getnameinfo-t.c, tests/portable/inet_aton-t.c,
+tests/portable/inet_ntoa-t.c, tests/portable/inet_ntop-t.c,
+tests/portable/mkstemp-t.c, tests/portable/setenv-t.c,
+tests/portable/strlcat-t.c, tests/portable/strlcpy-t.c,
+tests/portable/strndup-t.c, tests/util/buffer-t.c, tests/util/concat-t.c,
+tests/util/vector-t.c, util/concat.c, util/concat.h, util/macros.h,
+util/vector.c, and util/vector.h are covered by the following statement:
 
     The authors hereby relinquish any claim to any copyright that they may
     have in this work, whether granted under contract or by operation of
