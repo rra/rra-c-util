@@ -204,8 +204,8 @@ message_log_syslog(int pri, size_t len, const char *fmt, va_list args, int err)
 
     buffer = malloc(len + 1);
     if (buffer == NULL) {
-        fprintf(stderr, "failed to malloc %u bytes at %s line %d: %s",
-                len + 1, __FILE__, __LINE__, strerror(errno));
+        fprintf(stderr, "failed to malloc %lu bytes at %s line %d: %s",
+                (unsigned long) len + 1, __FILE__, __LINE__, strerror(errno));
         exit(message_fatal_cleanup ? (*message_fatal_cleanup)() : 1);
     }
     vsnprintf(buffer, len + 1, fmt, args);
