@@ -55,6 +55,9 @@ main(void)
 {
     if (!k_hasafs())
         exit(2);
+#ifdef NO_PAG_SUPPORT
+    exit(2);
+#endif
     if (k_setpag() != 0) {
         fprintf(stderr, "k_setpag failed: %s\n", strerror(errno));
         exit(1);
