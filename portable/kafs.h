@@ -12,6 +12,9 @@
  * in case programs that use it want to handle the case of no AFS support
  * differently (such as in help output).
  *
+ * The canonical version of this file is maintained in the rra-c-util package,
+ * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+ *
  * Written by Russ Allbery <rra@stanford.edu>
  * Copyright 2006, 2007, 2008, 2010
  *     The Board of Trustees of the Leland Stanford Junior University

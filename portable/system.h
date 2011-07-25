@@ -19,6 +19,9 @@
  * Missing functions are provided via #define or prototyped if available from
  * the portable helper library.  Also provides some standard #defines.
  *
+ * The canonical version of this file is maintained in the rra-c-util package,
+ * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+ *
  * Written by Russ Allbery <rra@stanford.edu>
  *
  * The authors hereby relinquish any claim to any copyright that they may have

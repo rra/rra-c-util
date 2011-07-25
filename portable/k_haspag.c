@@ -8,6 +8,9 @@
  * kafs layer.  It falls back on looking at the current process's supplemental
  * groups if the system call isn't supported or if k_pioctl isn't available.
  *
+ * The canonical version of this file is maintained in the rra-c-util package,
+ * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+ *
  * Written by Russ Allbery <rra@stanford.edu>
  *
  * The authors hereby relinquish any claim to any copyright that they may have

@@ -10,6 +10,9 @@
  * and exits with status 1.  If aklog fails, it exits with status 3.  If the
  * commands all finish, it exits 0.
  *
+ * The canonical version of this file is maintained in the rra-c-util package,
+ * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+ *
  * Written by Russ Allbery <rra@stanford.edu>
  * Copyright 2009, 2010
  *     The Board of Trustees of the Leland Stanford Junior University

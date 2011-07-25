@@ -6,6 +6,9 @@
  * used to recover that buffer.  It also includes the pam_strerror
  * implementation.
  *
+ * The canonical version of this file is maintained in the rra-c-util package,
+ * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+ *
  * Written by Russ Allbery <rra@stanford.edu>
  * Copyright 2010
  *     The Board of Trustees of the Leland Stanford Junior University

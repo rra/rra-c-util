@@ -1,6 +1,9 @@
 /*
  * Utility functions for tests that use Kerberos.
  *
+ * The canonical version of this file is maintained in the rra-c-util package,
+ * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+ *
  * Currently only provides kerberos_setup(), which assumes a particular set of
  * data files in either the SOURCE or BUILD directories and, using those,
  * obtains Kerberos credentials, sets up a ticket cache, and sets the

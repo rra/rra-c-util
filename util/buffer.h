@@ -12,6 +12,9 @@
  * of the data is used + left.  If a buffer is just used to store some data,
  * used can be set to 0 and left stores the length of the data.
  *
+ * The canonical version of this file is maintained in the rra-c-util package,
+ * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+ *
  * Written by Russ Allbery <rra@stanford.edu>
  * Copyright 2011
  *     The Board of Trustees of the Leland Stanford Junior University

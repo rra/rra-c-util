@@ -34,6 +34,9 @@ rra-c-util 3.7 (unreleased)
     fail to build on platforms that require the OpenAFS headers or
     libraries when AFS is not installed.
 
+    Add a pointer to rra-c-util to all files meant to be copied into other
+    software packages.
+
 rra-c-util 3.6 (2011-06-07)
 
     Fix error handling in network_accept_any if select returns with no

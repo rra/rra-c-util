@@ -13,6 +13,9 @@
  * needed so far.  Adding IPv6 support isn't worth it; systems with IPv6
  * support should already support getnameinfo natively.
  *
+ * The canonical version of this file is maintained in the rra-c-util package,
+ * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+ *
  * Written by Russ Allbery <rra@stanford.edu>
  *
  * The authors hereby relinquish any claim to any copyright that they may have

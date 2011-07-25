@@ -8,6 +8,9 @@ dnl     RRA_SYS_UNIX_SOCKETS
 dnl
 dnl They use a separate internal source macro to make the code easier to read.
 dnl
+dnl The canonical version of this file is maintained in the rra-c-util
+dnl package, available at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+dnl
 dnl Copyright 2009
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl Copyright (c) 2004, 2005, 2006, 2007, 2008, 2009
