@@ -33,7 +33,7 @@ dnl Probes for networking libraries.  Only needed for packages that make or
 dnl receive network connections or do DNS lookups.
 AC_SEARCH_LIBS([gethostbyname], [nsl])
 AC_SEARCH_LIBS([socket], [socket], ,
-    [AC_CHECK_LIB([nsl], [socket], [LIBS="-lnsl -lsocket $LIBS"], ,
+    [AC_CHECK_LIB([nsl], [socket], [LIBS="-lnsl -lsocket $LIBS"], [],
         [-lsocket])])
 
 dnl Probe for Kerberos.  This is only needed for packages that use Kerberos,
@@ -57,11 +57,11 @@ AC_CHECK_FUNCS([krb5_cc_copy_cache \
 AC_CHECK_FUNCS([krb5_get_init_creds_opt_free],
     [RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_FREE_ARGS])
 AC_CHECK_DECLS([krb5_kt_free_entry])
-AC_CHECK_FUNCS([krb5_appdefault_string], ,
+AC_CHECK_FUNCS([krb5_appdefault_string], [],
     [AC_CHECK_FUNCS([krb5_get_profile])
      AC_CHECK_HEADERS([k5profile.h profile.h])
      AC_LIBOBJ([krb5-profile])])
-AC_CHECK_FUNCS([krb5_get_renewed_creds], ,
+AC_CHECK_FUNCS([krb5_get_renewed_creds], [],
     [AC_CHECK_FUNCS([krb5_copy_creds_contents])
      AC_LIBOBJ([krb5-renew])])
 RRA_LIB_KRB5_RESTORE
@@ -77,7 +77,7 @@ RRA_LIB_GSSAPI_SWITCH
 AC_CHECK_HEADERS([gssapi/gssapi.h])
 AC_CHECK_DECL([GSS_C_NT_USER_NAME],
     [AC_DEFINE([HAVE_GSS_RFC_OIDS], 1,
-       [Define to 1 if the GSS-API library uses RFC-compliant OIDs.])], ,
+       [Define to 1 if the GSS-API library uses RFC-compliant OIDs.])], [],
 [[
 #if defined(HAVE_GSSAPI_H)
 # include <gssapi.h>
@@ -85,8 +85,8 @@ AC_CHECK_DECL([GSS_C_NT_USER_NAME],
 # include <gssapi/gssapi.h>
 #endif
 ]])
-AC_CHECK_DECLS([GSS_KRB5_MECHANISM], ,
-    [AC_CHECK_DECLS([gss_mech_krb5], ,
+AC_CHECK_DECLS([GSS_KRB5_MECHANISM], [],
+    [AC_CHECK_DECLS([gss_mech_krb5], [],
         [AC_LIBOBJ([gssapi-mech])],
         [#include <gssapi/gssapi_krb5.h>])],
 [[
@@ -104,7 +104,7 @@ dnl functions, for which we have a replacement in portable/lifetime.c.
 RRA_LIB_KRB4_OPTIONAL
 AS_IF([test x"$rra_use_krb4" = xyes],
     [RRA_LIB_KRB4_SWITCH
-     AC_CHECK_FUNCS([krb_life_to_time], , [AC_LIBOBJ([lifetime])])
+     AC_CHECK_FUNCS([krb_life_to_time], [], [AC_LIBOBJ([lifetime])])
      RRA_LIB_KRB4_RESTORE])
 
 dnl Probe for libkafs.  Do this so that we can test the libkafs portability
@@ -123,12 +123,12 @@ dnl replacement functions.
 AC_SEARCH_LIBS([pam_set_data], [pam])
 AC_CHECK_FUNCS([pam_getenv pam_getenvlist pam_modutil_getpwnam])
 AC_REPLACE_FUNCS([pam_syslog pam_vsyslog])
-AC_CHECK_HEADERS([security/pam_modutil.h], ,
+AC_CHECK_HEADERS([security/pam_modutil.h], [],
     [AC_CHECK_HEADERS([pam/pam_modutil.h])])
-AC_CHECK_HEADERS([security/pam_appl.h], ,
-    [AC_CHECK_HEADERS([pam/pam_appl.h], ,
+AC_CHECK_HEADERS([security/pam_appl.h], [],
+    [AC_CHECK_HEADERS([pam/pam_appl.h], [],
         [AC_MSG_ERROR([No PAM header files found])])])
-AC_CHECK_HEADERS([security/pam_ext.h], ,
+AC_CHECK_HEADERS([security/pam_ext.h], [],
     [AC_CHECK_HEADERS([pam/pam_ext.h])])
 RRA_HEADER_PAM_CONST
 AC_DEFINE([MODULE_NAME], ["pam_example"],
@@ -144,7 +144,7 @@ RRA_C_C99_VAMACROS
 RRA_C_GNU_VAMACROS
 AC_TYPE_LONG_LONG_INT
 AC_TYPE_UINT32_T
-AC_CHECK_TYPE([sig_atomic_t], ,
+AC_CHECK_TYPE([sig_atomic_t], [],
     [AC_DEFINE([sig_atomic_t], [int],
         [Define to int if <signal.h> does not define.])],
     [#include <sys/types.h>
@@ -157,27 +157,27 @@ AC_REPLACE_FUNCS([strlcat strlcpy strndup])
 dnl Additional probes for networking portability, used for packages that have
 dnl network code and support IPv6.
 AC_CHECK_HEADERS([sys/select.h])
-AC_CHECK_DECLS([inet_aton, inet_ntoa], , ,
+AC_CHECK_DECLS([inet_aton, inet_ntoa], [], [],
     [#include <sys/types.h>
      #include <netinet/in.h>
      #include <arpa/inet.h>])
-AC_CHECK_MEMBERS([struct sockaddr.sa_len], , ,
+AC_CHECK_MEMBERS([struct sockaddr.sa_len], [], [],
     [#include <sys/types.h>
      #include <sys/socket.h>])
-AC_CHECK_TYPE([socklen_t], ,
+AC_CHECK_TYPE([socklen_t], [],
     [AC_DEFINE([socklen_t], [int],
         [Define to int if <sys/socket.h> does not define.])],
     [#include <sys/types.h>
      #include <sys/socket.h>])
 AC_CHECK_TYPES([struct sockaddr_in6],
     [AC_DEFINE([HAVE_INET6], [1],
-        [Define to 1 if IPv6 library interfaces are available.])], ,
+        [Define to 1 if IPv6 library interfaces are available.])], [],
     [#include <sys/types.h>
      #include <netinet/in.h>])
 AC_CHECK_TYPES([struct sockaddr_storage],
-    [AC_CHECK_MEMBERS([struct sockaddr_storage.ss_family], , ,
+    [AC_CHECK_MEMBERS([struct sockaddr_storage.ss_family], [], [],
         [#include <sys/types.h>
-         #include <sys/socket.h>])], ,
+         #include <sys/socket.h>])], [],
     [#include <sys/types.h>
      #include <sys/socket.h>])
 RRA_MACRO_IN6_ARE_ADDR_EQUAL
