@@ -246,7 +246,7 @@ pam_putenv(pam_handle_t *pamh, const char *setting)
 int
 pam_putenv(pam_handle_t *pamh UNUSED, const char *setting)
 {
-    return putenv(setting);
+    return putenv((char *) setting);
 }
 
 #endif /* !HAVE_PAM_GETENV */
