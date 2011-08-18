@@ -10,6 +10,8 @@ rra-c-util 3.8 (unreleased)
     was found.  This simplifies reuse of code between mandatory-Kerberos
     and optional-Kerberos packages.
 
+    Fix sample configure.ac probe for krb5_kt_free_entry prototype.
+
 rra-c-util 3.7 (2011-07-25)
 
     Add a new set of utility functions for managing a data buffer.  A
