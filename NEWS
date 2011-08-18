@@ -5,6 +5,11 @@ rra-c-util 3.8 (unreleased)
     Add replacement for krb5_verify_init_creds_opt_init, which is missing
     from the AIX NAS Kerberos implementation in at least some versions.
 
+    Define the C preprocessor symbol HAVE_KERBEROS if RRA_LIB_KRB5 is
+    used, rather than only if RRA_LIB_KRB5_OPTIONAL is used and Kerberos
+    was found.  This simplifies reuse of code between mandatory-Kerberos
+    and optional-Kerberos packages.
+
 rra-c-util 3.7 (2011-07-25)
 
     Add a new set of utility functions for managing a data buffer.  A
