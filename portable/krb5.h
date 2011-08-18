@@ -177,6 +177,14 @@ const char *krb5_principal_get_realm(krb5_context, krb5_const_principal);
 # endif
 #endif
 
+/*
+ * AIX's NAS Kerberos implementation mysteriously provides the struct and the
+ * krb5_verify_init_creds function but not this function.
+ */
+#ifndef HAVE_KRB5_VERIFY_INIT_CREDS_OPT_INIT
+void krb5_verify_init_creds_opt_init(krb5_verify_init_creds_opt *opt)
+#endif
+
 /* Undo default visibility change. */
 #pragma GCC visibility pop
 

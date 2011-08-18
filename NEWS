@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 3.8 (unreleased)
+
+    Add replacement for krb5_verify_init_creds_opt_init, which is missing
+    from the AIX NAS Kerberos implementation in at least some versions.
+
 rra-c-util 3.7 (2011-07-25)
 
     Add a new set of utility functions for managing a data buffer.  A

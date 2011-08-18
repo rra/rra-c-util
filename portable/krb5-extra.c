@@ -134,3 +134,16 @@ krb5_principal_get_realm(krb5_context ctx UNUSED, krb5_const_principal princ)
     return data->data;
 }
 #endif /* !HAVE_KRB5_PRINCIPAL_GET_REALM */
+
+
+#ifndef HAVE_KRB5_VERIFY_INIT_CREDS_OPT_INIT
+/*
+ * Initialize the option struct for krb5_verify_init_creds.
+ */
+void
+krb5_verify_init_creds_opt_init(krb5_verify_init_creds_opt *opt)
+{
+    opt->flags = 0;
+    opt->ap_req_nofail = 0;
+}
+#endif

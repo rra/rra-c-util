@@ -53,6 +53,7 @@ AC_CHECK_FUNCS([krb5_cc_copy_cache \
     krb5_principal_get_num_comp \
     krb5_principal_get_realm \
     krb5_principal_set_realm \
+    krb5_verify_init_creds_opt_init \
     krb5_xfree])
 AC_CHECK_FUNCS([krb5_get_init_creds_opt_free],
     [RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_FREE_ARGS])
