@@ -153,23 +153,23 @@ AC_DEFUN([RRA_LIB_GSSAPI],
  AS_IF([test x"$rra_reduced_depends" = xtrue],
     [_RRA_LIB_GSSAPI_PATHS
      _RRA_LIB_GSSAPI_REDUCED],
-    [AC_ARG_VAR([KRB5_CONFIG], [Path to krb5-config])
-     AS_IF([test x"$rra_gssapi_root" != x && test -z "$KRB5_CONFIG"],
+    [AC_ARG_VAR([PATH_KRB5_CONFIG], [Path to krb5-config])
+     AS_IF([test x"$rra_gssapi_root" != x && test -z "$PATH_KRB5_CONFIG"],
          [AS_IF([test -x "${rra_gssapi_root}/bin/krb5-config"],
-             [KRB5_CONFIG="${rra_gssapi_root}/bin/krb5-config"])],
-         [AC_PATH_PROG([KRB5_CONFIG], [krb5-config], [],
+             [PATH_KRB5_CONFIG="${rra_gssapi_root}/bin/krb5-config"])],
+         [AC_PATH_PROG([PATH_KRB5_CONFIG], [krb5-config], [],
              [${PATH}:/usr/kerberos/bin])])
-     AS_IF([test x"$KRB5_CONFIG" != x && test -x "$KRB5_CONFIG"],
+     AS_IF([test x"$PATH_KRB5_CONFIG" != x && test -x "$PATH_KRB5_CONFIG"],
          [AC_CACHE_CHECK([for gssapi support in krb5-config],
              [rra_cv_lib_gssapi_config],
-             [AS_IF(["$KRB5_CONFIG" 2>&1 | grep gssapi >/dev/null 2>&1],
+             [AS_IF(["$PATH_KRB5_CONFIG" 2>&1 | grep gssapi >/dev/null 2>&1],
                  [rra_cv_lib_gssapi_config=yes],
                  [rra_cv_lib_gssapi_config=no])])
           AS_IF([test "$rra_cv_lib_gssapi_config" = yes],
-              [GSSAPI_CPPFLAGS=`"$KRB5_CONFIG" --cflags gssapi 2>/dev/null`
-               GSSAPI_LIBS=`"$KRB5_CONFIG" --libs gssapi 2>/dev/null`],
-              [GSSAPI_CPPFLAGS=`"$KRB5_CONFIG" --cflags 2>/dev/null`
-               GSSAPI_LIBS=`"$KRB5_CONFIG" --libs 2>/dev/null`])
+              [GSSAPI_CPPFLAGS=`"$PATH_KRB5_CONFIG" --cflags gssapi 2>/dev/null`
+               GSSAPI_LIBS=`"$PATH_KRB5_CONFIG" --libs gssapi 2>/dev/null`],
+              [GSSAPI_CPPFLAGS=`"$PATH_KRB5_CONFIG" --cflags 2>/dev/null`
+               GSSAPI_LIBS=`"$PATH_KRB5_CONFIG" --libs 2>/dev/null`])
           GSSAPI_CPPFLAGS=`echo "$GSSAPI_CPPFLAGS" \
               | sed 's%-I/usr/include ?%%'`
           _RRA_LIB_GSSAPI_CHECK],

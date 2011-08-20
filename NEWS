@@ -16,6 +16,11 @@ rra-c-util 3.8 (unreleased)
     given.  One generally doesn't specify specific directories like that
     unless krb5-config will be wrong.
 
+    Use PATH_KRB5_CONFIG as the environment variable to set the path to
+    krb5-config rather than KRB5_CONFIG in all the Autoconf macros that
+    use it (krb5.m4, krb5.m4, and gssapi.m4), since the latter is used by
+    the Kerberos libraries to specify an alternative path to krb5.conf.
+
     Add replacement for krb5_verify_init_creds_opt_init, which is missing
     from the AIX NAS Kerberos implementation in at least some versions.
 

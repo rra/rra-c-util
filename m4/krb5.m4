@@ -36,7 +36,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <rra@stanford.edu>
-dnl Copyright 2005, 2006, 2007, 2008, 2009, 2010
+dnl Copyright 2005, 2006, 2007, 2008, 2009, 2010, 2011
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
 dnl This file is free software; the authors give unlimited permission to copy
@@ -170,23 +170,23 @@ dnl Determine Kerberos compiler and linker flags from krb5-config.  Does the
 dnl additional probing we need to do to uncover error handling features, and
 dnl falls back on the manual checks.
 AC_DEFUN([_RRA_LIB_KRB5_CONFIG],
-[AC_ARG_VAR([KRB5_CONFIG], [Path to krb5-config])
- AS_IF([test x"$rra_krb5_root" != x && test -z "$KRB5_CONFIG"],
+[AC_ARG_VAR([PATH_KRB5_CONFIG], [Path to krb5-config])
+ AS_IF([test x"$rra_krb5_root" != x && test -z "$PATH_KRB5_CONFIG"],
      [AS_IF([test -x "${rra_krb5_root}/bin/krb5-config"],
-         [KRB5_CONFIG="${rra_krb5_root}/bin/krb5-config"])],
-     [AC_PATH_PROG([KRB5_CONFIG], [krb5-config], [],
+         [PATH_KRB5_CONFIG="${rra_krb5_root}/bin/krb5-config"])],
+     [AC_PATH_PROG([PATH_KRB5_CONFIG], [krb5-config], [],
          [${PATH}:/usr/kerberos/bin])])
- AS_IF([test x"$KRB5_CONFIG" != x && test -x "$KRB5_CONFIG"],
+ AS_IF([test x"$PATH_KRB5_CONFIG" != x && test -x "$PATH_KRB5_CONFIG"],
      [AC_CACHE_CHECK([for krb5 support in krb5-config],
          [rra_cv_lib_krb5_config],
-         [AS_IF(["$KRB5_CONFIG" 2>&1 | grep krb5 >/dev/null 2>&1],
+         [AS_IF(["$PATH_KRB5_CONFIG" 2>&1 | grep krb5 >/dev/null 2>&1],
              [rra_cv_lib_krb5_config=yes],
              [rra_cv_lib_krb5_config=no])])
       AS_IF([test x"$rra_cv_lib_krb5_config" = xyes],
-          [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags krb5 2>/dev/null`
-           KRB5_LIBS=`"$KRB5_CONFIG" --libs krb5 2>/dev/null`],
-          [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags 2>/dev/null`
-           KRB5_LIBS=`"$KRB5_CONFIG" --libs 2>/dev/null`])
+          [KRB5_CPPFLAGS=`"$PATH_KRB5_CONFIG" --cflags krb5 2>/dev/null`
+           KRB5_LIBS=`"$PATH_KRB5_CONFIG" --libs krb5 2>/dev/null`],
+          [KRB5_CPPFLAGS=`"$PATH_KRB5_CONFIG" --cflags 2>/dev/null`
+           KRB5_LIBS=`"$PATH_KRB5_CONFIG" --libs 2>/dev/null`])
       KRB5_CPPFLAGS=`echo "$KRB5_CPPFLAGS" | sed 's%-I/usr/include ?%%'`
       _RRA_LIB_KRB5_CHECK([$1])
       RRA_LIB_KRB5_SWITCH

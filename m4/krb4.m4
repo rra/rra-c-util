@@ -25,7 +25,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <rra@stanford.edu>
-dnl Copyright 2005, 2006, 2007, 2008, 2009
+dnl Copyright 2005, 2006, 2007, 2008, 2009, 2011
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
 dnl This file is free software; the authors give unlimited permission to copy
@@ -138,21 +138,21 @@ AC_DEFUN([_RRA_LIB_KRB4_INTERNAL],
  AS_IF([test x"$rra_reduced_depends" = xtrue],
     [_RRA_LIB_KRB4_PATHS
      _RRA_LIB_KRB4_REDUCED([$1])],
-    [AC_ARG_VAR([KRB5_CONFIG], [Path to krb5-config])
-     AS_IF([test x"$rra_krb4_root" != x && test -z "$KRB5_CONFIG"],
+    [AC_ARG_VAR([PATH_KRB5_CONFIG], [Path to krb5-config])
+     AS_IF([test x"$rra_krb4_root" != x && test -z "$PATH_KRB5_CONFIG"],
          [AS_IF([test -x "${rra_krb4_root}/bin/krb5-config"],
-             [KRB5_CONFIG="${rra_krb4_root}/bin/krb5-config"])],
-         [AC_PATH_PROG([KRB5_CONFIG], [krb5-config], [],
+             [PATH_KRB5_CONFIG="${rra_krb4_root}/bin/krb5-config"])],
+         [AC_PATH_PROG([PATH_KRB5_CONFIG], [krb5-config], [],
              [${PATH}:/usr/kerberos/bin])])
-     AS_IF([test x"$KRB5_CONFIG" != x && test -x "$KRB5_CONFIG"],
+     AS_IF([test x"$PATH_KRB5_CONFIG" != x && test -x "$PATH_KRB5_CONFIG"],
          [AC_CACHE_CHECK([for krb4 support in krb5-config],
              [rra_cv_lib_krb4_config],
-             [AS_IF(["$KRB5_CONFIG" 2>&1 | grep krb4 >/dev/null 2>&1],
+             [AS_IF(["$PATH_KRB5_CONFIG" 2>&1 | grep krb4 >/dev/null 2>&1],
                  [rra_cv_lib_krb4_config=yes],
                  [rra_cv_lib_krb4_config=no])])
           AS_IF([test x"$rra_cv_lib_krb4_config" = xyes],
-              [KRB4_CPPFLAGS=`"$KRB5_CONFIG" --cflags krb4 2>/dev/null`
-               KRB4_LIBS=`"$KRB5_CONFIG" --libs krb4 2>/dev/null`
+              [KRB4_CPPFLAGS=`"$PATH_KRB5_CONFIG" --cflags krb4 2>/dev/null`
+               KRB4_LIBS=`"$PATH_KRB5_CONFIG" --libs krb4 2>/dev/null`
                KRB4_CPPFLAGS=`echo "$KRB4_CPPFLAGS"|sed 's%-I/usr/include ?%%'`
                _RRA_LIB_KRB4_CHECK([$1])
                RRA_LIB_KRB4_SWITCH

@@ -107,14 +107,15 @@ BUILDING
   or lib64 on your platform.
 
   To specify a particular krb5-config script to use, either set the
-  KRB5_CONFIG environment variable or pass it to configure like:
+  PATH_KRB5_CONFIG environment variable or pass it to configure like:
 
-      ./configure KRB5_CONFIG=/path/to/krb5-config
+      ./configure PATH_KRB5_CONFIG=/path/to/krb5-config
 
   To not use krb5-config and force library probing even if there is a
-  krb5-config script on your path, set KRB5_CONFIG to a nonexistent path:
+  krb5-config script on your path, set PATH_KRB5_CONFIG to a nonexistent
+  path:
 
-      ./configure KRB5_CONFIG=/nonexistent
+      ./configure PATH_KRB5_CONFIG=/nonexistent
 
   krb5-config is not used and library probing is always done if either
   --with-krb5-include or --with-krb5-lib are given.
