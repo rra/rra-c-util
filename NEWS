@@ -2,6 +2,12 @@
 
 rra-c-util 3.8 (unreleased)
 
+    In the generic PAM option parser, add support for time configuration
+    options.  If Kerberos is available, these have a type of krb5_deltat
+    and are parsed using the Kerberos library routine to parse a time
+    interval.  Without Kerberos, they fall back to longs and are parsed as
+    numbers.
+
     Add replacement for krb5_verify_init_creds_opt_init, which is missing
     from the AIX NAS Kerberos implementation in at least some versions.
 
