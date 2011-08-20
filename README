@@ -104,9 +104,7 @@ BUILDING
   You can also individually set the paths to the include directory and the
   library directory with --with-krb5-include and --with-krb5-lib.  You may
   need to do this if Autoconf can't figure out whether to use lib, lib32,
-  or lib64 on your platform.  Note that these settings aren't used if a
-  krb5-config script is found, so you may need to disable the krb5-config
-  script as described below.
+  or lib64 on your platform.
 
   To specify a particular krb5-config script to use, either set the
   KRB5_CONFIG environment variable or pass it to configure like:
@@ -117,6 +115,9 @@ BUILDING
   krb5-config script on your path, set KRB5_CONFIG to a nonexistent path:
 
       ./configure KRB5_CONFIG=/nonexistent
+
+  krb5-config is not used and library probing is always done if either
+  --with-krb5-include or --with-krb5-lib are given.
 
 TESTING
 

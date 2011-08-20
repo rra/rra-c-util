@@ -11,6 +11,11 @@ rra-c-util 3.8 (unreleased)
     Support pam_get_item and pam_set_item in the fake PAM library used for
     testing PAM modules.
 
+    In the Autoconf Kerberos macros, avoid krb5-config and use manual
+    library probing if either --with-krb5-include or --with-krb5-lib is
+    given.  One generally doesn't specify specific directories like that
+    unless krb5-config will be wrong.
+
     Add replacement for krb5_verify_init_creds_opt_init, which is missing
     from the AIX NAS Kerberos implementation in at least some versions.
 

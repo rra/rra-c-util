@@ -166,6 +166,42 @@ AC_DEFUN([_RRA_LIB_KRB5_CHECK],
      _RRA_LIB_KRB5_PATHS
      _RRA_LIB_KRB5_MANUAL([$1])])])
 
+dnl Determine Kerberos compiler and linker flags from krb5-config.  Does the
+dnl additional probing we need to do to uncover error handling features, and
+dnl falls back on the manual checks.
+AC_DEFUN([_RRA_LIB_KRB5_CONFIG],
+[AC_ARG_VAR([KRB5_CONFIG], [Path to krb5-config])
+ AS_IF([test x"$rra_krb5_root" != x && test -z "$KRB5_CONFIG"],
+     [AS_IF([test -x "${rra_krb5_root}/bin/krb5-config"],
+         [KRB5_CONFIG="${rra_krb5_root}/bin/krb5-config"])],
+     [AC_PATH_PROG([KRB5_CONFIG], [krb5-config], [],
+         [${PATH}:/usr/kerberos/bin])])
+ AS_IF([test x"$KRB5_CONFIG" != x && test -x "$KRB5_CONFIG"],
+     [AC_CACHE_CHECK([for krb5 support in krb5-config],
+         [rra_cv_lib_krb5_config],
+         [AS_IF(["$KRB5_CONFIG" 2>&1 | grep krb5 >/dev/null 2>&1],
+             [rra_cv_lib_krb5_config=yes],
+             [rra_cv_lib_krb5_config=no])])
+      AS_IF([test x"$rra_cv_lib_krb5_config" = xyes],
+          [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags krb5 2>/dev/null`
+           KRB5_LIBS=`"$KRB5_CONFIG" --libs krb5 2>/dev/null`],
+          [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags 2>/dev/null`
+           KRB5_LIBS=`"$KRB5_CONFIG" --libs 2>/dev/null`])
+      KRB5_CPPFLAGS=`echo "$KRB5_CPPFLAGS" | sed 's%-I/usr/include ?%%'`
+      _RRA_LIB_KRB5_CHECK([$1])
+      RRA_LIB_KRB5_SWITCH
+      AC_CHECK_FUNCS([krb5_get_error_message],
+          [AC_CHECK_FUNCS([krb5_free_error_message])],
+          [AC_CHECK_FUNCS([krb5_get_error_string], [],
+              [AC_CHECK_FUNCS([krb5_get_err_txt], [],
+                  [AC_CHECK_FUNCS([krb5_svc_get_msg],
+                      [AC_CHECK_HEADERS([ibm_svc/krb5_svc.h], [], [],
+                          [#include <krb5.h>])],
+                      [AC_CHECK_HEADERS([et/com_err.h])])])])])
+      RRA_LIB_KRB5_RESTORE],
+     [_RRA_LIB_KRB5_PATHS
+      _RRA_LIB_KRB5_MANUAL([$1])])])
+
 dnl The core of the library checking, shared between RRA_LIB_KRB5 and
 dnl RRA_LIB_KRB5_OPTIONAL.  The single argument, if "true", says to fail if
 dnl Kerberos could not be found.
@@ -174,43 +210,12 @@ AC_DEFUN([_RRA_LIB_KRB5_INTERNAL],
  AS_IF([test x"$rra_reduced_depends" = xtrue],
     [_RRA_LIB_KRB5_PATHS
      _RRA_LIB_KRB5_REDUCED([$1])],
-    [AC_ARG_VAR([KRB5_CONFIG], [Path to krb5-config])
-     AS_IF([test x"$rra_krb5_root" != x && test -z "$KRB5_CONFIG"],
-         [AS_IF([test -x "${rra_krb5_root}/bin/krb5-config"],
-             [KRB5_CONFIG="${rra_krb5_root}/bin/krb5-config"])],
-         [AC_PATH_PROG([KRB5_CONFIG], [krb5-config], [],
-             [${PATH}:/usr/kerberos/bin])])
-     AS_IF([test x"$KRB5_CONFIG" != x && test -x "$KRB5_CONFIG"],
-         [AC_CACHE_CHECK([for krb5 support in krb5-config],
-             [rra_cv_lib_krb5_config],
-             [AS_IF(["$KRB5_CONFIG" 2>&1 | grep krb5 >/dev/null 2>&1],
-                 [rra_cv_lib_krb5_config=yes],
-                 [rra_cv_lib_krb5_config=no])])
-          AS_IF([test x"$rra_cv_lib_krb5_config" = xyes],
-              [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags krb5 2>/dev/null`
-               KRB5_LIBS=`"$KRB5_CONFIG" --libs krb5 2>/dev/null`],
-              [KRB5_CPPFLAGS=`"$KRB5_CONFIG" --cflags 2>/dev/null`
-               KRB5_LIBS=`"$KRB5_CONFIG" --libs 2>/dev/null`])
-          KRB5_CPPFLAGS=`echo "$KRB5_CPPFLAGS" | sed 's%-I/usr/include ?%%'`
-          _RRA_LIB_KRB5_CHECK([$1])
-          RRA_LIB_KRB5_SWITCH
-          AC_CHECK_FUNCS([krb5_get_error_message],
-              [AC_CHECK_FUNCS([krb5_free_error_message])],
-              [AC_CHECK_FUNCS([krb5_get_error_string], [],
-                  [AC_CHECK_FUNCS([krb5_get_err_txt], [],
-                      [AC_CHECK_FUNCS([krb5_svc_get_msg],
-                          [AC_CHECK_HEADERS([ibm_svc/krb5_svc.h], [], [],
-                              [#include <krb5.h>])],
-                          [AC_CHECK_HEADERS([et/com_err.h])])])])])
-          RRA_LIB_KRB5_RESTORE],
-         [_RRA_LIB_KRB5_PATHS
-          _RRA_LIB_KRB5_MANUAL([$1])])])
+    [AS_IF([test x"$rra_krb5_includedir" = x && test x"$rra_krb5_libdir" = x],
+        [_RRA_LIB_KRB5_CONFIG],
+        [_RRA_LIB_KRB5_PATHS
+         _RRA_LIB_KRB5_MANUAL([$1])])])
  rra_krb5_uses_com_err=false
- case "$LIBS" in
- *-lcom_err*)
-     rra_krb5_uses_com_err=true
-     ;;
- esac
+ AS_CASE([$LIBS], [*-lcom_err*], [rra_krb5_uses_com_err=true])
  AM_CONDITIONAL([KRB5_USES_COM_ERR], [test x"$rra_krb5_uses_com_err" = xtrue])])
 
 dnl The main macro for packages with mandatory Kerberos support.
