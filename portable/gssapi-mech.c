@@ -1,7 +1,7 @@
 /*
- * Define the Kerberos v5 GSS-API mechanism OID.
+ * Define the Kerberos GSS-API mechanism OID.
  *
- * This short bit of code exposes the Kerberos v5 GSS-API mechanism OID has
+ * This short bit of code exposes the Kerberos GSS-API mechanism OID has
  * gss_mech_krb5 on platforms that don't have GSS_KRB5_MECHANISM or
  * gss_mech_krb5, such as Solaris 10.
  *

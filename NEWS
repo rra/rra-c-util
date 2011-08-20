@@ -28,6 +28,9 @@ rra-c-util 3.8 (unreleased)
 
     Define some macros missing from Solaris PAM in portable/pam.h.
 
+    Change Kerberos v5 to just Kerberos in various files.  Version 5 has
+    been the default version of Kerberos for over a decade.
+
 rra-c-util 3.7 (2011-07-25)
 
     Add a new set of utility functions for managing a data buffer.  A
