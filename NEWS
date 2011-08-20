@@ -41,6 +41,8 @@ rra-c-util 3.8 (unreleased)
     Change Kerberos v5 to just Kerberos in various files.  Version 5 has
     been the default version of Kerberos for over a decade.
 
+    Fix use of long long in portable/mkstemp.c.
+
 rra-c-util 3.7 (2011-07-25)
 
     Add a new set of utility functions for managing a data buffer.  A
