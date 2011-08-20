@@ -221,7 +221,7 @@ network_bind_ipv6(const char *address, unsigned short port)
  */
 #if HAVE_INET6
 void
-network_bind_all(unsigned short port, int **fds, unsigned int *count)
+network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
 {
     struct addrinfo hints, *addrs, *addr;
     unsigned int size;

@@ -46,6 +46,8 @@ rra-c-util 3.8 (unreleased)
     Make the getaddrinfo replacement portable to systems that don't
     declare h_errno and don't define the netdb.h error constants.
 
+    Fix argument type for network_bind_all on Windows.
+
 rra-c-util 3.7 (2011-07-25)
 
     Add a new set of utility functions for managing a data buffer.  A
