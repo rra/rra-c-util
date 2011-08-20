@@ -342,18 +342,18 @@ network_accept_any(socket_type fds[], unsigned int count,
  * using the provided source address.  Returns true on success and false on
  * failure.
  */
-static int
+static bool
 network_source(socket_type fd, int family, const char *source)
 {
     if (source == NULL || strcmp(source, "all") == 0)
-        return 1;
+        return true;
     if (family == AF_INET) {
         struct sockaddr_in saddr;
 
         memset(&saddr, 0, sizeof(saddr));
         saddr.sin_family = AF_INET;
         if (!inet_aton(source, &saddr.sin_addr))
-            return 0;
+            return false;
         return bind(fd, (struct sockaddr *) &saddr, sizeof(saddr)) == 0;
     }
 #ifdef HAVE_INET6
@@ -363,7 +363,7 @@ network_source(socket_type fd, int family, const char *source)
         memset(&saddr, 0, sizeof(saddr));
         saddr.sin6_family = AF_INET6;
         if (inet_pton(AF_INET6, source, &saddr.sin6_addr) < 1)
-            return 0;
+            return false;
         return bind(fd, (struct sockaddr *) &saddr, sizeof(saddr)) == 0;
     }
 #endif
@@ -373,7 +373,7 @@ network_source(socket_type fd, int family, const char *source)
 #else
         socket_set_errno(EINVAL);
 #endif
-        return 0;
+        return false;
     }
 }
 
@@ -391,9 +391,9 @@ network_connect(struct addrinfo *ai, const char *source)
 {
     socket_type fd = INVALID_SOCKET;
     int oerrno;
-    int success;
+    bool success;
 
-    for (success = 0; ai != NULL; ai = ai->ai_next) {
+    for (success = false; ai != NULL; ai = ai->ai_next) {
         if (fd != INVALID_SOCKET)
             socket_close(fd);
         fd = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
@@ -402,7 +402,7 @@ network_connect(struct addrinfo *ai, const char *source)
         if (!network_source(fd, ai->ai_family, source))
             continue;
         if (connect(fd, ai->ai_addr, ai->ai_addrlen) == 0) {
-            success = 1;
+            success = true;
             break;
         }
     }
