@@ -162,6 +162,7 @@ AC_REPLACE_FUNCS([strlcat strlcpy strndup])
 dnl Additional probes for networking portability, used for packages that have
 dnl network code and support IPv6.
 AC_CHECK_HEADERS([sys/select.h])
+AC_CHECK_DECLS([h_errno], [], [], [#include <netdb.h>])
 AC_CHECK_DECLS([inet_aton, inet_ntoa], [], [],
     [#include <sys/types.h>
      #include <netinet/in.h>
