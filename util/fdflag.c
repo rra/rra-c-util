@@ -109,8 +109,8 @@ fdflag_nonblocking(int fd, bool flag)
     return (fcntl(fd, F_SETFL, mode) == 0);
 }
 #else /* !O_NONBLOCK */
-int
-nonblocking(int fd, bool flag)
+bool
+fdflag_nonblocking(int fd, bool flag)
 {
     int state;
 
