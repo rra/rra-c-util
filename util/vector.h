@@ -100,7 +100,9 @@ void cvector_free(struct cvector *)
  * Empty strings will yield zero-length vectors.  Adjacent delimiters are
  * treated as a single delimiter by *_split_space and *_split_multi, but *not*
  * by *_split, so callers of *_split should be prepared for zero-length
- * strings in the vector.
+ * strings in the vector.  *_split_space and *_split_multi ignore any leading
+ * or trailing delimiters, so those functions will never create zero-length
+ * strings (similar to the behavior of strtok).
  */
 struct vector *vector_split(const char *string, char sep, struct vector *)
     __attribute__((__nonnull__(1)));

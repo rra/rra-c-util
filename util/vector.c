@@ -348,7 +348,7 @@ vector_split_multi(const char *string, const char *seps,
     if (vector->allocated < count)
         vector_resize(vector, count);
 
-    for (start = string, p = string, i = 0; *p; p++)
+    for (start = string, p = string, i = 0; *p != '\0'; p++)
         if (strchr(seps, *p) != NULL) {
             if (start != p)
                 vector->strings[i++] = xstrndup(start, p - start);
@@ -381,7 +381,7 @@ cvector_split_multi(char *string, const char *seps, struct cvector *vector)
     if (vector->allocated < count)
         cvector_resize(vector, count);
 
-    for (start = string, p = string, i = 0; *p; p++)
+    for (start = string, p = string, i = 0; *p != '\0'; p++)
         if (strchr(seps, *p) != NULL) {
             if (start != p) {
                 *p = '\0';
@@ -441,7 +441,7 @@ vector_split_space(const char *string, struct vector *vector)
     if (vector->allocated < count)
         vector_resize(vector, count);
 
-    for (start = string, p = string, i = 0; *p; p++)
+    for (start = string, p = string, i = 0; *p != '\0'; p++)
         if (*p == ' ' || *p == '\t') {
             if (start != p)
                 vector->strings[i++] = xstrndup(start, p - start);
@@ -473,7 +473,7 @@ cvector_split_space(char *string, struct cvector *vector)
     if (vector->allocated < count)
         cvector_resize(vector, count);
 
-    for (start = string, p = string, i = 0; *p; p++)
+    for (start = string, p = string, i = 0; *p != '\0'; p++)
         if (*p == ' ' || *p == '\t') {
             if (start != p) {
                 *p = '\0';
