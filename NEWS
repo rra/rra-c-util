@@ -12,6 +12,11 @@ rra-c-util 3.8 (unreleased)
 
     Fix sample configure.ac probe for krb5_kt_free_entry prototype.
 
+    Check for krb5_get_init_creds_opt_set_change_password_prompt,
+    krb5_set_password, and krb5_get_init_creds_opt_set_pkinit, replacing
+    them as needed, and add new Autoconf macros to handle old
+    nine-argument forms of the latter.
+
 rra-c-util 3.7 (2011-07-25)
 
     Add a new set of utility functions for managing a data buffer.  A

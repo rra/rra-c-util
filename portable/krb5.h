@@ -115,9 +115,27 @@ krb5_error_code krb5_get_init_creds_opt_alloc(krb5_context,
 # define krb5_get_init_creds_opt_free(c, o) free(o)
 #endif
 
+/* MIT-specific. */
+#ifndef HAVE_KRB5_GET_INIT_CREDS_OPT_SET_CHANGE_PASSWORD_PROMPT
+# define krb5_get_init_creds_opt_set_change_password_prompt(o, f) /* empty */
+#endif
+
 /* Heimdal-specific. */
 #ifndef HAVE_KRB5_GET_INIT_CREDS_OPT_SET_DEFAULT_FLAGS
-#define krb5_get_init_creds_opt_set_default_flags(c, p, r, o) /* empty */
+# define krb5_get_init_creds_opt_set_default_flags(c, p, r, o) /* empty */
+#endif
+
+/*
+ * Old versions of Heimdal (0.7 and earlier) take only nine arguments to the
+ * krb5_get_init_creds_opt_set_pkinit instead of the 11 arguments that current
+ * versions take.  Adjust if needed.  This function is Heimdal-specific.
+ */
+#ifdef HAVE_KRB5_GET_INIT_CREDS_OPT_SET_PKINIT
+# ifdef HAVE_KRB5_GET_INIT_CREDS_OPT_SET_PKINIT_9_ARGS
+#  define krb5_get_init_creds_opt_set_pkinit(c, o, p, u, a, l, r, f, m, d, s) \
+    krb5_get_init_creds_opt_set_pkinit((c), (o), (p), (u), (a), (f), (m), \
+                                       (d), (s));
+# endif
 #endif
 
 /* Available in current MIT and Heimdal, but not older versions of Heimdal. */
@@ -175,6 +193,15 @@ const char *krb5_principal_get_realm(krb5_context, krb5_const_principal);
 # else
 #  define krb5_principal_get_num_comp(c, p) ((p)->name.name_string.len)
 # endif
+#endif
+
+/*
+ * krb5_change_password is deprecated in favor of krb5_set_password in current
+ * Heimdal.  Current MIT provides both.
+ */
+#ifndef HAVE_KRB5_SET_PASSWORD
+# define krb5_set_password(c, cr, pw, p, rc, rcs, rs) \
+    krb5_change_password((c), (cr), (pw), (rc), (rcs), (rs))
 #endif
 
 /*

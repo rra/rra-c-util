@@ -47,14 +47,18 @@ AC_CHECK_FUNCS([krb5_cc_copy_cache \
     krb5_data_free \
     krb5_free_default_realm \
     krb5_get_init_creds_opt_alloc \
+    krb5_get_init_creds_opt_set_change_password_prompt \
     krb5_get_init_creds_opt_set_default_flags \
     krb5_init_secure_context \
     krb5_principal_get_comp_string \
     krb5_principal_get_num_comp \
     krb5_principal_get_realm \
     krb5_principal_set_realm \
+    krb5_set_password \
     krb5_verify_init_creds_opt_init \
     krb5_xfree])
+AC_CHECK_FUNCS([krb5_get_init_creds_opt_set_pkinit],
+    [RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_SET_PKINIT_ARGS])
 AC_CHECK_FUNCS([krb5_get_init_creds_opt_free],
     [RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_FREE_ARGS])
 AC_CHECK_DECLS([krb5_kt_free_entry], [], [], [#include <krb5.h>])
