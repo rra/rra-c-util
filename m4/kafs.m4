@@ -156,12 +156,12 @@ AC_DEFUN([RRA_LIB_KAFS],
         [rra_afs_root="$withval"])])
  AC_ARG_WITH([afs-include],
     [AS_HELP_STRING([--with-afs-include=DIR],
-        [Location of Kerberos v5 headers])],
+        [Location of AFS headers])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_afs_includedir="$withval"])])
  AC_ARG_WITH([afs-lib],
     [AS_HELP_STRING([--with-afs-lib=DIR],
-        [Location of Kerberos v5 libraries])],
+        [Location of AFS libraries])],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_afs_libdir="$withval"])])
 
