@@ -8,6 +8,9 @@ rra-c-util 3.8 (unreleased)
     interval.  Without Kerberos, they fall back to longs and are parsed as
     numbers.
 
+    Support pam_get_item and pam_set_item in the fake PAM library used for
+    testing PAM modules.
+
     Add replacement for krb5_verify_init_creds_opt_init, which is missing
     from the AIX NAS Kerberos implementation in at least some versions.
 
