@@ -253,7 +253,7 @@ network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
      * assuming an IPv6 and IPv4 socket, and grow it by two when necessary.
      */
     size = 2;
-    *fds = xmalloc(size * sizeof(int));
+    *fds = xmalloc(size * sizeof(socket_type));
     for (addr = addrs; addr != NULL; addr = addr->ai_next) {
         network_sockaddr_sprint(name, sizeof(name), addr->ai_addr);
         if (addr->ai_family == AF_INET)
