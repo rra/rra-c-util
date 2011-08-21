@@ -42,9 +42,8 @@
 
 BEGIN_DECLS
 
-/* The primary interface.  Call repeatedly to return each option. */
-int getopt(int argc, char *argv[], const char *opts)
-    __attribute__((__visibility__("hidden")));
+/* Default to a hidden visibility for all portability functions. */
+#pragma GCC visibility push(hidden)
 
 /*
  * The current element in the argv array or, if getopt returns -1, the index
@@ -60,6 +59,12 @@ extern int optopt;
 
 /* The argument to an option. */
 extern char *optarg;
+
+/* The primary interface.  Call repeatedly to return each option. */
+int getopt(int argc, char *argv[], const char *opts);
+
+/* Undo default visibility change. */
+#pragma GCC visibility pop
 
 END_DECLS
 

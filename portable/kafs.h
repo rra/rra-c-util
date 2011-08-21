@@ -66,7 +66,7 @@ BEGIN_DECLS
 #  include <kopenafs.h>
 # endif
 # ifndef HAVE_K_HASPAG
-int k_haspag(void);
+int k_haspag(void) __attribute__((__visibility__("hidden")));
 # endif
 
 /* We're linking directly to the OpenAFS libraries. */
@@ -80,7 +80,7 @@ int lsetpag(void);
 # define k_setpag() lsetpag()
 # define k_unlog()  (errno = ENOSYS, -1)
 
-int k_haspag(void);
+int k_haspag(void) __attribute__((__visibility__("hidden")));
 
 /* We're using our local kafs replacement. */
 #elif HAVE_KAFS_REPLACEMENT
@@ -92,11 +92,17 @@ struct ViceIoctl {
     short out_size;
 };
 
+/* Default to a hidden visibility for all portability functions. */
+#pragma GCC visibility push(hidden)
+
 int k_hasafs(void);
 int k_haspag(void);
 int k_pioctl(char *, int, struct ViceIoctl *, int);
 int k_setpag(void);
 int k_unlog(void);
+
+/* Undo default visibility change. */
+#pragma GCC visibility pop
 
 /* We have no kafs implementation available. */
 #else
