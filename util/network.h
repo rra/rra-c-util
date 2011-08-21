@@ -81,9 +81,9 @@ socket_type network_accept_any(socket_type fds[], unsigned int count,
  * Create a socket and connect it to the remote service given by the linked
  * list of addrinfo structs.  Returns the new file descriptor on success and
  * -1 on failure, with the error left in errno.  Takes an optional source
- * address.
+ * address and a timeout in seconds, which may be 0 for no timeout.
  */
-socket_type network_connect(struct addrinfo *, const char *source)
+socket_type network_connect(struct addrinfo *, const char *source, time_t)
     __attribute__((__nonnull__(1)));
 
 /*
@@ -91,7 +91,7 @@ socket_type network_connect(struct addrinfo *, const char *source)
  * fails, errno may not be set to anything useful.
  */
 socket_type network_connect_host(const char *host, unsigned short port,
-                                 const char *source)
+                                 const char *source, time_t)
     __attribute__((__nonnull__(1)));
 
 /*

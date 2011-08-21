@@ -132,7 +132,7 @@ client(const char *host, const char *source, bool succeed)
     socket_type fd;
     FILE *out;
 
-    fd = network_connect_host(host, 11119, source);
+    fd = network_connect_host(host, 11119, source, 0);
     if (fd == INVALID_SOCKET) {
         if (succeed)
             _exit(1);
@@ -375,6 +375,73 @@ test_create_ipv4(const char *source)
 
 
 /*
+ * Test connect timeouts using IPv4.  Bring up a server on port 11119 on the
+ * loopback address and test connections to it.  The server only accepts one
+ * connection at a time, so the second connection will time out.
+ */
+static void
+test_timeout_ipv4(void)
+{
+    socket_type fd, c;
+    pid_t child;
+
+    fd = network_bind_ipv4("127.0.0.1", 11119);
+    if (fd == INVALID_SOCKET)
+        sysbail("cannot create or bind socket");
+    if (listen(fd, 1) < 0) {
+        sysdiag("cannot listen to socket");
+        ok_block(3, 0, "IPv4 network client with timeout");
+        close(fd);
+        return;
+    }
+    child = fork();
+    if (child < 0)
+        sysbail("cannot fork");
+    else if (child == 0) {
+        struct sockaddr_in sin;
+        socklen_t slen;
+
+        alarm(10);
+        c = accept(fd, &sin, &slen);
+        if (c == INVALID_SOCKET)
+            _exit(1);
+        sleep(9);
+        _exit(0);
+    } else {
+        socket_type block[20];
+        int i;
+
+        close(fd);
+        c = network_connect_host("127.0.0.1", 11119, NULL, 1);
+        ok(c != INVALID_SOCKET, "Timeout: first connection worked");
+
+        /*
+         * For some reason, despite a listening queue of only 1, it can take
+         * up to seven connections on Linux before connections start actually
+         * timing out.
+         */
+        alarm(10);
+        for (i = 0; i < (int) ARRAY_SIZE(block); i++) {
+            block[i] = network_connect_host("127.0.0.1", 11119, NULL, 1);
+            if (block[i] == INVALID_SOCKET)
+                break;
+        }
+        diag("Finally timed out on socket %d", i);
+        ok(block[i] == INVALID_SOCKET, "Timeout: later connection timed out");
+        is_int(ETIMEDOUT, socket_errno, "...with correct error");
+        alarm(0);
+        kill(child, SIGTERM);
+        waitpid(child, NULL, 0);
+        close(c);
+        for (; i >= 0; i--)
+            if (block[i] != INVALID_SOCKET)
+                close(block[i]);
+    }
+    close(fd);
+}
+
+
+/*
  * Tests network_addr_compare.  Takes the expected result, the two addresses,
  * and the mask.
  */
@@ -403,7 +470,7 @@ main(void)
     static const char *ipv6_addr = "FEDC:BA98:7654:3210:FEDC:BA98:7654:3210";
 #endif
 
-    plan(97);
+    plan(100);
 
     /*
      * If IPv6 support appears to be available but doesn't work, we have to
@@ -430,6 +497,9 @@ main(void)
 
     /* Test network_accept_any. */
     test_any();
+
+    /* Test network_connect with a timeout. */
+    test_timeout_ipv4();
 
     /*
      * Now, test network_sockaddr_sprint, network_sockaddr_equal, and

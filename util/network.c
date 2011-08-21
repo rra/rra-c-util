@@ -43,6 +43,7 @@
 
 #include <errno.h>
 
+#include <util/fdflag.h>
 #include <util/messages.h>
 #include <util/network.h>
 #include <util/xmalloc.h>
@@ -387,13 +388,15 @@ network_source(socket_type fd, int family, const char *source)
  * errno.
  */
 socket_type
-network_connect(struct addrinfo *ai, const char *source)
+network_connect(struct addrinfo *ai, const char *source, time_t timeout)
 {
     socket_type fd = INVALID_SOCKET;
-    int oerrno;
-    bool success;
+    int oerrno, status, err;
+    socklen_t len;
+    struct timeval tv;
+    fd_set set;
 
-    for (success = false; ai != NULL; ai = ai->ai_next) {
+    for (status = -1; status != 0 && ai != NULL; ai = ai->ai_next) {
         if (fd != INVALID_SOCKET)
             socket_close(fd);
         fd = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
@@ -401,15 +404,34 @@ network_connect(struct addrinfo *ai, const char *source)
             continue;
         if (!network_source(fd, ai->ai_family, source))
             continue;
-        if (connect(fd, ai->ai_addr, ai->ai_addrlen) == 0) {
-            success = true;
-            break;
+        if (timeout == 0)
+            status = connect(fd, ai->ai_addr, ai->ai_addrlen);
+        else {
+            fdflag_nonblocking(fd, true);
+            status = connect(fd, ai->ai_addr, ai->ai_addrlen);
+            if (status < 0 && socket_errno == EINPROGRESS) {
+                tv.tv_sec = timeout;
+                tv.tv_usec = 0;
+                FD_ZERO(&set);
+                FD_SET(fd, &set);
+                status = select(fd + 1, NULL, &set, NULL, &tv);
+                if (status == 0 && !FD_ISSET(fd, &set)) {
+                    status = -1;
+                    socket_set_errno(ETIMEDOUT);
+                } else if (status > 0 && FD_ISSET(fd, &set)) {
+                    len = sizeof(err);
+                    status = getsockopt(fd, SOL_SOCKET, SO_ERROR, &err, &len);
+                    if (status == 0)
+                        status = err;
+                }
+            }
+            fdflag_nonblocking(fd, false);
         }
     }
-    if (success)
+    if (status == 0)
         return fd;
     else {
-        if (fd >= 0) {
+        if (fd != INVALID_SOCKET) {
             oerrno = socket_errno;
             socket_close(fd);
             socket_set_errno(oerrno);
@@ -427,7 +449,7 @@ network_connect(struct addrinfo *ai, const char *source)
  */
 socket_type
 network_connect_host(const char *host, unsigned short port,
-                     const char *source)
+                     const char *source, time_t timeout)
 {
     struct addrinfo hints, *ai;
     char portbuf[16];
@@ -440,7 +462,7 @@ network_connect_host(const char *host, unsigned short port,
     snprintf(portbuf, sizeof(portbuf), "%d", port);
     if (getaddrinfo(host, portbuf, &hints, &ai) != 0)
         return INVALID_SOCKET;
-    fd = network_connect(ai, source);
+    fd = network_connect(ai, source, timeout);
     oerrno = socket_errno;
     freeaddrinfo(ai);
     socket_set_errno(oerrno);

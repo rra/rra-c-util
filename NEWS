@@ -2,6 +2,11 @@
 
 rra-c-util 3.8 (unreleased)
 
+    The network_connect utility functions now take an optional timeout.
+    If non-zero, a non-blocking connect is done with that timeout, rather
+    than blocking on connect until the TCP stack gives up.  The network
+    utility code now depends on the fdflag code.
+
     In the generic PAM option parser, add support for time configuration
     options.  If Kerberos is available, these have a type of krb5_deltat
     and are parsed using the Kerberos library routine to parse a time
