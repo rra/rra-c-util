@@ -289,6 +289,18 @@ network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
 
 
 /*
+ * Free the array of file descriptors allocated by network_bind_all.  This is
+ * a simple wrapper around free, needed on platforms where libraries allocate
+ * memory from a different memory domain than programs (such as Windows).
+ */
+void
+network_bind_all_free(socket_type *fds)
+{
+    free(fds);
+}
+
+
+/*
  * Given an array of file descriptors and the length of that array (the same
  * data that's returned by network_bind_all), wait for an incoming connection
  * on any of those sockets, accept the connection with accept(), and return

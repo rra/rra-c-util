@@ -59,11 +59,13 @@ socket_type network_bind_ipv6(const char *address, unsigned short port)
  * and one for IPv6, if IPv6 support is enabled).  If IPv6 is not enabled,
  * just one socket will be created and bound to the IPv4 wildcard address.
  * fds will be set to an array containing the resulting file descriptors, with
- * count holding the count returned.
+ * count holding the count returned.  Use network_bind_all_free to free the
+ * array of file descriptors when no longer needed.
  */
 void network_bind_all(unsigned short port, socket_type **fds,
                       unsigned int *count)
     __attribute__((__nonnull__));
+void network_bind_all_free(socket_type *fds);
 
 /*
  * Accept an incoming connection from any file descriptor in an array.  This

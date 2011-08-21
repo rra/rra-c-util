@@ -291,6 +291,7 @@ test_all(const char *source_ipv4, const char *source_ipv6 UNUSED)
     }
     if (count == 1)
         skip_block(3, "only one listening socket");
+    network_bind_all_free(fds);
 }
 
 
@@ -322,6 +323,7 @@ test_any(void)
         listener_any(fds, count);
         waitpid(child, NULL, 0);
     }
+    network_bind_all_free(fds);
 }
 
 
@@ -543,6 +545,7 @@ main(void)
        "...and not equal to IPv4");
     ok(!network_sockaddr_equal(ai6->ai_addr, ai4->ai_addr),
        "...other way around");
+    freeaddrinfo(ai6);
 
     /* Test IPv4 mapped addresses. */
     status = getaddrinfo("::ffff:7f00:1", NULL, &hints, &ai6);
@@ -563,6 +566,7 @@ main(void)
 #else
     skip_block(12, "IPv6 not supported");
 #endif
+    freeaddrinfo(ai);
 
     /* Check the domains of functions and their error handling. */
     ai4->ai_addr->sa_family = AF_UNIX;
@@ -570,6 +574,7 @@ main(void)
        "equal not equal with address mismatches");
     is_int(0, network_sockaddr_port(ai4->ai_addr),
            "port meaningless for AF_UNIX");
+    freeaddrinfo(ai4);
 
     /* Tests for network_addr_compare. */
     ok_addr(1, "127.0.0.1", "127.0.0.1",   NULL);

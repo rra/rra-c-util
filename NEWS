@@ -7,6 +7,8 @@ rra-c-util 3.8 (unreleased)
     than blocking on connect until the TCP stack gives up.  The network
     utility code now depends on the fdflag code.
 
+    Provide a function to free the results of network_bind_all.
+
     In the generic PAM option parser, add support for time configuration
     options.  If Kerberos is available, these have a type of krb5_deltat
     and are parsed using the Kerberos library routine to parse a time
