@@ -42,6 +42,10 @@
 #include <portable/socket.h>
 
 #include <errno.h>
+#ifdef HAVE_SYS_SELECT_H
+# include <sys/select.h>
+#endif
+#include <sys/time.h>
 
 #include <util/fdflag.h>
 #include <util/messages.h>
