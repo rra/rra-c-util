@@ -67,10 +67,10 @@ MAINTAINERCLEANFILES = Makefile.in aclocal.m4 build-aux/config.guess	\
 #     -Wconversion	http://bugs.debian.org/488884 (htons warnings)
 #
 # Last checked against gcc 4.6.1 (2011-05-04).
-WARNINGS = -g -O -Wall -Wextra -Wendif-labels -Wformat=2 -Winit-self	\
-	-Wswitch-enum -Wdeclaration-after-statement -Wshadow		\
-	-Wpointer-arith -Wbad-function-cast -Wwrite-strings		\
-	-Wjump-misses-init -Wlogical-op -Wstrict-prototypes		\
+WARNINGS = -g -O -Wall -Wextra -Wendif-labels -Wformat=2 -Winit-self	 \
+	-Wswitch-enum -Wdeclaration-after-statement -Wshadow		 \
+	-Wpointer-arith -Wbad-function-cast -Wcast-align -Wwrite-strings \
+	-Wjump-misses-init -Wlogical-op -Wstrict-prototypes		 \
 	-Wmissing-prototypes -Wredundant-decls -Wnested-externs -Werror
 
 warnings:

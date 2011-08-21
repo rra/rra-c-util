@@ -10,6 +10,12 @@
  * implementations for functions that aren't found on some pre-IPv6 systems.
  * No other part of the source tree should have to care about IPv4 vs. IPv6.
  *
+ * In this file, casts through void * or const void * of struct sockaddr *
+ * parameters are to silence gcc warnings with -Wcast-align.  The specific
+ * address types often require stronger alignment than a struct sockaddr, and
+ * were originally allocated with that alignment.  GCC doesn't have a good way
+ * of knowing that this code is correct.
+ *
  * The canonical version of this file is maintained in the rra-c-util package,
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
@@ -527,7 +533,7 @@ network_sockaddr_sprint(char *dst, size_t size, const struct sockaddr *addr)
     if (addr->sa_family == AF_INET6) {
         const struct sockaddr_in6 *sin6;
 
-        sin6 = (const struct sockaddr_in6 *) addr;
+        sin6 = (const struct sockaddr_in6 *) (const void *) addr;
         if (IN6_IS_ADDR_V4MAPPED(&sin6->sin6_addr)) {
             struct in_addr in;
 
@@ -541,7 +547,7 @@ network_sockaddr_sprint(char *dst, size_t size, const struct sockaddr *addr)
     if (addr->sa_family == AF_INET) {
         const struct sockaddr_in *sin;
 
-        sin = (const struct sockaddr_in *) addr;
+        sin = (const struct sockaddr_in *) (const void *) addr;
         result = inet_ntop(AF_INET, &sin->sin_addr, dst, size);
         return (result != NULL);
     } else {
@@ -559,20 +565,26 @@ network_sockaddr_sprint(char *dst, size_t size, const struct sockaddr *addr)
 bool
 network_sockaddr_equal(const struct sockaddr *a, const struct sockaddr *b)
 {
-    const struct sockaddr_in *a4 = (const struct sockaddr_in *) a;
-    const struct sockaddr_in *b4 = (const struct sockaddr_in *) b;
+    const struct sockaddr_in *a4;
+    const struct sockaddr_in *b4;
+#ifdef HAVE_INET6
+    const struct sockaddr_in6 *a6;
+    const struct sockaddr_in6 *b6;
+    const struct sockaddr *tmp;
+#endif
+
+    a4 = (const struct sockaddr_in *) (const void *) a;
+    b4 = (const struct sockaddr_in *) (const void *) b;
 
 #ifdef HAVE_INET6
-    const struct sockaddr_in6 *a6 = (const struct sockaddr_in6 *) a;
-    const struct sockaddr_in6 *b6 = (const struct sockaddr_in6 *) b;
-    const struct sockaddr *tmp;
-
+    a6 = (const struct sockaddr_in6 *) (const void *) a;
+    b6 = (const struct sockaddr_in6 *) (const void *) b;
     if (a->sa_family == AF_INET && b->sa_family == AF_INET6) {
         tmp = a;
         a = b;
         b = tmp;
-        a6 = (const struct sockaddr_in6 *) a;
-        b4 = (const struct sockaddr_in *) b;
+        a6 = (const struct sockaddr_in6 *) (const void *) a;
+        b4 = (const struct sockaddr_in *) (const void *) b;
     }
     if (a->sa_family == AF_INET6) {
         if (b->sa_family == AF_INET6)
@@ -608,14 +620,14 @@ network_sockaddr_port(const struct sockaddr *sa)
     const struct sockaddr_in6 *sin6;
 
     if (sa->sa_family == AF_INET6) {
-        sin6 = (const struct sockaddr_in6 *) sa;
+        sin6 = (const struct sockaddr_in6 *) (const void *) sa;
         return htons(sin6->sin6_port);
     }
 #endif
     if (sa->sa_family != AF_INET)
         return 0;
     else {
-        sin = (const struct sockaddr_in *) sa;
+        sin = (const struct sockaddr_in *) (const void *) sa;
         return htons(sin->sin_port);
     }
 }
