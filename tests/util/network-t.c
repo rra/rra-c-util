@@ -122,17 +122,23 @@ listener_any(socket_type fds[], unsigned int count)
 /*
  * Connect to the given host on port 11119 and send a constant string to a
  * socket, used to do the client side of the testing.  Takes the source
- * address as well to pass into network_connect_host.
+ * address as well to pass into network_connect_host.  If the flag is true,
+ * expects to succeed in connecting; otherwise, fail the test if the
+ * connection is successful.
  */
 static void
-client(const char *host, const char *source)
+client(const char *host, const char *source, bool succeed)
 {
     socket_type fd;
     FILE *out;
 
     fd = network_connect_host(host, 11119, source);
-    if (fd == INVALID_SOCKET)
-        sysdie("connect failed");
+    if (fd == INVALID_SOCKET) {
+        if (succeed)
+            _exit(1);
+        else
+            return;
+    }
     out = fdopen(fd, "w");
     if (out == NULL)
         sysdie("fdopen failed");
@@ -166,7 +172,7 @@ test_ipv4(const char *source)
             sysbail("cannot fork");
         else if (child == 0) {
             close(fd);
-            client("127.0.0.1", source);
+            client("127.0.0.1", source, true);
         } else {
             listener(fd);
             waitpid(child, NULL, 0);
@@ -186,20 +192,21 @@ test_ipv6(const char *source)
 {
     socket_type fd;
     pid_t child;
+    int status;
 
     fd = network_bind_ipv6("::1", 11119);
     if (fd == INVALID_SOCKET) {
         if (errno == EAFNOSUPPORT || errno == EPROTONOSUPPORT
             || errno == EADDRNOTAVAIL) {
             ipv6 = 0;
-            skip_block(3, "IPv6 not supported");
+            skip_block(4, "IPv6 not supported");
             return;
         } else
             sysbail("cannot create socket");
     }
     if (listen(fd, 1) < 0) {
         sysdiag("cannot listen to socket");
-        ok_block(3, 0, "IPv6 server test");
+        ok_block(4, 0, "IPv6 server test");
     } else {
         ok(1, "IPv6 server test");
         child = fork();
@@ -207,10 +214,14 @@ test_ipv6(const char *source)
             sysbail("cannot fork");
         else if (child == 0) {
             close(fd);
-            client("::1", source);
+#ifdef IPV6_V6ONLY
+            client("127.0.0.1", NULL, false);
+#endif
+            client("::1", source, true);
         } else {
             listener(fd);
-            waitpid(child, NULL, 0);
+            waitpid(child, &status, 0);
+            is_int(0, status, "client made correct connections");
         }
     }
 }
@@ -218,7 +229,7 @@ test_ipv6(const char *source)
 static void
 test_ipv6(const char *source UNUSED)
 {
-    skip_block(3, "IPv6 not supported");
+    skip_block(4, "IPv6 not supported");
 }
 #endif /* !HAVE_INET6 */
 
@@ -235,7 +246,8 @@ test_all(const char *source_ipv4, const char *source_ipv6 UNUSED)
     unsigned int count, i;
     pid_t child;
     struct sockaddr_storage saddr;
-    socklen_t size = sizeof(saddr);
+    socklen_t size;
+    int status;
 
     network_bind_all(11119, &fds, &count);
     if (count == 0)
@@ -251,24 +263,29 @@ test_all(const char *source_ipv4, const char *source_ipv6 UNUSED)
             ok_block(3, 0, "all address server test");
         } else {
             ok(1, "all address server test (part %d)", i);
+            size = sizeof(saddr);
+            if (getsockname(fd, (struct sockaddr *) &saddr, &size) < 0)
+                sysbail("cannot getsockname");
             child = fork();
             if (child < 0)
                 sysbail("cannot fork");
             else if (child == 0) {
-                if (getsockname(fd, (struct sockaddr *) &saddr, &size) < 0)
-                    sysbail("cannot getsockname");
-                if (saddr.ss_family == AF_INET)
-                    client("127.0.0.1", source_ipv4);
+                if (saddr.ss_family == AF_INET) {
+                    client("::1", source_ipv6, false);
+                    client("127.0.0.1", source_ipv4, true);
 #ifdef HAVE_INET6
-                else if (saddr.ss_family == AF_INET6)
-                    client("::1", source_ipv6);
+                } else if (saddr.ss_family == AF_INET6) {
+# ifdef IPV6_V6ONLY
+                    client("127.0.0.1", source_ipv4, false);
+# endif
+                    client("::1", source_ipv6, true);
 #endif
-                else
-                    skip_block(2, "unknown socket family %d", saddr.ss_family);
-                size = sizeof(saddr);
+                }
+                _exit(1);
             } else {
                 listener(fd);
-                waitpid(child, NULL, 0);
+                waitpid(child, &status, 0);
+                is_int(0, status, "client made correct connections");
             }
         }
     }
@@ -300,7 +317,7 @@ test_any(void)
     if (child < 0)
         sysbail("cannot fork");
     else if (child == 0)
-        client("127.0.0.1", NULL);
+        client("127.0.0.1", NULL, true);
     else {
         listener_any(fds, count);
         waitpid(child, NULL, 0);
@@ -386,7 +403,7 @@ main(void)
     static const char *ipv6_addr = "FEDC:BA98:7654:3210:FEDC:BA98:7654:3210";
 #endif
 
-    plan(91);
+    plan(97);
 
     /*
      * If IPv6 support appears to be available but doesn't work, we have to
