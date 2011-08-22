@@ -3,7 +3,8 @@ dnl
 dnl Finds the compiler and linker flags for linking with Kerberos libraries.
 dnl Provides the --with-krb5, --with-krb5-include, and --with-krb5-lib
 dnl configure options to specify non-standard paths to the Kerberos libraries.
-dnl Uses krb5-config where available unless reduced dependencies is requested.
+dnl Uses krb5-config where available unless reduced dependencies is requested
+dnl or --with-krb5-include or --with-krb5-lib are given.
 dnl
 dnl Provides the macro RRA_LIB_KRB5 and sets the substitution variables
 dnl KRB5_CPPFLAGS, KRB5_LDFLAGS, and KRB5_LIBS.  Also provides
