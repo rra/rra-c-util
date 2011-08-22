@@ -120,6 +120,12 @@ BUILDING
   krb5-config is not used and library probing is always done if either
   --with-krb5-include or --with-krb5-lib are given.
 
+  GSS-API libraries are found the same way: with krb5-config by default if
+  it is found, and a --with-gssapi=PATH flag to specify the installation
+  root.  PATH_KRB5_CONFIG is similarly used to find krb5-config for the
+  GSS-API libraries, and --with-gssapi-include and --with-gssapi-lib can
+  be used to specify the exact paths, overriding any krb5-config results.
+
 TESTING
 
   rra-c-util comes with an extensive test suite, which you can run after
