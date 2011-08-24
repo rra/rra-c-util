@@ -9,6 +9,9 @@ rra-c-util 3.8 (unreleased)
 
     Provide a function to free the results of network_bind_all.
 
+    Add an implementation of fdflag_nonblocking for Windows and allow
+    fdflag.c to be built on Windows.
+
     In the generic PAM option parser, add support for time configuration
     options.  If Kerberos is available, these have a type of krb5_deltat
     and are parsed using the Kerberos library routine to parse a time
