@@ -48,6 +48,10 @@ rra-c-util 3.8 (unreleased)
     them as needed, and add new Autoconf macros to handle old
     nine-argument forms of the latter.
 
+    Add RRA_LIB_REMCTL_OPTIONAL to m4/remctl.m4 for packages where the
+    remctl dependency is not required.  Define HAVE_REMCTL if remctl is
+    present, including when using the non-optional macro.
+
     Define some macros missing from Solaris PAM in portable/pam.h.
 
     Change Kerberos v5 to just Kerberos in various files.  Version 5 has
