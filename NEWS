@@ -64,6 +64,10 @@ rra-c-util 3.8 (unreleased)
 
     Fix argument type for network_bind_all on Windows.
 
+    Update to C TAP Harness 1.8:
+
+    * Add bmalloc, bcalloc, brealloc, and bstrdup TAP library functions.
+
 rra-c-util 3.7 (2011-07-25)
 
     Add a new set of utility functions for managing a data buffer.  A
