@@ -5,7 +5,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2010
+ * Copyright 2010, 2011
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -33,6 +33,7 @@
 
 #include <tests/tap/basic.h>
 #include <tests/tap/process.h>
+#include <util/macros.h>
 #include <util/messages-krb5.h>
 #include <util/messages.h>
 #include <util/xmalloc.h>
@@ -42,7 +43,7 @@
  * Test functions.
  */
 static void
-test_warn(void)
+test_warn(void *data UNUSED)
 {
     krb5_context ctx;
     krb5_error_code code;
@@ -60,7 +61,7 @@ test_warn(void)
 }
 
 static void
-test_die(void)
+test_die(void *data UNUSED)
 {
     krb5_context ctx;
     krb5_error_code code;
@@ -100,20 +101,20 @@ main(void)
     message = krb5_get_error_message(ctx, code);
 
     xasprintf(&wanted, "principal parse failed: %s\n", message);
-    is_function_output(test_warn, 0, wanted, "warn_krb5");
-    is_function_output(test_die, 1, wanted, "die_krb5");
+    is_function_output(test_warn, NULL, 0, wanted, "warn_krb5");
+    is_function_output(test_die, NULL, 1, wanted, "die_krb5");
     free(wanted);
 
     message_program_name = "msg-test";
     xasprintf(&wanted, "msg-test: principal parse failed: %s\n", message);
-    is_function_output(test_warn, 0, wanted, "warn_krb5 with name");
-    is_function_output(test_die, 1, wanted, "die_krb5 with name");
+    is_function_output(test_warn, NULL, 0, wanted, "warn_krb5 with name");
+    is_function_output(test_die, NULL, 1, wanted, "die_krb5 with name");
     free(wanted);
 
     message_handlers_warn(0);
-    is_function_output(test_warn, 0, "", "warn_krb5 with no handlers");
+    is_function_output(test_warn, NULL, 0, "", "warn_krb5 with no handlers");
     message_handlers_die(0);
-    is_function_output(test_die, 1, "", "warn_krb5 with no handlers");
+    is_function_output(test_die, NULL, 1, "", "warn_krb5 with no handlers");
 
     return 0;
 }

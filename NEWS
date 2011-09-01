@@ -52,6 +52,13 @@ rra-c-util 3.8 (unreleased)
     remctl dependency is not required.  Define HAVE_REMCTL if remctl is
     present, including when using the non-optional macro.
 
+    Improve the is_function_output TAP add-on interface to take an opaque
+    data pointer and pass it into the called function.
+
+    Add a new run_setup TAP add-on function that runs a given command and
+    calls bail if it fails, used for doing test setup in an external
+    command.  (Some things are easier to do in shell than in C.)
+
     Define some macros missing from Solaris PAM in portable/pam.h.
 
     Change Kerberos v5 to just Kerberos in various files.  Version 5 has
