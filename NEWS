@@ -67,6 +67,7 @@ rra-c-util 3.8 (unreleased)
     Update to C TAP Harness 1.8:
 
     * Add bmalloc, bcalloc, brealloc, and bstrdup TAP library functions.
+    * Fix runtests to honor -s even if BUILD and -b aren't given.
 
 rra-c-util 3.7 (2011-07-25)
 
