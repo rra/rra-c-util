@@ -22,7 +22,6 @@
 
 #include <tests/tap/basic.h>
 #include <util/buffer.h>
-#include <util/xmalloc.h>
 #include <util/xwrite.h>
 
 static const char test_string1[] = "This is a test";
@@ -110,7 +109,7 @@ main(void)
     fd = open("buffer-test", O_RDWR | O_CREAT | O_TRUNC, 0666);
     if (fd < 0)
         sysbail("cannot create buffer-test");
-    data = xmalloc(2048);
+    data = bmalloc(2048);
     memset(data, 'a', 1023);
     data[1023] = '\r';
     data[1024] = '\n';
@@ -174,7 +173,7 @@ main(void)
     buffer_sprintf(three, false, "%d testing", 8);
     is_int(9, three->left, "replacing the buffer works");
     is_string("8 testing", three->data, "and the results are correct");
-    data = xmalloc(1050);
+    data = bmalloc(1050);
     memset(data, 'a', 1049);
     data[1049] = '\0';
     is_int(1024, three->size, "size before large sprintf is 1024");
@@ -190,7 +189,7 @@ main(void)
     fd = open("buffer-test", O_RDWR | O_CREAT | O_TRUNC, 0666);
     if (fd < 0)
         sysbail("cannot create buffer-test");
-    data = xmalloc(2049);
+    data = bmalloc(2049);
     memset(data, 'a', 2049);
     if (xwrite(fd, data, 2049) < 2049)
         sysbail("cannot write to buffer-test");
@@ -250,7 +249,7 @@ main(void)
     test_vsprintf(three, false, "%d testing", 8);
     is_int(9, three->left, "replacing the buffer results in the correct size");
     is_string("8 testing", three->data, "and the correct data");
-    data = xmalloc(1050);
+    data = bmalloc(1050);
     memset(data, 'a', 1049);
     data[1049] = '\0';
     is_int(1024, three->size, "size is 1024 before large vsprintf");

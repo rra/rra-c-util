@@ -40,7 +40,6 @@
 #include <util/macros.h>
 #include <util/messages.h>
 #include <util/network.h>
-#include <util/xmalloc.h>
 
 /* Set this globally to 0 if IPv6 is available but doesn't work. */
 static int ipv6 = 1;
@@ -106,7 +105,7 @@ listener_any(socket_type fds[], unsigned int count)
     socklen_t slen;
 
     slen = sizeof(struct sockaddr_storage);
-    saddr = xmalloc(slen);
+    saddr = bmalloc(slen);
     client = network_accept_any(fds, count, saddr, &slen);
     listener_handler(client);
     is_int(AF_INET, saddr->sa_family, "...address family is IPv4");
