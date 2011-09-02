@@ -2,17 +2,10 @@
 
 util:
 
- * Add a timeout argument to the network_connect functions that, if set,
-   uses a non-blocking connect and select to enforce a connection
-   timeout.
-
  * Provide an API in util/messages-krb5.c to retrieve the most recent
    Kerberos error message.
 
 Test Suite:
-
- * Add test cases for network_bind_all properly binding separate addresses
-   for IPv4 and IPv6 on systems where IPv6 is supported.
 
  * Add a bail_krb5() function to tests/tap/kerberos.c that bails out but
    provides the Kerberos error message.  This requires messages-krb5.c and
