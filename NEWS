@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 3.8 (unreleased)
+rra-c-util 3.8 (2011-09-02)
 
     The network_connect utility functions now take an optional timeout.
     If non-zero, a non-blocking connect is done with that timeout, rather
