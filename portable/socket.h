@@ -66,11 +66,6 @@
 #include <portable/getaddrinfo.h>
 #include <portable/getnameinfo.h>
 
-/* Some systems don't define INADDR_LOOPBACK. */
-#ifndef INADDR_LOOPBACK
-# define INADDR_LOOPBACK 0x7f000001UL
-#endif
-
 /*
  * Defined by RFC 3493, used to store a generic address.  All of the extra
  * goop here is to ensure that the structs are appropriately aligned on
