@@ -1,5 +1,12 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 3.9 (unreleased)
+
+    Stop providing or using INADDR_LOOPBACK in the socket portability code
+    and instead use htonl(0x7f000001UL).  The byte-order of
+    INADDR_LOOPBACK appears to be undefined in practice, so neither using
+    it directly nor using it with htonl works reliably.
+
 rra-c-util 3.8 (2011-09-02)
 
     The network_connect utility functions now take an optional timeout.
