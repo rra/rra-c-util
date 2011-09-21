@@ -155,7 +155,7 @@ AC_CHECK_TYPES([sig_atomic_t], [], [],
      #include <signal.h>])
 RRA_FUNC_SNPRINTF
 AC_CHECK_FUNCS([setrlimit setsid])
-AC_REPLACE_FUNCS([asprintf daemon getopt issetuidgid mkstemp setenv seteuid])
+AC_REPLACE_FUNCS([asprintf daemon getopt issetugid mkstemp setenv seteuid])
 AC_REPLACE_FUNCS([strlcat strlcpy strndup])
 
 dnl Additional probes for networking portability, used for packages that have

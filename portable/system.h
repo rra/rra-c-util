@@ -128,7 +128,7 @@ extern int vsnprintf(char *, size_t, const char *, va_list);
 extern int daemon(int, int);
 #endif
 #if !HAVE_ISSETUIDGID
-extern int issetuidgid(void);
+extern int issetugid(void);
 #endif
 #if !HAVE_MKSTEMP
 extern int mkstemp(char *);

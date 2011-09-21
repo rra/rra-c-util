@@ -2,6 +2,11 @@
 
 rra-c-util 3.9 (unreleased)
 
+    The replacement for the Solaris and BSD function issetugid was
+    mistakenly called issetuidgid instead, causing it to always be built.
+    Use the correct function name so that the native function is used on
+    platforms that provide it.
+
     Stop providing or using INADDR_LOOPBACK in the socket portability code
     and instead use htonl(0x7f000001UL).  The byte-order of
     INADDR_LOOPBACK appears to be undefined in practice, so neither using
