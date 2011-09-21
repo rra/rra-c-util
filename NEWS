@@ -13,6 +13,9 @@ rra-c-util 3.9 (unreleased)
     principal and the stored environment variables, for cleaner valgrind
     analysis.
 
+    Wait longer for remctld to start in the remctl setup TAP extension to
+    allow time for running everything under valgrind.
+
     Stop providing or using INADDR_LOOPBACK in the socket portability code
     and instead use htonl(0x7f000001UL).  The byte-order of
     INADDR_LOOPBACK appears to be undefined in practice, so neither using
