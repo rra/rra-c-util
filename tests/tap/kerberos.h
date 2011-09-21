@@ -40,6 +40,10 @@ BEGIN_DECLS
  * tests/data/test.principal or no keytab in tests/data/test.keytab, return
  * NULL.  Otherwise, on failure, calls bail().
  *
+ * kerberos_cleanup will be set up to run from an atexit() handler.  This
+ * means that any child processes that should not remove the Kerberos ticket
+ * cache should call _exit instead of exit.
+ *
  * The principal will be automatically freed when kerberos_cleanup is called
  * or if kerberos_setup is called again.  The caller doesn't need to worry
  * about it.
