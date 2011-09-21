@@ -109,6 +109,9 @@ AC_CHECK_DECLS([GSS_KRB5_MECHANISM], [],
 #else
 # include <gssapi.h>
 #endif
+#ifdef HAVE_GSSAPI_GSSAPI_KRB5_H
+# include <gssapi/gssapi_krb5.h>
+#endif
 ]])
 RRA_LIB_GSSAPI_RESTORE
 
