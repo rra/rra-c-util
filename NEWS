@@ -7,6 +7,12 @@ rra-c-util 3.9 (unreleased)
     Use the correct function name so that the native function is used on
     platforms that provide it.
 
+    The Kerberos test setup TAP extension now registers its cleanup
+    function as an atexit handler so the caller doesn't need to explicitly
+    clean up.  It also frees all allocated memory, including the returned
+    principal and the stored environment variables, for cleaner valgrind
+    analysis.
+
     Stop providing or using INADDR_LOOPBACK in the socket portability code
     and instead use htonl(0x7f000001UL).  The byte-order of
     INADDR_LOOPBACK appears to be undefined in practice, so neither using
