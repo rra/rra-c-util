@@ -26,6 +26,10 @@ rra-c-util 3.9 (unreleased)
     principal and the stored environment variables, for cleaner valgrind
     analysis.
 
+    In the kinit version of the Kerberos test setup TAP extension, try to
+    suppress getting new AFS tokens in Heimdal so that the test doesn't
+    override a user's existing tokens.
+
     Wait longer for remctld to start in the remctl setup TAP extension to
     allow time for running everything under valgrind.
 
