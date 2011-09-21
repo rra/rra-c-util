@@ -66,6 +66,11 @@
 #include <portable/getaddrinfo.h>
 #include <portable/getnameinfo.h>
 
+/* Define socklen_t if it's not available in sys/socket.h. */
+#ifndef HAVE_SOCKLEN_T
+typedef socklen_t int;
+#endif
+
 /*
  * Defined by RFC 3493, used to store a generic address.  All of the extra
  * goop here is to ensure that the structs are appropriately aligned on

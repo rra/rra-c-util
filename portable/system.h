@@ -75,6 +75,11 @@
 # define snprintf _snprintf
 #endif
 
+/* Define sig_atomic_t if it's not available in signal.h. */
+#ifndef HAVE_SIG_ATOMIC_T
+typedef sig_atomic_t int;
+#endif
+
 /*
  * POSIX requires that these be defined in <unistd.h>.  If one of them has
  * been defined, all the rest almost certainly have.

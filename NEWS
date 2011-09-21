@@ -7,6 +7,10 @@ rra-c-util 3.9 (unreleased)
     INADDR_LOOPBACK appears to be undefined in practice, so neither using
     it directly nor using it with htonl works reliably.
 
+    Use typedef instead of #define for defining socklen_t and sig_atomic_t
+    if they're missing, following the recommendation in the Autoconf
+    manual.
+
 rra-c-util 3.8 (2011-09-02)
 
     The network_connect utility functions now take an optional timeout.
