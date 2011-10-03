@@ -188,7 +188,8 @@ AC_DEFUN([_RRA_LIB_KRB5_CONFIG],
            KRB5_LIBS=`"$PATH_KRB5_CONFIG" --libs krb5 2>/dev/null`],
           [KRB5_CPPFLAGS=`"$PATH_KRB5_CONFIG" --cflags 2>/dev/null`
            KRB5_LIBS=`"$PATH_KRB5_CONFIG" --libs 2>/dev/null`])
-      KRB5_CPPFLAGS=`echo "$KRB5_CPPFLAGS" | sed 's%-I/usr/include ?%%'`
+      KRB5_CPPFLAGS=`echo "$KRB5_CPPFLAGS" | sed 's%-I/usr/include %%'`
+      KRB5_CPPFLAGS=`echo "$KRB5_CPPFLAGS" | sed 's%-I/usr/include$%%'`
       _RRA_LIB_KRB5_CHECK([$1])
       RRA_LIB_KRB5_SWITCH
       AC_CHECK_FUNCS([krb5_get_error_message],

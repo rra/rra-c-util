@@ -153,7 +153,8 @@ AC_DEFUN([_RRA_LIB_KRB4_INTERNAL],
           AS_IF([test x"$rra_cv_lib_krb4_config" = xyes],
               [KRB4_CPPFLAGS=`"$PATH_KRB5_CONFIG" --cflags krb4 2>/dev/null`
                KRB4_LIBS=`"$PATH_KRB5_CONFIG" --libs krb4 2>/dev/null`
-               KRB4_CPPFLAGS=`echo "$KRB4_CPPFLAGS"|sed 's%-I/usr/include ?%%'`
+               KRB4_CPPFLAGS=`echo "$KRB4_CPPFLAGS"|sed 's%-I/usr/include %%'`
+               KRB4_CPPFLAGS=`echo "$KRB4_CPPFLAGS"|sed 's%-I/usr/include$%%'`
                _RRA_LIB_KRB4_CHECK([$1])
                RRA_LIB_KRB4_SWITCH
                AC_CHECK_HEADERS([kerberosIV/krb.h])
