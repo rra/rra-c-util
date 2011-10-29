@@ -5,6 +5,13 @@ rra-c-util 3.10 (unreleased)
     Correctly handle empty vectors in vector_join and cvector_join.
     Thanks to Richard Kettlewell for the test suite addition.
 
+    Fix the syntax of the typedefs for missing socklen_t and
+    sig_atomic_t.  Patch from Matthew Loar.
+
+    Provide ssize_t in portable/system.h if the system doesn't define it
+    (Windows does not).  Requires an additional check in configure.ac for
+    users of portable/system.h.  Patch from Matthew Loar.
+
     Fix the stripping of -I/usr/include from the output of krb5-config.
     The previous code used extended regular expressions, which cannot be
     relied on inside sed, and would have stripped include paths that start
