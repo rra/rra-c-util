@@ -77,7 +77,7 @@
 
 /* Define sig_atomic_t if it's not available in signal.h. */
 #ifndef HAVE_SIG_ATOMIC_T
-typedef sig_atomic_t int;
+typedef int sig_atomic_t;
 #endif
 
 /*
