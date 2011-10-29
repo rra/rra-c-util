@@ -94,7 +94,7 @@ static void test11(void *data UNUSED) {
 }
 
 static void log_msg(size_t len, const char *format, va_list args, int error) {
-    fprintf(stderr, "%d %d ", len, error);
+    fprintf(stderr, "%lu %d ", len, error);
     vfprintf(stderr, format, args);
     fprintf(stderr, "\n");
 }
