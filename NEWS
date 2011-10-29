@@ -2,6 +2,9 @@
 
 rra-c-util 3.10 (unreleased)
 
+    Correctly handle empty vectors in vector_join and cvector_join.
+    Thanks to Richard Kettlewell for the test suite addition.
+
     Fix the stripping of -I/usr/include from the output of krb5-config.
     The previous code used extended regular expressions, which cannot be
     relied on inside sed, and would have stripped include paths that start
