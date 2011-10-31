@@ -18,9 +18,12 @@ rra-c-util 3.10 (unreleased)
     with /usr/include.  Just use two sed invocations, with and without a
     trailing space.  Thanks to Ken Dreyer for the report.
 
-    Fixed RRA_LIB_KRB5_OPTIONAL to make Kerberos libraries really optional
+    Fix RRA_LIB_KRB5_OPTIONAL to make Kerberos libraries really optional
     when called without --enable-reduced-depends and without setting a
     path to the Kerberos libraries.
+
+    Fix RRA_LIB_REMCTL_OPTIONAL to not require the remctl library be found
+    when neither --with-remctl nor --without-remctl was given.
 
 rra-c-util 3.9 (2011-09-23)
 
