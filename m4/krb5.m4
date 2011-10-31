@@ -213,7 +213,7 @@ AC_DEFUN([_RRA_LIB_KRB5_INTERNAL],
     [_RRA_LIB_KRB5_PATHS
      _RRA_LIB_KRB5_REDUCED([$1])],
     [AS_IF([test x"$rra_krb5_includedir" = x && test x"$rra_krb5_libdir" = x],
-        [_RRA_LIB_KRB5_CONFIG],
+        [_RRA_LIB_KRB5_CONFIG([$1])],
         [_RRA_LIB_KRB5_PATHS
          _RRA_LIB_KRB5_MANUAL([$1])])])
  rra_krb5_uses_com_err=false
