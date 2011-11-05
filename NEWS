@@ -1,5 +1,13 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 3.11 (unreleased)
+
+    In the network utility library, when a connection with a timeout
+    concludes, properly store the recovered error code in errno where the
+    caller can pick it up.  Fix some problems with the test suite for
+    connect with timeout on systems where this cannot be tested by using a
+    short listen queue.
+
 rra-c-util 3.10 (2011-10-31)
 
     Correctly handle empty vectors in vector_join and cvector_join.
