@@ -8,6 +8,9 @@ rra-c-util 3.11 (2011-12-01)
     connect with timeout on systems where this cannot be tested by using a
     short listen queue.
 
+    Add a portability wrapper around some common APR headers that provides
+    macros missing from APR 0.9.
+
 rra-c-util 3.10 (2011-10-31)
 
     Correctly handle empty vectors in vector_join and cvector_join.
