@@ -1,5 +1,9 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 3.12 (unreleased)
+
+    Include config.h in stdbool.h unless it has already been included.
+
 rra-c-util 3.11 (2011-12-01)
 
     In the network utility library, when a connection with a timeout
