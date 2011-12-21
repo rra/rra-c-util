@@ -2,6 +2,10 @@
 
 rra-c-util 3.12 (unreleased)
 
+    Fix RRA_LIB_REMCTL_OPTIONAL to not define HAVE_REMCTL even if the
+    library wasn't found and to clear the variables used in Makefiles if
+    the library isn't found.
+
     Include config.h in stdbool.h unless it has already been included.
 
 rra-c-util 3.11 (2011-12-01)
