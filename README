@@ -76,7 +76,7 @@ REQUIREMENTS
 
 BUILDING
 
-  You can build rra-c-util and run its internal test suite with:
+  You can build rra-c-util with:
 
       ./configure
       make
