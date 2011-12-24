@@ -33,6 +33,11 @@ rra-c-util 3.12 (unreleased)
     which wrap asprintf and vasprintf, checking their return status and
     calling bail if they fail.
 
+    Update to C TAP Harness 1.9:
+
+    * Add test_tmpdir and test_tmpdir_free to TAP library.
+    * runtests now frees all allocated resources on exit.
+
 rra-c-util 3.11 (2011-12-01)
 
     In the network utility library, when a connection with a timeout
