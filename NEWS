@@ -39,6 +39,24 @@ rra-c-util 4.0 (unreleased)
     Kerberos probes.  This allows the header to be found on NetBSD
     systems.  Thanks to Fredrik Pettai for the report.
 
+    The kerberos_setup TAP utility function now expects a test keytab to
+    be in tests/config/keytab instead of tests/data/test.keytab and uses
+    tests/tmp for the temporary ticket cache.
+
+    Add new Kerberos TAP utility functions bail_krb5 and diag_krb5 to
+    append a Kerberos error message, kerberos_config_password to return
+    Kerberos principal and password information from a file in
+    tests/config, and kerberos_keytab_principal to return the first
+    principal found in a keytab file (so that the user doesn't have to
+    explicitly configure which principal to use once they've created the
+    keytab)
+
+    Add a kerberos_generate_conf TAP utility function to generate a
+    krb5.conf file for testing.  The last supports changing the default
+    realm, removing configuration that may interfere with what's being
+    tested, and honoring a krb5.conf file put in tests/config.  It uses a
+    helper program, generate-krb5-conf, which must be in tests/data.
+
     Fix RRA_LIB_REMCTL_OPTIONAL to not define HAVE_REMCTL even if the
     library wasn't found and to clear the variables used in Makefiles if
     the library isn't found.

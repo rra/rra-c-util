@@ -191,13 +191,14 @@ USING THIS CODE
     m4/lib-pathname.m4, and optionally util/messages-krb5.[ch].  You'll
     also need the relevant fragments of configure.ac.  Also see the
     kerberos.* libraries in tests/tap for a Kerberos-enabled test suite.
-    You may want to remove some things from krb5.h and krb5-extra.c the
-    corresponding configure checks if your code doesn't need all of those
-    functions.  If you need krb5_get_renewed_creds, also copy over
-    krb5-renew.c.  Don't forget to add $(KRB5_CPPFLAGS) to CPPFLAGS for
-    libportable and possibly libutil, and if you're building a shared
-    library, also add $(KRB5_LDFLAGS) to LDFLAGS and $(KRB5_LIBS) to
-    LIBADD for those libraries.
+    If you want to use kerberos_generate_conf from tests/tap/kerberos.c,
+    also copy over tests/data/generate-krb5-conf.  You may want to remove
+    some things from krb5.h and krb5-extra.c the corresponding configure
+    checks if your code doesn't need all of those functions.  If you need
+    krb5_get_renewed_creds, also copy over krb5-renew.c.  Don't forget to
+    add $(KRB5_CPPFLAGS) to CPPFLAGS for libportable and possibly libutil,
+    and if you're building a shared library, also add $(KRB5_LDFLAGS) to
+    LDFLAGS and $(KRB5_LIBS) to LIBADD for those libraries.
 
   * If you're using the kafs portability code, copy over the kafs
     directory, m4/kafs.m4, m4/lib-pathname.m4, portable/k_haspag.c, the

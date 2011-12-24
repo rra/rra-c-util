@@ -7,10 +7,6 @@ util:
 
 Test Suite:
 
- * Add a bail_krb5() function to tests/tap/kerberos.c that bails out but
-   provides the Kerberos error message.  This requires messages-krb5.c and
-   that the functions providing the Kerberos message be public.
-
  * The xmalloc test suite doesn't fully comply with the TAP output
    protocol when reporting diagnostics from the xmalloc helper program.
 
