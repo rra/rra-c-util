@@ -29,6 +29,10 @@ rra-c-util 3.12 (unreleased)
 
     Include config.h in stdbool.h unless it has already been included.
 
+    Add new TAP library add-on that defines basprintf and bvasprintf,
+    which wrap asprintf and vasprintf, checking their return status and
+    calling bail if they fail.
+
 rra-c-util 3.11 (2011-12-01)
 
     In the network utility library, when a connection with a timeout
