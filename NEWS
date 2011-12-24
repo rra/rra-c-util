@@ -43,6 +43,12 @@ rra-c-util 4.0 (unreleased)
     library wasn't found and to clear the variables used in Makefiles if
     the library isn't found.
 
+    Add a probe for Kerberos kadmin client libraries.  This uses a new
+    framework for library probes (m4/lib-helper.m4 and m4/krb5-config.m4)
+    that may eventually be used for the other library probes.  Add a
+    portability wrapper around kadm5/admin.h and some example probes in
+    configure.ac.
+
     Include config.h in stdbool.h unless it has already been included.
 
     Add new TAP library add-on that defines basprintf and bvasprintf,
@@ -69,6 +75,10 @@ rra-c-util 4.0 (unreleased)
     realm, removing configuration that may interfere with what's being
     tested, and honoring a krb5.conf file put in tests/config.  It uses a
     helper program, generate-krb5-conf, which must be in tests/data.
+
+    Add a Kerberos TAP utility function that uses the kadmin client
+    library to set a password expiration time on a principal for software
+    that needs to test behavior of expired passwords.
 
     Update to C TAP Harness 1.9:
 
