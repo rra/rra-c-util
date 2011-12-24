@@ -12,6 +12,9 @@ rra-c-util 3.12 (unreleased)
     even though the compiler doesn't indicate a new enough C standard
     version (such as NetBSD).
 
+    When overriding defaults during PAM option parsing in pam-util, free
+    any memory allocated for the old settings.
+
     In the Kerberos library probes, probe for both krb5.h and krb5/krb5.h
     and use the latter if the former isn't found.  Add an
     RRA_INCLUDES_KRB5 macro that expands into the headers to use for
