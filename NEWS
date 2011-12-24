@@ -51,7 +51,10 @@ rra-c-util 4.0 (unreleased)
 
     The kerberos_setup TAP utility function now expects a test keytab to
     be in tests/config/keytab instead of tests/data/test.keytab and uses
-    tests/tmp for the temporary ticket cache.
+    tests/tmp for the temporary ticket cache.  It no longer needs the
+    principal found in the keytab to be explicitly configured in
+    tests/data/test.principal; instead, it reads the principal from the
+    keytab.
 
     Add new Kerberos TAP utility functions bail_krb5 and diag_krb5 to
     append a Kerberos error message, kerberos_config_password to return
