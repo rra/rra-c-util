@@ -39,6 +39,16 @@ rra-c-util 4.0 (unreleased)
     Kerberos probes.  This allows the header to be found on NetBSD
     systems.  Thanks to Fredrik Pettai for the report.
 
+    Fix RRA_LIB_REMCTL_OPTIONAL to not define HAVE_REMCTL even if the
+    library wasn't found and to clear the variables used in Makefiles if
+    the library isn't found.
+
+    Include config.h in stdbool.h unless it has already been included.
+
+    Add new TAP library add-on that defines basprintf and bvasprintf,
+    which wrap asprintf and vasprintf, checking their return status and
+    calling bail if they fail.
+
     The kerberos_setup TAP utility function now expects a test keytab to
     be in tests/config/keytab instead of tests/data/test.keytab and uses
     tests/tmp for the temporary ticket cache.
@@ -56,16 +66,6 @@ rra-c-util 4.0 (unreleased)
     realm, removing configuration that may interfere with what's being
     tested, and honoring a krb5.conf file put in tests/config.  It uses a
     helper program, generate-krb5-conf, which must be in tests/data.
-
-    Fix RRA_LIB_REMCTL_OPTIONAL to not define HAVE_REMCTL even if the
-    library wasn't found and to clear the variables used in Makefiles if
-    the library isn't found.
-
-    Include config.h in stdbool.h unless it has already been included.
-
-    Add new TAP library add-on that defines basprintf and bvasprintf,
-    which wrap asprintf and vasprintf, checking their return status and
-    calling bail if they fail.
 
     Update to C TAP Harness 1.9:
 
