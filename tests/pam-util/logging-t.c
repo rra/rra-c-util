@@ -5,7 +5,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2010
+ * Copyright 2010, 2011
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -35,44 +35,48 @@
 
 #include <pam-util/args.h>
 #include <pam-util/logging.h>
-#include <tests/fakepam/testing.h>
+#include <tests/fakepam/pam.h>
 #include <tests/tap/basic.h>
+#include <tests/tap/string.h>
 
-/* Test a normal PAM logging function. */
-#define TEST(func, p, n)                              \
-    do {                                              \
-        (func)(args, "%s", "foo");                    \
-        asprintf(&expected, "%d %s", (p), "foo");     \
-        seen = pam_output();                          \
-        is_string(expected, seen, "%s", (n));         \
-        free(seen);                                   \
-        free(expected);                               \
+/* Test a normal PAM logging function. */                       \
+#define TEST(func, p, n)                                        \
+    do {                                                        \
+        (func)(args, "%s", "foo");                              \
+        basprintf(&expected, "%d %s", (p), "foo");              \
+        seen = pam_output();                                    \
+        is_string(expected, seen->strings[0], "%s", (n));       \
+        pam_output_free(seen);                                  \
+        free(expected);                                         \
     } while (0);
 
 /* Test a PAM error logging function. */
-#define TEST_PAM(func, c, p, n)                         \
-    do {                                                \
-        (func)(args, (c), "%s", "bar");                 \
-        asprintf(&expected, "%d %s: %s", (p), "bar",    \
-                 pam_strerror(args->pamh, c));          \
-        seen = pam_output();                            \
-        is_string(expected, seen, "%s", (n));           \
-        free(seen);                                     \
-        free(expected);                                 \
+#define TEST_PAM(func, c, p, n)                                 \
+    do {                                                        \
+        (func)(args, (c), "%s", "bar");                         \
+        basprintf(&expected, "%d %s: %s", (p), "bar",           \
+                  pam_strerror(args->pamh, c));                 \
+        seen = pam_output();                                    \
+        is_string(expected, seen->strings[0], "%s", (n));       \
+        pam_output_free(seen);                                  \
+        free(expected);                                         \
     } while (0);
 
 /* Test a PAM Kerberos error logging function .*/
 #define TEST_KRB5(func, p, n)                                             \
     do {                                                                  \
+        const char *msg;                                                  \
+                                                                          \
         code = krb5_parse_name(args->ctx, "foo@bar@EXAMPLE.COM", &princ); \
         (func)(args, code, "%s", "krb");                                  \
         code = krb5_parse_name(args->ctx, "foo@bar@EXAMPLE.COM", &princ); \
-        asprintf(&expected, "%d %s: %s", (p), "krb",                      \
-                 krb5_get_error_message(args->ctx, code));                \
+        msg = krb5_get_error_message(args->ctx, code);                    \
+        basprintf(&expected, "%d %s: %s", (p), "krb", msg);               \
         seen = pam_output();                                              \
-        is_string(expected, seen, "%s", (n));                             \
-        free(seen);                                                       \
+        is_string(expected, seen->strings[0], "%s", (n));                 \
+        pam_output_free(seen);                                            \
         free(expected);                                                   \
+        krb5_free_error_message(args->ctx, msg);                          \
     } while (0);
 
 
@@ -82,7 +86,8 @@ main(void)
     pam_handle_t *pamh;
     struct pam_args *args;
     struct pam_conv conv = { NULL, NULL };
-    char *expected, *seen;
+    char *expected;
+    struct output *seen;
 #ifdef HAVE_KERBEROS
     krb5_error_code code;
     krb5_principal princ;
@@ -122,6 +127,9 @@ main(void)
 #else
     skip_block(4, "not built with Kerberos support");
 #endif
+
+    putil_args_free(args);
+    pam_end(pamh, 0);
 
     return 0;
 }

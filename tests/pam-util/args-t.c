@@ -32,7 +32,7 @@
 #include <portable/system.h>
 
 #include <pam-util/args.h>
-#include <tests/fakepam/testing.h>
+#include <tests/fakepam/pam.h>
 #include <tests/tap/basic.h>
 
 
@@ -67,6 +67,8 @@ main(void)
     ok(args != NULL, "New args struct with PAM_SILENT is not NULL");
     is_int(args->silent, true, "...and silent is true");
     putil_args_free(args);
+
+    pam_end(pamh, 0);
 
     return 0;
 }

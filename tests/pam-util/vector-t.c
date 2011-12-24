@@ -62,10 +62,9 @@ main(void)
     is_int(4, copy->count, "...and has right count");
     is_int(4, copy->allocated, "...and has right allocated count");
     for (i = 0; i < 4; i++) {
-        is_string(cstring, copy->strings[i], "...and string %lu is right",
-                  (unsigned long) i);
+        is_string(cstring, copy->strings[i], "...and string %d is right", i);
         ok(copy->strings[i] != vector->strings[i],
-           "...and pointer %lu is different", (unsigned long) i);
+           "...and pointer %d is different", i);
     }
     vector_free(copy);
     vector_clear(vector);

@@ -36,8 +36,9 @@
 #include <pam-util/args.h>
 #include <pam-util/options.h>
 #include <pam-util/vector.h>
-#include <tests/fakepam/testing.h>
+#include <tests/fakepam/pam.h>
 #include <tests/tap/basic.h>
+#include <tests/tap/string.h>
 
 /* The configuration struct we will use for testing. */
 struct pam_config {
@@ -92,10 +93,10 @@ const size_t optlen = sizeof(options) / sizeof(options[0]);
         argv_err[0] = (a);                                              \
         status = putil_args_parse(args, 1, argv_err, options, optlen);  \
         ok(status, "Parse of %s", (a));                                 \
-        asprintf(&expected, "%d %s", (p), (e));                         \
+        basprintf(&expected, "%d %s", (p), (e));                        \
         seen = pam_output();                                            \
-        is_string(expected, seen, "...error for %s", (a));              \
-        free(seen);                                                     \
+        is_string(expected, seen->strings[0], "...error for %s", (a));  \
+        pam_output_free(seen);                                          \
         free(expected);                                                 \
     } while (0);
 
@@ -139,7 +140,8 @@ main(void)
     struct pam_conv conv = { NULL, NULL };
     bool status;
     struct vector *cells;
-    char *program, *seen, *expected;
+    char *program, *expected;
+    struct output *seen;
     const char *argv_bool[2] = { NULL, NULL };
     const char *argv_err[2] = { NULL, NULL };
     const char *argv_empty[] = { NULL };
@@ -268,7 +270,7 @@ main(void)
     options[0].defaults.string = NULL;
 
     /* Should be no errors so far. */
-    is_string(NULL, pam_output(), "No errors so far");
+    ok(pam_output() == NULL, "No errors so far");
 
     /* Test various ways of spelling booleans. */
     args->config = config_new();
@@ -394,17 +396,18 @@ main(void)
     args->config = config_new();
     TEST_ERROR("expires=ft87", LOG_ERR,
                "bad time value in setting: expires=ft87");
+    config_free(args->config);
 
     /* Test error reporting from the krb5.conf parser. */
     args->config = config_new();
     status = putil_args_krb5(args, "bad-number", options, optlen);
     ok(status, "Options from krb5.conf (bad-number)");
-    asprintf(&expected, "%d invalid number in krb5.conf setting for %s: %s",
-             LOG_ERR, "minimum_uid", "1000foo");
+    basprintf(&expected, "%d invalid number in krb5.conf setting for %s: %s",
+              LOG_ERR, "minimum_uid", "1000foo");
     seen = pam_output();
-    is_string(expected, seen, "...and correct error reported");
+    is_string(expected, seen->strings[0], "...and correct error reported");
     free(expected);
-    free(seen);
+    pam_output_free(seen);
     config_free(args->config);
     args->config = NULL;
 
@@ -412,14 +415,16 @@ main(void)
     args->config = config_new();
     status = putil_args_krb5(args, "bad-time", options, optlen);
     ok(status, "Options from krb5.conf (bad-time)");
-    asprintf(&expected, "%d invalid time in krb5.conf setting for %s: %s",
-             LOG_ERR, "expires", "ft87");
+    basprintf(&expected, "%d invalid time in krb5.conf setting for %s: %s",
+              LOG_ERR, "expires", "ft87");
     seen = pam_output();
-    is_string(expected, seen, "...and correct error reported");
+    is_string(expected, seen->strings[0], "...and correct error reported");
     free(expected);
-    free(seen);
+    pam_output_free(seen);
     config_free(args->config);
     args->config = NULL;
+
+    test_file_path_free(krb5conf);
 
 #else /* !HAVE_KERBEROS */
 
@@ -428,5 +433,6 @@ main(void)
 #endif
 
     putil_args_free(args);
+    pam_end(pamh, 0);
     return 0;
 }

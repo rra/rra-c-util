@@ -1,6 +1,22 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 3.12 (unreleased)
+rra-c-util 4.0 (unreleased)
+
+    The fake PAM library for testing now also supports a script-driven
+    test infrastructure that uses configuration files to specify the PAM
+    options, calls, flags, return status, prompts, responses, and logging
+    output and supports callbacks to check the PAM status before it's
+    closed.  See tests/fakepam/README for more information.
+
+    The fake PAM library now supports PAM_AUTHTOK, PAM_OLDAUTHTOK, and
+    PAM_CONV items and more correctly implements the PAM environment.  It
+    also supports intercepting getpwnam calls and returning a synthetic
+    structure, and intercepting Kerberos krb5_kuserok calls and using the
+    configured home directory to find .k5login.  Log output is now
+    returned as an array of strings rather than concatenating all the
+    messages together.  The fake PAM library now depends on the TAP
+    library and uses its facilities for allocating memory so that memory
+    allocation failures are reported with bail.
 
     Do not call krb5_get_error_message with a NULL context.  Older
     versions of Heimdal will dereference the context unconditionally and

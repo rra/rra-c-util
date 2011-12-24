@@ -95,9 +95,13 @@ check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	    \
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
 check_LIBRARIES = tests/fakepam/libfakepam.a tests/tap/libtap.a
-tests_fakepam_libfakepam_a_SOURCES = tests/fakepam/data.c	\
-        tests/fakepam/logging.c tests/fakepam/testing.c		\
-        tests/fakepam/testing.h
+tests_fakepam_libfakepam_a_CPPFLAGS = -I$(abs_top_srcdir)/tests	\
+	$(KRB5_CPPFLAGS)
+tests_fakepam_libfakepam_a_SOURCES = tests/fakepam/config.c		   \
+	tests/fakepam/data.c tests/fakepam/general.c			   \
+	tests/fakepam/internal.h tests/fakepam/kuserok.c		   \
+	tests/fakepam/logging.c tests/fakepam/pam.h tests/fakepam/script.c \
+	tests/fakepam/script.h
 tests_tap_libtap_a_CPPFLAGS = -I$(abs_top_srcdir)/tests $(KRB5_CPPFLAGS)
 tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h	\
 	tests/tap/kerberos.c tests/tap/kerberos.h tests/tap/messages.c	\

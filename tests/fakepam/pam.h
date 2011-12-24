@@ -10,7 +10,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2010
+ * Copyright 2010, 2011
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -32,8 +32,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
  
-#ifndef FAKEPAM_TESTING_H
-#define FAKEPAM_TESTING_H 1
+#ifndef FAKEPAM_PAM_H
+#define FAKEPAM_PAM_H 1
 
 #include <config.h>
 #include <portable/pam.h>
@@ -51,21 +51,42 @@ struct fakepam_data {
 struct pam_handle {
     const char *service;
     const char *user;
-    const char *authtok;
+    char *authtok;
+    char *oldauthtok;
     const struct pam_conv *conversation;
-    const char **environ;
+    char **environ;
     struct fakepam_data *data;
+    struct passwd *pwd;
+};
+
+/*
+ * Used to accumulate output from the PAM module.  Each call to a logging
+ * function will result in an additional string added to the array, and count
+ * will hold the total.
+ */
+struct output {
+    size_t count;
+    size_t allocated;
+    char **strings;
 };
 
 BEGIN_DECLS
 
 /*
+ * Sets the struct passwd returned by getpwnam calls.  The last struct passed
+ * to this function will be returned provided the pw_name matches.
+ */
+void pam_set_pwd(struct passwd *pwd);
+
+/*
  * Returns the accumulated messages logged with pam_syslog or pam_vsyslog
  * since the last call to pam_output and then clears the output.  Returns
- * newly allocated memory that the caller is responsible for freeing, or NULL
- * if no output has been logged since the last call or since startup.
+ * newly allocated memory that the caller is responsible for freeing with
+ * pam_output_free, or NULL if no output has been logged since the last call
+ * or since startup.
  */
-char *pam_output(void);
+struct output *pam_output(void);
+void pam_output_free(struct output *);
 
 END_DECLS
 
