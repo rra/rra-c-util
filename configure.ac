@@ -42,7 +42,7 @@ dnl portability layer and the kerberos.c TAP library add-on.  Many packages
 dnl will need less than this.  This should possibly move into krb5.m4.
 RRA_LIB_KRB5
 RRA_LIB_KRB5_SWITCH
-AC_CHECK_TYPES([krb5_realm], , , [#include <krb5.h>])
+AC_CHECK_TYPES([krb5_realm], [], [], [RRA_INCLUDES_KRB5])
 AC_CHECK_FUNCS([krb5_cc_copy_cache \
     krb5_data_free \
     krb5_free_default_realm \
@@ -61,7 +61,7 @@ AC_CHECK_FUNCS([krb5_get_init_creds_opt_set_pkinit],
     [RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_SET_PKINIT_ARGS])
 AC_CHECK_FUNCS([krb5_get_init_creds_opt_free],
     [RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_FREE_ARGS])
-AC_CHECK_DECLS([krb5_kt_free_entry], [], [], [#include <krb5.h>])
+AC_CHECK_DECLS([krb5_kt_free_entry], [], [], [RRA_INCLUDES_KRB5])
 AC_CHECK_FUNCS([krb5_appdefault_string], [],
     [AC_CHECK_FUNCS([krb5_get_profile])
      AC_CHECK_HEADERS([k5profile.h profile.h])
@@ -69,6 +69,7 @@ AC_CHECK_FUNCS([krb5_appdefault_string], [],
 AC_CHECK_FUNCS([krb5_get_renewed_creds], [],
     [AC_CHECK_FUNCS([krb5_copy_creds_contents])
      AC_LIBOBJ([krb5-renew])])
+AC_LIBOBJ([krb5-extra])
 RRA_LIB_KRB5_RESTORE
 
 dnl Make sure we build with Kerberos support where it's optional.

@@ -2,6 +2,12 @@
 
 rra-c-util 3.12 (unreleased)
 
+    In the Kerberos library probes, probe for both krb5.h and krb5/krb5.h
+    and use the latter if the former isn't found.  Add an
+    RRA_INCLUDES_KRB5 macro that expands into the headers to use for
+    Kerberos probes.  This allows the header to be found on NetBSD
+    systems.  Thanks to Fredrik Pettai for the report.
+
     Fix RRA_LIB_REMCTL_OPTIONAL to not define HAVE_REMCTL even if the
     library wasn't found and to clear the variables used in Makefiles if
     the library isn't found.
