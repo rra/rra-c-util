@@ -2,6 +2,16 @@
 
 rra-c-util 3.12 (unreleased)
 
+    Do not call krb5_get_error_message with a NULL context.  Older
+    versions of Heimdal will dereference the context unconditionally and
+    segfault.
+
+    When logging the entrance to PAM functions in pam-util, convert flags
+    into symbolic names.  Also close a memory leak in putil_log_failure
+    and allow for systems where __func__ is defined by the system headers
+    even though the compiler doesn't indicate a new enough C standard
+    version (such as NetBSD).
+
     In the Kerberos library probes, probe for both krb5.h and krb5/krb5.h
     and use the latter if the former isn't found.  Add an
     RRA_INCLUDES_KRB5 macro that expands into the headers to use for
