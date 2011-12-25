@@ -7,12 +7,12 @@
 # See LICENSE for licensing terms.
 
 ACLOCAL_AMFLAGS = -I m4
-EXTRA_DIST = .gitignore LICENSE autogen m4/apache.m4 m4/apr.m4		\
-	m4/aprutil.m4 m4/curl.m4 m4/ld-version.m4 m4/ldap.m4 m4/pcre.m4	\
-	m4/remctl.m4 m4/ssl.m4 mkusage portable/winsock.c tests/README	\
-	tests/TESTS tests/data/generate-krb5-conf tests/data/krb5.conf	\
-	tests/fakepam/README tests/kafs/basic-t tests/tap/kerberos.sh	\
-	tests/tap/kinit.c tests/tap/libtap.sh tests/tap/remctl.sh	\
+EXTRA_DIST = .gitignore LICENSE autogen m4/apache.m4 m4/apr.m4		   \
+	m4/aprutil.m4 m4/curl.m4 m4/ld-version.m4 m4/ldap.m4 m4/pcre.m4	   \
+	m4/remctl.m4 m4/ssl.m4 portable/winsock.c tests/README tests/TESTS \
+	tests/data/generate-krb5-conf tests/data/krb5.conf		   \
+	tests/fakepam/README tests/kafs/basic-t tests/tap/kerberos.sh	   \
+	tests/tap/kinit.c tests/tap/libtap.sh tests/tap/remctl.sh	   \
 	tests/util/xmalloc-t
 
 # This is unfortunately required since we have an object (k_hasafs) defined

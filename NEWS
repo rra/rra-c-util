@@ -80,6 +80,9 @@ rra-c-util 4.0 (2011-12-24)
     library to set a password expiration time on a principal for software
     that needs to test behavior of expired passwords.
 
+    Remove mkusage.  This idea turns out to not be as useful as it looked,
+    and the package of mine that was previously using it no longer is.
+
     Update to C TAP Harness 1.9:
 
     * Add test_tmpdir and test_tmpdir_free to TAP library.
