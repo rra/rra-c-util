@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.1 (unreleased)
+
+    In the PAM utility library, when Kerberos support is available, fix
+    initialization of time values in the module configuration on platforms
+    (like S/390X) where krb5_deltat is not equivalent to long.
+
 rra-c-util 4.0 (2011-12-24)
 
     The fake PAM library for testing now also supports a script-driven
