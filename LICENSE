@@ -40,7 +40,7 @@ notice requirements specified in that license.
 Collected copyright notices for the entire package:
 
   Copyright 1999, 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-      2010 Russ Allbery <rra@stanford.edu>
+      2010, 2011 Russ Allbery <rra@stanford.edu>
   Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011
       The Board of Trustees of the Leland Stanford Junior University
   Copyright 2004, 2005, 2006, 2007, 2008, 2009, 2010
@@ -271,3 +271,13 @@ and license:
   from the X Consortium.
 
   FSF changes to this file are in the public domain.
+
+The files tests/README and tests/fakepam/README are released under the
+following copyright and license:
+
+  Copyright 2010, 2011 Russ Allbery <rra@stanford.edu>
+
+  Copying and distribution of this file, with or without modification, are
+  permitted in any medium without royalty provided the copyright notice
+  and this notice are preserved.  This file is offered as-is, without any
+  warranty.
