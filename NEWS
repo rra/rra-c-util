@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.0 (unreleased)
+rra-c-util 4.0 (2011-12-24)
 
     The fake PAM library for testing now also supports a script-driven
     test infrastructure that uses configuration files to specify the PAM

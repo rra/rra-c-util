@@ -34,8 +34,9 @@ licenses, all of which are compatible with the above general package
 license but which may require preservation of additional notices.  All
 required notices are preserved in this file.  Each file intended for
 copying into other software packages contains a copyright and license
-notice at the top of the file.  Please take note of any attribution and
-notice requirements specified in that license.
+notice at the top of the file or, in the case of tests/fakepam/README, at
+the bottom of the file.  Please take note of any attribution and notice
+requirements specified in that license.
 
 Collected copyright notices for the entire package:
 
