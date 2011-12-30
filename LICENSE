@@ -67,21 +67,21 @@ portable/asprintf.c, portable/daemon.c, portable/dummy.c,
 portable/getaddrinfo.c, portable/getaddrinfo.h, portable/getnameinfo.c,
 portable/getnameinfo.h, portable/gssapi-mech.c, portable/gssapi.h,
 portable/inet_aton.c, portable/inet_ntoa.c, portable/inet_ntop.c,
-portable/issetugid.c, portable/krb4.h, portable/kadmin.h,
-portable/krb5-extra.c, portable/krb5.h, portable/macros.h,
-portable/mkstemp.c, portable/pam.h, portable/pam_syslog.c,
-portable/pam_vsyslog.c, portable/setenv.c, portable/seteuid.c,
-portable/stdbool.h, portable/strlcat.c, portable/strlcpy.c,
-portable/strndup.c, portable/system.h, portable/uio.h, portable/winsock.c,
-tests/pam-util/vector-t.c, tests/portable/asprintf-t.c,
-tests/portable/daemon-t.c, tests/portable/getaddrinfo-t.c,
-tests/portable/getnameinfo-t.c, tests/portable/inet_aton-t.c,
-tests/portable/inet_ntoa-t.c, tests/portable/inet_ntop-t.c,
-tests/portable/mkstemp-t.c, tests/portable/setenv-t.c,
-tests/portable/strlcat-t.c, tests/portable/strlcpy-t.c,
-tests/portable/strndup-t.c, tests/util/buffer-t.c, tests/util/concat-t.c,
-tests/util/vector-t.c, util/concat.c, util/concat.h, util/macros.h,
-util/vector.c, and util/vector.h are covered by the following statement:
+portable/issetugid.c, portable/kadmin.h, portable/krb5-extra.c,
+portable/krb5.h, portable/macros.h, portable/mkstemp.c, portable/pam.h,
+portable/pam_syslog.c, portable/pam_vsyslog.c, portable/setenv.c,
+portable/seteuid.c, portable/stdbool.h, portable/strlcat.c,
+portable/strlcpy.c, portable/strndup.c, portable/system.h, portable/uio.h,
+portable/winsock.c, tests/pam-util/vector-t.c,
+tests/portable/asprintf-t.c, tests/portable/daemon-t.c,
+tests/portable/getaddrinfo-t.c, tests/portable/getnameinfo-t.c,
+tests/portable/inet_aton-t.c, tests/portable/inet_ntoa-t.c,
+tests/portable/inet_ntop-t.c, tests/portable/mkstemp-t.c,
+tests/portable/setenv-t.c, tests/portable/strlcat-t.c,
+tests/portable/strlcpy-t.c, tests/portable/strndup-t.c,
+tests/util/buffer-t.c, tests/util/concat-t.c, tests/util/vector-t.c,
+util/concat.c, util/concat.h, util/macros.h, util/vector.c, and
+util/vector.h are covered by the following statement:
 
   The authors hereby relinquish any claim to any copyright that they may
   have in this work, whether granted under contract or by operation of law
@@ -97,7 +97,7 @@ would strongly prefer that any improvements or modifications be sent to me
 
 The files configure.ac, m4/apache.m4, m4/apr.m4, m4/aprutil.m4,
 m4/curl.m4, m4/gssapi.m4, m4/inet-ntoa.m4, m4/kadm5clnt.m4, m4/kafs.m4,
-m4/krb4.m4, m4/krb5.m4, m4/krb5-config.m4, m4/ld-version.m4, m4/ldap.m4,
+m4/krb5.m4, m4/krb5-config.m4, m4/ld-version.m4, m4/ldap.m4,
 m4/lib-depends.m4, m4/lib-helper.m4, m4/lib-pathname.m4, m4/pam-const.m4,
 m4/pcre.m4, m4/remctl.m4, m4/snprintf.m4, m4/ssl.m4, and m4/vamacros.m4
 are released under the following copyright and license:

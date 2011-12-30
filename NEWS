@@ -2,6 +2,10 @@
 
 rra-c-util 4.1 (unreleased)
 
+    Remove Kerberos v4 portability code: Autoconf probes, the portability
+    header, and the lifetime function replacements.  None of my packages
+    support Kerberos v4 any more and I can no longer test this code.
+
     In the PAM utility library, when Kerberos support is available, fix
     initialization of time values in the module configuration on platforms
     (like S/390X) where krb5_deltat is not equivalent to long.

@@ -116,15 +116,6 @@ AC_CHECK_DECLS([GSS_KRB5_MECHANISM], [],
 ]])
 RRA_LIB_GSSAPI_RESTORE
 
-dnl Probe for Kerberos v4.  This is only needed for packages that use Kerberos
-dnl v4, of course.  This code includes probing for the lifetime support
-dnl functions, for which we have a replacement in portable/lifetime.c.
-RRA_LIB_KRB4_OPTIONAL
-AS_IF([test x"$rra_use_krb4" = xyes],
-    [RRA_LIB_KRB4_SWITCH
-     AC_CHECK_FUNCS([krb_life_to_time], [], [AC_LIBOBJ([lifetime])])
-     RRA_LIB_KRB4_RESTORE])
-
 dnl Probe for Kerberos kadmin client libraries.
 RRA_LIB_KADM5CLNT_OPTIONAL
 RRA_LIB_KADM5CLNT_SWITCH
