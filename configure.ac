@@ -44,6 +44,7 @@ RRA_LIB_KRB5
 RRA_LIB_KRB5_SWITCH
 AC_CHECK_TYPES([krb5_realm], [], [], [RRA_INCLUDES_KRB5])
 AC_CHECK_FUNCS([krb5_cc_copy_cache \
+    krb5_cc_get_full_name \
     krb5_data_free \
     krb5_free_default_realm \
     krb5_get_init_creds_opt_alloc \
