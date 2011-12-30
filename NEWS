@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.1 (unreleased)
+rra-c-util 4.1 (2011-12-29)
 
     Remove Kerberos v4 portability code: Autoconf probes, the portability
     header, and the lifetime function replacements.  None of my packages
