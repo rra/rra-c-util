@@ -6,6 +6,9 @@ rra-c-util 4.1 (unreleased)
     initialization of time values in the module configuration on platforms
     (like S/390X) where krb5_deltat is not equivalent to long.
 
+    Add a replacement for a missing krb5_cc_get_full_name function to the
+    Kerberos portability layer.
+
 rra-c-util 4.0 (2011-12-24)
 
     The fake PAM library for testing now also supports a script-driven
