@@ -141,6 +141,9 @@ extern int mkstemp(char *);
 #if !HAVE_SETENV
 extern int setenv(const char *, const char *, int);
 #endif
+#if !HAVE_SETEUID
+extern int seteuid(uid_t);
+#endif
 #if !HAVE_STRLCAT
 extern size_t strlcat(char *, const char *, size_t);
 #endif
