@@ -62,7 +62,9 @@ REQUIREMENTS
   11, the kafs library that comes with either Heimdal or KTH Kerberos, the
   kopenafs library that comes with newer OpenAFS, AFS header files (on any
   other platform besides AIX or IRIX), or AFS libraries (on AIX and IRIX)
-  is required.
+  is required.  AIX binaries with AFS PAG support may not run on AIX
+  systems that do not have an AFS client installed due to how AIX handles
+  system calls.
 
   To enable tests that may be sensitive to the local environment or that
   produce a lot of false positives without uncovering many problems, set
