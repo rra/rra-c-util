@@ -26,11 +26,11 @@ pam_util_libpamutil_a_SOURCES = pam-util/args.c pam-util/args.h		\
 	pam-util/logging.c pam-util/logging.h pam-util/options.c	\
 	pam-util/options.h pam-util/vector.c pam-util/vector.h
 pam_util_libpamutil_a_CPPFLAGS = $(KRB5_CPPFLAGS)
-portable_libportable_a_SOURCES = portable/apr.h portable/dummy.c	    \
-	portable/getaddrinfo.h portable/getnameinfo.h portable/getopt.h	    \
-	portable/gssapi.h portable/kadmin.h portable/kafs.h portable/krb4.h \
-	portable/krb5-extra.c portable/krb5.h portable/macros.h		    \
-	portable/pam.h portable/socket.h portable/stdbool.h		    \
+portable_libportable_a_SOURCES = portable/apr.h portable/dummy.c	\
+	portable/getaddrinfo.h portable/getnameinfo.h portable/getopt.h	\
+	portable/gssapi.h portable/kadmin.h portable/kafs.h		\
+	portable/krb5-extra.c portable/krb5.h portable/macros.h		\
+	portable/pam.h portable/socket.h portable/stdbool.h		\
 	portable/system.h portable/uio.h
 portable_libportable_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 portable_libportable_a_LIBADD = $(LIBOBJS)
