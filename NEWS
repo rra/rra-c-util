@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.2 (unreleased)
+
+    Fix the skipped test counts in the network utility test suite for
+    systems that don't have IPv6 configured.  Thanks, Felix Geyer.
+
 rra-c-util 4.1 (2011-12-29)
 
     Remove Kerberos v4 portability code: Autoconf probes, the portability
