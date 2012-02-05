@@ -5,6 +5,10 @@ rra-c-util 4.2 (unreleased)
     Fix the skipped test counts in the network utility test suite for
     systems that don't have IPv6 configured.  Thanks, Felix Geyer.
 
+    Add -D_FORTIFY_SOURCE=2 to the default warning flags for more checks
+    on glibc systems, and fix the resulting warnings in some of the test
+    suite programs.
+
 rra-c-util 4.1 (2011-12-29)
 
     Remove Kerberos v4 portability code: Autoconf probes, the portability
