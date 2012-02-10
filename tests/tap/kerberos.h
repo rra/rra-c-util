@@ -57,9 +57,8 @@ void diag_krb5(krb5_context, krb5_error_code, const char *format, ...)
  * Set up Kerberos, returning the test principal.  This obtains Kerberos
  * tickets from a keytab and stores them in a Kerberos ticket cache, sets
  * KRB5_KTNAME and KRB5CCNAME, and returns the Kerberos principal to use for
- * testing.  If there is no principal in tests/data/test.principal or no
- * keytab in tests/data/test.keytab, return NULL.  Otherwise, on failure,
- * calls bail().
+ * testing.  If there is no principal in tests/config/principal or no keytab
+ * in tests/config/keytab, return NULL.  Otherwise, on failure, calls bail().
  *
  * kerberos_cleanup will be set up to run from an atexit() handler.  This
  * means that any child processes that should not remove the Kerberos ticket
