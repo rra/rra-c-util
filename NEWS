@@ -13,6 +13,13 @@ rra-c-util 4.2 (unreleased)
     tests/config location of Kerberos configuration and to use test_tmpdir
     for temporary files.
 
+    Add reading of Kerberos username and password configuration to
+    kerberos_setup in the Kerberos TAP add-on and always return a struct
+    of configuration.  Return the path to the keytab configuration, if
+    present.  Remove the alternative implementation of the Kerberos
+    utility functions that doesn't require the Kerberos libraries and
+    instead use #ifdef inside the primary implementation to handle this.
+
 rra-c-util 4.1 (2011-12-29)
 
     Remove Kerberos v4 portability code: Autoconf probes, the portability
