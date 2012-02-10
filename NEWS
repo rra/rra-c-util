@@ -9,6 +9,10 @@ rra-c-util 4.2 (unreleased)
     on glibc systems, and fix the resulting warnings in some of the test
     suite programs.
 
+    Update the kerberos.sh and remctl.sh TAP add-ons for the new
+    tests/config location of Kerberos configuration and to use test_tmpdir
+    for temporary files.
+
 rra-c-util 4.1 (2011-12-29)
 
     Remove Kerberos v4 portability code: Autoconf probes, the portability
