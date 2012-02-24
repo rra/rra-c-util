@@ -6,6 +6,9 @@ rra-c-util 4.2 (unreleased)
     utility library, which read from and write to network sockets with an
     optional timeout.
 
+    Avoid excessive memory allocation when duplicating short
+    nul-terminated strings in xstrndup.
+
     Fix the skipped test counts in the network utility test suite for
     systems that don't have IPv6 configured.  Thanks, Felix Geyer.
 
