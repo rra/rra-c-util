@@ -50,6 +50,12 @@
 #include <tests/tap/process.h>
 #include <tests/tap/string.h>
 
+/*
+ * Disable the requirement that format strings be literals, since it's easier
+ * to handle the possible patterns for kinit commands as an array.
+ */
+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
+
 
 /*
  * These variables hold the allocated configuration struct, the environment to
