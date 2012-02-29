@@ -6,6 +6,9 @@ rra-c-util 4.2 (unreleased)
     utility library, which read from and write to network sockets with an
     optional timeout.
 
+    Fix replacement strndup function to not assume that the string being
+    duplicated is nul-terminated.
+
     Avoid excessive memory allocation when duplicating short
     nul-terminated strings in xstrndup.
 
