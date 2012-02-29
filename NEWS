@@ -30,6 +30,10 @@ rra-c-util 4.2 (unreleased)
     utility functions that doesn't require the Kerberos libraries and
     instead use #ifdef inside the primary implementation to handle this.
 
+    Update to C TAP Harness 1.10:
+
+    * Add bstrndup function to C TAP library.
+
 rra-c-util 4.1 (2011-12-29)
 
     Remove Kerberos v4 portability code: Autoconf probes, the portability
