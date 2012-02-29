@@ -25,10 +25,14 @@ rra-c-util 4.2 (unreleased)
 
     Add reading of Kerberos username and password configuration to
     kerberos_setup in the Kerberos TAP add-on and always return a struct
-    of configuration.  Return the path to the keytab configuration, if
-    present.  Remove the alternative implementation of the Kerberos
-    utility functions that doesn't require the Kerberos libraries and
-    instead use #ifdef inside the primary implementation to handle this.
+    of configuration.  Return the path to the keytab configuration and the
+    corresponding principal, if present, and the principal, username,
+    realm, and password from a password configuration, if present.
+    Support requiring one or both configurations and calling skip_all if
+    they're missing.  Remove the alternative implementation of the
+    Kerberos utility functions that doesn't require the Kerberos libraries
+    and instead use #ifdef inside the primary implementation to handle
+    this.
 
     Update to C TAP Harness 1.10:
 
