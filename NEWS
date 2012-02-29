@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.2 (unreleased)
+rra-c-util 4.2 (2012-02-29)
 
     Add new network_read and network_write functions to the network
     utility library, which read from and write to network sockets with an
