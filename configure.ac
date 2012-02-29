@@ -172,7 +172,8 @@ AC_REPLACE_FUNCS([asprintf daemon getopt issetugid mkstemp setenv seteuid])
 AC_REPLACE_FUNCS([strlcat strlcpy strndup])
 
 dnl Additional probes for networking portability, used for packages that have
-dnl network code and support IPv6.
+dnl network code and support IPv6.  Probing for sys/select.h is also required
+dnl for any package that uses the remctl TAP add-on.
 AC_CHECK_HEADERS([sys/select.h])
 AC_CHECK_DECLS([h_errno], [], [], [#include <netdb.h>])
 AC_CHECK_DECLS([inet_aton, inet_ntoa], [], [],

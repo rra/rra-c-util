@@ -34,6 +34,15 @@ rra-c-util 4.2 (unreleased)
     and instead use #ifdef inside the primary implementation to handle
     this.
 
+    Significantly improve the remctl TAP add-on.  Get the path to remctld
+    from a #define via Makefile.am rather than requiring all test programs
+    pass it in.  Shut down remctld automatically at the end of the test
+    suite to remove the requirement for explicit cleanup.  Take the
+    Kerberos configuration struct from the new kerberos_setup function and
+    get the required configuration information from it.  Add support for
+    running remctld under fakeroot, and correctly handle shutting down
+    remctld when run under fakeroot or valgrind.
+
     Update to C TAP Harness 1.10:
 
     * Add bstrndup function to C TAP library.
