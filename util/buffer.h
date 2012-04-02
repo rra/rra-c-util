@@ -16,7 +16,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2011
+ * Copyright 2011, 2012
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006
  *     by Internet Systems Consortium, Inc. ("ISC")
@@ -79,16 +79,21 @@ void buffer_compact(struct buffer *);
 /* Set the buffer contents, ignoring anything currently there. */
 void buffer_set(struct buffer *, const char *data, size_t length);
 
+/*
+ * Set the buffer contents via a sprintf-style format string.  No trailing
+ * nul is added.
+ */
+void buffer_sprintf(struct buffer *, const char *, ...)
+    __attribute__((__format__(printf, 2, 3)));
+void buffer_vsprintf(struct buffer *, const char *, va_list);
+
 /* Append data to the buffer. */
 void buffer_append(struct buffer *, const char *data, size_t length);
 
-/*
- * Print data into the buffer, either appending or replacing the existing
- * data.  No trailing nul is added.
- */
-void buffer_sprintf(struct buffer *, bool append, const char *, ...)
-    __attribute__((__format__(printf, 3, 4)));
-void buffer_vsprintf(struct buffer *, bool append, const char *, va_list);
+/* Append via an sprintf-style format string.  No trailing nul is added. */
+void buffer_append_sprintf(struct buffer *, const char *, ...)
+    __attribute__((__format__(printf, 2, 3)));
+void buffer_append_vsprintf(struct buffer *, const char *, va_list);
 
 /* Swap the contents of two buffers. */
 void buffer_swap(struct buffer *, struct buffer *);

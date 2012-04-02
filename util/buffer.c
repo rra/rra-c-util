@@ -16,7 +16,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2011
+ * Copyright 2011, 2012
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006
  *     by Internet Systems Consortium, Inc. ("ISC")
@@ -143,21 +143,17 @@ buffer_append(struct buffer *buffer, const char *data, size_t length)
 
 
 /*
- * Print data into a buffer from the supplied va_list, either appending to the
- * end of it or replacing the existing contents.  The new data shows up as
- * unused data at the end of the buffer.  The trailing nul is not added to the
- * buffer.
+ * Print data into a buffer from the supplied va_list, appending to the end.
+ * The new data shows up as unused data at the end of the buffer.  The
+ * trailing nul is not added to the buffer.
  */
 void
-buffer_vsprintf(struct buffer *buffer, bool append, const char *format,
-                va_list args)
+buffer_append_vsprintf(struct buffer *buffer, const char *format, va_list args)
 {
     size_t total, avail;
     ssize_t status;
     va_list args_copy;
 
-    if (!append)
-        buffer_set(buffer, NULL, 0);
     total = buffer->used + buffer->left;
     avail = buffer->size - total;
     va_copy(args_copy, args);
@@ -179,18 +175,46 @@ buffer_vsprintf(struct buffer *buffer, bool append, const char *format,
 
 
 /*
- * Print data into a buffer, either appending to the end of it or replacing
- * the existing contents.  The new data shows up as unused data at the end of
- * the buffer.  Resize the buffer if needed.  The trailing nul is not added to
- * the buffer.
+ * Print data into a buffer, appending to the end.  The new data shows up as
+ * unused data at the end of the buffer.  Resize the buffer if needed.  The
+ * trailing nul is not added to the buffer.
  */
 void
-buffer_sprintf(struct buffer *buffer, bool append, const char *format, ...)
+buffer_append_sprintf(struct buffer *buffer, const char *format, ...)
 {
     va_list args;
 
     va_start(args, format);
-    buffer_vsprintf(buffer, append, format, args);
+    buffer_append_vsprintf(buffer, format, args);
+    va_end(args);
+}
+
+
+/*
+ * Replace the current buffer contents with data printed from the supplied
+ * va_list.  The new data shows up as unused data at the end of the buffer.
+ * The trailing nul is not added to the buffer.
+ */
+void
+buffer_vsprintf(struct buffer *buffer, const char *format, va_list args)
+{
+    buffer_set(buffer, NULL, 0);
+    buffer_append_vsprintf(buffer, format, args);
+}
+
+
+/*
+ * Replace the current buffer contents with data printed from the supplied
+ * format string and arguments.  The new data shows up as unused data at the
+ * end of the buffer.  The trailing nul is not added to the buffer.
+ */
+void
+buffer_sprintf(struct buffer *buffer, const char *format, ...)
+{
+    va_list args;
+
+    va_start(args, format);
+    buffer_vsprintf(buffer, format, args);
     va_end(args);
 }
 

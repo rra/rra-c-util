@@ -1,5 +1,13 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.3 (unreleased)
+
+    Remove the bool arguments to buffer_sprintf and buffer_vsprintf and
+    instead introduce new buffer_append_sprintf and _vsprintf functions to
+    append to the buffer, which is what the functions did with a true
+    argument.  This avoids having a bool argument to functions, the
+    meaning of which is often obscure in the calling code.
+
 rra-c-util 4.2 (2012-02-29)
 
     Add new network_read and network_write functions to the network
