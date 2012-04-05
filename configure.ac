@@ -76,45 +76,16 @@ RRA_LIB_KRB5_RESTORE
 dnl Make sure we build with Kerberos support where it's optional.
 AC_DEFINE([HAVE_KERBEROS], 1, [Define to enable Kerberos features.])
 
-dnl Probe for GSS-API.  This is only needed for packages that use GSS-API, of
-dnl course.  These are the probes needed for portable/gssapi.h and
-dnl portable/gssapi-mech.c.  This should possibly move into gssapi.m4.
+dnl Probe for GSS-API.  This is only needed for packages that use GSS-API.
+dnl The mechanism probe is not included in RRA_LIB_GSSAPI since it requires
+dnl a replacement source file and is only needed for packages that need to
+dnl refer to the Kerberos mechanism OID.
 RRA_LIB_GSSAPI
 RRA_LIB_GSSAPI_SWITCH
-AC_CHECK_HEADERS([gssapi/gssapi.h gssapi/gssapi_krb5.h])
-AC_CHECK_DECL([GSS_C_NT_USER_NAME],
-    [AC_DEFINE([HAVE_GSS_RFC_OIDS], 1,
-       [Define to 1 if the GSS-API library uses RFC-compliant OIDs.])], [],
-[[
-#ifdef HAVE_GSSAPI_GSSAPI_H
-# include <gssapi/gssapi.h>
-#else
-# include <gssapi.h>
-#endif
-]])
 AC_CHECK_DECLS([GSS_KRB5_MECHANISM], [],
-    [AC_CHECK_DECLS([gss_mech_krb5], [],
-        [AC_LIBOBJ([gssapi-mech])],
-[[
-#ifdef HAVE_GSSAPI_GSSAPI_H
-# include <gssapi/gssapi.h>
-#else
-# include <gssapi.h>
-#endif
-#ifdef HAVE_GSSAPI_GSSAPI_KRB5_H
-# include <gssapi/gssapi_krb5.h>
-#endif
-]])],
-[[
-#ifdef HAVE_GSSAPI_GSSAPI_H
-# include <gssapi/gssapi.h>
-#else
-# include <gssapi.h>
-#endif
-#ifdef HAVE_GSSAPI_GSSAPI_KRB5_H
-# include <gssapi/gssapi_krb5.h>
-#endif
-]])
+   [AC_CHECK_DECLS([gss_mech_krb5], [],
+       [AC_LIBOBJ([gssapi-mech])], [RRA_INCLUDES_GSSAPI])],
+   [RRA_INCLUDES_GSSAPI])
 RRA_LIB_GSSAPI_RESTORE
 
 dnl Probe for Kerberos kadmin client libraries.

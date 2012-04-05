@@ -8,6 +8,18 @@ rra-c-util 4.3 (unreleased)
     argument.  This avoids having a bool argument to functions, the
     meaning of which is often obscure in the calling code.
 
+    Probe for GSS-API headers using file existence checks instead of the
+    compiler if a GSS-API root or include path was given.  Otherwise, the
+    compiler may find the wrong header in the system default include path
+    and incorrectly assume gssapi/gssapi.h should be used instead of
+    gssapi.h.  Thanks to Jeffrey Hutzelman for the idea.
+
+    Add a new RRA_INCLUDES_GSSAPI macro that can be used to get a set of
+    standard includes when probing for GSS-API library features.
+
+    Move the probes for GSS-API include files and OID definitions into
+    RRA_LIB_GSSAPI, since there's no downside to always running them.
+
 rra-c-util 4.2 (2012-02-29)
 
     Add new network_read and network_write functions to the network
