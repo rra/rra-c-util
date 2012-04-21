@@ -20,6 +20,9 @@ rra-c-util 4.3 (unreleased)
     Move the probes for GSS-API include files and OID definitions into
     RRA_LIB_GSSAPI, since there's no downside to always running them.
 
+    Add parameter expansion support in the PAM options section to the PAM
+    test script parser.
+
 rra-c-util 4.2 (2012-02-29)
 
     Add new network_read and network_write functions to the network
