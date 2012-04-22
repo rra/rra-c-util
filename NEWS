@@ -23,6 +23,13 @@ rra-c-util 4.3 (unreleased)
     Add parameter expansion support in the PAM options section to the PAM
     test script parser.
 
+    Update to C TAP Harness 1.11:
+
+    * Only use feature-test macros when requested or built with gcc -ansi.
+    * New tests/tap/macros.h header with some common definitions.
+    * Drop is_double from the C TAP library to avoid requiring -lm.
+    * Avoid using local in the shell libtap.sh library.
+
 rra-c-util 4.2 (2012-02-29)
 
     Add new network_read and network_write functions to the network
