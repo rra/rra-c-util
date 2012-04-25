@@ -20,6 +20,9 @@ rra-c-util 4.3 (unreleased)
     Move the probes for GSS-API include files and OID definitions into
     RRA_LIB_GSSAPI, since there's no downside to always running them.
 
+    Set rra_use_remctl to true in RRA_LIB_REMCTL_OPTIONAL if remctl
+    libraries were found, following the documentation.
+
     Add parameter expansion support in the PAM options section to the PAM
     test script parser.
 
