@@ -2,7 +2,7 @@ dnl Autoconf configuration for rra-c-util.
 dnl
 dnl Written by Russ Allbery <rra@stanford.edu>
 dnl Copyright 2000, 2003 Russ Allbery <rra@stanford.edu>
-dnl Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011
+dnl Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
 dnl This file is free software; the authors give unlimited permission to copy
@@ -12,7 +12,7 @@ dnl notice is preserved.
 dnl I use this introductory boilerplate for all configure.ac files, changing
 dnl the AC_INIT arguments as appropriate.
 AC_PREREQ([2.64])
-AC_INIT([rra-c-util], [4.2], [rra@stanford.edu])
+AC_INIT([rra-c-util], [4.3], [rra@stanford.edu])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_LIBOBJ_DIR([portable])
 AC_CONFIG_MACRO_DIR([m4])

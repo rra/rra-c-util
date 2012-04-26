@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.3 (unreleased)
+rra-c-util 4.3 (2012-04-26)
 
     Remove the bool arguments to buffer_sprintf and buffer_vsprintf and
     instead introduce new buffer_append_sprintf and _vsprintf functions to
