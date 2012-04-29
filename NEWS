@@ -5,10 +5,11 @@ rra-c-util 4.4 (unreleased)
     In the PAM utility logging functions, do not include a colon, space,
     and the PAM error if the provided PAM status was PAM_SUCCESS.
 
-    Add PAM_AUTHINFO_UNAVAIL to the recognized PAM error codes in the PAM
-    script testing framework.  Report an error message rather than
-    segfaulting if necessary parameters for a testing script are not
-    provided.
+    Various minor improvements to the scripted PAM testing framework: add
+    PAM_AUTHINFO_UNAVAIL to the recognized PAM error codes, report output
+    and prompt lines starting from 1 instead of 0, and report an error
+    message rather than segfaulting if necessary parameters for a testing
+    script are not provided.
 
 rra-c-util 4.3 (2012-04-26)
 
