@@ -6,7 +6,9 @@ rra-c-util 4.4 (unreleased)
     and the PAM error if the provided PAM status was PAM_SUCCESS.
 
     Add PAM_AUTHINFO_UNAVAIL to the recognized PAM error codes in the PAM
-    script testing framework.
+    script testing framework.  Report an error message rather than
+    segfaulting if necessary parameters for a testing script are not
+    provided.
 
 rra-c-util 4.3 (2012-04-26)
 
