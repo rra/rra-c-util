@@ -5,6 +5,13 @@ rra-c-util 4.4 (unreleased)
     In the PAM utility logging functions, do not include a colon, space,
     and the PAM error if the provided PAM status was PAM_SUCCESS.
 
+    In the PAM testing framework, don't copy the provided password into
+    the PAM_AUTHTOK item.  Instead, take new configuration parameters
+    authtok and oldauthtok that, if provided, are copied into the PAM data
+    before running the script.  This allows separate testing of a saved
+    password and a password provided at a prompt.  Document in the fakepam
+    README file all of the possible configuration parameters.
+
     Various minor improvements to the scripted PAM testing framework: add
     PAM_AUTHINFO_UNAVAIL to the recognized PAM error codes, report output
     and prompt lines starting from 1 instead of 0, and report an error
