@@ -18,6 +18,9 @@ rra-c-util 4.4 (unreleased)
     message rather than segfaulting if necessary parameters for a testing
     script are not provided.
 
+    In the Kerberos TAP add-on, fix cleanup handling of user password
+    configuration and repeatedly-generated krb5.conf files.
+
 rra-c-util 4.3 (2012-04-26)
 
     Remove the bool arguments to buffer_sprintf and buffer_vsprintf and
