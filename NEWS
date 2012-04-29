@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.4 (unreleased)
+
+    In the PAM utility logging functions, do not include a colon, space,
+    and the PAM error if the provided PAM status was PAM_SUCCESS.
+
 rra-c-util 4.3 (2012-04-26)
 
     Remove the bool arguments to buffer_sprintf and buffer_vsprintf and
