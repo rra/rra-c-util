@@ -37,6 +37,11 @@ rra-c-util 4.4 (unreleased)
     In the Kerberos TAP add-on, fix cleanup handling of user password
     configuration and repeatedly-generated krb5.conf files.
 
+    Avoid using local in the remctl.sh and kerberos.sh TAP libraries and
+    instead use a tap_ prefix on variables, for portability to Solaris
+    /bin/sh.  Also avoid using test_file_path or test_tmpdir in backquotes
+    inside double quotes to avoid a quoting bug in Solaris /bin/sh.
+
     Update to C TAP Harness 1.12:
 
     * Add UNUSED macro to tests/tap/macros.h for other TAP add-ons.
