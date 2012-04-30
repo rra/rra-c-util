@@ -5,6 +5,19 @@ rra-c-util 4.4 (unreleased)
     In the PAM utility logging functions, do not include a colon, space,
     and the PAM error if the provided PAM status was PAM_SUCCESS.
 
+    Add regular expression support to the PAM test library.  Both output
+    lines and PAM prompts can now be extended regular expressions instead
+    of strings, indicated by surrounding them with slashes (/), and the
+    actual output or prompt will be matched against the regular
+    expression.  If regular expression support is not available, the test
+    will be skipped.
+
+    The fakepam library now separates the priority from the log line when
+    recording output from the PAM module instead of appending a string
+    representation of the priority to the beginning of the output line.
+    The layout of the output struct (returned by pam_output) has changed
+    accordingly.
+
     In the PAM testing framework, don't copy the provided password into
     the PAM_AUTHTOK item.  Instead, take new configuration parameters
     authtok and oldauthtok that, if provided, are copied into the PAM data

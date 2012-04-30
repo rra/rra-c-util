@@ -121,6 +121,9 @@ RRA_HEADER_PAM_CONST
 AC_DEFINE([MODULE_NAME], ["pam_example"],
     [The name of the PAM module, used by the pam_vsyslog replacement.])
 
+dnl Only required for the PAM test script facility.
+AC_CHECK_HEADER([regex.h], [AC_CHECK_FUNCS([regcomp])])
+
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
 dnl only used by fdflag.
