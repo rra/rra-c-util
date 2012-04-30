@@ -12,6 +12,9 @@ rra-c-util 4.4 (unreleased)
     expression.  If regular expression support is not available, the test
     will be skipped.
 
+    Support for the %* wildcard in output in PAM test scripts has been
+    removed.  Use regular expressions instead.
+
     The fakepam library now separates the priority from the log line when
     recording output from the PAM module instead of appending a string
     representation of the priority to the beginning of the output line.
