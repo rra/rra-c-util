@@ -42,6 +42,9 @@ rra-c-util 4.4 (unreleased)
     /bin/sh.  Also avoid using test_file_path or test_tmpdir in backquotes
     inside double quotes to avoid a quoting bug in Solaris /bin/sh.
 
+    Fix several portability bugs in the network test suite.  Patch from
+    Jeffrey Hutzelman.
+
     Update to C TAP Harness 1.12:
 
     * Add UNUSED macro to tests/tap/macros.h for other TAP add-ons.
