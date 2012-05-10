@@ -40,9 +40,11 @@ rra-c-util 4.4 (unreleased)
     will fix link issues on some platforms where all dependency libraries
     need to be linked to ensure proper behavior.
 
-    RRA_LIB_GSSAPI has been modified to use RRA_KRB5_CONFIG instead of
-    duplicating its own krb5-config logic.  This includes picking up the
-    above change to use --deps if available.
+    RRA_LIB_GSSAPI and RRA_LIB_KRB5 have been modified to use
+    RRA_KRB5_CONFIG instead of duplicating their own krb5-config logic.
+    This includes picking up the above change to use --deps if available.
+    If including m4/gssapi.m4 or m4/krb5.m4 in another package, one must
+    now also copy m4/krb5-config.m4.
 
     In the Kerberos TAP add-on, fix cleanup handling of user password
     configuration and repeatedly-generated krb5.conf files.

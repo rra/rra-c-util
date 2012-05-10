@@ -69,9 +69,15 @@ dnl    library type.
 dnl
 dnl 5. Further actions to take if krb5-config could not be used to get flags
 dnl    for that library type.
+dnl
+dnl Special-case a krb5-config argument of krb5 and run krb5-config without an
+dnl argument if that option was requested and not supported.  Old versions of
+dnl krb5-config didn't take an argument to specify the library type, but
+dnl always returned the flags for libkrb5.
 AC_DEFUN([RRA_KRB5_CONFIG],
 [AC_REQUIRE([_RRA_KRB5_CONFIG_PATH])
  rra_krb5_config_$3=
+ rra_krb5_config_$3[]_ok=
  AS_IF([test x"$1" != x && test -x "$1/bin/krb5-config"],
     [rra_krb5_config_$3="$1/bin/krb5-config"],
     [rra_krb5_config_$3="$PATH_KRB5_CONFIG"])
@@ -82,8 +88,14 @@ AC_DEFUN([RRA_KRB5_CONFIG],
              [rra_cv_lib_$3[]_config=no])])
      AS_IF([test "$rra_cv_lib_$3[]_config" = yes],
         [$3[]_CPPFLAGS=`"$rra_krb5_config_$3" --cflags $2 2>/dev/null`
-         $3[]_CPPFLAGS=`echo "$$3[]_CPPFLAGS" | sed 's%-I/usr/include %%'`
-         $3[]_CPPFLAGS=`echo "$$3[]_CPPFLAGS" | sed 's%-I/usr/include$%%'`
          _RRA_KRB5_CONFIG_LIBS([$rra_krb5_config_$3], [$2], [$3])
-         $4])])
- AS_IF([test x"$rra_cv_lib_$3[]_config" != xyes], [$5])])
+         rra_krb5_config_$3[]_ok=yes],
+        [AS_IF([test x"$2" = xkrb5],
+            [$3[]_CPPFLAGS=`"$rra_krb5_config_$3" --cflags 2>/dev/null`
+             $3[]_LIBS=`"$rra_krb5_config_$3" --libs $2 2>/dev/null`
+             rra_krb5_config_$3[]_ok=yes])])])
+ AS_IF([test x"$rra_krb5_config_$3[]_ok" = xyes],
+    [$3[]_CPPFLAGS=`echo "$$3[]_CPPFLAGS" | sed 's%-I/usr/include %%'`
+     $3[]_CPPFLAGS=`echo "$$3[]_CPPFLAGS" | sed 's%-I/usr/include$%%'`
+     $4],
+    [$5])])
