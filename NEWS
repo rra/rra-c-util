@@ -46,6 +46,11 @@ rra-c-util 4.4 (unreleased)
     If including m4/gssapi.m4 or m4/krb5.m4 in another package, one must
     now also copy m4/krb5-config.m4.
 
+    RRA_LIB_GSSAPI no longer calls krb5-config with no arguments if the
+    gssapi argument isn't supported and instead falls back to manual
+    library probing.  This is only relevant for very old versions of
+    Kerberos.
+
     In the Kerberos TAP add-on, fix cleanup handling of user password
     configuration and repeatedly-generated krb5.conf files.
 
