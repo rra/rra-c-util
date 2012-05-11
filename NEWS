@@ -59,6 +59,13 @@ rra-c-util 4.4 (unreleased)
     /bin/sh.  Also avoid using test_file_path or test_tmpdir in backquotes
     inside double quotes to avoid a quoting bug in Solaris /bin/sh.
 
+    Make the __attribute__ handling in portable/macros.h more aware of
+    different versions and compilers.  All attributes are now suppressed
+    for GCC older than 2.96 (instead of 2.7), since __malloc__ became
+    available then.  __alloc_size__ is suppressed for GCC older than 4.3.
+    Warnings about unknown diagnostics are suppressed for LLVM and Clang,
+    which pretend to be GCC but don't support all the same attributes.
+
     Fix several portability bugs in the network test suite.  Patch from
     Jeffrey Hutzelman.
 
