@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.4 (unreleased)
+rra-c-util 4.4 (2012-05-11)
 
     In the PAM utility logging functions, do not include a colon, space,
     and the PAM error if the provided PAM status was PAM_SUCCESS.
