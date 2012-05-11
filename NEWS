@@ -67,6 +67,7 @@ rra-c-util 4.4 (unreleased)
     * Add UNUSED macro to tests/tap/macros.h for other TAP add-ons.
     * Suppress plan and summary if bail is called before any tests run.
     * Remove additional uses of local in tests/tap/libtap.sh.
+    * Silence __attribute__ warnings on more compilers.
 
 rra-c-util 4.3 (2012-04-26)
 
