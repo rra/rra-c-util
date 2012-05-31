@@ -12,6 +12,11 @@ rra-c-util 4.5 (unreleased)
     Add a replacement for krb5_free_string to the Kerberos portability
     header.
 
+    In the PAM testing library, do not set a default value for the user
+    but use the user member of the config struct without modification,
+    even if it's NULL.  This allows testing of PAM calls where no user is
+    set.
+
 rra-c-util 4.4 (2012-05-11)
 
     In the PAM utility logging functions, do not include a colon, space,
