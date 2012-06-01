@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.5 (unreleased)
+rra-c-util 4.5 (2012-05-31)
 
     In the PAM utility library, cope with a NULL pam_args structure in
     putil_args_free and in EXIT logging to make handling of failure to
