@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.6 (unreleased)
+
+    Add an RRA_INCLUDES_APACHE macro to m4/apache.m4 that can be used to
+    include a basic set of Apache headers when probing for declarations
+    relevant to Apache modules.
+
 rra-c-util 4.5 (2012-05-31)
 
     In the PAM utility library, cope with a NULL pam_args structure in
