@@ -6,6 +6,9 @@ rra-c-util 4.6 (unreleased)
     include a basic set of Apache headers when probing for declarations
     relevant to Apache modules.
 
+    Strip -g and -On flags from APACHE_CPPFLAGS as returned by apxs to
+    avoid forcing debugging and optimization strategy for Apache modules.
+
 rra-c-util 4.5 (2012-05-31)
 
     In the PAM utility library, cope with a NULL pam_args structure in
