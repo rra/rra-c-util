@@ -88,15 +88,21 @@ const size_t optlen = sizeof(options) / sizeof(options[0]);
  * calling putil_args_parse() on it.  It then recovers the error message and
  * expects it to match the severity and error message given.
  */
-#define TEST_ERROR(a, p, e)                                              \
-    do {                                                                 \
-        argv_err[0] = (a);                                               \
-        status = putil_args_parse(args, 1, argv_err, options, optlen);   \
-        ok(status, "Parse of %s", (a));                                  \
-        seen = pam_output();                                             \
-        is_int((p), seen->lines[0].priority, "...priority for %s", (a)); \
-        is_string((e), seen->lines[0].line, "...error for %s", (a));     \
-        pam_output_free(seen);                                           \
+#define TEST_ERROR(a, p, e)                                             \
+    do {                                                                \
+        argv_err[0] = (a);                                              \
+        status = putil_args_parse(args, 1, argv_err, options, optlen);  \
+        ok(status, "Parse of %s", (a));                                 \
+        seen = pam_output();                                            \
+        if (seen == NULL)                                               \
+            ok_block(2, false, "...no error output");                   \
+        else {                                                          \
+            is_int((p), seen->lines[0].priority,                        \
+                   "...priority for %s", (a));                          \
+            is_string((e), seen->lines[0].line,                         \
+                      "...error for %s", (a));                          \
+        }                                                               \
+        pam_output_free(seen);                                          \
     } while (0);
 
 
@@ -414,9 +420,13 @@ main(void)
     status = putil_args_krb5(args, "bad-time", options, optlen);
     ok(status, "Options from krb5.conf (bad-time)");
     seen = pam_output();
-    is_string("invalid time in krb5.conf setting for expires: ft87",
-              seen->lines[0].line, "...and correct error reported");
-    is_int(LOG_ERR, seen->lines[0].priority, "...with correct priority");
+    if (seen == NULL)
+        ok_block(2, false, "...no error output");
+    else {
+        is_string("invalid time in krb5.conf setting for expires: ft87",
+                  seen->lines[0].line, "...and correct error reported");
+        is_int(LOG_ERR, seen->lines[0].priority, "...with correct priority");
+    }
     pam_output_free(seen);
     config_free(args->config);
     args->config = NULL;
