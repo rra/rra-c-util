@@ -2,6 +2,9 @@
 
 rra-c-util 4.6 (unreleased)
 
+    In the replacement kafs library, fix a compilation failure on Solaris
+    11 or later.
+
     Add an RRA_INCLUDES_APACHE macro to m4/apache.m4 that can be used to
     include a basic set of Apache headers when probing for declarations
     relevant to Apache modules.
