@@ -8,11 +8,12 @@ rra-c-util 4.6 (unreleased)
     concatpath was only used in INN and will be reintroduced if I end up
     using it in my other software.
 
-    xasprintf and xvasprintf are now void functions and always call the
-    xmalloc failure handler on any error, not just on ENOMEM errors.  The
-    faint chance that the underlying asprintf function could return some
-    other error isn't worth the additional code complexity of still having
-    to check the return status and then probably abort anyway.
+    xasprintf and xvasprintf (in the util library) and basprintf and
+    bvasprintf (in the TAP add-on) are now void functions and always call
+    the xmalloc failure handler on any error, not just on ENOMEM errors.
+    The faint chance that the underlying asprintf function could return
+    some other error isn't worth the additional code complexity of still
+    having to check the return status and then probably abort anyway.
 
     In the replacement kafs library, fix a compilation failure on Solaris
     11 or later.
