@@ -2,6 +2,12 @@
 
 rra-c-util 4.6 (unreleased)
 
+    Drop concat and concatpath from the util library.  asprintf or
+    xasprintf, provided by the portability and util libraries
+    respectively, are entirely superior alternatives to concat.
+    concatpath was only used in INN and will be reintroduced if I end up
+    using it in my other software.
+
     In the replacement kafs library, fix a compilation failure on Solaris
     11 or later.
 
