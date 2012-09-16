@@ -12,6 +12,9 @@ Test Suite:
 
  * Incorporate the Perl utility library from kstart's test suite.
 
+ * Generalize the pod-t and pod-spelling-t test cases to be easier to copy
+   into other packages without modifications.
+
 Documentation:
 
  * Write POD documentation for all public interfaces.
