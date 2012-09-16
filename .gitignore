@@ -43,5 +43,6 @@
 /tests/util/xwrite-t
 .deps/
 .dirstamp
+*.3
 *.a
 *.o

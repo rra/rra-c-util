@@ -6,3 +6,11 @@ set -e
 
 autoreconf -i --force
 rm -rf autom4te.cache
+
+# Generate manual pages.
+version=`grep '^rra-c-util' NEWS | head -1 | cut -d' ' -f2`
+for doc in xmalloc ; do
+    pod2man --release="$version" --center="rra-c-util" --section=3 \
+        --name=`echo "$doc" | tr a-z A-Z` docs/api/"$doc".pod \
+        > docs/api/"$doc".3
+done

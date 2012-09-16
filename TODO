@@ -11,3 +11,10 @@ Test Suite:
    protocol when reporting diagnostics from the xmalloc helper program.
 
  * Incorporate the Perl utility library from kstart's test suite.
+
+Documentation:
+
+ * Write POD documentation for all public interfaces.
+
+ * Move the comments at the start of some of the util/* source files into
+   proper POD documentation.

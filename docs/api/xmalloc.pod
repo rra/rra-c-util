@@ -1,0 +1,93 @@
+=for stopwords
+xmalloc xcalloc xrealloc nmemb extern const resized rra-c-util Allbery
+
+=head1 NAME
+
+xmalloc, xcalloc, xrealloc - Checked memory allocation
+
+=head1 SYNOPSIS
+
+#include <util/xmalloc.h>
+
+void *B<xmalloc>(size_t I<size>);
+
+void *B<xcalloc>(size_t I<nmemb>, size_t I<size>);
+
+void *B<xrealloc>(void *I<ptr>, size_t I<size>);
+
+extern void (*B<xmalloc_error_handler>)(const char *, size_t,
+    const char *, int);
+
+=head1 DESCRIPTION
+
+The xmalloc(), xcalloc(), and xrealloc() functions are equivalent to the
+normal C library functions malloc(), calloc(), and realloc(), except that
+the memory allocation is checked and is guaranteed to never return NULL
+(indicating an out of memory condition).  Instead, if the underlying
+memory allocation fails, the xmalloc_error_handler callback is called.  By
+default, this will report an error to standard error and then terminate
+the program.
+
+Just as with the C library functions, xmalloc() takes the amount of memory
+to allocate and returns a pointer to the newly-allocated memory.
+xcalloc() takes a count and an item size and returns enough memory to hold
+I<nmemb> contiguous objects of size I<size> (in other words, I<nmemb> *
+I<size>).  The memory allocated by xcalloc() will be set to the all-0 bit
+pattern before it is returned.  Finally, xrealloc() expands or shrinks an
+existing piece of allocated memory pointed to by I<ptr>, changing it to
+point to I<size> bytes.  Any existing data pointed to by I<ptr> that fits
+within the new memory allocation will be preserved.  If I<ptr> is NULL,
+xrealloc() is equivalent to xmalloc().
+
+xmalloc_error_handler is a global variable that holds a function pointer
+used as the callback for a memory allocation failure.  By default, a
+callback is set that notifies standard error and exits the program.  It
+calls sysdie(), and therefore follows any message handler settings about
+where to send the error.  See L<sysdie(3)> for more information.
+
+xmalloc_error_handler can be set to some other function of the caller's
+choice to change the failure behavior.  That function will be passed the
+name of the memory allocation function that failed, the size of the failed
+allocation, the source file where the allocation call was, and the line
+number where the allocation call was.  It does not return anything.  If
+this callback doesn't terminate the program, the memory allocation will be
+retried after it returns.  If you choose to write a handler that doesn't
+terminate the program (if, for example, there is something that can be
+done to free up memory), be sure that you don't inadvertently cause an
+infinite loop of retried, failing memory allocations.
+
+=head1 RETURN VALUE
+
+xmalloc(), xcalloc(), and xrealloc() all return a pointer to the newly
+allocated or resized memory.  All three functions are guaranteed to never
+return NULL, so their return value does not need to be checked.
+
+=head1 CAVEATS
+
+Changing xmalloc_error_handler is global and not thread-safe.  It
+generally should be set to the desired handler at the start of the
+program, before any threads are created.
+
+The default xmalloc_error_handler terminates the entire program and is
+therefore obviously not thread-safe.  However, generally memory allocation
+failure is not an error from which most programs can meaningfully recover.
+If it is possible to meaningfully recover from a particular memory
+allocation, such as an attempt to allocate very large amounts of memory
+with a fallback to some other strategy, one should probably not use
+xmalloc() and friends for that allocation.
+
+=head1 SEE ALSO
+
+calloc(3), malloc(3), realloc(3), L<sysdie(3)>
+
+Other equivalent wrappers that also use xmalloc_error_handler:
+L<xasprintf(3)>, L<xstrdup(3)>, L<xstrndup(3)>, L<xvasprintf(3)>
+
+The current version of the rra-c-util library is available from its web
+page at L<http://www.eyrie.org/~eagle/software/rra-c-util/>.
+
+=head1 AUTHOR
+
+Russ Allbery <rra@stanford.edu>
+
+=cut
