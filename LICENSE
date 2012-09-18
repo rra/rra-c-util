@@ -77,6 +77,16 @@ License: unlimited
  and/or distribute it, with or without modifications, as long as this
  notice is preserved.
 
+Files: docs/api/xmalloc.3 docs/api/xmalloc.pod tests/README
+ tests/fakepam/README
+Copyright: 2010-2012 Russ Allbery <rra@stanford.edu>
+  2012 The Board of Trustees of the Leland Stanford Junior University
+License: all-permissive
+ Copying and distribution of this file, with or without modification, are
+ permitted in any medium without royalty provided the copyright notice and
+ this notice are preserved.  This file is offered as-is, without any
+ warranty.
+
 Files: kafs/sys-syscall.c pam-util/vector.c pam-util/vector.h
  portable/apr.h portable/asprintf.c portable/daemon.c portable/dummy.c
  portable/getaddrinfo.c portable/getaddrinfo.h portable/getnameinfo.c
@@ -93,9 +103,8 @@ Files: kafs/sys-syscall.c pam-util/vector.c pam-util/vector.h
  tests/portable/inet_ntoa-t.c tests/portable/inet_ntop-t.c
  tests/portable/mkstemp-t.c tests/portable/setenv-t.c
  tests/portable/strlcat-t.c tests/portable/strlcpy-t.c
- tests/portable/strndup-t.c tests/util/buffer-t.c tests/util/concat-t.c
- tests/util/vector-t.c util/concat.c util/concat.h util/macros.h
- util/vector.c util/vector.h
+ tests/portable/strndup-t.c tests/util/buffer-t.c tests/util/vector-t.c
+ util/macros.h util/vector.c util/vector.h
 Copyright: no copyright notice, see License
 License: rra-public-domain
  The authors hereby relinquish any claim to any copyright that they may
@@ -174,14 +183,6 @@ License: Powell-snprintf
  This code is based on code written by Patrick Powell (papowell@astart.com)
  It may be used for any purpose as long as this notice remains intact
  on all source code distributions
-
-Files: tests/README tests/fakepam/README
-Copyright: 2010-2012 Russ Allbery <rra@stanford.edu>
-License: all-permissive
- Copying and distribution of this file, with or without modification, are
- permitted in any medium without royalty provided the copyright notice and
- this notice are preserved.  This file is offered as-is, without any
- warranty.
 
 License: Expat
  Permission is hereby granted, free of charge, to any person obtaining a
