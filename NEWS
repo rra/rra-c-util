@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.7 (unreleased)
+
+    Add new portability wrapper for sys/statvfs.h that converts statvfs
+    code to statfs code for older systems.
+
 rra-c-util 4.6 (2012-09-17)
 
     Drop concat and concatpath from the util library.  asprintf or
