@@ -5,6 +5,9 @@ rra-c-util 4.7 (unreleased)
     Add new portability wrapper for sys/statvfs.h that converts statvfs
     code to statfs code for older systems.
 
+    Add a valgrind suppression file in tests/data that is suitable for
+    other projects using rra-c-util, particularly ones using Kerberos.
+
 rra-c-util 4.6 (2012-09-17)
 
     Drop concat and concatpath from the util library.  asprintf or
