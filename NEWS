@@ -5,6 +5,10 @@ rra-c-util 4.7 (unreleased)
     Add new portability wrapper for sys/statvfs.h that converts statvfs
     code to statfs code for older systems.
 
+    When probing for Heimdal's libroken, probe for roken_concat (present
+    since at least Heimdal 0.4) instead of rk_simple_execve (not present
+    until Heimdal 1.3).
+
     Add a valgrind suppression file in tests/data that is suitable for
     other projects using rra-c-util, particularly ones using Kerberos.
 
