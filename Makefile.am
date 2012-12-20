@@ -13,10 +13,11 @@ EXTRA_DIST = .gitignore LICENSE autogen docs/api/xmalloc.3		    \
 	m4/ssl.m4 portable/winsock.c tests/README tests/TESTS		    \
 	tests/data/generate-krb5-conf tests/data/krb5.conf		    \
 	tests/data/perlcriticrc tests/data/perltidyrc			    \
-	tests/docs/pod-spelling-t tests/docs/pod-t tests/fakepam/README	    \
-	tests/kafs/basic-t tests/perl/critic-t tests/perl/minimum-version-t \
-	tests/perl/strict-t tests/tap/kerberos.sh tests/tap/libtap.sh	    \
-	tests/tap/remctl.sh tests/util/xmalloc-t
+	tests/data/valgrind.supp tests/docs/pod-spelling-t tests/docs/pod-t \
+	tests/fakepam/README tests/kafs/basic-t tests/perl/critic-t	    \
+	tests/perl/minimum-version-t tests/perl/strict-t		    \
+	tests/tap/kerberos.sh tests/tap/libtap.sh tests/tap/remctl.sh	    \
+	tests/util/xmalloc-t
 
 # This is unfortunately required since we have an object (k_hasafs) defined
 # in LIBOBJS that needs the kafs headers.  There isn't any way in Automake
@@ -33,8 +34,8 @@ portable_libportable_a_SOURCES = portable/apr.h portable/dummy.c	\
 	portable/getaddrinfo.h portable/getnameinfo.h portable/getopt.h	\
 	portable/gssapi.h portable/kadmin.h portable/kafs.h		\
 	portable/krb5-extra.c portable/krb5.h portable/macros.h		\
-	portable/pam.h portable/socket.h portable/stdbool.h		\
-	portable/system.h portable/uio.h
+	portable/pam.h portable/socket.h portable/statvfs.h		\
+	portable/stdbool.h portable/system.h portable/uio.h
 portable_libportable_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 portable_libportable_a_LIBADD = $(LIBOBJS)
 util_libutil_a_SOURCES = util/buffer.c util/buffer.h util/fdflag.c	    \
