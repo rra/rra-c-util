@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.7 (unreleased)
+rra-c-util 4.7 (2012-12-19)
 
     Add new portability wrapper for sys/statvfs.h that converts statvfs
     code to statfs code for older systems.
