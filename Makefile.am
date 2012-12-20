@@ -12,7 +12,7 @@ EXTRA_DIST = .gitignore LICENSE autogen docs/api/xmalloc.3		    \
 	m4/curl.m4 m4/ld-version.m4 m4/ldap.m4 m4/pcre.m4 m4/remctl.m4	    \
 	m4/ssl.m4 portable/winsock.c tests/README tests/TESTS		    \
 	tests/data/generate-krb5-conf tests/data/krb5.conf		    \
-	tests/data/perlcriticrc tests/perl/perltidyrc			    \
+	tests/data/perlcriticrc tests/data/perltidyrc			    \
 	tests/docs/pod-spelling-t tests/docs/pod-t tests/fakepam/README	    \
 	tests/kafs/basic-t tests/perl/critic-t tests/perl/minimum-version-t \
 	tests/perl/strict-t tests/tap/kerberos.sh tests/tap/libtap.sh	    \
