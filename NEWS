@@ -9,6 +9,11 @@ rra-c-util 4.7 (unreleased)
     since at least Heimdal 0.4) instead of rk_simple_execve (not present
     until Heimdal 1.3).
 
+    Probe for Kerberos headers using file existence checks instead of the
+    compiler if a Kerberos root or include path was given.  Otherwise, the
+    compiler may find the wrong header in the system default include path
+    and incorrectly assume krb5.h should be used instead of krb5/krb5.h.
+
     Add a valgrind suppression file in tests/data that is suitable for
     other projects using rra-c-util, particularly ones using Kerberos.
 
