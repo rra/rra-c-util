@@ -9,6 +9,10 @@ rra-c-util 4.7 (unreleased)
     since at least Heimdal 0.4) instead of rk_simple_execve (not present
     until Heimdal 1.3).
 
+    portable/apr.h now includes apr_errno.h, apr_file_info.h, and
+    apr_file_io.h and handles backwards compatibility of the APR_FOPEN_*
+    flags and APR_FPROT_* constants to APR 0.9.
+
     Probe for Kerberos headers using file existence checks instead of the
     compiler if a Kerberos root or include path was given.  Otherwise, the
     compiler may find the wrong header in the system default include path
