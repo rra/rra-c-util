@@ -18,6 +18,12 @@ rra-c-util 4.7 (unreleased)
     compiler may find the wrong header in the system default include path
     and incorrectly assume krb5.h should be used instead of krb5/krb5.h.
 
+    Update tests/docs/pod-t and tests/docs/pod-spelling-t to use
+    File::Spec rather than assuming UNIX paths, use Test::Spelling instead
+    of hand-rolling its functionality, ignore .git and perl directories,
+    and use my current Perl coding style.  These tests are now more
+    suitable for copying into other packages.
+
     Add a valgrind suppression file in tests/data that is suitable for
     other projects using rra-c-util, particularly ones using Kerberos.
 
