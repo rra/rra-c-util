@@ -1,19 +1,21 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <rra@stanford.edu
-# Copyright 2008, 2009, 2010, 2011
+# Copyright 2008, 2009, 2010, 2011, 2012
 #     The Board of Trustees of the Leland Stanford Junior University
 #
 # See LICENSE for licensing terms.
 
 ACLOCAL_AMFLAGS = -I m4
-EXTRA_DIST = .gitignore LICENSE autogen docs/api/xmalloc.3		\
-	docs/api/xmalloc.pod m4/apache.m4 m4/apr.m4 m4/aprutil.m4	\
-	m4/curl.m4 m4/ld-version.m4 m4/ldap.m4 m4/pcre.m4 m4/remctl.m4	\
-	m4/ssl.m4 portable/winsock.c tests/README tests/TESTS		\
-	tests/data/generate-krb5-conf tests/data/krb5.conf		\
-	tests/docs/pod-spelling-t tests/docs/pod-t tests/fakepam/README	\
-	tests/kafs/basic-t tests/tap/kerberos.sh tests/tap/libtap.sh	\
+EXTRA_DIST = .gitignore LICENSE autogen docs/api/xmalloc.3		    \
+	docs/api/xmalloc.pod m4/apache.m4 m4/apr.m4 m4/aprutil.m4	    \
+	m4/curl.m4 m4/ld-version.m4 m4/ldap.m4 m4/pcre.m4 m4/remctl.m4	    \
+	m4/ssl.m4 portable/winsock.c tests/README tests/TESTS		    \
+	tests/data/generate-krb5-conf tests/data/krb5.conf		    \
+	tests/data/perlcriticrc tests/perl/perltidyrc			    \
+	tests/docs/pod-spelling-t tests/docs/pod-t tests/fakepam/README	    \
+	tests/kafs/basic-t tests/perl/critic-t tests/perl/minimum-version-t \
+	tests/perl/strict-t tests/tap/kerberos.sh tests/tap/libtap.sh	    \
 	tests/tap/remctl.sh tests/util/xmalloc-t
 
 # This is unfortunately required since we have an object (k_hasafs) defined

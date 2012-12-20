@@ -7,6 +7,9 @@ pam-util/fakepam
 pam-util/logging
 pam-util/options
 pam-util/vector
+perl/critic
+perl/minimum-version
+perl/strict
 portable/asprintf
 portable/daemon
 portable/getaddrinfo

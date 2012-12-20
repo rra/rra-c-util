@@ -24,6 +24,12 @@ rra-c-util 4.7 (unreleased)
     and use my current Perl coding style.  These tests are now more
     suitable for copying into other packages.
 
+    Add new generic tests for packages containing Perl:
+    tests/perl/critic-t, tests/perl/minimum-version-t, and
+    tests/perl/strict-t.  Add configuration for perlcritic and perltidy
+    for use with the test suite to tests/data.  The minimum version test
+    may require some configuration when copied into another package.
+
     Add a valgrind suppression file in tests/data that is suitable for
     other projects using rra-c-util, particularly ones using Kerberos.
 
