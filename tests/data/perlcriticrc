@@ -70,6 +70,11 @@ max_characters = 65
 allowed_types  = Octal
 allowed_values = 0 1 2 100 511
 
+# Increase this to six digits so that I'm not told to add underscores to
+# port numbers (which is just silly).
+[ValuesAndExpressions::RequireNumberSeparators]
+min_value = 100000
+
 # use English was one of the worst ideas in the history of Perl.  It makes the
 # code slightly more readable for amateurs at the cost of confusing
 # experienced Perl programmers and sending people in futile quests for where
