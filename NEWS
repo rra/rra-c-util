@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.8 (unreleased)
+
+    Skip the tests/perl/strict-t check for people other than the
+    maintainer.  Non-critical scripts in the package may require optional
+    packages or new versions of Perl to pass syntax checking.
+
 rra-c-util 4.7 (2012-12-19)
 
     Add new portability wrapper for sys/statvfs.h that converts statvfs
