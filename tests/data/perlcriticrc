@@ -35,6 +35,9 @@ verbose  = %f:%l:%c: [%p] %m (%e, Severity: %s)\n
 # This is handled with a separate test case that uses Test::Spelling.
 [-Documentation::PodSpelling]
 
+# Pod::Man and Pod::Text fixed this bug years ago.  I know, I maintain them.
+[-Documentation::RequirePodLinksIncludeText]
+
 # The POD sections Perl::Critic wants are incompatible with the POD template
 # from perlpodstyle, which is what I use for my POD documentation.
 [-Documentation::RequirePodSections]
@@ -58,7 +61,7 @@ lines = 15
 # are counted, but they don't seem to be by number of characters in the
 # variable reference.)
 [RegularExpressions::ProhibitComplexRegexes]
-max_characters = 65
+max_characters = 80
 
 # Nice idea, but it *utterly* confuses cperl-mode when used with braces, so
 # it's more trouble than it's worth.
