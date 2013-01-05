@@ -24,5 +24,7 @@ Test::Pod->import;
 
 # Check all POD in the Perl distribution.  Add the examples directory.
 my @files = all_pod_files();
-push @files, 'examples';
+if (-d 'examples') {
+    push @files, 'examples';
+}
 all_pod_files_ok(@files);
