@@ -10,7 +10,7 @@
 # which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
 # Written by Russ Allbery <rra@stanford.edu>
-# Copyright 2011, 2012
+# Copyright 2011, 2012, 2013
 #     The Board of Trustees of the Leland Stanford Junior University
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -70,6 +70,9 @@ max_characters = 80
 # modules.
 [-ValuesAndExpressions::ProhibitConstantPragma]
 
+# -1 is used for the last element in arrays and is a special return value for
+# index.
+#
 # 100 is used for calculating percentages.  Making it a constant is just
 # confusing.
 #
@@ -78,7 +81,7 @@ max_characters = 80
 # decimal.
 [ValuesAndExpressions::ProhibitMagicNumbers]
 allowed_types  = Octal
-allowed_values = 0 1 2 100 511
+allowed_values = -1 0 1 2 100 511
 
 # Increase this to six digits so that I'm not told to add underscores to
 # port numbers (which is just silly).
