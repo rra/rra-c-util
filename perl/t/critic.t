@@ -1,16 +1,20 @@
 #!/usr/bin/perl
 #
-# Check for perlcritic errors in included Perl code.
+# Check for perlcritic errors in all code.
 #
 # Checks all Perl code in blib/lib, t, and Makefile.PL for problems uncovered
 # by perlcritic.  This test is disabled unless RRA_MAINTAINER_TESTS is set,
-# since coding style will not interfere with functionality.
+# since coding style will not interfere with functionality and newer versions
+# of perlcritic may introduce new checks.
 #
 # Written by Russ Allbery <rra@stanford.edu>
-# Copyright 2012
-#     The Board of Trustees of the Leland Stanford Junior University
 #
-# See LICENSE for licensing terms.
+# The authors hereby relinquish any claim to any copyright that they may have
+# in this work, whether granted under contract or by operation of law or
+# international treaty, and hereby commit to the public, at large, that they
+# shall not, at any time in the future, seek to enforce any copyright in this
+# work against any person or entity, or prevent any person or entity from
+# copying, publishing, distributing or creating derivative works of this work.
 
 use 5.006;
 use strict;
@@ -28,7 +32,7 @@ use Test::More;
 #  Throws: String exception if the file could not be found.
 sub test_file_path {
     my ($file) = @_;
-    for my $base (qw{t tests .}) {
+    for my $base (qw(t tests .)) {
         if (-f "$base/$file") {
             return "$base/$file";
         }
@@ -56,11 +60,13 @@ local $ENV{PERLTIDY} = test_file_path('data/perltidyrc');
 my $profile = test_file_path('data/perlcriticrc');
 Test::Perl::Critic->import(-profile => $profile);
 
-# By default, Test::Perl::Critic only checks blib.  We also want to check t.
+# By default, Test::Perl::Critic only checks blib.  We also want to check
+# examples, t, and Makefile.PL.
 my @files = Perl::Critic::Utils::all_perl_files('blib');
 if (!@files) {
     @files = Perl::Critic::Utils::all_perl_files('lib');
 }
+push @files, Perl::Critic::Utils::all_perl_files('examples');
 push @files, Perl::Critic::Utils::all_perl_files('t');
 push @files, 'Makefile.PL';
 @files = grep { !m{ [.](?:in|tdy) }xms } @files;

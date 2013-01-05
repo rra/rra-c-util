@@ -1,15 +1,15 @@
 #!/usr/bin/perl
 #
-# Check for POD formatting errors.
-#
-# Check all POD documents in the Perl module distribution for POD formatting
-# errors.
+# Check all POD documents for POD formatting errors.
 #
 # Written by Russ Allbery <rra@stanford.edu>
-# Copyright 2012
-#     The Board of Trustees of the Leland Stanford Junior University
 #
-# See LICENSE for licensing terms.
+# The authors hereby relinquish any claim to any copyright that they may have
+# in this work, whether granted under contract or by operation of law or
+# international treaty, and hereby commit to the public, at large, that they
+# shall not, at any time in the future, seek to enforce any copyright in this
+# work against any person or entity, or prevent any person or entity from
+# copying, publishing, distributing or creating derivative works of this work.
 
 use strict;
 use warnings;
@@ -22,5 +22,7 @@ if (!eval { require Test::Pod }) {
 }
 Test::Pod->import;
 
-# Check all POD in the Perl distribution.
-all_pod_files_ok();
+# Check all POD in the Perl distribution.  Add the examples directory.
+my @files = all_pod_files();
+push @files, 'examples';
+all_pod_files_ok(@files);
