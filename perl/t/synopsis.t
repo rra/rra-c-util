@@ -28,7 +28,7 @@ Test::Synopsis->import;
 # The default Test::Synopsis all_synopsis_ok() function requires that the
 # module be in a lib directory.  Use Perl::Critic::Utils to find the modules
 # in blib, or lib if it doesn't exist.
-my @files = Perl::Critic::Utils::all_perl_files('blib');
+my @files = Perl::Critic::Utils::all_perl_files('blib/lib', 'blib/arch');
 if (!@files) {
     @files = Perl::Critic::Utils::all_perl_files('lib');
 }
