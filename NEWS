@@ -6,6 +6,9 @@ rra-c-util 4.8 (unreleased)
     maintainer.  Non-critical scripts in the package may require optional
     packages or new versions of Perl to pass syntax checking.
 
+    Update the perlcritic and perltidy configuration used for checking
+    Perl coding style to match the current Stanford Perl coding style.
+
 rra-c-util 4.7 (2012-12-19)
 
     Add new portability wrapper for sys/statvfs.h that converts statvfs
