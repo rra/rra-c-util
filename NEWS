@@ -2,9 +2,24 @@
 
 rra-c-util 4.8 (unreleased)
 
-    Skip the tests/perl/strict-t check for people other than the
-    maintainer.  Non-critical scripts in the package may require optional
-    packages or new versions of Perl to pass syntax checking.
+    Add new Test::RRA, Test::RRA::Automake, and Test::RRA::Config Perl
+    modules collecting useful utility functions for tests written in Perl
+    in packages that use the rra-c-util layout and structure.  The tests
+    in tests/docs and tests/perl now use these libraries, so packages
+    using those test scripts should also include the tests/tap/perl
+    directory in the distribution.
+
+    The tests/perl/critic-t and tests/perl/minimum-version-t tests now use
+    tests/data/perl.conf for per-package configuration, making it easier
+    to use the tests verbatim in multiple packages with different ignore
+    lists or minimum version requirements.
+
+    The tests/perl/strict-t test now works properly for Perl scripts that
+    make use of a Perl module that's built as part of the larger package
+    build.
+
+    The Perl tests now more correctly handle testing of packages when the
+    build directory is a subdirectory of the source directory.
 
     Update the perlcritic and perltidy configuration used for checking
     Perl coding style to match the current Stanford Perl coding style.

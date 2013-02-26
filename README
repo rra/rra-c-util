@@ -4,9 +4,10 @@
                 Written by Russ Allbery <rra@stanford.edu>
 
   Copyright 2000, 2009, 2010 Russ Allbery <rra@stanford.edu>.  Copyright
-  2009, 2010, 2011, 2012 The Board of Trustees of the Leland Stanford
-  Junior University.  This software is distributed under a BSD-style
-  license.  Please see the section LICENSE below for more information.
+  2009, 2010, 2011, 2012, 2013 The Board of Trustees of the Leland
+  Stanford Junior University.  This software is distributed under a
+  BSD-style license.  Please see the section LICENSE below for more
+  information.
 
 BLURB
 
@@ -66,8 +67,9 @@ REQUIREMENTS
   systems that do not have an AFS client installed due to how AIX handles
   system calls.
 
-  To run the full test suite, Perl 5.6.2 or later is required.  The
-  following additional Perl modules will be used if present:
+  To run the full test suite, and to use the Perl test support libraries,
+  Perl 5.6.2 or later is required.  The following additional Perl modules
+  will be used if present:
 
       Test::MinimumVersion
       Test::Perl::Critic
@@ -200,19 +202,33 @@ USING THIS CODE
     shared library, you'll need to instead build libutil.la and change
     some of the Automake variables.
 
+  * If your package uses a TAP-based test suite written in C, consider
+    using the additional TAP utility functions in tests/tap (specifically
+    messages.*, process.*, and string.*).
+
   * If you're using the Kerberos portability code, copy over
     portable/krb5.h, portable/krb5-extra.c, m4/krb5.m4, m4/lib-depends.m4,
     m4/lib-pathname.m4, and optionally util/messages-krb5.[ch].  You'll
-    also need the relevant fragments of configure.ac.  Also see the
+    also need the relevant fragments of configure.ac.  You may want to
+    remove some things from krb5.h and krb5-extra.c the corresponding
+    configure checks if your code doesn't need all of those functions.  If
+    you need krb5_get_renewed_creds, also copy over krb5-renew.c.  Don't
+    forget to add $(KRB5_CPPFLAGS) to CPPFLAGS for libportable and
+    possibly libutil, and if you're building a shared library, also add
+    $(KRB5_LDFLAGS) to LDFLAGS and $(KRB5_LIBS) to LIBADD for those
+    libraries.
+
+    For a Kerberos-enabled test suite, also consider copying the
     kerberos.* libraries in tests/tap for a Kerberos-enabled test suite.
     If you want to use kerberos_generate_conf from tests/tap/kerberos.c,
-    also copy over tests/data/generate-krb5-conf.  You may want to remove
-    some things from krb5.h and krb5-extra.c the corresponding configure
-    checks if your code doesn't need all of those functions.  If you need
-    krb5_get_renewed_creds, also copy over krb5-renew.c.  Don't forget to
-    add $(KRB5_CPPFLAGS) to CPPFLAGS for libportable and possibly libutil,
-    and if you're building a shared library, also add $(KRB5_LDFLAGS) to
-    LDFLAGS and $(KRB5_LIBS) to LIBADD for those libraries.
+    also copy over tests/data/generate-krb5-conf.
+
+  * For testing that requires making Kerberos administrative changes,
+    consider copying over the kadmin.* libraries in tests/tap.
+
+  * For testing packages that use remctl, see the tests/tap/remctl.c and
+    tests/tap/remctl.h files for C tests and tests/tap/remctl.sh for shell
+    scripts.
 
   * If you're using the kafs portability code, copy over the kafs
     directory, m4/kafs.m4, m4/lib-pathname.m4, portable/k_haspag.c, the
@@ -227,9 +243,9 @@ USING THIS CODE
     package from the m4 directory.
 
   * Copy over any generic tests from tests/docs and tests/perl that are
-    appropriate for your package.  tests/perl/minimum-version-t may
-    require some configuration to specify the minimum version for scripts
-    or modules found in various directories.
+    appropriate for your package.  If you use any of these, also copy over
+    the tests/tap/perl directory and tests/data/perl.conf (and customize
+    the latter for your package).
 
   I also copy over all the relevant tests from the tests directory and the
   build machinery for them from Makefile.am so that the portability and
@@ -261,8 +277,8 @@ LICENSE
   The rra-c-util package as a whole covered by the following copyright
   statement and license:
 
-    Copyright 2000, 2009-2010 Russ Allbery <rra@stanford.edu>
-    Copyright 2009-2012
+    Copyright 2000, 2009, 2010 Russ Allbery <rra@stanford.edu>
+    Copyright 2009, 2010, 2011, 2012, 2013
         The Board of Trustees of the Leland Stanford Junior University
 
     Permission is hereby granted, free of charge, to any person obtaining a
