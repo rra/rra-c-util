@@ -24,6 +24,10 @@ rra-c-util 4.8 (unreleased)
     Update the perlcritic and perltidy configuration used for checking
     Perl coding style to match the current Stanford Perl coding style.
 
+    Add a new perl/t directory that contains generic test programs
+    suitable for standalone Perl modules or for projects that embed a Perl
+    module build inside the project.
+
 rra-c-util 4.7 (2012-12-19)
 
     Add new portability wrapper for sys/statvfs.h that converts statvfs

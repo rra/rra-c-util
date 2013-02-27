@@ -247,6 +247,15 @@ USING THIS CODE
     the tests/tap/perl directory and tests/data/perl.conf (and customize
     the latter for your package).
 
+  * If the package embeds a Perl module, copy over any tests from the
+    perl/t directory that are applicable.  This can provide generic
+    testing of the embedded Perl module using Perl's own test
+    infrastructure.  If you use any of these, also copy over the
+    perl/t/data/perl.conf file and customize it for your package.  You
+    will need to arrange for perl/t/data to contain copies of the
+    perlcriticrc and perltidyrc files, either by making copies of the
+    files from tests/data or by using make to copy them.
+
   I also copy over all the relevant tests from the tests directory and the
   build machinery for them from Makefile.am so that the portability and
   utility layer are tested along with the rest of the package.  The test
