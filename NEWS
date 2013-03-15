@@ -28,6 +28,9 @@ rra-c-util 4.8 (unreleased)
     suitable for standalone Perl modules or for projects that embed a Perl
     module build inside the project.
 
+    All C code in the package now cleanly passes clang --analyze with
+    clang 3.0.
+
     Update to C TAP Harness 2.0:
 
     * runtests now treats the command line as a list of tests by default.
