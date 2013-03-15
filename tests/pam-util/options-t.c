@@ -196,7 +196,7 @@ main(void)
     status = putil_args_parse(args, 6, argv_all, options, optlen);
     ok(status, "Parse of full argv");
     if (args->config->cells == NULL)
-        ok_block(false, 4, "...cells is set");
+        ok_block(4, false, "...cells is set");
     else {
         ok(args->config->cells != NULL, "...cells is set");
         is_int(2, args->config->cells->count, "...with two cells");
@@ -228,7 +228,7 @@ main(void)
     status = putil_args_defaults(args, options, optlen);
     ok(status, "Setting defaults with new defaults");
     if (args->config->cells == NULL)
-        ok_block(false, 4, "...cells is set");
+        ok_block(4, false, "...cells is set");
     else {
         ok(args->config->cells != NULL, "...cells is set");
         is_int(2, args->config->cells->count, "...with two cells");
@@ -242,7 +242,7 @@ main(void)
     status = putil_args_parse(args, 6, argv_all, options, optlen);
     ok(status, "Parse of full argv after defaults");
     if (args->config->cells == NULL)
-        ok_block(false, 4, "...cells is set");
+        ok_block(4, false, "...cells is set");
     else {
         ok(args->config->cells != NULL, "...cells is set");
         is_int(2, args->config->cells->count, "...with two cells");
@@ -276,7 +276,7 @@ main(void)
     status = putil_args_defaults(args, options, optlen);
     ok(status, "Setting defaults with string default for vector");
     if (args->config->cells == NULL)
-        ok_block(false, 4, "...cells is set");
+        ok_block(4, false, "...cells is set");
     else {
         ok(args->config->cells != NULL, "...cells is set");
         is_int(2, args->config->cells->count, "...with two cells");
