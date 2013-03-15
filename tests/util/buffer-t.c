@@ -113,6 +113,8 @@ main(void)
     /* buffer_resize */
     three = buffer_new();
     ok(three != NULL, "buffer_new works");
+    if (three == NULL)
+        bail("buffer_new returned NULL");
     is_int(0, three->size, "initial size is 0");
     buffer_set(three, test_string1, sizeof(test_string1));
     is_int(1024, three->size, "size becomes 1024 when adding data");
@@ -137,6 +139,8 @@ main(void)
         sysbail("cannot rewind buffer-test");
     three = buffer_new();
     ok(three != NULL, "buffer_new works");
+    if (three == NULL)
+        bail("buffer_new returned NULL");
     is_int(0, three->size, "and initial size is 0");
     buffer_resize(three, 1024);
     is_int(1024, three->size, "resize to 1024 works");

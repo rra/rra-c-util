@@ -39,6 +39,8 @@ main(void)
 
     vector = vector_new();
     ok(vector != NULL, "vector_new returns non-NULL");
+    if (vector == NULL)
+        bail("vector_new returned NULL");
     ok(vector_add(vector, cstring), "vector_add succeeds");
     is_int(1, vector->count, "vector_add increases count");
     ok(vector->strings[0] != cstring, "...and allocated new memory");
@@ -59,6 +61,8 @@ main(void)
     ok(vector->strings[0] != cstring, "each pointer is different");
     copy = vector_copy(vector);
     ok(copy != NULL, "vector_copy returns non-NULL");
+    if (copy == NULL)
+        bail("vector_copy returned NULL");
     is_int(4, copy->count, "...and has right count");
     is_int(4, copy->allocated, "...and has right allocated count");
     for (i = 0; i < 4; i++) {

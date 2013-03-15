@@ -5,7 +5,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2010, 2011, 2012
+ * Copyright 2010, 2011, 2012, 2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -195,12 +195,16 @@ main(void)
     /* Now, check setting everything. */
     status = putil_args_parse(args, 6, argv_all, options, optlen);
     ok(status, "Parse of full argv");
-    ok(args->config->cells != NULL, "...cells is set");
-    is_int(2, args->config->cells->count, "...with two cells");
-    is_string("stanford.edu", args->config->cells->strings[0],
-              "...first is stanford.edu");
-    is_string("ir.stanford.edu", args->config->cells->strings[1],
-              "...second is ir.stanford.edu");
+    if (args->config->cells == NULL)
+        ok_block(false, 4, "...cells is set");
+    else {
+        ok(args->config->cells != NULL, "...cells is set");
+        is_int(2, args->config->cells->count, "...with two cells");
+        is_string("stanford.edu", args->config->cells->strings[0],
+                  "...first is stanford.edu");
+        is_string("ir.stanford.edu", args->config->cells->strings[1],
+                  "...second is ir.stanford.edu");
+    }
     is_int(true, args->config->debug, "...debug is set");
     is_int(86400, args->config->expires, "...expires is set");
     is_int(true, args->config->ignore_root, "...ignore_root is set");
@@ -223,22 +227,30 @@ main(void)
     args->config = config_new();
     status = putil_args_defaults(args, options, optlen);
     ok(status, "Setting defaults with new defaults");
-    ok(args->config->cells != NULL, "...cells is set");
-    is_int(2, args->config->cells->count, "...with two cells");
-    is_string("foo.com", args->config->cells->strings[0],
-              "...first is foo.com");
-    is_string("bar.com", args->config->cells->strings[1],
-              "...second is bar.com");
+    if (args->config->cells == NULL)
+        ok_block(false, 4, "...cells is set");
+    else {
+        ok(args->config->cells != NULL, "...cells is set");
+        is_int(2, args->config->cells->count, "...with two cells");
+        is_string("foo.com", args->config->cells->strings[0],
+                  "...first is foo.com");
+        is_string("bar.com", args->config->cells->strings[1],
+                  "...second is bar.com");
+    }
     is_string("/bin/false", args->config->program,
               "...program is /bin/false");
     status = putil_args_parse(args, 6, argv_all, options, optlen);
     ok(status, "Parse of full argv after defaults");
-    ok(args->config->cells != NULL, "...cells is set");
-    is_int(2, args->config->cells->count, "...with two cells");
-    is_string("stanford.edu", args->config->cells->strings[0],
-              "...first is stanford.edu");
-    is_string("ir.stanford.edu", args->config->cells->strings[1],
-              "...second is ir.stanford.edu");
+    if (args->config->cells == NULL)
+        ok_block(false, 4, "...cells is set");
+    else {
+        ok(args->config->cells != NULL, "...cells is set");
+        is_int(2, args->config->cells->count, "...with two cells");
+        is_string("stanford.edu", args->config->cells->strings[0],
+                  "...first is stanford.edu");
+        is_string("ir.stanford.edu", args->config->cells->strings[1],
+                  "...second is ir.stanford.edu");
+    }
     is_int(true, args->config->debug, "...debug is set");
     is_int(86400, args->config->expires, "...expires is set");
     is_int(true, args->config->ignore_root, "...ignore_root is set");
@@ -263,12 +275,16 @@ main(void)
     args->config = config_new();
     status = putil_args_defaults(args, options, optlen);
     ok(status, "Setting defaults with string default for vector");
-    ok(args->config->cells != NULL, "...cells is set");
-    is_int(2, args->config->cells->count, "...with two cells");
-    is_string("foo.com", args->config->cells->strings[0],
-              "...first is foo.com");
-    is_string("bar.com", args->config->cells->strings[1],
-              "...second is bar.com");
+    if (args->config->cells == NULL)
+        ok_block(false, 4, "...cells is set");
+    else {
+        ok(args->config->cells != NULL, "...cells is set");
+        is_int(2, args->config->cells->count, "...with two cells");
+        is_string("foo.com", args->config->cells->strings[0],
+                  "...first is foo.com");
+        is_string("bar.com", args->config->cells->strings[1],
+                  "...second is bar.com");
+    }
     config_free(args->config);
     args->config = NULL;
     options[0].type = TYPE_LIST;
