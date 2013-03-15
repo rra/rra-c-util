@@ -216,4 +216,4 @@ tests_util_xwrite_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 
 check-local: $(check_PROGRAMS)
-	cd tests && ./runtests $(abs_top_srcdir)/tests/TESTS
+	cd tests && ./runtests -l '$(abs_top_srcdir)/tests/TESTS'

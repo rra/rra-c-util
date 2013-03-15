@@ -28,6 +28,14 @@ rra-c-util 4.8 (unreleased)
     suitable for standalone Perl modules or for projects that embed a Perl
     module build inside the project.
 
+    Update to C TAP Harness 2.0:
+
+    * runtests now treats the command line as a list of tests by default.
+    * The full test executable path can now be passed to runtests -o.
+    * Improved harness output for tests with lazy plans.
+    * Improved harness output to a terminal for some abort cases.
+    * Flush harness output after each test even when not on a terminal.
+
 rra-c-util 4.7 (2012-12-19)
 
     Add new portability wrapper for sys/statvfs.h that converts statvfs
