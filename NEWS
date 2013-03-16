@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.8 (unreleased)
+rra-c-util 4.8 (2013-03-15)
 
     Add new Test::RRA, Test::RRA::Automake, and Test::RRA::Config Perl
     modules collecting useful utility functions for tests written in Perl
