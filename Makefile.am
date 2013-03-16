@@ -16,11 +16,13 @@ EXTRA_DIST = .gitignore LICENSE autogen docs/api/xmalloc.3		    \
 	perl/t/style/critic.t perl/t/style/minimum-version.t		    \
 	perl/t/style/strict.t tests/README tests/TESTS			    \
 	tests/data/generate-krb5-conf tests/data/krb5.conf		    \
-	tests/data/perlcriticrc tests/data/perltidyrc			    \
+	tests/data/perl.conf tests/data/perlcriticrc tests/data/perltidyrc  \
 	tests/data/valgrind.supp tests/docs/pod-spelling-t tests/docs/pod-t \
 	tests/fakepam/README tests/kafs/basic-t tests/perl/critic-t	    \
 	tests/perl/minimum-version-t tests/perl/strict-t		    \
-	tests/tap/kerberos.sh tests/tap/libtap.sh tests/tap/remctl.sh	    \
+	tests/tap/kerberos.sh tests/tap/libtap.sh			    \
+	tests/tap/perl/Test/RRA.pm tests/tap/perl/Test/RRA/Automake.pm	    \
+	tests/tap/perl/Test/RRA/Config.pm tests/tap/remctl.sh		    \
 	tests/util/xmalloc-t
 
 # This is unfortunately required since we have an object (k_hasafs) defined
