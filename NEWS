@@ -31,7 +31,7 @@ rra-c-util 4.8 (unreleased)
     All C code in the package now cleanly passes clang --analyze with
     clang 3.0.
 
-    Update to C TAP Harness 2.0:
+    Update to C TAP Harness 2.1:
 
     * runtests now treats the command line as a list of tests by default.
     * The full test executable path can now be passed to runtests -o.
