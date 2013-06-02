@@ -75,10 +75,12 @@ int k_haspag(void) __attribute__((__visibility__("hidden")));
 #  include <afs/afssyscalls.h>
 # else
 int lsetpag(void);
+int lpioctl(char *, int, void *, int);
 # endif
-# define k_hasafs() (1)
-# define k_setpag() lsetpag()
-# define k_unlog()  (errno = ENOSYS, -1)
+# define k_hasafs()           (1)
+# define k_pioctl(p, c, a, f) lpioctl((p), (c), (a), (f))
+# define k_setpag()           lsetpag()
+# define k_unlog()            (errno = ENOSYS, -1)
 
 int k_haspag(void) __attribute__((__visibility__("hidden")));
 
@@ -107,10 +109,11 @@ int k_unlog(void);
 /* We have no kafs implementation available. */
 #else
 # undef HAVE_KAFS
-# define k_hasafs() (0)
-# define k_haspag() (0)
-# define k_setpag() (errno = ENOSYS, -1)
-# define k_unlog()  (errno = ENOSYS, -1)
+# define k_hasafs()           (0)
+# define k_haspag()           (0)
+# define k_pioctl(p, c, a, f) (errno = ENOSYS, -1)
+# define k_setpag()           (errno = ENOSYS, -1)
+# define k_unlog()            (errno = ENOSYS, -1)
 #endif
 
 END_DECLS

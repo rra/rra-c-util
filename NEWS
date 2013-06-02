@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.9 (unreleased)
+
+    Add support for k_pioctl to the portability layer for libkafs by
+    providing a fallback to lpioctl when using the AFS libraries and a
+    system call failure define if no library was found.
+
 rra-c-util 4.8 (2013-03-15)
 
     Add new Test::RRA, Test::RRA::Automake, and Test::RRA::Config Perl
