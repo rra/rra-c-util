@@ -6,6 +6,9 @@ rra-c-util 4.9 (unreleased)
     providing a fallback to lpioctl when using the AFS libraries and a
     system call failure define if no library was found.
 
+    Increase buffer sizes in the network timeout test to work properly
+    with newer Linux kernels.
+
 rra-c-util 4.8 (2013-03-15)
 
     Add new Test::RRA, Test::RRA::Automake, and Test::RRA::Config Perl
