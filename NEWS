@@ -6,6 +6,11 @@ rra-c-util 4.9 (unreleased)
     providing a fallback to lpioctl when using the AFS libraries and a
     system call failure define if no library was found.
 
+    Improve the standard Perl tests to check POD under examples, usr/bin,
+    and usr/sbin directories, not check SYNOPSIS sections for scripts,
+    work correctly with packages missing Build.PL or a t directory, and
+    also check style in files under a usr directory.
+
     Increase buffer sizes in the network timeout test to work properly
     with newer Linux kernels.
 
