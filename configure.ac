@@ -1,8 +1,9 @@
 dnl Autoconf configuration for rra-c-util.
 dnl
 dnl Written by Russ Allbery <rra@stanford.edu>
-dnl Copyright 2000, 2003 Russ Allbery <rra@stanford.edu>
-dnl Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
+dnl Copyright 2000, 2003, 2013 Russ Allbery <rra@stanford.edu>
+dnl Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
+dnl     2012, 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
 dnl This file is free software; the authors give unlimited permission to copy
@@ -22,10 +23,17 @@ AM_MAINTAINER_MODE
 
 dnl Standard probes for the basic compilation environment.  These are
 dnl generally the same for every package, except that ones that include shared
-dnl libraries change AC_PROG_RANLIB to AC_PROG_LIBTOOL.
+dnl libraries change AC_PROG_RANLIB to AC_PROG_LIBTOOL.  Add
+dnl RRA_LD_VERSION_SCRIPT to probe for symbol versioning support for packages
+dnl using shared libraries.
+dnl
+dnl AM_PROG_AR is required for Automake 1.12 by Libtool but not defined at all
+dnl (or needed) in Automake 1.11.  Work around this bug.
 AC_PROG_CC
 AC_USE_SYSTEM_EXTENSIONS
+AC_SYS_LARGEFILE
 AM_PROG_CC_C_O
+m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_INSTALL
 AC_PROG_RANLIB
 
