@@ -6,6 +6,9 @@ rra-c-util 4.9 (unreleased)
     providing a fallback to lpioctl when using the AFS libraries and a
     system call failure define if no library was found.
 
+    Prototype the libkafs functions if the library was found but no header
+    file was since some AFS builds don't provide headers.
+
     Improve the standard Perl tests to check POD under examples, usr/bin,
     and usr/sbin directories, not check SYNOPSIS sections for scripts,
     work correctly with packages missing Build.PL or a t directory, and

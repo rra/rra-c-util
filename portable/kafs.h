@@ -64,8 +64,22 @@ BEGIN_DECLS
 #  include <kafs.h>
 # elif HAVE_KOPENAFS_H
 #  include <kopenafs.h>
+# else
+struct ViceIoctl {
+    void *in, *out;
+    short in_size;
+    short out_size;
+};
+int k_hasafs(void);
+int k_pioctl(char *, struct ViceIoctl *, void *, int);
+int k_setpag(void);
+int k_unlog(void);
 # endif
-# ifndef HAVE_K_HASPAG
+# ifdef HAVE_K_HASPAG
+#  if !defined(HAVE_KAFS_H) && !defined(HAVE_KOPENAFS_H)
+int k_haspag(void);
+#  endif
+# else
 int k_haspag(void) __attribute__((__visibility__("hidden")));
 # endif
 
