@@ -14,6 +14,12 @@ rra-c-util 4.9 (unreleased)
     work correctly with packages missing Build.PL or a t directory, and
     also check style in files under a usr directory.
 
+    network_connect, when given a timeout, now resumes waiting for the
+    nonblocking connect after being interrupted by a signal.  This can
+    mean that a connect can take longer than the timeout if interrupted;
+    hopefully both timeouts and catching signals are rare enough that this
+    won't pose a serious issue.
+
     Increase buffer sizes in the network timeout test to work properly
     with newer Linux kernels.
 
