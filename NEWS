@@ -26,6 +26,10 @@ rra-c-util 4.9 (unreleased)
     The PCRE Autoconf probe macros now correctly handle the case where the
     PCRE library exists but its header file does not, such as on Mac OS X.
 
+    Update to C TAP Harness 2.2:
+
+    * bail and sysbail now exit with status 255 to match Test::More.
+
 rra-c-util 4.8 (2013-03-15)
 
     Add new Test::RRA, Test::RRA::Automake, and Test::RRA::Config Perl
