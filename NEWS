@@ -23,6 +23,9 @@ rra-c-util 4.9 (unreleased)
     Increase buffer sizes in the network timeout test to work properly
     with newer Linux kernels.
 
+    The PCRE Autoconf probe macros now correctly handle the case where the
+    PCRE library exists but its header file does not, such as on Mac OS X.
+
 rra-c-util 4.8 (2013-03-15)
 
     Add new Test::RRA, Test::RRA::Automake, and Test::RRA::Config Perl
