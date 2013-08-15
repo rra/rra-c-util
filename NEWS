@@ -26,6 +26,11 @@ rra-c-util 4.9 (unreleased)
     The PCRE Autoconf probe macros now correctly handle the case where the
     PCRE library exists but its header file does not, such as on Mac OS X.
 
+    Add new tests/perl/module-version-t test for packages that have
+    embedded Perl modules.  This checks that the embedded Perl module
+    versions match the package version and can optionally update all of
+    the version numbers.
+
     Update to C TAP Harness 2.2:
 
     * bail and sysbail now exit with status 255 to match Test::More.
