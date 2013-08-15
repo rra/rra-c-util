@@ -9,6 +9,7 @@ pam-util/options
 pam-util/vector
 perl/critic
 perl/minimum-version
+perl/module-version
 perl/strict
 portable/asprintf
 portable/daemon

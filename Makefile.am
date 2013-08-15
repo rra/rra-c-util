@@ -19,8 +19,8 @@ EXTRA_DIST = .gitignore LICENSE autogen docs/api/xmalloc.3		    \
 	tests/data/perl.conf tests/data/perlcriticrc tests/data/perltidyrc  \
 	tests/data/valgrind.supp tests/docs/pod-spelling-t tests/docs/pod-t \
 	tests/fakepam/README tests/kafs/basic-t tests/perl/critic-t	    \
-	tests/perl/minimum-version-t tests/perl/strict-t		    \
-	tests/tap/kerberos.sh tests/tap/libtap.sh			    \
+	tests/perl/minimum-version-t tests/perl/module-version-t	    \
+	tests/perl/strict-t tests/tap/kerberos.sh tests/tap/libtap.sh	    \
 	tests/tap/perl/Test/RRA.pm tests/tap/perl/Test/RRA/Automake.pm	    \
 	tests/tap/perl/Test/RRA/Config.pm tests/tap/remctl.sh		    \
 	tests/util/xmalloc-t
