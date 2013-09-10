@@ -10,7 +10,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2010, 2011
+ * Copyright 2010, 2011, 2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -42,7 +42,7 @@
 #include <portable/macros.h>
 #include <portable/stdbool.h>
 
-#include <sys/types.h>
+#include <stddef.h>
 
 /* Forward declarations to avoid additional includes. */
 struct vector;

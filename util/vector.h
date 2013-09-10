@@ -28,7 +28,7 @@
 #include <config.h>
 #include <portable/macros.h>
 
-#include <sys/types.h>
+#include <stddef.h>
 
 struct vector {
     size_t count;

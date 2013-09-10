@@ -36,6 +36,8 @@
 # include <portable/krb5.h>
 #endif
 #include <portable/pam.h>
+
+#include <stddef.h>
 #include <syslog.h>
 
 /* Forward declarations to avoid extra includes. */

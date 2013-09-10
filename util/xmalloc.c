@@ -84,8 +84,6 @@
 #include <config.h>
 #include <portable/system.h>
 
-#include <errno.h>
-
 #include <util/messages.h>
 #include <util/xmalloc.h>
 

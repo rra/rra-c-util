@@ -4,7 +4,7 @@
  * The canonical version of this file is maintained in the rra-c-util package,
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
- * Copyright 2010, 2012
+ * Copyright 2010, 2012, 2013
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006
  *     by Internet Systems Consortium, Inc. ("ISC")
@@ -33,7 +33,8 @@
 #include <config.h>
 #include <portable/macros.h>
 
-#include <sys/types.h>
+#include <stdarg.h>
+#include <stddef.h>
 
 /*
  * The functions are actually macros so that we can pick up the file and line

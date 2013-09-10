@@ -37,8 +37,6 @@
 #include <config.h>
 #include <portable/system.h>
 
-#include <ctype.h>
-
 #include <util/vector.h>
 #include <util/xmalloc.h>
 

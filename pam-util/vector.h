@@ -37,7 +37,7 @@
 #include <portable/macros.h>
 #include <portable/stdbool.h>
 
-#include <sys/types.h>
+#include <stddef.h>
 
 struct vector {
     size_t count;
