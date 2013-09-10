@@ -5,7 +5,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <rra@stanford.edu>
- * Copyright 2006, 2007, 2009, 2011, 2012
+ * Copyright 2006, 2007, 2009, 2011, 2012, 2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -53,10 +53,10 @@ struct kerberos_config {
  * certain configuration information isn't available.
  */
 enum kerberos_needs {
-    TAP_KRB_NEEDS_NONE,
-    TAP_KRB_NEEDS_KEYTAB,
-    TAP_KRB_NEEDS_PASSWORD,
-    TAP_KRB_NEEDS_BOTH
+    TAP_KRB_NEEDS_NONE     = 0x00,
+    TAP_KRB_NEEDS_KEYTAB   = 0x01,
+    TAP_KRB_NEEDS_PASSWORD = 0x02,
+    TAP_KRB_NEEDS_BOTH     = 0x01 | 0x02
 };
 
 BEGIN_DECLS
