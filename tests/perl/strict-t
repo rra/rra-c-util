@@ -42,6 +42,7 @@ use lib "$ENV{SOURCE}/tap/perl";
 use Test::More;
 use Test::RRA qw(use_prereq);
 use Test::RRA::Automake qw(automake_setup perl_dirs);
+use Test::RRA::Config qw(@STRICT_IGNORE);
 
 # Load prerequisite modules.
 use_prereq('Test::Strict');
@@ -52,7 +53,7 @@ automake_setup();
 
 # Run the actual tests.  We also want to check warnings.
 $Test::Strict::TEST_WARNINGS = 1;
-all_perl_files_ok(perl_dirs());
+all_perl_files_ok(perl_dirs({ skip => [@STRICT_IGNORE] }));
 
 # Suppress "used only once" warnings.
 END { $Test::Strict::TEST_WARNINGS = 0 }

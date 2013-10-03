@@ -6,6 +6,9 @@ rra-c-util 4.10 (unreleased)
     containing underscores and report the required version number, if any,
     in the skip message printed if the test is skipped.
 
+    Support a @STRICT_IGNORE variable in the perl.conf configuration file
+    for the standard tests for Perl scripts.
+
     Add the appropriate gcc attribute to avoid leaking the dummy symbol
     used to keep the portability library from being empty when it is
     included in a shared object.
