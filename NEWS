@@ -9,6 +9,10 @@ rra-c-util 4.10 (unreleased)
     Support a @STRICT_IGNORE variable in the perl.conf configuration file
     for the standard tests for Perl scripts.
 
+    Include in portable/kadmin.h the header file defining kadmin error
+    codes, add a probe for one of the two possible namings for that file,
+    and adjust for the missing KADM5_PASS_Q_GENERIC error code in Heimdal.
+
     Add the appropriate gcc attribute to avoid leaking the dummy symbol
     used to keep the portability library from being empty when it is
     included in a shared object.

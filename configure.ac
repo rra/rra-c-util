@@ -100,6 +100,7 @@ RRA_LIB_GSSAPI_RESTORE
 dnl Probe for Kerberos kadmin client libraries.
 RRA_LIB_KADM5CLNT_OPTIONAL
 RRA_LIB_KADM5CLNT_SWITCH
+AC_CHECK_HEADERS([kadm5/kadm5_err.h])
 AC_CHECK_FUNCS([kadm5_init_with_skey_ctx])
 RRA_LIB_KADM5CLNT_RESTORE
 
