@@ -13,6 +13,8 @@ rra-c-util 4.10 (unreleased)
     codes, add a probe for one of the two possible namings for that file,
     and adjust for the missing KADM5_PASS_Q_GENERIC error code in Heimdal.
 
+    Replace krb5_free_default_realm with krb5_xfree on Heimdal, not free.
+
     Add the appropriate gcc attribute to avoid leaking the dummy symbol
     used to keep the portability library from being empty when it is
     included in a shared object.
