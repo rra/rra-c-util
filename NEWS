@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.10 (unreleased)
+rra-c-util 4.10 (2013-10-04)
 
     Add Autoconf macros for finding build flags for the TinyCDB library.
 
