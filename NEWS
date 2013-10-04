@@ -4,6 +4,13 @@ rra-c-util 4.10 (unreleased)
 
     Add Autoconf macros for finding build flags for the TinyCDB library.
 
+    The Autoconf macros for probing for the OpenSSL libraries have been
+    renamed to RRA_LIB_OPENSSL instead of RRA_LIB_SSL, and all the
+    substitution variables have similarly been changed.  The m4 file is
+    now openssl.m4 and depends on lib-helper.m4.  There is a new macro,
+    RRA_LIB_OPENSSL_OPTIONAL, for packages with optional OpenSSL support.
+    HAVE_SSL is now defined if the OpenSSL libraries were found.
+
     In the use_prereq function in Test::RRA, support version numbers
     containing underscores and report the required version number, if any,
     in the skip message printed if the test is skipped.
