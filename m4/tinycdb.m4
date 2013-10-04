@@ -13,6 +13,9 @@ dnl HAVE_CDB if the library is found.
 dnl
 dnl Depends on the lib-helper.m4 framework.
 dnl
+dnl The canonical version of this file is maintained in the rra-c-util
+dnl package, available at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+dnl
 dnl Written by Russ Allbery <rra@stanford.edu>
 dnl Copyright 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
