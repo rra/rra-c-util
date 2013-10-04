@@ -7,14 +7,14 @@ dnl
 dnl Provides the macros RRA_LIB_CDB and RRA_LIB_CDB_OPTIONAL and sets the
 dnl substitution variables CDB_CPPFLAGS, CDB_LDFLAGS, and CDB_LIBS.  Also
 dnl provides RRA_LIB_CDB_SWITCH to set CPPFLAGS, LDFLAGS, and LIBS to include
-dnl the kadmin client libraries, saving the ecurrent values, and
-dnl RRA_LIB_CDB_RESTORE to restore those settings to before the last
-dnl RRA_LIB_CDB_SWITCH.  Define HAVE_CDB if the library is found.
+dnl the TinyCDB libraries, saving the current values, and RRA_LIB_CDB_RESTORE
+dnl to restore those settings to before the last RRA_LIB_CDB_SWITCH.  Define
+dnl HAVE_CDB if the library is found.
 dnl
-dnl Depends on RRA_SET_LDFLAGS.
+dnl Depends on the lib-helper.m4 framework.
 dnl
 dnl Written by Russ Allbery <rra@stanford.edu>
-dnl Copyright 2010, 2013
+dnl Copyright 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
 dnl This file is free software; the authors give unlimited permission to copy
@@ -41,14 +41,14 @@ AC_DEFUN([_RRA_LIB_CDB_INTERNAL],
  AC_CHECK_HEADERS([cdb.h])
  RRA_LIB_CDB_RESTORE])
 
-dnl The main macro for packages with mandatory kadmin client support.
+dnl The main macro for packages with mandatory TinyCDB support.
 AC_DEFUN([RRA_LIB_CDB],
 [RRA_LIB_HELPER_VAR_INIT([CDB])
  RRA_LIB_HELPER_WITH([tinycdb], [TinyCDB], [CDB])
  _RRA_LIB_CDB_INTERNAL([true])
  AC_DEFINE([HAVE_CDB], 1, [Define if libcdb is available.])])
 
-dnl The main macro for packages with optional kadmin client support.
+dnl The main macro for packages with optional TinyCDB support.
 AC_DEFUN([RRA_LIB_CDB_OPTIONAL],
 [RRA_LIB_HELPER_VAR_INIT([CDB])
  RRA_LIB_HELPER_WITH_OPTIONAL([tinycdb], [TinyCDB], [CDB])
