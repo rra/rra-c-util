@@ -63,9 +63,15 @@ endif
 # Work around the GNU Coding Standards, which leave all the Autoconf and
 # Automake stuff around after make maintainer-clean, thus making that command
 # mostly worthless.
-MAINTAINERCLEANFILES = Makefile.in aclocal.m4 build-aux/config.guess	\
-        build-aux/config.sub build-aux/depcomp build-aux/install-sh	\
-        build-aux/missing config.h.in config.h.in~ configure
+DISTCLEANFILES = config.h.in~
+MAINTAINERCLEANFILES = Makefile.in aclocal.m4 build-aux/ar-lib		\
+        build-aux/compile build-aux/config.guess build-aux/config.sub	\
+        build-aux/depcomp build-aux/install-sh build-aux/missing	\
+        config.h.in configure
+
+# Remove the Autoconf cache directory on make distclean.
+distclean-local:
+	rm -rf autom4te.cache
 
 # A set of flags for warnings.  Add -O because gcc won't find some warnings
 # without optimization turned on.  Desirable warnings that can't be turned
