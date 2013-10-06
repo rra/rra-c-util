@@ -18,10 +18,14 @@ dnl If KRB5_CPPFLAGS, KRB5_LDFLAGS, or KRB5_LIBS are set before calling these
 dnl macros, their values will be added to whatever the macros discover.
 dnl
 dnl Provides the RRA_LIB_KRB5_OPTIONAL macro, which should be used if Kerberos
-dnl support is optional.  This macro will still always set the substitution
-dnl variables, but they'll be empty unless --with-krb5 is given.  Also,
-dnl HAVE_KERBEROS will be defined if --with-krb5 is given and
-dnl $rra_use_kerberos will be set to "true".
+dnl support is optional.  In this case, Kerberos libraries are mandatory if
+dnl --with-krb5 or related flags are given, and will not be probed for if
+dnl --without-krb5 is given.  Otherwise, they'll be probed for, and
+dnl rra_use_kerberos will be set to true if they're found and not set
+dnl otherwise.  The substitution variables will always be set, but they will
+dnl be empty unless Kerberos libraries are found and the user did not disable
+dnl Kerberos support.  Similarly, HAVE_KERBEROS will be defined if Kerberos
+dnl libraries are found and the user didn't disable Kerberos support.
 dnl
 dnl Sets the Automake conditional KRB5_USES_COM_ERR saying whether we use
 dnl com_err, since if we're also linking with AFS libraries, we may have to
@@ -311,7 +315,8 @@ AC_DEFUN([RRA_LIB_KRB5_OPTIONAL],
      [m4_ifdef([AM_CONDITIONAL],
          [AM_CONDITIONAL([KRB5_USES_COM_ERR], [false])])])
  AS_IF([test x"$KRB5_LIBS" != x],
-    [AC_DEFINE([HAVE_KERBEROS], 1, [Define to enable Kerberos features.])])])
+    [rra_use_kerberos=true
+     AC_DEFINE([HAVE_KERBEROS], 1, [Define to enable Kerberos features.])])])
 
 dnl Source used by RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_FREE_ARGS.
 AC_DEFUN([_RRA_FUNC_KRB5_OPT_FREE_ARGS_SOURCE], [RRA_INCLUDES_KRB5] [[

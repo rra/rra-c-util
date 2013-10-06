@@ -6,6 +6,11 @@ rra-c-util 4.11 (unreleased)
     The AM_CONDITIONAL for the use of com_err is now ignored if Automake
     is not in use.
 
+    RRA_LIB_KRB5_OPTIONAL now sets $rra_use_kerberos if no --with-krb5 or
+    --without-krb5 flag was passed to configure but Kerberos libraries
+    were found during the configure process.  This parallels when
+    HAVE_KERBEROS is defined.
+
 rra-c-util 4.10 (2013-10-04)
 
     Add Autoconf macros for finding build flags for the TinyCDB library.
