@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.11 (unreleased)
+
+    Don't require use of Automake when using the Kerberos Autoconf macros.
+    The AM_CONDITIONAL for the use of com_err is now ignored if Automake
+    is not in use.
+
 rra-c-util 4.10 (2013-10-04)
 
     Add Autoconf macros for finding build flags for the TinyCDB library.
