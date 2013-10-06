@@ -27,7 +27,8 @@ dnl Sets the Automake conditional KRB5_USES_COM_ERR saying whether we use
 dnl com_err, since if we're also linking with AFS libraries, we may have to
 dnl change library ordering in that case.
 dnl
-dnl Depends on RRA_ENABLE_REDUCED_DEPENDS and RRA_SET_LDFLAGS.
+dnl Depends on RRA_KRB5_CONFIG, RRA_ENABLE_REDUCED_DEPENDS, and
+dnl RRA_SET_LDFLAGS.
 dnl
 dnl Also provides RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_FREE_ARGS, which checks
 dnl whether krb5_get_init_creds_opt_free takes one argument or two.  Defines
