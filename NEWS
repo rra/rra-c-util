@@ -15,6 +15,10 @@ rra-c-util 4.11 (unreleased)
     strings in network_bind_all and network_connect_host, and use the
     correct format for the port number for the latter.
 
+    Check the return status of vsnprintf in the syslog message handlers
+    for die, warn, and friends, and report an error with warn if vsnprintf
+    fails.
+
     In the vasprintf replacement, preserve errno if snprintf fails when
     formatting the string into the newly-allocated buffer.
 
