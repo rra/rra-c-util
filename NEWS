@@ -11,6 +11,9 @@ rra-c-util 4.11 (unreleased)
     were found during the configure process.  This parallels when
     HAVE_KERBEROS is defined.
 
+    In the vasprintf replacement, preserve errno if snprintf fails when
+    formatting the string into the newly-allocated buffer.
+
 rra-c-util 4.10 (2013-10-04)
 
     Add Autoconf macros for finding build flags for the TinyCDB library.
