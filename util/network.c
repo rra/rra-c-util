@@ -250,7 +250,7 @@ network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
 {
     struct addrinfo hints, *addrs, *addr;
     unsigned int size;
-    int error;
+    int status;
     socket_type fd;
     char service[16], name[INET6_ADDRSTRLEN];
 
@@ -261,10 +261,14 @@ network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
-    snprintf(service, sizeof(service), "%hu", port);
-    error = getaddrinfo(NULL, service, &hints, &addrs);
-    if (error < 0) {
-        warn("getaddrinfo failed: %s", gai_strerror(error));
+    status = snprintf(service, sizeof(service), "%hu", port);
+    if (status < 0 || (size_t) status > sizeof(service)) {
+        warn("cannot convert port %hu to string", port);
+        return;
+    }
+    status = getaddrinfo(NULL, service, &hints, &addrs);
+    if (status < 0) {
+        warn("getaddrinfo failed: %s", gai_strerror(status));
         return;
     }
 
@@ -522,12 +526,18 @@ network_connect_host(const char *host, unsigned short port,
     struct addrinfo hints, *ai;
     char portbuf[16];
     socket_type fd;
-    int oerrno;
+    int status, oerrno;
 
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
-    snprintf(portbuf, sizeof(portbuf), "%d", port);
+    status = snprintf(portbuf, sizeof(portbuf), "%hu", port);
+    if (status > 0 && (size_t) status > sizeof(portbuf)) {
+        status = -1;
+        errno = EOVERFLOW;
+    }
+    if (status < 0)
+        return INVALID_SOCKET;
     if (getaddrinfo(host, portbuf, &hints, &ai) != 0)
         return INVALID_SOCKET;
     fd = network_connect(ai, source, timeout);

@@ -11,6 +11,10 @@ rra-c-util 4.11 (unreleased)
     were found during the configure process.  This parallels when
     HAVE_KERBEROS is defined.
 
+    Check the return status of snprintf when converting port numbers to
+    strings in network_bind_all and network_connect_host, and use the
+    correct format for the port number for the latter.
+
     In the vasprintf replacement, preserve errno if snprintf fails when
     formatting the string into the newly-allocated buffer.
 
