@@ -22,18 +22,18 @@
 
 #include <pam-util/vector.h>
 #include <tests/tap/basic.h>
+#include <tests/tap/string.h>
 
 
 int
 main(void)
 {
     struct vector *vector, *ovector, *copy;
-    const char cstring[] = "This is a\ttest.  ";
-    char *string;
-    char buffer[BUFSIZ];
-    const char * const env[] = { buffer, NULL };
+    char *command, *string;
+    const char *env[2];
     pid_t child;
     size_t i;
+    const char cstring[] = "This is a\ttest.  ";
 
     plan(60);
 
@@ -111,8 +111,8 @@ main(void)
     vector = vector_new();
     ok(vector_add(vector, "/bin/sh"), "vector_add succeeds");
     ok(vector_add(vector, "-c"), "vector_add succeeds");
-    snprintf(buffer, sizeof(buffer), "echo ok %lu - vector_exec", testnum++);
-    ok(vector_add(vector, buffer), "vector_add succeeds");
+    basprintf(&command, "echo ok %lu - vector_exec", testnum++);
+    ok(vector_add(vector, command), "vector_add succeeds");
     child = fork();
     if (child < 0)
         sysbail("unable to fork");
@@ -121,13 +121,16 @@ main(void)
             sysdiag("unable to exec /bin/sh");
     waitpid(child, NULL, 0);
     vector_free(vector);
+    free(command);
 
     vector = vector_new();
     ok(vector_add(vector, "/bin/sh"), "vector_add succeeds");
     ok(vector_add(vector, "-c"), "vector_add succeeds");
     ok(vector_add(vector, "echo ok $NUMBER - vector_exec_env"),
        "vector_add succeeds");
-    snprintf(buffer, sizeof(buffer), "NUMBER=%lu", testnum++);
+    basprintf(&string, "NUMBER=%lu", testnum++);
+    env[0] = string;
+    env[1] = NULL;
     child = fork();
     if (child < 0)
         sysbail("unable to fork");
@@ -136,6 +139,7 @@ main(void)
             sysdiag("unable to exec /bin/sh");
     waitpid(child, NULL, 0);
     vector_free(vector);
+    free(string);
 
     return 0;
 }
