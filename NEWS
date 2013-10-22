@@ -11,6 +11,11 @@ rra-c-util 4.11 (unreleased)
     were found during the configure process.  This parallels when
     HAVE_KERBEROS is defined.
 
+    In xasprintf and xvasprintf, distinguish between failure to allocate
+    memory and failure to format the output.  Report the latter by passing
+    0 to the failure handler, and special-case that in the default failure
+    handler to report a different error message.
+
     Check the return status of snprintf when converting port numbers to
     strings in network_bind_all and network_connect_host, and use the
     correct format for the port number for the latter.

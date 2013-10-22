@@ -49,12 +49,14 @@ xmalloc_error_handler can be set to some other function of the caller's
 choice to change the failure behavior.  That function will be passed the
 name of the memory allocation function that failed, the size of the failed
 allocation, the source file where the allocation call was, and the line
-number where the allocation call was.  It does not return anything.  If
-this callback doesn't terminate the program, the memory allocation will be
-retried after it returns.  If you choose to write a handler that doesn't
-terminate the program (if, for example, there is something that can be
-done to free up memory), be sure that you don't inadvertently cause an
-infinite loop of retried, failing memory allocations.
+number where the allocation call was.  The size of the failed
+authentication will be 0 if the failure was some non-memory-related
+failure from xasprintf() or xvasprintf().  It does not return anything.
+If this callback doesn't terminate the program, the memory allocation will
+be retried after it returns.  If you choose to write a handler that
+doesn't terminate the program (if, for example, there is something that
+can be done to free up memory), be sure that you don't inadvertently cause
+an infinite loop of retried, failing memory allocations.
 
 =head1 RETURN VALUE
 
@@ -92,7 +94,7 @@ Russ Allbery <rra@stanford.edu>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2012 The Board of Trustees of the Leland Stanford Junior
+Copyright 2012, 2013 The Board of Trustees of the Leland Stanford Junior
 University
 
 Copying and distribution of this file, with or without modification, are

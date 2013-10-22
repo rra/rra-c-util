@@ -58,7 +58,7 @@
  * The canonical version of this file is maintained in the rra-c-util package,
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
- * Copyright 2012
+ * Copyright 2012, 2013
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006
  *     by Internet Systems Consortium, Inc. ("ISC")
@@ -94,8 +94,12 @@
 void
 xmalloc_fail(const char *function, size_t size, const char *file, int line)
 {
-    sysdie("failed to %s %lu bytes at %s line %d", function,
-           (unsigned long) size, file, line);
+    if (size == 0)
+        sysdie("failed to format output with %s at %s line %d", function,
+               file, line);
+    else
+        sysdie("failed to %s %lu bytes at %s line %d", function,
+               (unsigned long) size, file, line);
 }
 
 /* Assign to this variable to choose a handler other than the default. */
@@ -206,7 +210,9 @@ x_vasprintf(char **strp, const char *fmt, va_list args, const char *file,
         va_copy(args_copy, args);
         status = vsnprintf(NULL, 0, fmt, args_copy);
         va_end(args_copy);
-        (*xmalloc_error_handler)("vasprintf", status + 1, file, line);
+        if (status < 0)
+            status = 0;
+        (*xmalloc_error_handler)("vasprintf", status, file, line);
         va_copy(args_copy, args);
         status = vasprintf(strp, fmt, args_copy);
         va_end(args_copy);
@@ -229,7 +235,9 @@ x_asprintf(char **strp, const char *file, int line, const char *fmt, ...)
         va_copy(args_copy, args);
         status = vsnprintf(NULL, 0, fmt, args_copy);
         va_end(args_copy);
-        (*xmalloc_error_handler)("asprintf", status + 1, file, line);
+        if (status < 0)
+            status = 0;
+        (*xmalloc_error_handler)("asprintf", status, file, line);
         va_copy(args_copy, args);
         status = vasprintf(strp, fmt, args_copy);
         va_end(args_copy);
@@ -250,7 +258,9 @@ x_asprintf(char **strp, const char *fmt, ...)
         va_copy(args_copy, args);
         status = vsnprintf(NULL, 0, fmt, args_copy);
         va_end(args_copy);
-        (*xmalloc_error_handler)("asprintf", status + 1, __FILE__, __LINE__);
+        if (status < 0)
+            status = 0;
+        (*xmalloc_error_handler)("asprintf", status, __FILE__, __LINE__);
         va_copy(args_copy, args);
         status = vasprintf(strp, fmt, args_copy);
         va_end(args_copy);

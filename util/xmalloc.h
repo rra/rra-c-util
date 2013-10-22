@@ -97,7 +97,11 @@ void x_asprintf(char **, const char *, ...)
     __attribute__((__nonnull__, __format__(printf, 2, 3)));
 #endif
 
-/* Failure handler takes the function, the size, the file, and the line. */
+/*
+ * Failure handler takes the function, the size, the file, and the line.  The
+ * size will be zero if the failure was due to some failure in snprintf
+ * instead of a memory allocation failure.
+ */
 typedef void (*xmalloc_handler_type)(const char *, size_t, const char *, int);
 
 /* The default error handler. */
