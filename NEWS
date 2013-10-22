@@ -14,6 +14,9 @@ rra-c-util 4.11 (unreleased)
     In the vasprintf replacement, preserve errno if snprintf fails when
     formatting the string into the newly-allocated buffer.
 
+    Check the return status of snprintf in the getnameinfo and inet_ntop
+    replacement functions instead of assuming that it will always succeed.
+
 rra-c-util 4.10 (2013-10-04)
 
     Add Autoconf macros for finding build flags for the TinyCDB library.
