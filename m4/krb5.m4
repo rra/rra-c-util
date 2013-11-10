@@ -19,13 +19,12 @@ dnl macros, their values will be added to whatever the macros discover.
 dnl
 dnl Provides the RRA_LIB_KRB5_OPTIONAL macro, which should be used if Kerberos
 dnl support is optional.  In this case, Kerberos libraries are mandatory if
-dnl --with-krb5 or related flags are given, and will not be probed for if
-dnl --without-krb5 is given.  Otherwise, they'll be probed for, and
-dnl rra_use_kerberos will be set to true if they're found and not set
-dnl otherwise.  The substitution variables will always be set, but they will
+dnl --with-krb5 is given, and will not be probed for if --without-krb5 is
+dnl given.  Otherwise, they'll be probed for but will not be required.
+dnl Defines HAVE_KERBEROS and sets rra_use_kerberos to true if the libraries
+dnl are found.  The substitution variables will always be set, but they will
 dnl be empty unless Kerberos libraries are found and the user did not disable
-dnl Kerberos support.  Similarly, HAVE_KERBEROS will be defined if Kerberos
-dnl libraries are found and the user didn't disable Kerberos support.
+dnl Kerberos support.
 dnl
 dnl Sets the Automake conditional KRB5_USES_COM_ERR saying whether we use
 dnl com_err, since if we're also linking with AFS libraries, we may have to
