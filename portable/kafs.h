@@ -42,7 +42,7 @@
 #define PORTABLE_KAFS_H 1
 
 #include <config.h>
-#ifdef HAVE_KERBEROS
+#ifdef HAVE_KRB5
 # include <portable/krb5.h>
 #endif
 #include <portable/macros.h>

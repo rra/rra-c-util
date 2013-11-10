@@ -11,8 +11,8 @@ dnl KRB5_CPPFLAGS, KRB5_LDFLAGS, and KRB5_LIBS.  Also provides
 dnl RRA_LIB_KRB5_SWITCH to set CPPFLAGS, LDFLAGS, and LIBS to include the
 dnl Kerberos libraries, saving the current values first, and
 dnl RRA_LIB_KRB5_RESTORE to restore those settings to before the last
-dnl RRA_LIB_KRB5_SWITCH.  HAVE_KERBEROS will always be defined if RRA_LIB_KRB5
-dnl is used.
+dnl RRA_LIB_KRB5_SWITCH.  HAVE_KRB5 will always be defined if RRA_LIB_KRB5 is
+dnl used.
 dnl
 dnl If KRB5_CPPFLAGS, KRB5_LDFLAGS, or KRB5_LIBS are set before calling these
 dnl macros, their values will be added to whatever the macros discover.
@@ -21,9 +21,9 @@ dnl Provides the RRA_LIB_KRB5_OPTIONAL macro, which should be used if Kerberos
 dnl support is optional.  In this case, Kerberos libraries are mandatory if
 dnl --with-krb5 is given, and will not be probed for if --without-krb5 is
 dnl given.  Otherwise, they'll be probed for but will not be required.
-dnl Defines HAVE_KERBEROS and sets rra_use_kerberos to true if the libraries
-dnl are found.  The substitution variables will always be set, but they will
-dnl be empty unless Kerberos libraries are found and the user did not disable
+dnl Defines HAVE_KRB5 and sets rra_use_KRB5 to true if the libraries are
+dnl found.  The substitution variables will always be set, but they will be
+dnl empty unless Kerberos libraries are found and the user did not disable
 dnl Kerberos support.
 dnl
 dnl Sets the Automake conditional KRB5_USES_COM_ERR saying whether we use
@@ -258,7 +258,7 @@ AC_DEFUN([RRA_LIB_KRB5],
 [rra_krb5_root=
  rra_krb5_libdir=
  rra_krb5_includedir=
- rra_use_kerberos=true
+ rra_use_KRB5=true
  AC_SUBST([KRB5_CPPFLAGS])
  AC_SUBST([KRB5_LDFLAGS])
  AC_SUBST([KRB5_LIBS])
@@ -279,14 +279,14 @@ AC_DEFUN([RRA_LIB_KRB5],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_krb5_libdir="$withval"])])
  _RRA_LIB_KRB5_INTERNAL([true])
- AC_DEFINE([HAVE_KERBEROS], 1, [Define to enable Kerberos features.])])
+ AC_DEFINE([HAVE_KRB5], 1, [Define to enable Kerberos features.])])
 
 dnl The main macro for packages with optional Kerberos support.
 AC_DEFUN([RRA_LIB_KRB5_OPTIONAL],
 [rra_krb5_root=
  rra_krb5_libdir=
  rra_krb5_includedir=
- rra_use_kerberos=
+ rra_use_KRB5=
  AC_SUBST([KRB5_CPPFLAGS])
  AC_SUBST([KRB5_LDFLAGS])
  AC_SUBST([KRB5_LIBS])
@@ -295,9 +295,9 @@ AC_DEFUN([RRA_LIB_KRB5_OPTIONAL],
     [AS_HELP_STRING([--with-krb5@<:@=DIR@:>@],
         [Location of Kerberos headers and libraries])],
     [AS_IF([test x"$withval" = xno],
-        [rra_use_kerberos=false],
+        [rra_use_KRB5=false],
         [AS_IF([test x"$withval" != xyes], [rra_krb5_root="$withval"])
-         rra_use_kerberos=true])])
+         rra_use_KRB5=true])])
  AC_ARG_WITH([krb5-include],
     [AS_HELP_STRING([--with-krb5-include=DIR],
         [Location of Kerberos headers])],
@@ -309,14 +309,14 @@ AC_DEFUN([RRA_LIB_KRB5_OPTIONAL],
     [AS_IF([test x"$withval" != xyes && test x"$withval" != xno],
         [rra_krb5_libdir="$withval"])])
 
- AS_IF([test x"$rra_use_kerberos" != xfalse],
-     [AS_IF([test x"$rra_use_kerberos" = xtrue],
+ AS_IF([test x"$rra_use_KRB5" != xfalse],
+     [AS_IF([test x"$rra_use_KRB5" = xtrue],
          [_RRA_LIB_KRB5_INTERNAL([true])],
          [_RRA_LIB_KRB5_INTERNAL([false])])],
      [AM_CONDITIONAL([KRB5_USES_COM_ERR], [false])])
  AS_IF([test x"$KRB5_LIBS" != x],
-    [rra_use_kerberos=true
-     AC_DEFINE([HAVE_KERBEROS], 1, [Define to enable Kerberos features.])])])
+    [rra_use_KRB5=true
+     AC_DEFINE([HAVE_KRB5], 1, [Define to enable Kerberos features.])])])
 
 dnl Source used by RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_FREE_ARGS.
 AC_DEFUN([_RRA_FUNC_KRB5_OPT_FREE_ARGS_SOURCE], [RRA_INCLUDES_KRB5] [[

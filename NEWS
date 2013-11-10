@@ -2,6 +2,12 @@
 
 rra-c-util 4.11 (unreleased)
 
+    RRA_LIB_KRB5 and RRA_LIB_KRB5_OPTIONAL now define HAVE_KRB5 instead of
+    HAVE_KERBEROS and set rra_use_KRB5 instead of rra_use_kerberos, for
+    consistency with other macros, with the macro names, and with the
+    other shell variables those macros set.  All utility code, libraries,
+    and tests included in rra-c-util have been updated accordingly.
+
     Don't require use of Automake when using the Kerberos Autoconf macros.
     The AM_CONDITIONAL for the use of com_err is now ignored if Automake
     is not in use.

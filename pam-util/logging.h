@@ -32,7 +32,7 @@
 
 #include <config.h>
 #include <portable/macros.h>
-#ifdef HAVE_KERBEROS
+#ifdef HAVE_KRB5
 # include <portable/krb5.h>
 #endif
 #include <portable/pam.h>
@@ -76,7 +76,7 @@ void putil_debug_pam(struct pam_args *, int, const char *, ...)
  * report the last Kerberos error.  These are only available if built with
  * Kerberos support.
  */
-#ifdef HAVE_KERBEROS
+#ifdef HAVE_KRB5
 void putil_crit_krb5(struct pam_args *, int, const char *, ...)
     __attribute__((__format__(printf, 3, 4)));
 void putil_err_krb5(struct pam_args *, int, const char *, ...)

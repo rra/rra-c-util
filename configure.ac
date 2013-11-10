@@ -82,9 +82,6 @@ AC_CHECK_FUNCS([krb5_get_renewed_creds], [],
 AC_LIBOBJ([krb5-extra])
 RRA_LIB_KRB5_RESTORE
 
-dnl Make sure we build with Kerberos support where it's optional.
-AC_DEFINE([HAVE_KERBEROS], 1, [Define to enable Kerberos features.])
-
 dnl Probe for GSS-API.  This is only needed for packages that use GSS-API.
 dnl The mechanism probe is not included in RRA_LIB_GSSAPI since it requires
 dnl a replacement source file and is only needed for packages that need to

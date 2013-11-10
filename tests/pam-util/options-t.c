@@ -44,7 +44,7 @@
 struct pam_config {
     struct vector *cells;
     bool debug;
-#ifdef HAVE_KERBEROS
+#ifdef HAVE_KRB5
     krb5_deltat expires;
 #else
     long expires;
@@ -150,7 +150,7 @@ main(void)
     const char *argv_bool[2] = { NULL, NULL };
     const char *argv_err[2] = { NULL, NULL };
     const char *argv_empty[] = { NULL };
-#ifdef HAVE_KERBEROS
+#ifdef HAVE_KRB5
     const char *argv_all[] = {
         "cells=stanford.edu,ir.stanford.edu", "debug", "expires=1d",
         "ignore_root", "minimum_uid=1000", "program=/bin/true"
@@ -332,7 +332,7 @@ main(void)
     config_free(args->config);
     args->config = NULL;
 
-#ifdef HAVE_KERBEROS
+#ifdef HAVE_KRB5
 
     /* Test for Kerberos krb5.conf option parsing. */
     krb5conf = test_file_path("data/krb5.conf");
@@ -449,7 +449,7 @@ main(void)
 
     test_file_path_free(krb5conf);
 
-#else /* !HAVE_KERBEROS */
+#else /* !HAVE_KRB5 */
 
     skip_block(37, "Kerberos support not configured");
 
