@@ -11,6 +11,10 @@ rra-c-util 4.11 (unreleased)
     libraries are found at configure time, paralleling how the HAVE_* C
     preprocessor variables are defined.
 
+    RRA_LIB_OPENSSL and RRA_LIB_OPENSSL_OPTIONAL now define HAVE_OPENSSL
+    instead of HAVE_SSL if the library is found to make the define
+    consistent with the macro names and shell variables.
+
     In xasprintf and xvasprintf, distinguish between failure to allocate
     memory and failure to format the output.  Report the latter by passing
     0 to the failure handler, and special-case that in the default failure

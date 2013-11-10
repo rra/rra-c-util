@@ -70,7 +70,7 @@ AC_DEFUN([RRA_LIB_OPENSSL],
  RRA_LIB_HELPER_WITH([openssl], [OpenSSL], [OPENSSL])
  _RRA_LIB_OPENSSL_INTERNAL([true])
  rra_use_OPENSSL=true
- AC_DEFINE([HAVE_SSL], 1, [Define if libssl is available.])])
+ AC_DEFINE([HAVE_OPENSSL], 1, [Define if libssl is available.])])
 
 dnl The main macro for packages with optional OpenSSL support.
 AC_DEFUN([RRA_LIB_OPENSSL_OPTIONAL],
@@ -82,4 +82,4 @@ AC_DEFUN([RRA_LIB_OPENSSL_OPTIONAL],
         [_RRA_LIB_OPENSSL_INTERNAL([false])])])
  AS_IF([test x"$OPENSSL_LIBS" != x],
     [rra_use_OPENSSL=true
-     AC_DEFINE([HAVE_SSL], 1, [Define if libssl is available.])])])
+     AC_DEFINE([HAVE_OPENSSL], 1, [Define if libssl is available.])])])
