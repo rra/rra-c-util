@@ -52,18 +52,26 @@ AC_DEFUN([_RRA_LIB_OPENSSL_INTERNAL],
  AC_SUBST([CRYPTO_LDFLAGS])
  AC_SUBST([CRYPTO_LIBS])
  RRA_LIB_OPENSSL_SWITCH
- AC_CHECK_LIB([crypto], [AES_cbc_encrypt], [CRYPTO_LIBS=-lcrypto],
+ rra_openssl_extra=
+ LIBS=
+ AS_IF([test x"$rra_reduced_depends" != xtrue],
+    [AC_SEARCH_LIBS([dlopen], [dl])])
+ rra_openssl_extra="$LIBS"
+ LIBS="$rra_OPENSSL_save_LIBS"
+ AC_CHECK_LIB([crypto], [AES_cbc_encrypt],
+    [CRYPTO_LIBS="-lcrypto $rra_openssl_extra"],
     [AS_IF([test x"$1" = xtrue],
-        [AC_MSG_ERROR([cannot find usable OpenSSL crypto library])])])
+        [AC_MSG_ERROR([cannot find usable OpenSSL crypto library])])],
+    [$rra_openssl_extra])
  AS_IF([test x"$rra_reduced_depends" = xtrue],
+    [AC_CHECK_LIB([ssl], [SSL_library_init], [OPENSSL_LIBS=-lssl],
+        [AS_IF([test x"$1" = xtrue],
+            [AC_MSG_ERROR([cannot find usable OpenSSL library])])])],
     [AC_CHECK_LIB([ssl], [SSL_library_init],
         [OPENSSL_LIBS="-lssl $CRYPTO_LIBS"],
         [AS_IF([test x"$1" = xtrue],
             [AC_MSG_ERROR([cannot find usable OpenSSL library])])],
-        [$CRYPTO_LIBS])],
-    [AC_CHECK_LIB([ssl], [SSL_library_init], [OPENSSL_LIBS=-lssl],
-        [AS_IF([test x"$1" = xtrue],
-            [AC_MSG_ERROR([cannot find usable OpenSSL library])])])])
+        [$CRYPTO_LIBS])])
  RRA_LIB_OPENSSL_RESTORE])
 
 dnl The main macro for packages with mandatory OpenSSL support.

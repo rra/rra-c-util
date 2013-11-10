@@ -20,6 +20,11 @@ rra-c-util 4.11 (unreleased)
     default CPPFLAGS, LDFLAGS, and LIBS after probing for the libraries.
     Patch from Julien ÉLIE.
 
+    RRA_LIB_OPENSSL and RRA_LIB_OPENSSL_OPTIONAL now probe for -ldl first
+    and add it to the dependency libraries unless --enable-reduced-depends
+    is given.  This is required to link with OpenSSL on AIX.  Reported by
+    Julien ÉLIE.
+
     In xasprintf and xvasprintf, distinguish between failure to allocate
     memory and failure to format the output.  Report the latter by passing
     0 to the failure handler, and special-case that in the default failure
