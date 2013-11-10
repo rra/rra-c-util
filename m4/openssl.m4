@@ -15,7 +15,7 @@ dnl settings to before the last RRA_LIB_OPENSSL_SWITCH or
 dnl RRA_LIB_CRYPTO_SWITCH.  Defines HAVE_OPENSSL and sets rra_use_OPENSSL to
 dnl true if the library is found.
 dnl
-dnl Depends on the lib-helper.m4 framework.
+dnl Depends on RRA_ENABLE_REDUCED_DEPENDS and the lib-helper.m4 framework.
 dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
@@ -43,7 +43,8 @@ dnl Checks if the OpenSSL and crypto libraries are present.  The single
 dnl argument, if "true", says to fail if the OpenSSL SSL library could not be
 dnl found.
 AC_DEFUN([_RRA_LIB_OPENSSL_INTERNAL],
-[RRA_LIB_HELPER_PATHS([OPENSSL])
+[AC_REQUIRE([RRA_ENABLE_REDUCED_DEPENDS])
+ RRA_LIB_HELPER_PATHS([OPENSSL])
  CRYPTO_CPPFLAGS="$OPENSSL_CPPFLAGS"
  CRYPTO_LDFLAGS="$OPENSSL_LDFLAGS"
  CRYPTO_LIBS=
