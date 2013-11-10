@@ -15,6 +15,11 @@ rra-c-util 4.11 (unreleased)
     instead of HAVE_SSL if the library is found to make the define
     consistent with the macro names and shell variables.
 
+    RRA_LIB_OPENSSL_OPTIONAL no longer aborts if libcrypto could not be
+    found, and both it and RRA_LIB_OPENSSL now properly restore the
+    default CPPFLAGS, LDFLAGS, and LIBS after probing for the libraries.
+    Patch from Julien ÉLIE.
+
     In xasprintf and xvasprintf, distinguish between failure to allocate
     memory and failure to format the output.  Report the latter by passing
     0 to the failure handler, and special-case that in the default failure
