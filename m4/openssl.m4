@@ -12,7 +12,8 @@ dnl RRA_LIB_CRYPTO_SWITCH to set CPPFLAGS, LDFLAGS, and LIBS to include the
 dnl SSL or crypto libraries, saving the current values first, and
 dnl RRA_LIB_OPENSSL_RESTORE and RRA_LIB_CRYPTO_RESTORE to restore those
 dnl settings to before the last RRA_LIB_OPENSSL_SWITCH or
-dnl RRA_LIB_CRYPTO_SWITCH.
+dnl RRA_LIB_CRYPTO_SWITCH.  Defines HAVE_OPENSSL and sets rra_use_OPENSSL to
+dnl true if the library is found.
 dnl
 dnl Depends on the lib-helper.m4 framework.
 dnl
@@ -67,6 +68,7 @@ AC_DEFUN([RRA_LIB_OPENSSL],
 [RRA_LIB_HELPER_VAR_INIT([OPENSSL])
  RRA_LIB_HELPER_WITH([openssl], [OpenSSL], [OPENSSL])
  _RRA_LIB_OPENSSL_INTERNAL([true])
+ rra_use_OPENSSL=true
  AC_DEFINE([HAVE_SSL], 1, [Define if libssl is available.])])
 
 dnl The main macro for packages with optional OpenSSL support.
@@ -78,4 +80,5 @@ AC_DEFUN([RRA_LIB_OPENSSL_OPTIONAL],
         [_RRA_LIB_OPENSSL_INTERNAL([true])],
         [_RRA_LIB_OPENSSL_INTERNAL([false])])])
  AS_IF([test x"$OPENSSL_LIBS" != x],
-    [AC_DEFINE([HAVE_SSL], 1, [Define if libssl is available.])])])
+    [rra_use_OPENSSL=true
+     AC_DEFINE([HAVE_SSL], 1, [Define if libssl is available.])])])

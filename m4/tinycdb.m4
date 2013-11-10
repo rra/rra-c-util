@@ -8,8 +8,8 @@ dnl Provides the macros RRA_LIB_CDB and RRA_LIB_CDB_OPTIONAL and sets the
 dnl substitution variables CDB_CPPFLAGS, CDB_LDFLAGS, and CDB_LIBS.  Also
 dnl provides RRA_LIB_CDB_SWITCH to set CPPFLAGS, LDFLAGS, and LIBS to include
 dnl the TinyCDB libraries, saving the current values, and RRA_LIB_CDB_RESTORE
-dnl to restore those settings to before the last RRA_LIB_CDB_SWITCH.  Define
-dnl HAVE_CDB if the library is found.
+dnl to restore those settings to before the last RRA_LIB_CDB_SWITCH.  Defines
+dnl HAVE_CDB and sets rra_use_CDB to true if the library is found.
 dnl
 dnl Depends on the lib-helper.m4 framework.
 dnl
@@ -49,6 +49,7 @@ AC_DEFUN([RRA_LIB_CDB],
 [RRA_LIB_HELPER_VAR_INIT([CDB])
  RRA_LIB_HELPER_WITH([tinycdb], [TinyCDB], [CDB])
  _RRA_LIB_CDB_INTERNAL([true])
+ rra_use_CDB=true
  AC_DEFINE([HAVE_CDB], 1, [Define if libcdb is available.])])
 
 dnl The main macro for packages with optional TinyCDB support.
@@ -60,4 +61,5 @@ AC_DEFUN([RRA_LIB_CDB_OPTIONAL],
         [_RRA_LIB_CDB_INTERNAL([true])],
         [_RRA_LIB_CDB_INTERNAL([false])])])
  AS_IF([test x"$CDB_LIBS" != x],
-    [AC_DEFINE([HAVE_CDB], 1, [Define if libcdb is available.])])])
+    [rra_use_CDB=true
+     AC_DEFINE([HAVE_CDB], 1, [Define if libcdb is available.])])])

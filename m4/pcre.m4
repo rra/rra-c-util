@@ -9,9 +9,9 @@ dnl Provides the macro RRA_LIB_PCRE_OPTIONAL and sets the substitution
 dnl variables PCRE_CPPFLAGS, PCRE_LDFLAGS, and PCRE_LIBS.  Also provides
 dnl RRA_LIB_PCRE_SWITCH to set CPPFLAGS, LDFLAGS, and LIBS to include the PCRE
 dnl libraries, saving the current values first, and RRA_LIB_PCRE_RESTORE to
-dnl restore those settings to before the last RRA_LIB_PCRE_SWITCH.  HAVE_PCRE
-dnl will be defined if PCRE is found.  If it isn't found, the substitution
-dnl variables will be empty.
+dnl restore those settings to before the last RRA_LIB_PCRE_SWITCH.  Defines
+dnl HAVE_PCRE and sets rra_use_pcre to true if PCRE is found.  If it isn't
+dnl found, the substitution variables will be empty.
 dnl
 dnl Depends on RRA_SET_LDFLAGS.
 dnl
@@ -110,7 +110,7 @@ AC_DEFUN([RRA_LIB_PCRE_OPTIONAL],
 [rra_pcre_root=
  rra_pcre_libdir=
  rra_pcre_includedir=
- rra_with_pcre=
+ rra_use_pcre=
  PCRE_CPPFLAGS=
  PCRE_LDFLAGS=
  PCRE_LIBS=
@@ -141,5 +141,6 @@ AC_DEFUN([RRA_LIB_PCRE_OPTIONAL],
          [_RRA_LIB_PCRE_INTERNAL([true])],
          [_RRA_LIB_PCRE_INTERNAL([false])])])
  AS_IF([test x"$PCRE_LIBS" != x],
-    [AC_DEFINE([HAVE_PCRE], 1,
+    [rra_use_pcre=true
+     AC_DEFINE([HAVE_PCRE], 1,
         [Define to 1 if the PCRE library is present.])])])

@@ -6,10 +6,10 @@ rra-c-util 4.11 (unreleased)
     The AM_CONDITIONAL for the use of com_err is now ignored if Automake
     is not in use.
 
-    RRA_LIB_KRB5_OPTIONAL now sets $rra_use_kerberos if no --with-krb5 or
-    --without-krb5 flag was passed to configure but Kerberos libraries
-    were found during the configure process.  This parallels when
-    HAVE_KERBEROS is defined.
+    All *_OPTIONAL m4 macros now set the corresponding rra_use_* shell
+    variable to true if no explicit configure flags are given but the
+    libraries are found at configure time, paralleling how the HAVE_* C
+    preprocessor variables are defined.
 
     In xasprintf and xvasprintf, distinguish between failure to allocate
     memory and failure to format the output.  Report the latter by passing
