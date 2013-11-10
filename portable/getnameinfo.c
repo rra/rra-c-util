@@ -58,18 +58,18 @@ int test_getnameinfo(const struct sockaddr *, socklen_t, char *, socklen_t,
  * period.  If it does, try to copy it into the provided node buffer and set
  * status accordingly, returning true.  If not, return false.
  */
-static int
+static bool
 try_name(const char *name, char *node, socklen_t nodelen, int *status)
 {
     if (strchr(name, '.') == NULL)
-        return 0;
+        return false;
     if (strlen(name) + 1 > (size_t) nodelen)
         *status = EAI_OVERFLOW;
     else {
         strlcpy(node, name, nodelen);
         *status = 0;
     }
-    return 1;
+    return true;
 }
 
 
