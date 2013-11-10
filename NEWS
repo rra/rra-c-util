@@ -50,6 +50,11 @@ rra-c-util 4.11 (unreleased)
     Check the return status of snprintf in the getnameinfo and inet_ntop
     replacement functions instead of assuming that it will always succeed.
 
+    portable/socket.h now defines EAI_ADDRFAMILY to EAI_FAMILY if it's not
+    defined to let code compare against this obsolete error code
+    unconditionally.  Some older systems may have an EAI_ADDRFAMILY error
+    code distinct from EAI_FAMILY.
+
 rra-c-util 4.10 (2013-10-04)
 
     Add Autoconf macros for finding build flags for the TinyCDB library.
