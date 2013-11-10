@@ -91,8 +91,7 @@ AC_DEFUN([_RRA_LIB_PCRE_CHECK],
 dnl The core of the PCRE library checking.  The single argument, if "true",
 dnl says to fail if PCRE could not be found.
 AC_DEFUN([_RRA_LIB_PCRE_INTERNAL],
-[AC_REQUIRE([RRA_ENABLE_REDUCED_DEPENDS])
- AC_ARG_VAR([PCRE_CONFIG], [Path to pcre-config])
+[AC_ARG_VAR([PCRE_CONFIG], [Path to pcre-config])
  AS_IF([test x"$rra_pcre_root" != x && test -z "$PCRE_CONFIG"],
     [AS_IF([test -x "${rra_pcre_root}/bin/pcre-config"],
         [PCRE_CONFIG="${rra_pcre_root}/bin/pcre-config"])],
