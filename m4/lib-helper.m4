@@ -6,13 +6,13 @@ dnl CPPFLAGS, LDFLAGS, and LIBS shell substitution variables.  Most of them
 dnl take as one of the arguments the prefix string to use for variables, which
 dnl is usually something like "KRB5" or "GSSAPI".
 dnl
-dnl Depends on RRA_ENABLE_REDUCED_DEPENDS and RRA_SET_LDFLAGS.
+dnl Depends on RRA_SET_LDFLAGS.
 dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2011
+dnl Copyright 2011, 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
 dnl This file is free software; the authors give unlimited permission to copy
