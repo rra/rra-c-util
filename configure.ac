@@ -134,6 +134,14 @@ AC_DEFINE([MODULE_NAME], ["pam_example"],
 dnl Only required for the PAM test script facility.
 AC_CHECK_HEADER([regex.h], [AC_CHECK_FUNCS([regcomp])])
 
+dnl Run other optional library probing checks, even though they're unused by
+dnl the rra-c-util code itself, so that they're exercised during the
+dnl rra-c-util configure run.
+RRA_LIB_OPENSSL_OPTIONAL
+RRA_LIB_PCRE_OPTIONAL
+RRA_LIB_REMCTL_OPTIONAL
+RRA_LIB_CDB_OPTIONAL
+
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
 dnl only used by fdflag.
