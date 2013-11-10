@@ -52,6 +52,9 @@ dnl This file is free software; the authors give unlimited permission to copy
 dnl and/or distribute it, with or without modifications, as long as this
 dnl notice is preserved.
 
+dnl Ignore Automake conditionals if not using Automake.
+m4_define_default([AM_CONDITIONAL], [:])
+
 dnl Headers to include when probing for Kerberos library properties.
 AC_DEFUN([RRA_INCLUDES_KRB5], [[
 #if HAVE_KRB5_H
@@ -248,9 +251,8 @@ AC_DEFUN([_RRA_LIB_KRB5_INTERNAL],
          _RRA_LIB_KRB5_MANUAL([$1])])])
  rra_krb5_uses_com_err=false
  AS_CASE([$LIBS], [*-lcom_err*], [rra_krb5_uses_com_err=true])
- m4_ifdef([AM_CONDITIONAL],
-    [AM_CONDITIONAL([KRB5_USES_COM_ERR],
-        [test x"$rra_krb5_uses_com_err" = xtrue])])])
+ AM_CONDITIONAL([KRB5_USES_COM_ERR],
+    [test x"$rra_krb5_uses_com_err" = xtrue])])
 
 dnl The main macro for packages with mandatory Kerberos support.
 AC_DEFUN([RRA_LIB_KRB5],
@@ -312,8 +314,7 @@ AC_DEFUN([RRA_LIB_KRB5_OPTIONAL],
      [AS_IF([test x"$rra_use_kerberos" = xtrue],
          [_RRA_LIB_KRB5_INTERNAL([true])],
          [_RRA_LIB_KRB5_INTERNAL([false])])],
-     [m4_ifdef([AM_CONDITIONAL],
-         [AM_CONDITIONAL([KRB5_USES_COM_ERR], [false])])])
+     [AM_CONDITIONAL([KRB5_USES_COM_ERR], [false])])
  AS_IF([test x"$KRB5_LIBS" != x],
     [rra_use_kerberos=true
      AC_DEFINE([HAVE_KERBEROS], 1, [Define to enable Kerberos features.])])])
