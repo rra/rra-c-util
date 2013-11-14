@@ -8,6 +8,10 @@ rra-c-util 4.11 (unreleased)
     other shell variables those macros set.  All utility code, libraries,
     and tests included in rra-c-util have been updated accordingly.
 
+    RRA_LIB_KRB5_OPTIONAL now correctly configures the package to not use
+    Kerberos instead of failing if neither the new Kerberos error APIs nor
+    libcom_err could be found.
+
     Don't require use of Automake when using the Kerberos Autoconf macros.
     The AM_CONDITIONAL for the use of com_err is now ignored if Automake
     is not in use.
