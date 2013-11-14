@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.11 (unreleased)
+rra-c-util 4.11 (2013-11-14)
 
     RRA_LIB_KRB5 and RRA_LIB_KRB5_OPTIONAL now define HAVE_KRB5 instead of
     HAVE_KERBEROS and set rra_use_KRB5 instead of rra_use_kerberos, for
