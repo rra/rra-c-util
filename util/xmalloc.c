@@ -210,8 +210,7 @@ x_vasprintf(char **strp, const char *fmt, va_list args, const char *file,
         va_copy(args_copy, args);
         status = vsnprintf(NULL, 0, fmt, args_copy);
         va_end(args_copy);
-        if (status < 0)
-            status = 0;
+        status = (status < 0) ? 0 : status + 1;
         (*xmalloc_error_handler)("vasprintf", status, file, line);
         va_copy(args_copy, args);
         status = vasprintf(strp, fmt, args_copy);
@@ -235,8 +234,7 @@ x_asprintf(char **strp, const char *file, int line, const char *fmt, ...)
         va_copy(args_copy, args);
         status = vsnprintf(NULL, 0, fmt, args_copy);
         va_end(args_copy);
-        if (status < 0)
-            status = 0;
+        status = (status < 0) ? 0 : status + 1;
         (*xmalloc_error_handler)("asprintf", status, file, line);
         va_copy(args_copy, args);
         status = vasprintf(strp, fmt, args_copy);
@@ -258,8 +256,7 @@ x_asprintf(char **strp, const char *fmt, ...)
         va_copy(args_copy, args);
         status = vsnprintf(NULL, 0, fmt, args_copy);
         va_end(args_copy);
-        if (status < 0)
-            status = 0;
+        status = (status < 0) ? 0 : status + 1;
         (*xmalloc_error_handler)("asprintf", status, __FILE__, __LINE__);
         va_copy(args_copy, args);
         status = vasprintf(strp, fmt, args_copy);
