@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.12 (unreleased)
+
+    Fix a bug in the *_OPTIONAL version of all Autoconf macros using
+    lib-helper.m4 that would add yes/include and yes/lib to the compiler
+    and linker search paths.  Found by Julien ÉLIE.
+
 rra-c-util 4.11 (2013-11-14)
 
     RRA_LIB_KRB5 and RRA_LIB_KRB5_OPTIONAL now define HAVE_KRB5 instead of
