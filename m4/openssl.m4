@@ -15,6 +15,12 @@ dnl settings to before the last RRA_LIB_OPENSSL_SWITCH or
 dnl RRA_LIB_CRYPTO_SWITCH.  Defines HAVE_OPENSSL and sets rra_use_OPENSSL to
 dnl true if the library is found.
 dnl
+dnl Provides the RRA_LIB_OPENSSL_OPTIONAL macro, which should be used if
+dnl OpenSSL support is optional.  This macro will still set the substitution
+dnl variables and shell variables described above, but they'll be empty unless
+dnl OpenSSL libraries are detected.  HAVE_OPENSSL will be defined only if the
+dnl library is found.
+dnl
 dnl Depends on RRA_ENABLE_REDUCED_DEPENDS and the lib-helper.m4 framework.
 dnl
 dnl The canonical version of this file is maintained in the rra-c-util

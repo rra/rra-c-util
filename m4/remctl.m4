@@ -13,11 +13,11 @@ dnl RRA_LIB_REMCTL_RESTORE to restore those settings to before the last
 dnl RRA_LIB_REMCTL_SWITCH.  HAVE_REMCTL will always be defined if
 dnl RRA_LIB_REMCTL is used.
 dnl
-dnl Provides the RRA_LIB_REMCTL_OPTIONAL macro, which should be used if
-dnl Kerberos support is optional.  This macro will still always set the
-dnl substitution variables, but they'll be empty unless --with-remctl is
-dnl given.  Defines HAVE_REMCTL and sets rra_use_remctl to true if the remctl
-dnl library is found.
+dnl Provides the RRA_LIB_REMCTL_OPTIONAL macro, which should be used if remctl
+dnl support is optional.  This macro will still always set the substitution
+dnl variables described above, but they'll be empty unless remctl libraries
+dnl are found.  Defines HAVE_REMCTL and sets rra_use_remctl to true if the
+dnl remctl library is found.
 dnl
 dnl Depends on RRA_ENABLE_REDUCED_DEPENDS, RRA_SET_LDFLAGS, and
 dnl RRA_LIB_GSSAPI.
