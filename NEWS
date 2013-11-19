@@ -6,6 +6,10 @@ rra-c-util 4.12 (unreleased)
     lib-helper.m4 that would add yes/include and yes/lib to the compiler
     and linker search paths.  Found by Julien ÉLIE.
 
+    Add new RRA_LIB_SASL and RRA_LIB_SASL_OPTIONAL macros based on
+    Autoconf macros in INN.  Contributed by Julien ÉLIE.  Currently, these
+    only deal with Cyrus SASL, not GNU SASL.
+
 rra-c-util 4.11 (2013-11-14)
 
     RRA_LIB_KRB5 and RRA_LIB_KRB5_OPTIONAL now define HAVE_KRB5 instead of
