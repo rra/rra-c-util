@@ -10,6 +10,9 @@ rra-c-util 4.12 (unreleased)
     Autoconf macros in INN.  Contributed by Julien ÉLIE.  Currently, these
     only deal with Cyrus SASL, not GNU SASL.
 
+    Provide KADM5_MISSING_KRB5_CONF_PARAMS in portable/kadmin.h for kadmin
+    implementations that don't define it, such as Heimdal.
+
 rra-c-util 4.11 (2013-11-14)
 
     RRA_LIB_KRB5 and RRA_LIB_KRB5_OPTIONAL now define HAVE_KRB5 instead of
