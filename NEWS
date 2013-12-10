@@ -13,6 +13,11 @@ rra-c-util 4.12 (unreleased)
     Provide KADM5_MISSING_KRB5_CONF_PARAMS in portable/kadmin.h for kadmin
     implementations that don't define it, such as Heimdal.
 
+    Add test_tmpdir to Test::RRA::Automake.  This works the same as the
+    corresponding function in the C and shell TAP libraries: it creates a
+    temporary directory for tests to use, returns the path, and attempts
+    to remove the directory when the process exits.
+
     Add an ignore rule to the valgrind suppression file for memory
     allocated by dlopen on Linux, which appears to be unavoidable and not
     freed on dlclose.
