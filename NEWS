@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.12 (unreleased)
+rra-c-util 4.12 (2013-12-09)
 
     Fix a bug in the *_OPTIONAL version of all Autoconf macros using
     lib-helper.m4 that would add yes/include and yes/lib to the compiler

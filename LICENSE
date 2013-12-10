@@ -71,7 +71,7 @@ Files: configure.ac m4/apache.m4 m4/apr.m4 m4/aprutil.m4 m4/curl.m4
  m4/gssapi.m4 m4/inet-ntoa.m4 m4/kadm5clnt.m4 m4/kafs.m4 m4/krb5-config.m4
  m4/krb5.m4 m4/ld-version.m4 m4/ldap.m4 m4/lib-depends.m4 m4/lib-helper.m4
  m4/lib-pathname.m4 m4/openssl.m4 m4/pam-const.m4 m4/pcre.m4 m4/remctl.m4
- m4/snprintf.m4 m4/tinycdb.m4 m4/vamacros.m4
+ m4/sasl.m4 m4/snprintf.m4 m4/tinycdb.m4 m4/vamacros.m4
 Copyright: 1999-2001, 2003, 2007 Russ Allbery <eagle@eyrie.org>
   2002-2013 The Board of Trustees of the Leland Stanford Junior University
   2007-2008 Markus Moeller
