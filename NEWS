@@ -13,6 +13,10 @@ rra-c-util 4.12 (unreleased)
     Provide KADM5_MISSING_KRB5_CONF_PARAMS in portable/kadmin.h for kadmin
     implementations that don't define it, such as Heimdal.
 
+    Add an ignore rule to the valgrind suppression file for memory
+    allocated by dlopen on Linux, which appears to be unavoidable and not
+    freed on dlclose.
+
 rra-c-util 4.11 (2013-11-14)
 
     RRA_LIB_KRB5 and RRA_LIB_KRB5_OPTIONAL now define HAVE_KRB5 instead of
