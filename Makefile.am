@@ -15,7 +15,7 @@ EXTRA_DIST = .gitignore LICENSE autogen docs/api/xmalloc.3		    \
 	perl/t/docs/pod.t perl/t/docs/synopsis.t perl/t/style/coverage.t    \
 	perl/t/style/critic.t perl/t/style/minimum-version.t		    \
 	perl/t/style/strict.t tests/README tests/TESTS			    \
-	tests/data/generate-krb5-conf tests/data/krb5.conf		    \
+	tests/data/generate-krb5-conf tests/data/krb5-pam.conf		    \
 	tests/data/perl.conf tests/data/perlcriticrc tests/data/perltidyrc  \
 	tests/data/valgrind.supp tests/docs/pod-spelling-t tests/docs/pod-t \
 	tests/fakepam/README tests/kafs/basic-t tests/perl/critic-t	    \
