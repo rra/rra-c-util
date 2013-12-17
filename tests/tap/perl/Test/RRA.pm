@@ -149,7 +149,7 @@ Test::RRA - Support functions for Perl tests
     skip_unless_maintainer('Coding style tests');
 
     # Load modules, skipping the test if they're not available.
-    use_prereq('File::Slurp');
+    use_prereq('Perl6::Slurp', 'slurp');
     use_prereq('Test::Script::Run', '0.04');
 
 =head1 DESCRIPTION
