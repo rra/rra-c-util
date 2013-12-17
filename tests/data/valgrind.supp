@@ -37,7 +37,6 @@
    Memcheck:Leak
    fun:calloc
    fun:_dlerror_run
-   fun:dlopen*
 }
 {
    heimdal-krb5-init-context-once
