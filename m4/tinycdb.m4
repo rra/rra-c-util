@@ -25,7 +25,7 @@ dnl and/or distribute it, with or without modifications, as long as this
 dnl notice is preserved.
 
 dnl Save the current CPPFLAGS, LDFLAGS, and LIBS settings and switch to
-dnl versions that include the kadmin client flags.  Used as a wrapper, with
+dnl versions that include the TinyCDB flags.  Used as a wrapper, with
 dnl RRA_LIB_CDB_RESTORE, around tests.
 AC_DEFUN([RRA_LIB_CDB_SWITCH], [RRA_LIB_HELPER_SWITCH([CDB])])
 
