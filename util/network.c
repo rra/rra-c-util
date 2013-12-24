@@ -109,14 +109,14 @@ network_set_reuseaddr(socket_type fd)
  * (or INVALID_SOCKET on a failure).
  */
 socket_type
-network_bind_ipv4(const char *address, unsigned short port)
+network_bind_ipv4(int type, const char *address, unsigned short port)
 {
     socket_type fd;
     struct sockaddr_in server;
     struct in_addr addr;
 
     /* Create the socket. */
-    fd = socket(PF_INET, SOCK_STREAM, IPPROTO_IP);
+    fd = socket(PF_INET, type, IPPROTO_IP);
     if (fd == INVALID_SOCKET) {
         syswarn("cannot create IPv4 socket for %s,%hu", address, port);
         return INVALID_SOCKET;
@@ -158,7 +158,7 @@ network_bind_ipv4(const char *address, unsigned short port)
  */
 #if HAVE_INET6
 socket_type
-network_bind_ipv6(const char *address, unsigned short port)
+network_bind_ipv6(int type, const char *address, unsigned short port)
 {
     socket_type fd;
     struct sockaddr_in6 server;
@@ -168,7 +168,7 @@ network_bind_ipv6(const char *address, unsigned short port)
 #endif
 
     /* Create the socket. */
-    fd = socket(PF_INET6, SOCK_STREAM, IPPROTO_IP);
+    fd = socket(PF_INET6, type, IPPROTO_IP);
     if (fd == INVALID_SOCKET) {
         if (socket_errno != EAFNOSUPPORT && socket_errno != EPROTONOSUPPORT)
             syswarn("cannot create IPv6 socket for %s,%hu", address, port);
@@ -245,8 +245,9 @@ network_bind_ipv6(const char *address, unsigned short port)
  * the file descriptors and stores the count in the third argument.
  */
 #if HAVE_INET6
-void
-network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
+bool
+network_bind_all(int type, unsigned short port, socket_type **fds,
+                 unsigned int *count)
 {
     struct addrinfo hints, *addrs, *addr;
     unsigned int size;
@@ -260,16 +261,16 @@ network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
     memset(&hints, 0, sizeof(hints));
     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;
     hints.ai_family = AF_UNSPEC;
-    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_socktype = type;
     status = snprintf(service, sizeof(service), "%hu", port);
     if (status < 0 || (size_t) status > sizeof(service)) {
         warn("cannot convert port %hu to string", port);
-        return;
+        return false;
     }
     status = getaddrinfo(NULL, service, &hints, &addrs);
     if (status < 0) {
         warn("getaddrinfo failed: %s", gai_strerror(status));
-        return;
+        return false;
     }
 
     /*
@@ -281,9 +282,9 @@ network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
     for (addr = addrs; addr != NULL; addr = addr->ai_next) {
         network_sockaddr_sprint(name, sizeof(name), addr->ai_addr);
         if (addr->ai_family == AF_INET)
-            fd = network_bind_ipv4(name, port);
+            fd = network_bind_ipv4(type, name, port);
         else if (addr->ai_family == AF_INET6)
-            fd = network_bind_ipv6(name, port);
+            fd = network_bind_ipv6(type, name, port);
         else
             continue;
         if (fd != INVALID_SOCKET) {
@@ -296,14 +297,16 @@ network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
         }
     }
     freeaddrinfo(addrs);
+    return (*count > 0);
 }
 #else /* HAVE_INET6 */
-void
-network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
+bool
+network_bind_all(int type, unsigned short port, socket_type **fds,
+                 unsigned int *count)
 {
     socket_type fd;
 
-    fd = network_bind_ipv4("0.0.0.0", port);
+    fd = network_bind_ipv4(type, "0.0.0.0", port);
     if (fd >= 0) {
         *fds = xmalloc(sizeof(socket_type));
         *fds[0] = fd;
@@ -311,6 +314,7 @@ network_bind_all(unsigned short port, socket_type **fds, unsigned int *count)
     } else {
         *fds = NULL;
         *count = 0;
+        return false;
     }
 }
 #endif /* HAVE_INET6 */

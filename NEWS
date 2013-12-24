@@ -1,6 +1,13 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 4.13 (unreleased)
+rra-c-util 5.0 (unreleased)
+
+    The network_bind_* functions now take a socket type as an additional
+    argument so that they can be used with UDP-based services.
+
+    network_bind_all now returns a boolean, which will be false if no
+    sockets could be bound due to some error.  Callers may check this
+    instead of checking if the socket count is zero.
 
     vector_free and cvector_free now accept a NULL argument and silently
     do nothing.  This allows for more concise cleanup code.

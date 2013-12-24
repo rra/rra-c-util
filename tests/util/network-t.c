@@ -159,7 +159,7 @@ test_ipv4(const char *source)
     socket_type fd;
     pid_t child;
 
-    fd = network_bind_ipv4("127.0.0.1", 11119);
+    fd = network_bind_ipv4(SOCK_STREAM, "127.0.0.1", 11119);
     if (fd == INVALID_SOCKET)
         sysbail("cannot create or bind socket");
     if (listen(fd, 1) < 0) {
@@ -194,7 +194,7 @@ test_ipv6(const char *source)
     pid_t child;
     int status;
 
-    fd = network_bind_ipv6("::1", 11119);
+    fd = network_bind_ipv6(SOCK_STREAM, "::1", 11119);
     if (fd == INVALID_SOCKET) {
         if (errno == EAFNOSUPPORT || errno == EPROTONOSUPPORT
             || errno == EADDRNOTAVAIL) {
@@ -249,8 +249,7 @@ test_all(const char *source_ipv4, const char *source_ipv6 UNUSED)
     socklen_t size;
     int status;
 
-    network_bind_all(11119, &fds, &count);
-    if (count == 0)
+    if (!network_bind_all(SOCK_STREAM, 11119, &fds, &count))
         sysbail("cannot create or bind socket");
     if (count > 2) {
         diag("got more than two sockets, using just the first two");
@@ -314,8 +313,7 @@ test_any(void)
     unsigned int count, i;
     pid_t child;
 
-    network_bind_all(11119, &fds, &count);
-    if (count == 0)
+    if (!network_bind_all(SOCK_STREAM, 11119, &fds, &count))
         sysbail("cannot create or bind socket");
     for (i = 0; i < count; i++)
         if (listen(fds[i], 1) < 0) {
@@ -346,7 +344,7 @@ test_create_ipv4(const char *source)
     socket_type fd;
     pid_t child;
 
-    fd = network_bind_ipv4("127.0.0.1", 11119);
+    fd = network_bind_ipv4(SOCK_STREAM, "127.0.0.1", 11119);
     if (fd == INVALID_SOCKET)
         sysbail("cannot create or bind socket");
     if (listen(fd, 1) < 0) {
@@ -395,7 +393,7 @@ test_timeout_ipv4(void)
     socket_type fd, c;
     pid_t child;
 
-    fd = network_bind_ipv4("127.0.0.1", 11119);
+    fd = network_bind_ipv4(SOCK_STREAM, "127.0.0.1", 11119);
     if (fd == INVALID_SOCKET)
         sysbail("cannot create or bind socket");
     if (listen(fd, 1) < 0) {
@@ -511,7 +509,7 @@ test_network_read(void)
     socklen_t slen;
     char buffer[4];
 
-    fd = network_bind_ipv4("127.0.0.1", 11119);
+    fd = network_bind_ipv4(SOCK_STREAM, "127.0.0.1", 11119);
     if (fd == INVALID_SOCKET)
         sysbail("cannot create or bind socket");
     if (listen(fd, 1) < 0) {
@@ -575,7 +573,7 @@ test_network_write(void)
 
     buffer = bmalloc(4096 * 1024);
     memset(buffer, 'a', 4096 * 1024);
-    fd = network_bind_ipv4("127.0.0.1", 11119);
+    fd = network_bind_ipv4(SOCK_STREAM, "127.0.0.1", 11119);
     if (fd == INVALID_SOCKET)
         sysbail("cannot create or bind socket");
     if (listen(fd, 1) < 0) {
