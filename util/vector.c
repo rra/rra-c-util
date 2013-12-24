@@ -37,6 +37,8 @@
 #include <config.h>
 #include <portable/system.h>
 
+#include <assert.h>
+
 #include <util/vector.h>
 #include <util/xmalloc.h>
 
@@ -51,8 +53,8 @@ vector_new(void)
 
     vector = xmalloc(sizeof(struct vector));
     vector->count = 0;
-    vector->allocated = 0;
-    vector->strings = NULL;
+    vector->allocated = 1;
+    vector->strings = xcalloc(1, sizeof(char *));
     return vector;
 }
 
@@ -63,8 +65,8 @@ cvector_new(void)
 
     vector = xmalloc(sizeof(struct cvector));
     vector->count = 0;
-    vector->allocated = 0;
-    vector->strings = NULL;
+    vector->allocated = 1;
+    vector->strings = xcalloc(1, sizeof(const char *));
     return vector;
 }
 
@@ -77,32 +79,27 @@ vector_resize(struct vector *vector, size_t size)
 {
     size_t i;
 
+    assert(vector != NULL);
     if (vector->count > size) {
         for (i = size; i < vector->count; i++)
             free(vector->strings[i]);
         vector->count = size;
     }
-    if (size == 0) {
-        free(vector->strings);
-        vector->strings = NULL;
-    } else {
-        vector->strings = xrealloc(vector->strings, size * sizeof(char *));
-    }
+    if (size == 0)
+        size = 1;
+    vector->strings = xrealloc(vector->strings, size * sizeof(char *));
     vector->allocated = size;
 }
 
 void
 cvector_resize(struct cvector *vector, size_t size)
 {
+    assert(vector != NULL);
     if (vector->count > size)
         vector->count = size;
-    if (size == 0) {
-        free(vector->strings);
-        vector->strings = NULL;
-    } else {
-        vector->strings =
-            xrealloc(vector->strings, size * sizeof(const char *));
-    }
+    if (size == 0)
+        size = 1;
+    vector->strings = xrealloc(vector->strings, size * sizeof(const char *));
     vector->allocated = size;
 }
 
@@ -117,6 +114,7 @@ vector_add(struct vector *vector, const char *string)
 {
     size_t next = vector->count;
 
+    assert(vector != NULL);
     if (vector->count == vector->allocated)
         vector_resize(vector, vector->allocated + 1);
     vector->strings[next] = xstrdup(string);
@@ -128,6 +126,7 @@ cvector_add(struct cvector *vector, const char *string)
 {
     size_t next = vector->count;
 
+    assert(vector != NULL);
     if (vector->count == vector->allocated)
         cvector_resize(vector, vector->allocated + 1);
     vector->strings[next] = string;
@@ -146,6 +145,7 @@ vector_addn(struct vector *vector, const char *string, size_t length)
 {
     size_t next = vector->count;
 
+    assert(vector != NULL);
     if (vector->count == vector->allocated)
         vector_resize(vector, vector->allocated + 1);
     vector->strings[next] = xstrndup(string, length);
@@ -161,6 +161,7 @@ vector_clear(struct vector *vector)
 {
     size_t i;
 
+    assert(vector != NULL);
     for (i = 0; i < vector->count; i++)
         free(vector->strings[i]);
     vector->count = 0;
@@ -169,6 +170,7 @@ vector_clear(struct vector *vector)
 void
 cvector_clear(struct cvector *vector)
 {
+    assert(vector != NULL);
     vector->count = 0;
 }
 
@@ -179,6 +181,8 @@ cvector_clear(struct cvector *vector)
 void
 vector_free(struct vector *vector)
 {
+    if (vector == NULL)
+        return;
     vector_clear(vector);
     free(vector->strings);
     free(vector);
@@ -187,6 +191,8 @@ vector_free(struct vector *vector)
 void
 cvector_free(struct cvector *vector)
 {
+    if (vector == NULL)
+        return;
     cvector_clear(vector);
     free(vector->strings);
     free(vector);
@@ -498,6 +504,7 @@ vector_join(const struct vector *vector, const char *seperator)
     char *string;
     size_t i, size, seplen;
 
+    assert(vector != NULL);
     if (vector->count == 0)
         return xstrdup("");
     seplen = strlen(seperator);
@@ -521,6 +528,7 @@ cvector_join(const struct cvector *vector, const char *seperator)
     char *string;
     size_t i, size, seplen;
 
+    assert(vector != NULL);
     if (vector->count == 0)
         return xstrdup("");
     seplen = strlen(seperator);
@@ -547,6 +555,7 @@ cvector_join(const struct cvector *vector, const char *seperator)
 int
 vector_exec(const char *path, struct vector *vector)
 {
+    assert(vector != NULL);
     if (vector->allocated == vector->count)
         vector_resize(vector, vector->count + 1);
     vector->strings[vector->count] = NULL;
@@ -556,6 +565,7 @@ vector_exec(const char *path, struct vector *vector)
 int
 cvector_exec(const char *path, struct cvector *vector)
 {
+    assert(vector != NULL);
     if (vector->allocated == vector->count)
         cvector_resize(vector, vector->count + 1);
     vector->strings[vector->count] = NULL;

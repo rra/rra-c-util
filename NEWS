@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 4.13 (unreleased)
+
+    vector_free and cvector_free now accept a NULL argument and silently
+    do nothing.  This allows for more concise cleanup code.
+
 rra-c-util 4.12 (2013-12-09)
 
     Fix a bug in the *_OPTIONAL version of all Autoconf macros using
