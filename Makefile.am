@@ -107,8 +107,9 @@ check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	 \
 	tests/portable/strlcat-t tests/portable/strlcpy-t		 \
 	tests/portable/strndup-t tests/util/buffer-t tests/util/fdflag-t \
 	tests/util/messages-t tests/util/messages-krb5-t		 \
-	tests/util/network-t tests/util/vector-t tests/util/xmalloc	 \
-	tests/util/xwrite-t
+	tests/util/network/addr-ipv4-t tests/util/network/addr-ipv6-t	 \
+	tests/util/network/client-t tests/util/network/server-t		 \
+	tests/util/vector-t tests/util/xmalloc tests/util/xwrite-t
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
 check_LIBRARIES = tests/fakepam/libfakepam.a tests/tap/libtap.a
@@ -214,7 +215,13 @@ tests_util_messages_krb5_t_CPPFLAGS = $(KRB5_CPPFLAGS)
 tests_util_messages_krb5_t_LDFLAGS = $(KRB5_LDFLAGS)
 tests_util_messages_krb5_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a $(KRB5_LIBS)
-tests_util_network_t_LDADD = tests/tap/libtap.a util/libutil.a \
+tests_util_network_addr_ipv4_t_LDADD = tests/tap/libtap.a util/libutil.a \
+	portable/libportable.a
+tests_util_network_addr_ipv6_t_LDADD = tests/tap/libtap.a util/libutil.a \
+	portable/libportable.a
+tests_util_network_client_t_LDADD = tests/tap/libtap.a util/libutil.a \
+	portable/libportable.a
+tests_util_network_server_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 tests_util_vector_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
