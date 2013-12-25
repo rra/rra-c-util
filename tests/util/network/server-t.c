@@ -111,6 +111,37 @@ client_writer(const char *host, const char *source, bool succeed)
 
 
 /*
+ * A client writer for testing UDP.  Sends a UDP packet to port 11119 on
+ * localhost, from the given source address, containing a constant string.
+ * This also verifies that network_client_create works properly.
+ */
+static void
+client_udp_writer(const char *source)
+{
+    socket_type fd;
+    struct sockaddr_in sin;
+
+    /* Create and bind the socket. */
+    fd = network_client_create(PF_INET, SOCK_DGRAM, source);
+    if (fd == INVALID_SOCKET)
+        _exit(1);
+
+    /* Connect to localhost port 11119. */
+    memset(&sin, 0, sizeof(sin));
+    sin.sin_family = AF_INET;
+    sin.sin_port = htons(11119);
+    sin.sin_addr.s_addr = htonl(0x7f000001UL);
+    if (connect(fd, (struct sockaddr *) &sin, sizeof(sin)) < 0)
+        _exit(1);
+
+    /* Send our fixed UDP packet. */
+    if (send(fd, "socket test\r\n", 13, 0) < 13)
+        _exit(1);
+    _exit(0);
+}
+
+
+/*
  * When testing the bind (server) functions, we create listening sockets, fork
  * a child process to connect to it, and accept the connection and read the
  * data in the server.  The test reporting is therefore done by the listener.
@@ -401,11 +432,75 @@ test_any(void)
 }
 
 
+/*
+ * Bring up a UDP server on port 11119 on all addresses and try connecting to
+ * it via 127.0.0.1, using network_wait_any underneath.  This tests the bind
+ * functions for UDP sockets, network_client_create for UDP addresses, and
+ * network_wait_any.
+ */
+static void
+test_any_udp(void)
+{
+    socket_type *fds, fd;
+    unsigned int count, i;
+    pid_t child;
+    char buffer[BUFSIZ];
+    ssize_t length;
+    int status;
+    struct sockaddr_storage addr;
+    struct sockaddr *saddr;
+    struct sockaddr_in sin;
+    socklen_t addrlen;
+
+    /* Bind our UDP socket. */
+    if (!network_bind_all(SOCK_DGRAM, 11119, &fds, &count))
+        sysbail("cannot create or bind socket");
+
+    /* Create a child that writes a single UDP packet to the server. */
+    child = fork();
+    if (child < 0)
+        sysbail("cannot fork");
+    else if (child == 0)
+        client_udp_writer("127.0.0.1");
+
+    /* Set an alarm, since if the client malfunctions, nothing happens. */
+    alarm(5);
+
+    /* Wait for the UDP packet and then read and confirm it. */
+    fd = network_wait_any(fds, count);
+    ok(fd != INVALID_SOCKET, "network_wait_any found UDP message");
+    if (fd == INVALID_SOCKET)
+        ok_block(3, false, "could not accept client");
+    else {
+        saddr = (struct sockaddr *) &addr;
+        addrlen = sizeof(addr);
+        length = recvfrom(fd, buffer, sizeof(buffer), 0, saddr, &addrlen);
+        is_int(13, length, "...of correct length");
+        sin.sin_family = AF_INET;
+        sin.sin_port = htons(11119);
+        sin.sin_addr.s_addr = htonl(0x7f000001UL);
+        ok(network_sockaddr_equal((struct sockaddr *) &sin, saddr),
+           "...from correct address");
+        buffer[13] = '\0';
+        is_string("socket test\r\n", buffer, "...and correct contents");
+    }
+
+    /* Wait for the child and be sure it exited successfully. */
+    waitpid(child, &status, 0);
+    is_int(0, status, "client made correct connections");
+
+    /* Clean up. */
+    for (i = 0; i < count; i++)
+        socket_close(fds[i]);
+    network_bind_all_free(fds);
+}
+
+
 int
 main(void)
 {
     /* Set up the plan. */
-    plan(37);
+    plan(42);
 
     /* Test network_bind functions. */
     test_ipv4(NULL);
@@ -427,5 +522,8 @@ main(void)
 
     /* Test network_accept_any. */
     test_any();
+
+    /* Test UDP socket handling and network_wait_any. */
+    test_any_udp();
     return 0;
 }

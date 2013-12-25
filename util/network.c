@@ -388,24 +388,23 @@ network_bind_all_free(socket_type *fds)
 /*
  * Given an array of file descriptors and the length of that array (the same
  * data that's returned by network_bind_all), wait for an incoming connection
- * on any of those sockets, accept the connection with accept(), and return
- * the new file descriptor.
+ * on any of those sockets and return the file descriptor that selects ready
+ * for read.
  *
- * This is essentially a replacement for accept() with a single socket for
- * daemons that are listening to multiple separate bound sockets, possibly
- * because they need to listen to specific interfaces or possibly because
- * they're listening for both IPv4 and IPv6 connections.
+ * This is primarily intended for UDP services listening on mutliple file
+ * descriptors, and also provides part of the code for network_accept_any.
+ * TCP services will probably want to use network_accept_any instead.
  *
- * Returns the new socket on success or INVALID_SOCKET on failure.  On
- * success, fills out the arguments with the address and address length of the
- * accepted client.  No error will be reported, so the caller should do that.
- * Note that INVALID_SOCKET may be returned if the timeout is interrupted by a
- * signal, which is not, precisely speaking, an error condition.  In this
- * case, errno will be set to EINTR.
+ * Returns the new socket on success or INVALID_SOCKET on failure.  Note that
+ * INVALID_SOCKET may be returned if the timeout is interrupted by a signal,
+ * which is not, precisely speaking, an error condition.  In this case, errno
+ * will be set to EINTR.
+ *
+ * This is not intended to be a replacement for a full event loop, just some
+ * simple shared code for UDP services.
  */
 socket_type
-network_accept_any(socket_type fds[], unsigned int count,
-                   struct sockaddr *addr, socklen_t *addrlen)
+network_wait_any(socket_type fds[], unsigned int count)
 {
     fd_set readfds;
     socket_type maxfd, fd;
@@ -428,6 +427,35 @@ network_accept_any(socket_type fds[], unsigned int count,
             fd = fds[i];
             break;
         }
+    return fd;
+}
+
+
+/*
+ * Given an array of file descriptors and the length of that array (the same
+ * data that's returned by network_bind_all), wait for an incoming connection
+ * on any of those sockets, accept the connection with accept(), and return
+ * the new file descriptor.
+ *
+ * This is essentially a replacement for accept() with a single socket for
+ * daemons that are listening to multiple separate bound sockets, possibly
+ * because they need to listen to specific interfaces or possibly because
+ * they're listening for both IPv4 and IPv6 connections.
+ *
+ * Returns the new socket on success or INVALID_SOCKET on failure.  On
+ * success, fills out the arguments with the address and address length of the
+ * accepted client.  No error will be reported, so the caller should do that.
+ * Note that INVALID_SOCKET may be returned if the timeout is interrupted by a
+ * signal, which is not, precisely speaking, an error condition.  In this
+ * case, errno will be set to EINTR.
+ */
+socket_type
+network_accept_any(socket_type fds[], unsigned int count,
+                   struct sockaddr *addr, socklen_t *addrlen)
+{
+    socket_type fd;
+
+    fd = network_wait_any(fds, count);
     if (fd == INVALID_SOCKET)
         return INVALID_SOCKET;
     else

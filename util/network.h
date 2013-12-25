@@ -71,6 +71,18 @@ bool network_bind_all(int type, unsigned short port, socket_type **fds,
 void network_bind_all_free(socket_type *fds);
 
 /*
+ * Wait on an array of file descriptor for one of them to select ready for
+ * read, and return the first file descriptor that does so.  This is primarily
+ * intended for UDP services listening on mutliple file descriptors.  TCP
+ * services will probably want to use network_accept_any instead.
+ *
+ * This is not intended to be a replacement for a full event loop, just some
+ * simple shared code for UDP services.
+ */
+socket_type network_wait_any(socket_type fds[], unsigned int count)
+    __attribute__((__nonnull__));
+
+/*
  * Accept an incoming connection from any file descriptor in an array.  This
  * is a blocking accept that will wait until there is an incoming connection,
  * unless interrupted by receipt of a signal.  Returns the new socket or

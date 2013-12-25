@@ -12,6 +12,11 @@ rra-c-util 5.0 (unreleased)
     The network_bind_* functions now more reliably set the socket errno on
     failure and log somewhat more informative error messages with warn.
 
+    New network_wait_any function that waits for an array of file
+    descriptors and returns the first one that selects ready for read.
+    This can be used by UDP servers similar to network_accept_any for TCP
+    servers.
+
     vector_free and cvector_free now accept a NULL argument and silently
     do nothing.  This allows for more concise cleanup code.
 
