@@ -9,6 +9,9 @@ rra-c-util 5.0 (unreleased)
     sockets could be bound due to some error.  Callers may check this
     instead of checking if the socket count is zero.
 
+    The network_bind_* functions now more reliably set the socket errno on
+    failure and log somewhat more informative error messages with warn.
+
     vector_free and cvector_free now accept a NULL argument and silently
     do nothing.  This allows for more concise cleanup code.
 
