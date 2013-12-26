@@ -20,6 +20,10 @@ rra-c-util 5.0 (unreleased)
     vector_free and cvector_free now accept a NULL argument and silently
     do nothing.  This allows for more concise cleanup code.
 
+    Update to C TAP Harness 2.4:
+
+    * Add new diag_file_add and _remove API to the C TAP library.
+
 rra-c-util 4.12 (2013-12-09)
 
     Fix a bug in the *_OPTIONAL version of all Autoconf macros using
