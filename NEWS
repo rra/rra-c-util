@@ -20,6 +20,12 @@ rra-c-util 5.0 (unreleased)
     vector_free and cvector_free now accept a NULL argument and silently
     do nothing.  This allows for more concise cleanup code.
 
+    Provide new process_start, process_start_fakeroot, and process_stop
+    functions in the process TAP add-on.  Note that these require an
+    Autoconf probe for sys/select.h and a replacement for a missing
+    mkstemp.  Rewrite the remctl TAP add-on to use this new API to start
+    and stop remctld.
+
     Update to C TAP Harness 2.4:
 
     * Add new diag_file_add and _remove API to the C TAP library.
