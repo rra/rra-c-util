@@ -26,6 +26,12 @@ rra-c-util 5.0 (unreleased)
     mkstemp.  Rewrite the remctl TAP add-on to use this new API to start
     and stop remctld.
 
+    The remctl TAP add-on now aborts if the remctld PID file already
+    exists rather than removing it and continuing.  Since the process is
+    automatically stopped and the PID file removed on any normal test
+    exit, its continued existence probably implies there's a random
+    remctld process still running.
+
     Update to C TAP Harness 2.4:
 
     * Add new diag_file_add and _remove API to the C TAP library.
