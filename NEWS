@@ -32,6 +32,9 @@ rra-c-util 5.0 (unreleased)
     exit, its continued existence probably implies there's a random
     remctld process still running.
 
+    Add new RRA_LIB_ZLIB and RRA_LIB_ZLIB_OPTIONAL macros based on the
+    Autoconf macros in INN.  Contributed by Julien ÉLIE.
+
     Update to C TAP Harness 2.4:
 
     * Add new diag_file_add and _remove API to the C TAP library.

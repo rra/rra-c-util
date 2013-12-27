@@ -139,6 +139,7 @@ RRA_LIB_OPENSSL_OPTIONAL
 RRA_LIB_PCRE_OPTIONAL
 RRA_LIB_REMCTL_OPTIONAL
 RRA_LIB_SASL_OPTIONAL
+RRA_LIB_ZLIB_OPTIONAL
 
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
