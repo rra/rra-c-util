@@ -2,7 +2,8 @@ dnl Find the compiler and linker flags for the Berkeley DB library.
 dnl
 dnl Finds the compiler and linker flags for linking with the Berkeley DB
 dnl library.  Provides the --with-bdb, --with-bdb-lib, and --with-bdb-include
-dnl configure options to specify non-standard paths to the Berkeley DB library.
+dnl configure options to specify non-standard paths to the Berkeley DB
+dnl library.
 dnl
 dnl Provides the macro RRA_LIB_BDB and sets the substitution variables
 dnl BDB_CPPFLAGS, BDB_LDFLAGS, and BDB_LIBS.  Also provides RRA_LIB_BDB_SWITCH
@@ -11,18 +12,18 @@ dnl saving the current values first, and RRA_LIB_BDB_RESTORE to restore those
 dnl settings to before the last RRA_LIB_BDB_SWITCH.  Defines HAVE_BDB and sets
 dnl rra_use_BDB to true if the library is found.
 dnl
-dnl Provides the RRA_LIB_BDB_OPTIONAL macro, which should be used if Berkeley DB
-dnl support is optional.  This macro will still always set the substitution
-dnl variables, but they'll be empty unless --with-bdb is given.
-dnl Defines HAVE_BDB and sets rra_use_BDB to true if the Berkeley DB library
-dnl is found.
-dnl
-dnl Depends on the lib-helper.m4 framework.
+dnl Provides the RRA_LIB_BDB_OPTIONAL macro, which should be used if Berkeley
+dnl DB support is optional.  This macro will still always set the substitution
+dnl variables, but they'll be empty unless --with-bdb is given.  Defines
+dnl HAVE_BDB and sets rra_use_BDB to true if the Berkeley DB library is found.
 dnl
 dnl This file also provides RRA_LIB_BDB_NDBM, which checks whether the
 dnl Berkeley DB library has ndbm support.  It then defines HAVE_BDB_NDBM and
-dnl sets rra_cv_lib_bdb_ndbm to yes if ndbm compatibility layer for
-dnl Berkely DB is available.
+dnl sets rra_cv_lib_bdb_ndbm to yes if ndbm compatibility layer for Berkely DB
+dnl is available.  Either RRA_LIB_BDB or RRA_LIB_BDB_OPTIONAL must be called
+dnl before calling this macro.
+dnl
+dnl Depends on the lib-helper.m4 framework.
 dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
@@ -82,7 +83,8 @@ AC_DEFUN([_RRA_LIB_BDB_NDBM_SOURCE], [[
 #include <db.h>
 
 int
-main(void) {
+main(void)
+{
     DBM *database;
     database = dbm_open("test", 0, 0600);
     dbm_close(database);
@@ -90,16 +92,17 @@ main(void) {
 }
 ]])
 
-dnl Check whether Berkeley DB was compiled with ndbm compatibility layer.
-dnl If so, set HAVE_BDB_NDBM.
+dnl Check whether Berkeley DB was compiled with ndbm compatibility layer.  If
+dnl so, set HAVE_BDB_NDBM.  Either RRA_LIB_BDB or RRA_LIB_BDB_OPTIONAL should
+dnl be called before calling this macro.
 AC_DEFUN([RRA_LIB_BDB_NDBM],
 [RRA_LIB_BDB_SWITCH
-AC_CACHE_CHECK([for working nbdm compatibility layer with Berkeley DB],
+ AC_CACHE_CHECK([for working ndbm compatibility layer with Berkeley DB],
     [rra_cv_lib_bdb_ndbm],
     [AC_LINK_IFELSE([AC_LANG_SOURCE([_RRA_LIB_BDB_NDBM_SOURCE])],
         [rra_cv_lib_bdb_ndbm=yes],
         [rra_cv_lib_bdb_ndbm=no])])
-AS_IF([test x"$rra_cv_lib_bdb_ndbm" = xyes],
+ AS_IF([test x"$rra_cv_lib_bdb_ndbm" = xyes],
     [AC_DEFINE([HAVE_BDB_NDBM], 1,
         [Define if the Berkeley DB ndbm compatibility layer is available.])])
-RRA_LIB_BDB_RESTORE])
+ RRA_LIB_BDB_RESTORE])
