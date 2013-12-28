@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 5.0 (unreleased)
+rra-c-util 5.0 (2013-12-27)
 
     The network_bind_* functions now take a socket type as an additional
     argument so that they can be used with UDP-based services.
