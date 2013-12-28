@@ -25,6 +25,9 @@ EXTRA_DIST = .gitignore LICENSE autogen docs/api/xmalloc.3		    \
 	tests/tap/perl/Test/RRA/Config.pm tests/tap/remctl.sh		    \
 	tests/util/xmalloc-t
 
+# Enable kafs support when running distcheck.
+DISTCHECK_CONFIGURE_FLAGS = --enable-kafs
+
 # This is unfortunately required since we have an object (k_hasafs) defined
 # in LIBOBJS that needs the kafs headers.  There isn't any way in Automake
 # that I can find to define additional CPPFLAGS for a specific LIBOBJS
