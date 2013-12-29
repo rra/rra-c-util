@@ -1,5 +1,14 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.1 (unreleased)
+
+    Add Autoconf support for systemd.  This provides two macros:
+    RRA_WITH_SYSTEMD_UNITDIR, which defines the HAVE_SYSTEMD Automake
+    conditional and the systemdsystemunitdir substitution variable, and
+    RRA_LIB_SYSTEMD_DAEMON_OPTIONAL, which probes for the optional
+    libsystemd-daemon library (used for socket notification and startup
+    synchronization).
+
 rra-c-util 5.0 (2013-12-27)
 
     The network_bind_* functions now take a socket type as an additional
