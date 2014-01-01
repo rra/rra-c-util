@@ -1,9 +1,25 @@
                           rra-c-util To-Do List
 
+General:
+
+ * Provide tools to dynamically generate system.h, krb5.h, krb5-extra.c,
+   kadmin.h, and any other files whose complete contents are not
+   relevant to every package.
+
+ * Look for duplication with gnulib (under an acceptable license) and
+   remove some portability code here in favor of gnulib.
+
+ * Use krb5_free_string for appdefaults code.
+
 util:
 
  * Provide an API in util/messages-krb5.c to retrieve the most recent
    Kerberos error message.
+
+TAP Add-Ons:
+
+ * Check the Kerberos password if password was requested and abort if
+   authentication fails.
 
 Test Suite:
 
@@ -12,12 +28,15 @@ Test Suite:
 
  * Incorporate the Perl utility library from kstart's test suite.
 
- * Generalize the pod-t and pod-spelling-t test cases to be easier to copy
-   into other packages without modifications.
-
 Documentation:
 
  * Write POD documentation for all public interfaces.
 
  * Move the comments at the start of some of the util/* source files into
    proper POD documentation.
+
+ * Document the Kerberos API provided.
+
+ * Write a guide to Kerberos portability.
+
+ * Add coding style guides to this package.
