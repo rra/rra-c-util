@@ -10,7 +10,9 @@ rra-c-util 5.1 (unreleased)
     conditional and the systemdsystemunitdir substitution variable, and
     RRA_LIB_SYSTEMD_DAEMON_OPTIONAL, which probes for the optional
     libsystemd-daemon library (used for socket notification and startup
-    synchronization).
+    synchronization).  It also provides portable/sd-daemon.h, which wraps
+    the systemd/sd-daemon.h include file and stubs out sd_notify and
+    sd_listen_fds if libsystemd-daemon was not available.
 
 rra-c-util 5.0 (2013-12-27)
 

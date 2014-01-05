@@ -3,7 +3,7 @@ dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2000, 2003, 2013 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
-dnl     2012, 2013
+dnl     2012, 2013, 2014
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
 dnl This file is free software; the authors give unlimited permission to copy
@@ -141,6 +141,7 @@ RRA_LIB_OPENSSL_OPTIONAL
 RRA_LIB_PCRE_OPTIONAL
 RRA_LIB_REMCTL_OPTIONAL
 RRA_LIB_SASL_OPTIONAL
+RRA_LIB_SYSTEMD_DAEMON_OPTIONAL
 RRA_LIB_ZLIB_OPTIONAL
 
 dnl These probes are needed by anything that uses portable/system.h, the other
