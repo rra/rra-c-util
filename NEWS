@@ -2,6 +2,9 @@
 
 rra-c-util 5.1 (unreleased)
 
+    Fix a cut and paste error that prevented process_start_fakeroot from
+    working properly.
+
     Add Autoconf support for systemd.  This provides two macros:
     RRA_WITH_SYSTEMD_UNITDIR, which defines the HAVE_SYSTEMD Automake
     conditional and the systemdsystemunitdir substitution variable, and

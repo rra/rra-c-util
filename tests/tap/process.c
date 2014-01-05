@@ -15,7 +15,7 @@
  *
  * Written by Russ Allbery <eagle@eyrie.org>
  * Copyright 2002, 2004, 2005, 2013 Russ Allbery <eagle@eyrie.org>
- * Copyright 2009, 2010, 2011, 2013
+ * Copyright 2009, 2010, 2011, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -442,5 +442,5 @@ process_start(const char *const argv[], const char *pidfile)
 struct process *
 process_start_fakeroot(const char *const argv[], const char *pidfile)
 {
-    return process_start_internal(argv, pidfile, false);
+    return process_start_internal(argv, pidfile, true);
 }
