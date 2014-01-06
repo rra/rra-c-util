@@ -1,7 +1,7 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <eagle@eyrie.org
-# Copyright 2008, 2009, 2010, 2011, 2012, 2013
+# Copyright 2008, 2009, 2010, 2011, 2012, 2013, 2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
 # See LICENSE for licensing terms.
@@ -43,8 +43,9 @@ portable_libportable_a_SOURCES = portable/apr.h portable/dummy.c	\
 	portable/getaddrinfo.h portable/getnameinfo.h portable/getopt.h	\
 	portable/gssapi.h portable/kadmin.h portable/kafs.h		\
 	portable/krb5-extra.c portable/krb5.h portable/macros.h		\
-	portable/pam.h portable/socket.h portable/statvfs.h		\
-	portable/stdbool.h portable/system.h portable/uio.h
+	portable/pam.h portable/sd-daemon.h portable/socket.h		\
+	portable/statvfs.h portable/stdbool.h portable/system.h		\
+	portable/uio.h
 portable_libportable_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 portable_libportable_a_LIBADD = $(LIBOBJS)
 util_libutil_a_SOURCES = util/buffer.c util/buffer.h util/fdflag.c	    \
