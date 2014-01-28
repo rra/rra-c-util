@@ -5,7 +5,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2010, 2011, 2012, 2013
+ * Copyright 2010, 2011, 2012, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -112,14 +112,7 @@ const size_t optlen = sizeof(options) / sizeof(options[0]);
 static struct pam_config *
 config_new(void)
 {
-    struct pam_config *config;
-
-    config = calloc(1, sizeof(struct pam_config));
-    if (config == NULL)
-        sysbail("cannot allocate memory");
-    config->cells = NULL;
-    config->program = NULL;
-    return config;
+    return bcalloc(1, sizeof(struct pam_config));
 }
 
 
@@ -129,10 +122,10 @@ config_new(void)
 static void
 config_free(struct pam_config *config)
 {
-    if (config->cells != NULL)
-        vector_free(config->cells);
-    if (config->program != NULL)
-        free(config->program);
+    if (config == NULL)
+        return;
+    vector_free(config->cells);
+    free(config->program);
     free(config);
 }
 

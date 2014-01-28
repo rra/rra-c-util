@@ -10,7 +10,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2011, 2012
+ * Copyright 2011, 2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -389,8 +389,7 @@ expand_string(const char *template, const struct script_config *config)
         }
     }
     *out = '\0';
-    if (uid != NULL)
-        free(uid);
+    free(uid);
     return output;
 }
 

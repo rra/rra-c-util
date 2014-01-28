@@ -282,5 +282,8 @@ main(void)
     free(data);
     buffer_free(three);
 
+    /* Test buffer_free with NULL and ensure it doesn't explode. */
+    buffer_free(NULL);
+
     return 0;
 }

@@ -16,7 +16,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2011, 2012
+ * Copyright 2011, 2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006
  *     by Internet Systems Consortium, Inc. ("ISC")
@@ -55,14 +55,7 @@
 struct buffer *
 buffer_new(void)
 {
-    struct buffer *buffer;
-
-    buffer = xmalloc(sizeof(struct buffer));
-    buffer->size = 0;
-    buffer->used = 0;
-    buffer->left = 0;
-    buffer->data = NULL;
-    return buffer;
+    return xcalloc(1, sizeof(struct buffer));
 }
 
 
@@ -72,8 +65,9 @@ buffer_new(void)
 void
 buffer_free(struct buffer *buffer)
 {
-    if (buffer->data != NULL)
-        free(buffer->data);
+    if (buffer == NULL)
+        return;
+    free(buffer->data);
     free(buffer);
 }
 

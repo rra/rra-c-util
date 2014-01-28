@@ -9,7 +9,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2006, 2007, 2008, 2010, 2011, 2013
+ * Copyright 2006, 2007, 2008, 2010, 2011, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -266,8 +266,7 @@ default_number(struct pam_args *args, const char *section, const char *realm,
         else
             *result = value;
     }
-    if (tmp != NULL)
-        free(tmp);
+    free(tmp);
 }
 
 
@@ -309,8 +308,7 @@ default_time(struct pam_args *args, const char *section, const char *realm,
         else
             *result = value;
     }
-    if (tmp != NULL)
-        free(tmp);
+    free(tmp);
 }
 
 
@@ -618,8 +616,7 @@ convert_string(struct pam_args *args, const char *arg, char **setting)
         putil_crit(args, "cannot allocate memory: %s", strerror(errno));
         return false;
     }
-    if (*setting != NULL)
-        free(*setting);
+    free(*setting);
     *setting = result;
     return true;
 }
@@ -648,8 +645,7 @@ convert_list(struct pam_args *args, const char *arg, struct vector **setting)
         putil_crit(args, "cannot allocate vector: %s", strerror(errno));
         return false;
     }
-    if (*setting != NULL)
-        vector_free(*setting);
+    vector_free(*setting);
     *setting = result;
     return true;
 }

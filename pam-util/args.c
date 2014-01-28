@@ -15,7 +15,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2010, 2012, 2013
+ * Copyright 2010, 2012, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -69,12 +69,9 @@ putil_args_new(pam_handle_t *pamh, int flags)
         return NULL;
     }
     args->pamh = pamh;
-    args->config = NULL;
-    args->user = NULL;
     args->silent = ((flags & PAM_SILENT) == PAM_SILENT);
 
 #ifdef HAVE_KRB5
-    args->realm = NULL;
     if (issetugid())
         status = krb5_init_secure_context(&args->ctx);
     else
@@ -98,8 +95,7 @@ putil_args_free(struct pam_args *args)
     if (args == NULL)
         return;
 #ifdef HAVE_KRB5
-    if (args->realm != NULL)
-        free(args->realm);
+    free(args->realm);
     if (args->ctx != NULL)
         krb5_free_context(args->ctx);
 #endif

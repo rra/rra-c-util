@@ -9,7 +9,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2010, 2011
+ * Copyright 2010, 2011, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -133,15 +133,13 @@ pam_set_item(pam_handle_t *pamh, int item, PAM_CONST void *data)
 {
     switch (item) {
     case PAM_AUTHTOK:
-        if (pamh->authtok != NULL)
-            free(pamh->authtok);
+        free(pamh->authtok);
         pamh->authtok = strdup(data);
         if (pamh->authtok == NULL)
             return PAM_BUF_ERR;
         return PAM_SUCCESS;
     case PAM_OLDAUTHTOK:
-        if (pamh->oldauthtok != NULL)
-            free(pamh->oldauthtok);
+        free(pamh->oldauthtok);
         pamh->oldauthtok = strdup(data);
         if (pamh->oldauthtok == NULL)
             return PAM_BUF_ERR;

@@ -43,15 +43,7 @@
 struct vector *
 vector_new(void)
 {
-    struct vector *vector;
-
-    vector = malloc(sizeof(struct vector));
-    if (vector == NULL)
-        return NULL;
-    vector->count = 0;
-    vector->allocated = 0;
-    vector->strings = NULL;
-    return vector;
+    return calloc(1, sizeof(struct vector));
 }
 
 

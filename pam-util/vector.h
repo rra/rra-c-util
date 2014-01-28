@@ -85,8 +85,7 @@ void vector_clear(struct vector *)
     __attribute__((__nonnull__));
 
 /* Free the vector and all resources allocated for it. */
-void vector_free(struct vector *)
-    __attribute__((__nonnull__));
+void vector_free(struct vector *);
 
 /*
  * Split functions build a vector from a string.  vector_split_multi splits on

@@ -8,7 +8,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2010, 2011
+ * Copyright 2010, 2011, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -86,17 +86,14 @@ pam_end(pam_handle_t *pamh, int status)
 
     if (pamh->environ != NULL) {
         for (i = 0; pamh->environ[i] != NULL; i++)
-            if (pamh->environ[i] != NULL)
-                free(pamh->environ[i]);
+            free(pamh->environ[i]);
         free(pamh->environ);
     }
-    if (pamh->authtok != NULL)
-        free(pamh->authtok);
-    if (pamh->oldauthtok != NULL)
-        free(pamh->oldauthtok);
+    free(pamh->authtok);
+    free(pamh->oldauthtok);
     for (item = pamh->data; item != NULL; ) {
         if (item->cleanup != NULL)
-            item->cleanup (pamh, item->data, status);
+            item->cleanup(pamh, item->data, status);
         free(item->name);
         next = item->next;
         free(item);
