@@ -20,6 +20,9 @@ rra-c-util 5.2 (unreleased)
 
     Fix syntax error when building portable/krb5.h with a C++ compiler.
 
+    Add additional suppressions for MIT Kerberos and Heimdal to the
+    valgrind suppression file.
+
     Update to C TAP Harness 3.0:
 
     * test_cleanup_register callbacks now know about the primary process.
