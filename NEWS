@@ -1,5 +1,20 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.2 (unreleased)
+
+    In the process TAP add-on, flush output from the process after
+    stopping it instead of before and include the exit status if
+    available.  Use a cleaner method to wait for the process to stop that
+    doesn't terminate the test with SIGALRM if the process doesn't stop
+    fast enough and instead clearly reports the problem with bail.  Fix a
+    memory leak when starting a process under fakeroot.
+
+    Update to C TAP Harness 3.0:
+
+    * test_cleanup_register callbacks now know about the primary process.
+    * Reopen standard input to /dev/null when running a test list.
+    * Don't leak extraneous file descriptors to tests.
+
 rra-c-util 5.1 (2014-01-05)
 
     Fix a cut and paste error that prevented process_start_fakeroot from
