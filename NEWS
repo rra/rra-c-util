@@ -12,6 +12,8 @@ rra-c-util 5.2 (unreleased)
     fast enough and instead clearly reports the problem with bail.  Fix a
     memory leak when starting a process under fakeroot.
 
+    Fix syntax error when building portable/krb5.h with a C++ compiler.
+
     Update to C TAP Harness 3.0:
 
     * test_cleanup_register callbacks now know about the primary process.

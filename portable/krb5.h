@@ -264,4 +264,6 @@ void krb5_verify_init_creds_opt_init(krb5_verify_init_creds_opt *opt)
 /* Undo default visibility change. */
 #pragma GCC visibility pop
 
+END_DECLS
+
 #endif /* !PORTABLE_KRB5_H */
