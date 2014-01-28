@@ -18,6 +18,10 @@ rra-c-util 5.2 (unreleased)
     fast enough and instead clearly reports the problem with bail.  Fix a
     memory leak when starting a process under fakeroot.
 
+    Port the Kerberos TAP add-on to the new test_cleanup_register API and
+    free allocated memory in child processes as well as the primary
+    process.
+
     Fix syntax error when building portable/krb5.h with a C++ compiler.
 
     Add additional suppressions for MIT Kerberos and Heimdal to the
