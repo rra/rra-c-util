@@ -5,6 +5,12 @@ rra-c-util 5.2 (unreleased)
     Suppress shell errors from the systemd unit directory probe when
     pkg-config is not available.
 
+    Add new message_handlers_reset function to the messages utility API.
+    This function resets all handlers to their defaults and frees any
+    memory allocated by the message_handlers functions.  This is primarily
+    useful to allow freeing all memory when doing exhaustive memory
+    allocation testing.
+
     In the process TAP add-on, flush output from the process after
     stopping it instead of before and include the exit status if
     available.  Use a cleaner method to wait for the process to stop that
