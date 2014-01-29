@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 5.2 (unreleased)
+rra-c-util 5.2 (2014-01-28)
 
     Suppress shell errors from the systemd unit directory probe when
     pkg-config is not available.
