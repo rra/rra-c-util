@@ -46,7 +46,7 @@ portable_libportable_a_SOURCES = portable/apr.h portable/dummy.c	\
 	portable/pam.h portable/sd-daemon.h portable/socket.h		\
 	portable/statvfs.h portable/stdbool.h portable/system.h		\
 	portable/uio.h
-portable_libportable_a_CPPFLAGS = $(KRB5_CPPFLAGS)
+portable_libportable_a_CPPFLAGS = $(KRB5_CPPFLAGS) $(LIBEVENT_CPPFLAGS)
 portable_libportable_a_LIBADD = $(LIBOBJS)
 util_libutil_a_SOURCES = util/buffer.c util/buffer.h util/fdflag.c	    \
 	util/fdflag.h util/macros.h util/messages-krb5.c		    \

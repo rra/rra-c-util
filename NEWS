@@ -5,6 +5,13 @@ rra-c-util 5.2 (unreleased)
     Suppress shell errors from the systemd unit directory probe when
     pkg-config is not available.
 
+    Add Autoconf support for libevent in the form of RRA_LIB_EVENT and
+    RRA_LIB_EVENT_OPTIONAL macros and corresponding RRA_LIB_EVENT_SWITCH
+    and RRA_LIB_EVENT_RESTORE macros.  Add a portability wrapper around
+    the libevent include files and Autoconf probes, defines, and code to
+    support using libevent 1.4 via the libevent 2.0 API (with some
+    degradation of functionality).
+
     Add new message_handlers_reset function to the messages utility API.
     This function resets all handlers to their defaults and frees any
     memory allocated by the message_handlers functions.  This is primarily

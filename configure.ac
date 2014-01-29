@@ -101,6 +101,28 @@ AC_CHECK_HEADERS([kadm5/kadm5_err.h])
 AC_CHECK_FUNCS([kadm5_init_with_skey_ctx])
 RRA_LIB_KADM5CLNT_RESTORE
 
+dnl Probe for libevent.
+dnl Check for libevent, used by the server.
+RRA_LIB_EVENT_OPTIONAL
+AS_IF([test x"$rra_use_LIBEVENT" = xtrue],
+   [RRA_LIB_EVENT_SWITCH
+    AC_CHECK_HEADERS([event2/event.h])
+    AC_CHECK_TYPES([bufferevent_data_cb, bufferevent_event_cb,
+                    event_callback_fn, evutil_socket_t],
+        [], [], [RRA_INCLUDES_EVENT])
+    AC_CHECK_FUNCS([bufferevent_get_input \
+        bufferevent_read_buffer \
+        bufferevent_socket_new \
+        evbuffer_get_length \
+        event_base_got_break \
+        event_base_loopbreak \
+        event_free \
+        event_new \
+        event_set_fatal_callback \
+        libevent_global_shutdown])
+    AC_LIBOBJ([event-extra])
+    RRA_LIB_EVENT_RESTORE])
+
 dnl Probe for libkafs.  Do this so that we can test the libkafs portability
 dnl library.  For rra-c-util, AFS support is conditional and not built by
 dnl default, so this is an example of that.  For packages where it is not
