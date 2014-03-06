@@ -1,5 +1,14 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.3 (unreleased)
+
+    The standard Perl script test for strict and warnings now supports a
+    new configuration option, @STRICT_PREREQ, which lists modules that are
+    required for meaningful script testing.  If any of those modules is
+    not installed, Perl scripts will not be checked.  This allows correct
+    handling of supporting scripts or optional utilities whose
+    dependencies are not installed when tests are run.
+
 rra-c-util 5.2 (2014-01-28)
 
     Suppress shell errors from the systemd unit directory probe when
