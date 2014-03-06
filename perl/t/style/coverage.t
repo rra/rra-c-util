@@ -10,7 +10,7 @@
 # which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
 # Written by Russ Allbery <eagle@eyrie.org>
-# Copyright 2013
+# Copyright 2013, 2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -50,7 +50,7 @@ use_prereq('Devel::Cover');
 use_prereq('Test::Strict');
 
 # Build a list of test directories to use for coverage.
-my %ignore = map { $_ => 1 } qw(docs style), @COVERAGE_SKIP_TESTS;
+my %ignore = map { $_ => 1 } qw(data docs style), @COVERAGE_SKIP_TESTS;
 opendir(my $testdir, 't') or BAIL_OUT("cannot open t: $!");
 my @t_dirs = readdir($testdir) or BAIL_OUT("cannot read t: $!");
 closedir($testdir) or BAIL_OUT("cannot close t: $!");
