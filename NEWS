@@ -145,7 +145,7 @@ rra-c-util 4.11 (2013-11-14)
     The AM_CONDITIONAL for the use of com_err is now ignored if Automake
     is not in use.
 
-    All *_OPTIONAL m4 macros now set the corresponding rra_use_* shell
+    All _OPTIONAL m4 macros now set the corresponding rra_use_* shell
     variable to true if no explicit configure flags are given but the
     libraries are found at configure time, paralleling how the HAVE_* C
     preprocessor variables are defined.
