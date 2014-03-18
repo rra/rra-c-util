@@ -1,4 +1,4 @@
-                              rra-c-util 5.2
+                              rra-c-util 5.3
                  (Russ Allbery's utility libraries for C)
 
                 Written by Russ Allbery <eagle@eyrie.org>
@@ -287,7 +287,7 @@ LICENSE
   statement and license:
 
     Copyright 2000, 2009, 2010, 2013 Russ Allbery <eagle@eyrie.org>
-    Copyright 2009, 2010, 2011, 2012, 2013
+    Copyright 2009, 2010, 2011, 2012, 2013, 2014
         The Board of Trustees of the Leland Stanford Junior University
 
     Permission is hereby granted, free of charge, to any person obtaining a
