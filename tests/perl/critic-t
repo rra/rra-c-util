@@ -56,7 +56,7 @@ use_prereq('Test::Perl::Critic');
 # source directory is read-only.  It unconditionally tries to create a log
 # file in the current directory and fails to run any checks if it cannot.
 if (!-w File::Spec->curdir()) {
-    plan skip_all => 'Perl::Tidy requires writable current directory';
+    plan skip_all => 'Perl::Tidy needs writable source directory';
 }
 
 # Force the embedded Perl::Tidy check to use the correct configuration.

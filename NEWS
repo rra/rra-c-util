@@ -9,8 +9,16 @@ rra-c-util 5.3 (2014-03-18)
     handling of supporting scripts or optional utilities whose
     dependencies are not installed when tests are run.
 
-    Work around a Test::Perl::Critic bug with Debian perltidy 20130922-1
-    that leaves perltidy.LOG files around after testing.
+    Work around a bug caused by the combination of Perl::Tidy 20130922,
+    which unconditionally writes a log file, and Perl::Critic, which
+    doesn't suppress it, by removing stray perltidy.LOG files after
+    testing.
+
+    Skip Perl critic tests for right now if the source directory is not
+    writable, since Perl::Tidy 20130922 tries to unconditionally create a
+    log file in the current directory, the current directory needs to be
+    the root of the source directory for some testing to work properly,
+    and Perl::Tidy fails all checks if it cannot create the log file.
 
 rra-c-util 5.2 (2014-01-28)
 
