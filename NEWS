@@ -9,6 +9,9 @@ rra-c-util 5.3 (unreleased)
     handling of supporting scripts or optional utilities whose
     dependencies are not installed when tests are run.
 
+    Work around a Test::Perl::Critic bug with Debian perltidy 20130922-1
+    that leaves perltidy.LOG files around after testing.
+
 rra-c-util 5.2 (2014-01-28)
 
     Suppress shell errors from the systemd unit directory probe when
