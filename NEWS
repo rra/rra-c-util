@@ -1,5 +1,16 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.4 (unreleased)
+
+    Rename skip_unless_maintainer to skip_unless_author in Test::RRA and
+    add a skip_unless_automated function that skips the test unless
+    author, release, or automated testing is requested.  Use the new
+    function for many of the Perl tests that don't uncover functionality
+    issues.  Switch from RRA_MAINTAINER_TESTS to use the environment
+    variables from the Perl Lancaster Consensus (AUTHOR_TESTING,
+    AUTOMATED_TESTING, and RELEASE_TESTING) for consistency with other
+    Perl packages.
+
 rra-c-util 5.3 (2014-03-18)
 
     The standard Perl script test for strict and warnings now supports a

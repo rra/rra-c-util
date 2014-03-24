@@ -245,7 +245,7 @@ check-local: $(check_PROGRAMS)
 check-valgrind: $(check_PROGRAMS)
 	rm -rf $(abs_top_builddir)/tmp-valgrind
 	mkdir $(abs_top_builddir)/tmp-valgrind
-	env RRA_MAINTAINER_TESTS= valgrind --leak-check=full	\
+	env AUTHOR_TESTING= valgrind --leak-check=full		\
 	    --show-reachable=yes --trace-children=yes		\
 	    --log-file=$(abs_top_builddir)/tmp-valgrind/log.%p	\
 	    --trace-children-skip="/bin/sh,*/cat,*/diff,*/expr,*/grep,*/mkdir,*/rm,*/rmdir,*/sed,*/sleep,*/true,*/wc,*/docs/*-t,*/perl/*-t" \

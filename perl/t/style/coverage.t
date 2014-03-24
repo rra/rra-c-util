@@ -2,10 +2,6 @@
 #
 # Test Perl code for test coverage.
 #
-# Test coverage checking is disabled unless RRA_MAINTAINER_TESTS is set since
-# it takes a long time, is sensitive to the versions of various libraries,
-# and will not interfere with functionality.
-#
 # The canonical version of this file is maintained in the rra-c-util package,
 # which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
@@ -39,13 +35,15 @@ use lib 't/lib';
 
 use File::Spec;
 use Test::More;
-use Test::RRA qw(skip_unless_maintainer use_prereq);
+use Test::RRA qw(skip_unless_author use_prereq);
 use Test::RRA::Config qw($COVERAGE_LEVEL @COVERAGE_SKIP_TESTS);
 
-# Skip code coverage unless doing maintainer testing.
-skip_unless_maintainer('Coverage testing');
+# Skip code coverage unless author tests are enabled since it takes a long
+# time, is sensitive to versions of various libraries, and does not detect
+# functionality problems.
+skip_unless_author('Coverage tests');
 
-# Load required modules.
+# Load prerequisite modules.
 use_prereq('Devel::Cover');
 use_prereq('Test::Strict');
 
