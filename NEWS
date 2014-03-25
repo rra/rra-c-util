@@ -11,6 +11,12 @@ rra-c-util 5.4 (unreleased)
     AUTOMATED_TESTING, and RELEASE_TESTING) for consistency with other
     Perl packages.
 
+    Add Autoconf support for SQLite in the form of RRA_LIB_SQLITE and
+    RRA_LIB_SQLITE_OPTIONAL macros and corresponding RRA_LIB_SQLITE_SWITCH
+    and RRA_LIB_SQLITE_RESTORE macros.  These only look for SQLite 3 with
+    the sqlite3_open_v2 interface, since that should be old enough to be
+    present nearly everywhere.
+
 rra-c-util 5.3 (2014-03-18)
 
     The standard Perl script test for strict and warnings now supports a
