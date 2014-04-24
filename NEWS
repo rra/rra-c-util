@@ -11,6 +11,9 @@ rra-c-util 5.5 (unreleased)
     (which it had included for years as an implementation detail) and
     limits.h (to ensure the availability of SIZE_TYPE on older systems).
 
+    Fix compilation of portable/pam.h with a C++ compiler.  Caught by
+    cppcheck.
+
 rra-c-util 5.4 (2014-03-25)
 
     Rename skip_unless_maintainer to skip_unless_author in Test::RRA and
