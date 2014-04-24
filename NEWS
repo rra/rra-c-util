@@ -1,5 +1,16 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.5 (unreleased)
+
+    Use calloc in preference to calculating a malloc size with
+    multiplication everywhere.  In most places this caution was probably
+    not necessary, but uniformity is easier to audit and no one will ever
+    notice the speed difference between malloc and calloc.
+
+    portable/system.h now also guarantees the inclusion of inttypes.h
+    (which it had included for years as an implementation detail) and
+    limits.h (to ensure the availability of SIZE_TYPE on older systems).
+
 rra-c-util 5.4 (2014-03-25)
 
     Rename skip_unless_maintainer to skip_unless_author in Test::RRA and

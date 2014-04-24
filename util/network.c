@@ -20,7 +20,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2009, 2011, 2012, 2013
+ * Copyright 2009, 2011, 2012, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006, 2007, 2008
  *     by Internet Systems Consortium, Inc. ("ISC")
@@ -328,7 +328,7 @@ network_bind_all(int type, unsigned short port, socket_type **fds,
      * assuming an IPv6 and IPv4 socket, and grow it by two when necessary.
      */
     size = 2;
-    *fds = xmalloc(size * sizeof(socket_type));
+    *fds = xcalloc(size, sizeof(socket_type));
     for (addr = addrs; addr != NULL; addr = addr->ai_next) {
         network_sockaddr_sprint(name, sizeof(name), addr->ai_addr);
         if (addr->ai_family == AF_INET)

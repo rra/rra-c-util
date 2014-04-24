@@ -205,7 +205,7 @@ pam_getenvlist(pam_handle_t *pamh)
     }
     for (i = 0; pamh->environ[i] != NULL; i++)
         ;
-    env = malloc((i + 1) * sizeof(char *));
+    env = calloc(i + 1, sizeof(char *));
     if (env == NULL)
         return NULL;
     for (i = 0; pamh->environ[i] != NULL; i++) {
@@ -266,7 +266,7 @@ pam_putenv(pam_handle_t *pamh, const char *setting)
     if (pamh->environ == NULL) {
         if (delete)
             return PAM_BAD_ITEM;
-        pamh->environ = malloc(2 * sizeof(char *));
+        pamh->environ = calloc(2, sizeof(char *));
         if (pamh->environ == NULL) {
             free(copy);
             return PAM_BUF_ERR;
