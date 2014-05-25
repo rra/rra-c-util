@@ -1,7 +1,7 @@
 dnl Autoconf configuration for rra-c-util.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2000, 2003, 2013 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2000, 2003, 2013, 2014 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
 dnl     2012, 2013, 2014
 dnl     The Board of Trustees of the Leland Stanford Junior University
@@ -184,8 +184,8 @@ AC_CHECK_TYPES([ssize_t], [], [],
     [#include <sys/types.h>])
 RRA_FUNC_SNPRINTF
 AC_CHECK_FUNCS([setrlimit setsid])
-AC_REPLACE_FUNCS([asprintf daemon getopt issetugid mkstemp setenv seteuid])
-AC_REPLACE_FUNCS([strlcat strlcpy strndup])
+AC_REPLACE_FUNCS([asprintf daemon getopt issetugid mkstemp reallocarray])
+AC_REPLACE_FUNCS([setenv seteuid strlcat strlcpy strndup])
 
 dnl Additional probes for networking portability, used for packages that have
 dnl network code and support IPv6.  Probing for sys/select.h is also required

@@ -20,6 +20,7 @@ portable/inet_aton
 portable/inet_ntoa
 portable/inet_ntop
 portable/mkstemp
+portable/reallocarray
 portable/setenv
 portable/snprintf
 portable/strlcat

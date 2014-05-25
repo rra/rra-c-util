@@ -7,6 +7,11 @@ rra-c-util 5.5 (unreleased)
     not necessary, but uniformity is easier to audit and no one will ever
     notice the speed difference between malloc and calloc.
 
+    Add a replacement for reallocarray for systems (currently anything
+    that isn't OpenBSD) that don't have it.  This function is the same as
+    realloc but takes calloc-style arguments and checks for size overflow
+    before calling realloc.
+
     portable/system.h now also guarantees the inclusion of inttypes.h
     (which it had included for years as an implementation detail) and
     limits.h (to ensure the availability of SIZE_TYPE on older systems).

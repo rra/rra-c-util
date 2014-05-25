@@ -99,21 +99,22 @@ warnings:
 	$(MAKE) V=0 CFLAGS='$(WARNINGS)' $(check_PROGRAMS)
 
 # The bits below are for the test suite, not for the main package.
-check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	 \
-	tests/pam-util/args-t tests/pam-util/fakepam-t			 \
-	tests/pam-util/logging-t tests/pam-util/options-t		 \
-	tests/pam-util/vector-t tests/portable/asprintf-t		 \
-	tests/portable/daemon-t tests/portable/getaddrinfo-t		 \
-	tests/portable/getnameinfo-t tests/portable/getopt-t		 \
-	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		 \
-	tests/portable/inet_ntop-t tests/portable/mkstemp-t		 \
-	tests/portable/setenv-t tests/portable/snprintf-t		 \
-	tests/portable/strlcat-t tests/portable/strlcpy-t		 \
-	tests/portable/strndup-t tests/util/buffer-t tests/util/fdflag-t \
-	tests/util/messages-t tests/util/messages-krb5-t		 \
-	tests/util/network/addr-ipv4-t tests/util/network/addr-ipv6-t	 \
-	tests/util/network/client-t tests/util/network/server-t		 \
-	tests/util/vector-t tests/util/xmalloc tests/util/xwrite-t
+check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	   \
+	tests/pam-util/args-t tests/pam-util/fakepam-t			   \
+	tests/pam-util/logging-t tests/pam-util/options-t		   \
+	tests/pam-util/vector-t tests/portable/asprintf-t		   \
+	tests/portable/daemon-t tests/portable/getaddrinfo-t		   \
+	tests/portable/getnameinfo-t tests/portable/getopt-t		   \
+	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		   \
+	tests/portable/inet_ntop-t tests/portable/mkstemp-t		   \
+	tests/portable/reallocarray-t tests/portable/setenv-t		   \
+	tests/portable/snprintf-t tests/portable/strlcat-t		   \
+	tests/portable/strlcpy-t tests/portable/strndup-t		   \
+	tests/util/buffer-t tests/util/fdflag-t tests/util/messages-t	   \
+	tests/util/messages-krb5-t tests/util/network/addr-ipv4-t	   \
+	tests/util/network/addr-ipv6-t tests/util/network/client-t	   \
+	tests/util/network/server-t tests/util/vector-t tests/util/xmalloc \
+	tests/util/xwrite-t
 tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
 	-DBUILD='"$(abs_top_builddir)/tests"'
 check_LIBRARIES = tests/fakepam/libfakepam.a tests/tap/libtap.a
@@ -194,6 +195,10 @@ tests_portable_inet_ntop_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_mkstemp_t_SOURCES = tests/portable/mkstemp-t.c \
 	tests/portable/mkstemp.c
 tests_portable_mkstemp_t_LDADD = tests/tap/libtap.a portable/libportable.a
+tests_portable_reallocarray_t_SOURCES = tests/portable/reallocarray-t.c \
+	tests/portable/reallocarray.c
+tests_portable_reallocarray_t_LDADD = tests/tap/libtap.a \
+	portable/libportable.a
 tests_portable_setenv_t_SOURCES = tests/portable/setenv-t.c \
 	tests/portable/setenv.c
 tests_portable_setenv_t_LDADD = tests/tap/libtap.a portable/libportable.a
