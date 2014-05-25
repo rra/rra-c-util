@@ -12,6 +12,9 @@ rra-c-util 5.5 (unreleased)
     realloc but takes calloc-style arguments and checks for size overflow
     before calling realloc.
 
+    Add xreallocarray to the util library, which is a checked version of
+    reallocarray similar to what xrealloc is for realloc.
+
     portable/system.h now also guarantees the inclusion of inttypes.h
     (which it had included for years as an implementation detail) and
     limits.h (to ensure the availability of SIZE_TYPE on older systems).
