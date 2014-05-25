@@ -299,7 +299,7 @@ pam_putenv(pam_handle_t *pamh, const char *setting)
     if (!found) {
         if (delete)
             return PAM_BAD_ITEM;
-        env = realloc(pamh->environ, (i + 2) * sizeof(char *));
+        env = reallocarray(pamh->environ, (i + 2), sizeof(char *));
         if (env == NULL)
             return PAM_BUF_ERR;
         pamh->environ = env;

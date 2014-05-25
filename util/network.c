@@ -340,7 +340,7 @@ network_bind_all(int type, unsigned short port, socket_type **fds,
         if (fd != INVALID_SOCKET) {
             if (*count >= size) {
                 size += 2;
-                *fds = xrealloc(*fds, size * sizeof(socket_type));
+                *fds = xreallocarray(*fds, size, sizeof(socket_type));
             }
             (*fds)[*count] = fd;
             (*count)++;
