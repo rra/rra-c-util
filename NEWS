@@ -23,6 +23,13 @@ rra-c-util 5.5 (unreleased)
     Fix compilation of portable/pam.h with a C++ compiler.  Caught by
     cppcheck.
 
+    Update to C TAP Harness 3.1:
+
+    * ok, okv, and is_* now return the success of the test.
+    * Add breallocarray API for error-checked reallocarray in tests.
+    * Check for integer overflow on memory allocations.
+    * Avoid all remaining uses of sprintf.
+
 rra-c-util 5.4 (2014-03-25)
 
     Rename skip_unless_maintainer to skip_unless_author in Test::RRA and
