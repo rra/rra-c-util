@@ -26,6 +26,7 @@ rra-c-util 5.5 (unreleased)
     Update to C TAP Harness 3.1:
 
     * ok, okv, and is_* now return the success of the test.
+    * diag and sysdiag now return true.
     * Add breallocarray API for error-checked reallocarray in tests.
     * Check for integer overflow on memory allocations.
     * Avoid all remaining uses of sprintf.
