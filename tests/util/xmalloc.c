@@ -360,8 +360,8 @@ main(int argc, char *argv[])
             syswarn("Can't set data limit to %lu", (unsigned long) limit);
             exit(2);
         }
-        if (size < limit || code == 'r') {
-            test_size = code == 'r' ? 10 : size;
+        if (size < limit || code == 'r' || code == 'y') {
+            test_size = (code == 'r' || code == 'y') ? 10 : size;
             if (test_size == 0)
                 test_size = 1;
             tmp = malloc(test_size);
