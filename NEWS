@@ -27,6 +27,11 @@ rra-c-util 5.5 (unreleased)
     Fix compilation of portable/pam.h with a C++ compiler.  Caught by
     cppcheck.
 
+    RRA_LIB_KRB5 and RRA_LIB_KRB5_OPTIONAL now also provide a
+    KRB5_CPPFLAGS_GCC Makefile variable that can be used in combination
+    with gcc warnings (such as the make warnings target) to suppress
+    warnings from Kerberos headers in non-system paths.
+
     Update to C TAP Harness 3.1:
 
     * ok, okv, and is_* now return the success of the test.
