@@ -2,6 +2,10 @@
 
 rra-c-util 5.5 (unreleased)
 
+    In network_read and network_write with a timeout, restart the I/O
+    attempt if a system call failed with EINTR instead of aborting the
+    operation.
+
     Use calloc in preference to calculating a malloc size with
     multiplication everywhere, and reallocarray in preference to
     calculating a realloc size.  In most places this caution was probably

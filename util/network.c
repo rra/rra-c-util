@@ -712,7 +712,12 @@ network_read(socket_type fd, void *buffer, size_t total, time_t timeout)
     if (timeout == 0)
         return (socket_xread(fd, buffer, total) >= 0);
 
-    /* The hard way.  We try to apply the timeout on the whole read. */
+    /*
+     * The hard way.  We try to apply the timeout on the whole read.  If
+     * either select or read fails with EINTR, restart the loop, and rely on
+     * the overall timeout to limit how long we wait without forward
+     * progress.
+     */
     start = time(NULL);
     now = start;
     do {
@@ -723,16 +728,20 @@ network_read(socket_type fd, void *buffer, size_t total, time_t timeout)
             tv.tv_sec = 1;
         tv.tv_usec = 0;
         status = select(fd + 1, &set, NULL, NULL, &tv);
-        if (status < 0)
+        if (status < 0) {
+            if (socket_errno == EINTR)
+                continue;
             return false;
-        else if (status == 0) {
+        } else if (status == 0) {
             socket_set_errno(ETIMEDOUT);
             return false;
         }
         status = socket_read(fd, (char *) buffer + got, total - got);
-        if (status < 0)
+        if (status < 0) {
+            if (socket_errno == EINTR)
+                continue;
             return false;
-        else if (status == 0) {
+        } else if (status == 0) {
             socket_set_errno(EPIPE);
             return false;
         }
@@ -767,7 +776,10 @@ network_write(socket_type fd, const void *buffer, size_t total, time_t timeout)
     if (timeout == 0)
         return (socket_xwrite(fd, buffer, total) >= 0);
 
-    /* The hard way.  We try to apply the timeout on the whole write. */
+    /* The hard way.  We try to apply the timeout on the whole write.  If
+     * either select or read fails with EINTR, restart the loop, and rely on
+     * the overall timeout to limit how long we wait without forward progress.
+     */
     fdflag_nonblocking(fd, true);
     start = time(NULL);
     now = start;
@@ -779,15 +791,20 @@ network_write(socket_type fd, const void *buffer, size_t total, time_t timeout)
             tv.tv_sec = 1;
         tv.tv_usec = 0;
         status = select(fd + 1, NULL, &set, NULL, &tv);
-        if (status < 0)
+        if (status < 0) {
+            if (socket_errno == EINTR)
+                continue;
             goto fail;
-        else if (status == 0) {
+        } else if (status == 0) {
             socket_set_errno(ETIMEDOUT);
             goto fail;
         }
         status = socket_write(fd, (const char *) buffer + sent, total - sent);
-        if (status < 0)
+        if (status < 0) {
+            if (socket_errno == EINTR)
+                continue;
             goto fail;
+        }
         sent += status;
         if (sent == total) {
             fdflag_nonblocking(fd, false);
