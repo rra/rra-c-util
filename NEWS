@@ -32,6 +32,10 @@ rra-c-util 5.5 (unreleased)
     with gcc warnings (such as the make warnings target) to suppress
     warnings from Kerberos headers in non-system paths.
 
+    The util/messages-krb5 test can now be included in a package that may
+    or may not be built with Kerberos support and will be skipped if
+    Kerberos support is not enabled.
+
     Update to C TAP Harness 3.1:
 
     * ok, okv, and is_* now return the success of the test.
