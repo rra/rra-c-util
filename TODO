@@ -9,24 +9,47 @@ General:
  * Look for duplication with gnulib (under an acceptable license) and
    remove some portability code here in favor of gnulib.
 
+ * Add a gnulib-style synchronization tool to include the latest version
+   of the code in a package.
+
  * Use krb5_free_string for appdefaults code.
 
-util:
+Autoconf probes:
+
+ * Check the usability of headers in library probes and treat the library
+   as not found if the header isn't available.
+
+Portability layer:
+
+ * Add long option support to getopt (possibly by using gnulib instead).
+
+ * Add a replacement for strtonum.
+
+ * Use getauxval(AT_SECURE) in issetugid replacement if available.
+
+Utility functions:
 
  * Provide an API in util/messages-krb5.c to retrieve the most recent
    Kerberos error message.
 
-TAP Add-Ons:
+TAP add-ons:
 
  * Check the Kerberos password if password was requested and abort if
    authentication fails.
 
-Test Suite:
+Build system:
+
+ * Support an --enable-rpath configure flag that adds the library
+   directories to the RPATH of built binaries (requested for libkopenafs).
+
+Test suite:
 
  * The xmalloc test suite doesn't fully comply with the TAP output
    protocol when reporting diagnostics from the xmalloc helper program.
 
- * Incorporate the Perl utility library from kstart's test suite.
+ * Incorporate the Perl utility library from kstart's test suite, or
+   use Authen::Kerberos if it's far enough along to support the
+   required functions.
 
 Documentation:
 
