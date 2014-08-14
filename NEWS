@@ -5,6 +5,9 @@ rra-c-util 5.6 (unreleased)
     Check for integer overflow when determining the size of the results of
     vector_join and vector_cjoin.
 
+    Avoid strlcpy in the getnameinfo replacement (use memcpy instead) and
+    the setenv replacement (use asprintf instead).
+
 rra-c-util 5.5 (2014-07-02)
 
     In network_read and network_write with a timeout, restart the I/O
