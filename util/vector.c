@@ -470,10 +470,16 @@ vector_join(const struct vector *vector, const char *seperator)
     if (vector->count == 0)
         return xstrdup("");
 
-    /* Determine the total size of the resulting string. */
+    /*
+     * Determine the total size of the resulting string.  Be careful of
+     * integer overflow while doing so.
+     */
     seplen = strlen(seperator);
-    for (size = 0, i = 0; i < vector->count; i++)
+    for (size = 0, i = 0; i < vector->count; i++) {
+        assert(SIZE_MAX - size >= strlen(vector->strings[i]) + seplen + 1);
         size += strlen(vector->strings[i]);
+    }
+    assert(SIZE_MAX - size >= (vector->count - 1) * seplen + 1);
     size += (vector->count - 1) * seplen + 1;
 
     /* Allocate the memory and build up the string using strlcat. */
@@ -497,10 +503,16 @@ cvector_join(const struct cvector *vector, const char *seperator)
     if (vector->count == 0)
         return xstrdup("");
 
-    /* Determine the total size of the resulting string. */
+    /*
+     * Determine the total size of the resulting string.  Be careful of
+     * integer overflow while doing so.
+     */
     seplen = strlen(seperator);
-    for (size = 0, i = 0; i < vector->count; i++)
+    for (size = 0, i = 0; i < vector->count; i++) {
+        assert(SIZE_MAX - size >= strlen(vector->strings[i]));
         size += strlen(vector->strings[i]);
+    }
+    assert(SIZE_MAX - size >= (vector->count - 1) * seplen + 1);
     size += (vector->count - 1) * seplen + 1;
 
     /* Allocate the memory and build up the string using strlcat. */

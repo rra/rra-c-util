@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.6 (unreleased)
+
+    Check for integer overflow when determining the size of the results of
+    vector_join and vector_cjoin.
+
 rra-c-util 5.5 (2014-07-02)
 
     In network_read and network_write with a timeout, restart the I/O
