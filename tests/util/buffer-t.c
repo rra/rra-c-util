@@ -252,7 +252,7 @@ main(void)
     free(data);
     buffer_free(three);
 
-    /* buffer_vsprintf */
+    /* buffer_vsprintf and buffer_append_vsprintf */
     three = buffer_new();
     test_append_vsprintf(three, "testing %d testing", 6);
     is_int(0, three->used, "buffer_append_vsprintf leaves used as 0");
