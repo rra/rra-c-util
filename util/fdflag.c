@@ -144,6 +144,6 @@ fdflag_nonblocking(socket_type fd, bool flag)
     int state;
 
     state = flag ? 1 : 0;
-    return ioctl(fd, FIONBIO, &state);
+    return (ioctl(fd, FIONBIO, &state) == 0);
 }
 #endif /* !O_NONBLOCK */
