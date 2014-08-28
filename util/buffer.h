@@ -126,4 +126,4 @@ bool buffer_read_file(struct buffer *, int fd);
 
 END_DECLS
 
-#endif /* INN_BUFFER_H */
+#endif /* UTIL_BUFFER_H */
