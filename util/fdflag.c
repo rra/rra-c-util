@@ -58,7 +58,10 @@
  * Do it right anyway; it's not that expensive.
  *
  * Stub this out on Windows, where it's not supported (at least currently by
- * this utility library).
+ * this utility library).  Do not use socket_type for the first parameter,
+ * since it's meaningful to set file descriptors for regular files to
+ * close-on-exec (even though this is currently irrelevant since the function
+ * isn't supported on Windows).
  */
 #ifdef _WIN32
 bool
