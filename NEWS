@@ -8,6 +8,13 @@ rra-c-util 5.6 (unreleased)
     Avoid strlcpy in the getnameinfo replacement (use memcpy instead) and
     the setenv replacement (use asprintf instead).
 
+    Add a style/module-version.t test and helper script for regular Perl
+    modules.  This is similar to tests/perl/module-version-t except that
+    it expects a Perl module layout instead of Perl modules embedded in a
+    larger distribution, does not do the Automake integration, and
+    supports the Perl 5.12 package syntax.  (Common code should someday be
+    factored out into Test::RRA.)
+
 rra-c-util 5.5 (2014-07-02)
 
     In network_read and network_write with a timeout, restart the I/O
