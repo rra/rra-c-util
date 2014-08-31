@@ -4,9 +4,6 @@
 # configuration file to store some package-specific data.  This module loads
 # that configuration and provides the namespace for the configuration
 # settings.
-#
-# The canonical version of this file is maintained in the rra-c-util package,
-# which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
 
 package Test::RRA::Config;
 
