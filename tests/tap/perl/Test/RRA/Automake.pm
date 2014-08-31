@@ -14,6 +14,7 @@
 # which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
 # Written by Russ Allbery <eagle@eyrie.org>
+# Copyright 2014 Russ Allbery <eagle@eyrie.org>
 # Copyright 2013
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -196,7 +197,7 @@ sub perl_dirs {
 
     # Build the list of top-level directories to test.
     opendir(my $rootdir, q{.}) or BAIL_OUT("cannot open .: $!");
-    my @dirs = grep { -d $_ && !$skip{$_} } readdir($rootdir);
+    my @dirs = grep { -d && !$skip{$_} } readdir($rootdir);
     closedir($rootdir);
     @dirs = File::Spec->no_upwards(@dirs);
 
@@ -386,6 +387,8 @@ otherwise ignored.
 Russ Allbery <eagle@eyrie.org>
 
 =head1 COPYRIGHT AND LICENSE
+
+Copyright 2014 Russ Allbery <eagle@eyrie.org>
 
 Copyright 2013 The Board of Trustees of the Leland Stanford Junior
 University
