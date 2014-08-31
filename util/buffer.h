@@ -16,6 +16,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2014 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011, 2012
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006
@@ -57,6 +58,9 @@ struct buffer {
 };
 
 BEGIN_DECLS
+
+/* Default to a hidden visibility for all util functions. */
+#pragma GCC visibility push(hidden)
 
 /* Allocate a new buffer and initialize its contents. */
 struct buffer *buffer_new(void);
@@ -123,6 +127,9 @@ bool buffer_read_all(struct buffer *, int fd);
  * buffer_read_all when fstat can be called on the file descriptor.
  */
 bool buffer_read_file(struct buffer *, int fd);
+
+/* Undo default visibility change. */
+#pragma GCC visibility pop
 
 END_DECLS
 

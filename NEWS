@@ -15,6 +15,10 @@ rra-c-util 5.6 (unreleased)
     supports the Perl 5.12 package syntax.  (Common code should someday be
     factored out into Test::RRA.)
 
+    Fix visibility for util/buffer.c functions and for inet_aton and
+    inet_ntoa replacements to match the default hidden visiblity of other
+    portability and util functions.  Thanks, Julien ÉLIE.
+
 rra-c-util 5.5 (2014-07-02)
 
     In network_read and network_write with a timeout, restart the I/O
