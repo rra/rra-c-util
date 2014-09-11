@@ -391,7 +391,7 @@ network_bind_all_free(socket_type *fds)
  * on any of those sockets and return the file descriptor that selects ready
  * for read.
  *
- * This is primarily intended for UDP services listening on mutliple file
+ * This is primarily intended for UDP services listening on multiple file
  * descriptors, and also provides part of the code for network_accept_any.
  * TCP services will probably want to use network_accept_any instead.
  *

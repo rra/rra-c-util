@@ -73,7 +73,7 @@ void network_bind_all_free(socket_type *fds);
 /*
  * Wait on an array of file descriptor for one of them to select ready for
  * read, and return the first file descriptor that does so.  This is primarily
- * intended for UDP services listening on mutliple file descriptors.  TCP
+ * intended for UDP services listening on multiple file descriptors.  TCP
  * services will probably want to use network_accept_any instead.
  *
  * This is not intended to be a replacement for a full event loop, just some
