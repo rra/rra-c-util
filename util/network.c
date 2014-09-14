@@ -955,6 +955,14 @@ network_addr_match(const char *a, const char *b, const char *mask)
 #endif
 
     /*
+     * AIX 7.1 treats the empty string as equivalent to 0.0.0.0 and allows it
+     * to match, but it's too easy to get the empty string from some sort of
+     * syntax error.  Special-case the empty string to always return false.
+     */
+    if (a[0] == '\0' || b[0] == '\0')
+        return false;
+
+    /*
      * If the addresses are IPv4, the mask may be in one of two forms.  It can
      * either be a traditional mask, like 255.255.0.0, or it can be a CIDR
      * subnet designation, like 16.  (The caller should have already removed
