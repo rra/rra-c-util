@@ -20,6 +20,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2014 Russ Allbery <eagle@eyrie.org>
  * Copyright 2009, 2011, 2012, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006, 2007, 2008
@@ -223,7 +224,8 @@ network_bind_ipv6(int type, const char *address, unsigned short port)
     fd = socket(PF_INET6, type, IPPROTO_IP);
     if (fd == INVALID_SOCKET) {
         if (socket_errno != EAFNOSUPPORT && socket_errno != EPROTONOSUPPORT)
-            syswarn("cannot create IPv6 socket for %s,%hu", address, port);
+            syswarn("cannot create IPv6 socket for %s, port %hu", address,
+                    port);
         return INVALID_SOCKET;
     }
     network_set_reuseaddr(fd);
@@ -274,7 +276,7 @@ network_bind_ipv6(int type, const char *address, unsigned short port)
 #else /* HAVE_INET6 */
 
 socket_type
-network_bind_ipv6(const char *address, unsigned short port)
+network_bind_ipv6(int type UNUSED, const char *address, unsigned short port)
 {
     warn("cannot bind %s, port %hu: IPv6 not supported", address, port);
     socket_set_errno(EPROTONOSUPPORT);
@@ -287,9 +289,9 @@ network_bind_ipv6(const char *address, unsigned short port)
 /*
  * Create and bind sockets for every local address, as determined by
  * getaddrinfo if IPv6 is available (otherwise, just use the IPv4 loopback
- * address).  Takes the port number, and then a pointer to an array of
- * integers and a pointer to a count of them.  Allocates a new array to hold
- * the file descriptors and stores the count in the third argument.
+ * address).  Takes the socket type and port number, and then a pointer to an
+ * array of integers and a pointer to a count of them.  Allocates a new array
+ * to hold the file descriptors and stores the count in the fourth argument.
  */
 #if HAVE_INET6
 
@@ -471,7 +473,9 @@ network_accept_any(socket_type fds[], unsigned int count,
 static bool
 network_source(socket_type fd, int family, const char *source)
 {
-    if (source == NULL || strcmp(source, "all") == 0)
+    if (source == NULL)
+        return true;
+    if (strcmp(source, "all") == 0 || strcmp(source, "any") == 0)
         return true;
     if (family == AF_INET) {
         struct sockaddr_in saddr;

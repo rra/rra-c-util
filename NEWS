@@ -24,6 +24,11 @@ rra-c-util 5.6 (unreleased)
     string as equivalent to 0.0.0.0, but we want to treat it as a syntax
     error since it's too easy to get an empty string by accident.
 
+    network_connect, network_connect_host, and network_client_create now
+    accept "any" as a source as well as "all", as a synonym for letting
+    the operating system pick, for parallelism with network_bind_ipv4 and
+    network_bind_ipv6.
+
 rra-c-util 5.5 (2014-07-02)
 
     In network_read and network_write with a timeout, restart the I/O
