@@ -98,17 +98,6 @@
 #endif
 
 /*
- * Windows requires a different errno code for a socket equivalent of EINVAL.
- * Use this macro to set the socket error to EINVAL.
- */
-#ifdef _WIN32
-# define socket_set_errno_einval()      socket_set_errno(WSAEINVAL)
-#else
-# define socket_set_errno_einval()      socket_set_errno(EINVAL)
-#endif
-
-
-/*
  * Set SO_REUSEADDR on a socket if possible (so that something new can listen
  * on the same port immediately if the daemon dies unexpectedly).
  */
