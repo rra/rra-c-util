@@ -239,9 +239,13 @@ network_bind_ipv6(int type, const char *address, unsigned short port)
      * exist on the system, but we gain the ability to bind to IPv6 addresses
      * that aren't yet configured.  Since IPv6 address configuration can take
      * unpredictable amounts of time during system setup, this is more robust.
+     *
+     * Ensure there is always a block here to avoid compiler warnings, since
+     * network_set_freebind() may expand into nothing.
      */
-    if (strcmp(address, "::") != 0)
+    if (strcmp(address, "::") != 0) {
         network_set_freebind(fd);
+    }
 
     /* Flesh out the socket and do the bind. */
     memset(&server, 0, sizeof(server));
