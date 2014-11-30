@@ -58,6 +58,7 @@
 #include <time.h>
 
 #include <util/fdflag.h>
+#include <util/macros.h>
 #include <util/messages.h>
 #include <util/network.h>
 #include <util/xmalloc.h>
@@ -119,7 +120,7 @@ network_set_reuseaddr(socket_type fd)
  * consistent and easier to understand.
  */
 #ifdef IPV6_V6ONLY
-static void
+static void UNUSED
 network_set_v6only(socket_type fd)
 {
     int flag = 1;
@@ -135,7 +136,7 @@ network_set_v6only(socket_type fd)
  * IPv6 addresses that may not have been set up yet.
  */
 #ifdef IP_FREEBIND
-static void
+static void UNUSED
 network_set_freebind(socket_type fd)
 {
     int flag = 1;
