@@ -29,6 +29,8 @@
  * with the system versions.
  */
 #if TESTING
+# undef asprintf
+# undef vasprintf
 # define asprintf test_asprintf
 # define vasprintf test_vasprintf
 int test_asprintf(char **, const char *, ...)
