@@ -38,6 +38,9 @@ rra-c-util 5.6 (unreleased)
     sys/un.h and defines SUN_LEN if the implementation does not do so.
     (Use in combination with the RRA_MACRO_SUN_LEN Autoconf macro.)
 
+    Add PIPE_READ and PIPE_WRITE macros to util/macros.h to name the
+    elements of the array passed to pipe.
+
 rra-c-util 5.5 (2014-07-02)
 
     In network_read and network_write with a timeout, restart the I/O
