@@ -172,7 +172,7 @@ dnl portable replacements, and the messages utility library.  sys/filio.h is
 dnl only used by fdflag.
 AC_HEADER_STDBOOL
 AC_CHECK_HEADERS([sys/bitypes.h sys/filio.h sys/uio.h sys/time.h syslog.h])
-AC_CHECK_DECLS([snprintf, vsnprintf])
+AC_CHECK_DECLS([snprintf, strlcat, strlcpy, vsnprintf])
 RRA_C_C99_VAMACROS
 RRA_C_GNU_VAMACROS
 AC_TYPE_LONG_LONG_INT
