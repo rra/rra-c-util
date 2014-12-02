@@ -63,6 +63,8 @@
  */
 #if TESTING
 # undef pwrite
+# undef write
+# undef writev
 # define pwrite fake_pwrite
 # define write  fake_write
 # define writev fake_writev
