@@ -58,8 +58,9 @@
 
 /*
  * If we're running the test suite, call testing versions of the write
- * functions.  #undef pwrite first because large file support may define a
- * macro pwrite (pointing to pwrite64) on some platforms (e.g. Solaris).
+ * functions.  #undef the functions first since large file support may define
+ * a macro pwrite (pointing to pwrite64) on some platforms (e.g. Solaris),
+ * and it's possible the other functions may be similarly affected.
  */
 #if TESTING
 # undef pwrite
