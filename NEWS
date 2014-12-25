@@ -46,6 +46,11 @@ rra-c-util 5.6 (unreleased)
     pam_start) and PAM_USER_PROMPT (returning "login: ") to the fake PAM
     library for testing.
 
+    In the TAP add-on for Kerberos testing, add a new flag,
+    TAP_KRB_NEEDS_PKINIT, to the kerberos_setup function.  This indicates
+    that configuration for PKINIT authentications is required for this
+    test case.
+
     Update to C TAP Harness 3.2:
 
     * Support comments and blank lines in test lists.
