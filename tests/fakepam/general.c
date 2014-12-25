@@ -57,16 +57,12 @@ pam_start(const char *service_name, const char *user,
 {
     struct pam_handle *handle;
 
-    handle = malloc(sizeof(struct pam_handle));
+    handle = calloc(1, sizeof(struct pam_handle));
     if (handle == NULL)
         return PAM_BUF_ERR;
     handle->service = service_name;
     handle->user = user;
-    handle->authtok = NULL;
-    handle->oldauthtok = NULL;
     handle->conversation = pam_conversation;
-    handle->environ = NULL;
-    handle->data = NULL;
     *pamh = handle;
     return PAM_SUCCESS;
 }
@@ -91,6 +87,9 @@ pam_end(pam_handle_t *pamh, int status)
     }
     free(pamh->authtok);
     free(pamh->oldauthtok);
+    free(pamh->rhost);
+    free(pamh->ruser);
+    free(pamh->tty);
     for (item = pamh->data; item != NULL; ) {
         if (item->cleanup != NULL)
             item->cleanup(pamh, item->data, status);

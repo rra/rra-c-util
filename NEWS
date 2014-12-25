@@ -41,6 +41,11 @@ rra-c-util 5.6 (unreleased)
     Add PIPE_READ and PIPE_WRITE macros to util/macros.h to name the
     elements of the array passed to pipe.
 
+    Add full support for PAM_RHOST, PAM_RUSER, and PAM_TTY and read-only
+    support for PAM_SERVICE (returning the service name given to
+    pam_start) and PAM_USER_PROMPT (returning "login: ") to the fake PAM
+    library for testing.
+
     Update to C TAP Harness 3.2:
 
     * Support comments and blank lines in test lists.
