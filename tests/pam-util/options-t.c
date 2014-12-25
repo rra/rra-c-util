@@ -330,7 +330,7 @@ main(void)
     /* Test for Kerberos krb5.conf option parsing. */
     krb5conf = test_file_path("data/krb5-pam.conf");
     if (krb5conf == NULL)
-        bail("cannot find data/krb5.conf");
+        bail("cannot find data/krb5-pam.conf");
     if (setenv("KRB5_CONFIG", krb5conf, 1) < 0)
         sysbail("cannot set KRB5_CONFIG");
     krb5_free_context(args->ctx);
