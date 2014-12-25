@@ -41,6 +41,10 @@ rra-c-util 5.6 (unreleased)
     Add PIPE_READ and PIPE_WRITE macros to util/macros.h to name the
     elements of the array passed to pipe.
 
+    Update to C TAP Harness 3.2:
+
+    * Support comments and blank lines in test lists.
+
 rra-c-util 5.5 (2014-07-02)
 
     In network_read and network_write with a timeout, restart the I/O
