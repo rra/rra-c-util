@@ -278,14 +278,14 @@ from the C<MYMETA.json> file.
 
 =head1 AUTHOR
 
-Russ Allbery <rra@cpan.org>
+Russ Allbery <eagle@eyrie.org>
 
 =head1 COPYRIGHT AND LICENSE
 
 Copyright 2013, 2014 The Board of Trustees of the Leland Stanford Junior
 University
 
-Copyright 2014 Russ Allbery <rra@cpan.org>
+Copyright 2014 Russ Allbery <eagle@eyrie.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),

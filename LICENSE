@@ -14,7 +14,6 @@ Copyright: 1997, 2000-2002 Benjamin Sittler
   2000-2002, 2004-2014 Russ Allbery <eagle@eyrie.org>
   2001-2002, 2004-2014
     The Board of Trustees of the Leland Stanford Junior University
-  2014 Russ Allbery <rra@cpan.org>
 License: Expat
 
 Files: Makefile.in
