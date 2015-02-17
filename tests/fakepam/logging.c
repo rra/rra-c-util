@@ -94,7 +94,7 @@ output_add(struct output *output, int priority, const char *string)
  * codes used by the system PAM library.
  */
 const char *
-pam_strerror(pam_handle_t *pamh UNUSED, int code)
+pam_strerror(PAM_STRERROR_CONST pam_handle_t *pamh UNUSED, int code)
 {
     switch (code) {
     case PAM_SUCCESS:     return "No error";
