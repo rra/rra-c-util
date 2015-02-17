@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.7 (unreleased)
+
+    Avoid $() in the probe for systemd support, since Solaris 10 /bin/sh
+    is still used by configure and doesn't support this syntax.
+
 rra-c-util 5.6 (2014-12-25)
 
     Check for integer overflow when determining the size of the results of
