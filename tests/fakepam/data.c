@@ -74,7 +74,7 @@ pam_set_data(pam_handle_t *pamh, const char *item, void *data,
     for (p = pamh->data; p != NULL; p = p->next)
         if (strcmp(p->name, item) == 0) {
             if (p->cleanup != NULL)
-                p->cleanup (pamh, p->data, PAM_DATA_REPLACE);
+                p->cleanup(pamh, p->data, PAM_DATA_REPLACE);
             p->data = data;
             p->cleanup = cleanup;
             return PAM_SUCCESS;
