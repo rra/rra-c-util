@@ -2,6 +2,11 @@
 
 rra-c-util 5.7 (unreleased)
 
+    Add portability defines for Mac OS X 10's PAM implementation, which
+    doesn't support the PAM_DATA_REPLACE and PAM_DATA_SILENT options for
+    pam_set_data and doesn't define PAM_BAD_ITEM.  Thanks to Meno Abels
+    for the report.
+
     Avoid $() in the probe for systemd support, since Solaris 10 /bin/sh
     is still used by configure and doesn't support this syntax.
 

@@ -62,6 +62,26 @@
 #endif
 
 /*
+ * Mac OS X 10 doesn't define these.  They're meant to be logically or'd with
+ * an exit status in pam_set_data, so define them to 0 if not defined to
+ * deactivate them.
+ */
+#ifndef PAM_DATA_REPLACE
+# define PAM_DATA_REPLACE 0
+#endif
+#ifndef PAM_DATA_SILENT
+# define PAM_DATA_SILENT 0
+#endif
+
+/*
+ * Mac OS X 10 apparently doesn't use PAM_BAD_ITEM and returns PAM_SYMBOL_ERR
+ * instead.
+ */
+#ifndef PAM_BAD_ITEM
+# define PAM_BAD_ITEM PAM_SYMBOL_ERR
+#endif
+
+/*
  * Some PAM implementations support building the module static and exporting
  * the call points via a struct instead.  (This is the default in OpenPAM, for
  * example.)  To support this, the pam_sm_* functions are declared PAM_EXTERN.
