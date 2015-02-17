@@ -44,6 +44,8 @@
 
 #ifdef HAVE_KRB5_H
 # include <krb5.h>
+#elif HAVE_KERBEROSV5_KRB5_H
+# include <kerberosv5/krb5.h>
 #else
 # include <krb5/krb5.h>
 #endif

@@ -5,6 +5,10 @@ rra-c-util 5.7 (unreleased)
     Avoid $() in the probe for systemd support, since Solaris 10 /bin/sh
     is still used by configure and doesn't support this syntax.
 
+    Port the Kerberos Autoconf macros and portability framework to the
+    included Kerberos in Solaris 10 by adding some more entries to the
+    header search paths.
+
 rra-c-util 5.6 (2014-12-25)
 
     Check for integer overflow when determining the size of the results of

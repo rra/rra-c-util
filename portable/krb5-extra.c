@@ -34,6 +34,8 @@
 #   include <ibm_svc/krb5_svc.h>
 #  elif defined(HAVE_ET_COM_ERR_H)
 #   include <et/com_err.h>
+#  elif defined(HAVE_KERBEROSV5_COM_ERR_H)
+#   include <kerberosv5/com_err.h>
 #  else
 #   include <com_err.h>
 #  endif
