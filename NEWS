@@ -25,6 +25,9 @@ rra-c-util 5.7 (unreleased)
     included Kerberos in Solaris 10 by adding some more entries to the
     header search paths.
 
+    Add a macro to probe for whether the compiler is Clang, and use that
+    to determine appropriate warning flags for Clang versus gcc.
+
 rra-c-util 5.6 (2014-12-25)
 
     Check for integer overflow when determining the size of the results of

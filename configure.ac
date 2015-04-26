@@ -230,6 +230,10 @@ dnl by packages that want to use UNIX domain sockets.
 RRA_SYS_UNIX_SOCKETS
 RRA_MACRO_SUN_LEN
 
+dnl Enable appropriate warnings.
+AM_CONDITIONAL([WARNINGS_GCC], [test x"$GCC" = xyes && test x"$CLANG" != xyes])
+AM_CONDITIONAL([WARNINGS_CLANG], [test x"$CLANG" = xyes])
+
 dnl Output section.  This is generally the same for all packages.
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_HEADER([config.h])

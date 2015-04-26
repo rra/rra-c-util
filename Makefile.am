@@ -86,13 +86,18 @@ distclean-local:
 # Last checked against gcc 4.8.2 (2014-04-12).  -D_FORTIFY_SOURCE=2 enables
 # warn_unused_result attribute markings on glibc functions on Linux, which
 # catches a few more issues.
-WARNINGS = -g -O -fstrict-overflow -fstrict-aliasing -D_FORTIFY_SOURCE=2    \
-	-Wall -Wextra -Wendif-labels -Wformat=2 -Winit-self -Wswitch-enum   \
-	-Wstrict-overflow=5 -Wfloat-equal -Wdeclaration-after-statement	    \
-	-Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align	    \
-	-Wwrite-strings -Wjump-misses-init -Wlogical-op -Wstrict-prototypes \
-	-Wold-style-definition -Wmissing-prototypes -Wnormalized=nfc	    \
+if WARNINGS_GCC
+    WARNINGS = -g -O -fstrict-overflow -fstrict-aliasing -D_FORTIFY_SOURCE=2 \
+	-Wall -Wextra -Wendif-labels -Wformat=2 -Winit-self -Wswitch-enum    \
+	-Wstrict-overflow=5 -Wfloat-equal -Wdeclaration-after-statement	     \
+	-Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align	     \
+	-Wwrite-strings -Wjump-misses-init -Wlogical-op -Wstrict-prototypes  \
+	-Wold-style-definition -Wmissing-prototypes -Wnormalized=nfc	     \
 	-Wpacked -Wredundant-decls -Wnested-externs -Winline -Wvla -Werror
+endif
+if WARNINGS_CLANG
+    WARINGS = -Weverything -Wno-padded
+endif
 
 warnings:
 	$(MAKE) V=0 CFLAGS='$(WARNINGS)' KRB5_CPPFLAGS='$(KRB5_CPPFLAGS_GCC)'
