@@ -5,6 +5,7 @@ compiler:
 addons:
   apt:
     packages:
+      - cpanminus
       - libevent-dev
       - libkrb5-dev
       - libpam0g-dev
