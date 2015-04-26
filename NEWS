@@ -28,6 +28,11 @@ rra-c-util 5.7 (unreleased)
     Add a macro to probe for whether the compiler is Clang, and use that
     to determine appropriate warning flags for Clang versus gcc.
 
+    Update to C TAP Harness 3.3:
+
+    * Display verbose test results with -v or C_TAP_VERBOSE.
+    * Test infrastructure builds cleanly with Clang warnings.
+
 rra-c-util 5.6 (2014-12-25)
 
     Check for integer overflow when determining the size of the results of
