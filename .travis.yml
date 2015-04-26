@@ -1,0 +1,23 @@
+language: c
+compiler:
+  - gcc
+
+addons:
+  apt:
+    packages:
+      - libevent-dev
+      - libkrb5-dev
+      - libpam0g-dev
+      - pkg-config
+before_install:
+  - cpanm Test::MinimumVersion
+  - cpanm Test::Perl::Critic
+  - cpanm Test::Pod
+  - cpanm Test::Strict
+  - cpanm Test::Synopsis
+env: AUTHOR_TESTING=1
+script: ./autogen && ./configure && make warnings && make check
+
+branches:
+  only:
+    - master
