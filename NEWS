@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 5.7 (unreleased)
+rra-c-util 5.7 (2015-04-26)
 
     Add portability defines for Mac OS X 10's PAM implementation, which
     doesn't support the PAM_DATA_REPLACE and PAM_DATA_SILENT options for
