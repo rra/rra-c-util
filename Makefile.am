@@ -96,7 +96,7 @@ if WARNINGS_GCC
 	-Wpacked -Wredundant-decls -Wnested-externs -Winline -Wvla -Werror
 endif
 if WARNINGS_CLANG
-    WARINGS = -Weverything -Wno-padded
+    WARNINGS = -Weverything -Wno-padded
 endif
 
 warnings:
