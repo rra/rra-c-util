@@ -4,6 +4,9 @@ rra-c-util 5.8 (unreleased)
 
     Add missing va_end in xasprintf implementation.
 
+    Fix segfault in buffer_find_string if passed a buffer that's never had
+    any data.  Found by Richard Kettlewell.
+
 rra-c-util 5.7 (2015-04-26)
 
     Add portability defines for Mac OS X 10's PAM implementation, which
