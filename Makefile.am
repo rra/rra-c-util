@@ -89,11 +89,12 @@ distclean-local:
 if WARNINGS_GCC
     WARNINGS = -g -O -fstrict-overflow -fstrict-aliasing -D_FORTIFY_SOURCE=2 \
 	-Wall -Wextra -Wendif-labels -Wformat=2 -Winit-self -Wswitch-enum    \
-	-Wstrict-overflow=5 -Wfloat-equal -Wdeclaration-after-statement	     \
-	-Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-align	     \
-	-Wwrite-strings -Wjump-misses-init -Wlogical-op -Wstrict-prototypes  \
-	-Wold-style-definition -Wmissing-prototypes -Wnormalized=nfc	     \
-	-Wpacked -Wredundant-decls -Wnested-externs -Winline -Wvla -Werror
+	-Wstrict-overflow=5 -Wmissing-format-attribute -Wfloat-equal	     \
+	-Wdeclaration-after-statement -Wshadow -Wpointer-arith		     \
+	-Wbad-function-cast -Wcast-align -Wwrite-strings -Wjump-misses-init  \
+	-Wlogical-op -Wstrict-prototypes -Wold-style-definition		     \
+	-Wmissing-prototypes -Wnormalized=nfc -Wpacked -Wredundant-decls     \
+	-Wnested-externs -Winline -Wvla -Werror
 endif
 if WARNINGS_CLANG
     WARNINGS = -Weverything -Wno-padded

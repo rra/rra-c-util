@@ -57,7 +57,7 @@
  * available, we skip this test.
  */
 #ifdef HAVE_REGCOMP
-static void
+static void __attribute__((__format__(printf, 3, 4)))
 like(const char *wanted, const char *seen, const char *format, ...)
 {
     va_list args;
@@ -117,7 +117,7 @@ like(const char *wanted, const char *seen, const char *format UNUSED, ...)
  *
  * Eventually calls either is_string or ok to report results via TAP.
  */
-static void
+static void __attribute__((__format__(printf, 3, 4)))
 compare_string(char *wanted, char *seen, const char *format, ...)
 {
     va_list args;
@@ -133,7 +133,7 @@ compare_string(char *wanted, char *seen, const char *format, ...)
     length = strlen(wanted);
     if (wanted[0] == '/' && wanted[length - 1] == '/') {
         regex = bstrndup(wanted + 1, length - 2);
-        like(regex, seen, comment);
+        like(regex, seen, "%s", comment);
         free(regex);
     } else {
         is_string(wanted, seen, "%s", comment);
