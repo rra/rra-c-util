@@ -55,7 +55,9 @@
  * Disable the requirement that format strings be literals, since it's easier
  * to handle the possible patterns for kinit commands as an array.
  */
-#pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ > 2) || defined(__clang__)
+# pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#endif
 
 
 /*
