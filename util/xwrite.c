@@ -80,7 +80,7 @@ xwrite(int fd, const void *buffer, size_t size)
 {
     size_t total;
     ssize_t status;
-    int count = 0;
+    unsigned int count = 0;
 
     if (size == 0)
 	return 0;
@@ -108,7 +108,7 @@ xpwrite(int fd, const void *buffer, size_t size, off_t offset)
 {
     size_t total;
     ssize_t status;
-    int count = 0;
+    unsigned int count = 0;
 
     if (size == 0)
 	return 0;
@@ -137,7 +137,7 @@ xwritev(int fd, const struct iovec iov[], int iovcnt)
 {
     ssize_t total, status = 0;
     size_t left, offset;
-    int iovleft, i, count;
+    unsigned int iovleft, i, count;
     struct iovec *tmpiov;
 
     /*
@@ -153,7 +153,7 @@ xwritev(int fd, const struct iovec iov[], int iovcnt)
     }
 
     /* Get a count of the total number of bytes in the iov array. */
-    for (total = 0, i = 0; i < iovcnt; i++)
+    for (total = 0, i = 0; i < (unsigned int) iovcnt; i++)
         total += iov[i].iov_len;
     if (total == 0)
 	return 0;
