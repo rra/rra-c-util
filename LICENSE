@@ -11,13 +11,13 @@ License: Expat
 
 Files: *
 Copyright: 1997, 2000-2002 Benjamin Sittler
-  2000-2002, 2004-2014 Russ Allbery <eagle@eyrie.org>
+  2000-2002, 2004-2015 Russ Allbery <eagle@eyrie.org>
   2001-2002, 2004-2014
     The Board of Trustees of the Leland Stanford Junior University
 License: Expat
 
 Files: Makefile.in
-Copyright: 1994-2013 Free Software Foundation, Inc.
+Copyright: 1994-2014 Free Software Foundation, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
 License: FSF-unlimited and Expat
 
@@ -28,7 +28,7 @@ License: FSF-unlimited, and GPL-2+ with Autoconf exception or Expat
 
 Files: build-aux/ar-lib build-aux/compile build-aux/depcomp
  build-aux/missing
-Copyright: 1996-2013 Free Software Foundation, Inc.
+Copyright: 1996-2014 Free Software Foundation, Inc.
 License: GPL-2+ with Autoconf exception or Expat
 
 Files: build-aux/config.guess build-aux/config.sub
@@ -69,12 +69,13 @@ License: FSF-configure
  permission to copy, distribute and modify it.
 
 Files: configure.ac m4/apache.m4 m4/apr.m4 m4/aprutil.m4 m4/bdb.m4
- m4/curl.m4 m4/gssapi.m4 m4/inet-ntoa.m4 m4/kadm5clnt.m4 m4/kafs.m4
- m4/krb5-config.m4 m4/krb5.m4 m4/ld-version.m4 m4/ldap.m4 m4/lib-depends.m4
- m4/lib-helper.m4 m4/lib-pathname.m4 m4/libevent.m4 m4/openssl.m4
- m4/pam-const.m4 m4/pcre.m4 m4/remctl.m4 m4/sasl.m4 m4/snprintf.m4
- m4/sqlite.m4 m4/systemd.m4 m4/tinycdb.m4 m4/vamacros.m4 m4/zlib.m4
-Copyright: 1999-2001, 2003, 2007, 2013-2014 Russ Allbery <eagle@eyrie.org>
+ m4/clang.m4 m4/curl.m4 m4/gssapi.m4 m4/inet-ntoa.m4 m4/kadm5clnt.m4
+ m4/kafs.m4 m4/krb5-config.m4 m4/krb5.m4 m4/ld-version.m4 m4/ldap.m4
+ m4/lib-depends.m4 m4/lib-helper.m4 m4/lib-pathname.m4 m4/libevent.m4
+ m4/openssl.m4 m4/pam-const.m4 m4/pcre.m4 m4/remctl.m4 m4/sasl.m4
+ m4/snprintf.m4 m4/sqlite.m4 m4/systemd.m4 m4/tinycdb.m4 m4/vamacros.m4
+ m4/zlib.m4
+Copyright: 1999-2001, 2003, 2007, 2013-2015 Russ Allbery <eagle@eyrie.org>
   2002-2014 The Board of Trustees of the Leland Stanford Junior University
   2007-2008 Markus Moeller
   2008-2010 Free Software Foundation, Inc.
@@ -131,7 +132,7 @@ Files: m4/socket-unix.m4 m4/socket.m4 portable/socket.h util/buffer.c
 Copyright: 1991, 1994-2003 The Internet Software Consortium and Rich Salz
   2004-2010 Internet Systems Consortium, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2014 Russ Allbery <eagle@eyrie.org>
+  2014-2015 Russ Allbery <eagle@eyrie.org>
 License: ISC
  Permission to use, copy, modify, and distribute this software for any
  purpose with or without fee is hereby granted, provided that the above
