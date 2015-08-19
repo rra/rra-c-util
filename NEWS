@@ -10,6 +10,11 @@ rra-c-util 5.8 (unreleased)
     Add portability code for kadm5_init_krb5_context for programs that
     use libkadm5clnt without needing libkrb5.
 
+    Fix the logic in Test::RRA::Automake for stripping relative
+    directories from the paths created by Automake to cope with multiple
+    ascending relative paths in a row, as is now used by current Automake
+    dist checking.
+
     Update to C TAP Harness 3.4:
 
     * Fix segfault in runtests with an empty test list.
