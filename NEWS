@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.9 (unreleased)
+
+    Fix the portability defines for the anonymous principal strings to
+    correctly define the Heimdal API, and add KRB5_ANON_REALM.
+
 rra-c-util 5.8 (2015-08-18)
 
     Add missing va_end in xasprintf implementation.
