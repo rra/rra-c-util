@@ -99,6 +99,7 @@ static const struct {
     { "PAM_AUTHINFO_UNAVAIL", PAM_AUTHINFO_UNAVAIL },
     { "PAM_IGNORE",           PAM_IGNORE           },
     { "PAM_NEW_AUTHTOK_REQD", PAM_NEW_AUTHTOK_REQD },
+    { "PAM_SESSION_ERR",      PAM_SESSION_ERR      },
     { "PAM_SUCCESS",          PAM_SUCCESS          },
     { "PAM_USER_UNKNOWN",     PAM_USER_UNKNOWN     },
 };
