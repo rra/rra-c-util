@@ -166,7 +166,7 @@ log_pam(struct pam_args *pargs, int priority, int status, const char *fmt,
  * preprocessor to save duplicate code.
  */
 #define LOG_FUNCTION(level, priority)                                   \
-    void  __attribute__((__format__(printf, 2, 3)))                     \
+    void __attribute__((__format__(printf, 2, 3)))                      \
     putil_ ## level(struct pam_args *pargs, const char *fmt, ...)       \
     {                                                                   \
         va_list args;                                                   \
