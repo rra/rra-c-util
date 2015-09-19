@@ -5,6 +5,10 @@ rra-c-util 5.9 (unreleased)
     Fix the portability defines for the anonymous principal strings to
     correctly define the Heimdal API, and add KRB5_ANON_REALM.
 
+    In the PAM testing framework, clear errno when a module calls
+    pam_modutil_getpwnam with an unrecognized username.  Returning NULL
+    with a 0 errno makes other testing easier.
+
     Add PAM_SESSION_ERR to the error codes supported by the PAM testing
     framework.
 
