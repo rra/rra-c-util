@@ -2,6 +2,16 @@
 
 rra-c-util 5.10 (unreleased)
 
+    New option, @MODULE_VERSION_IGNORE, for the test perl.conf
+    configuration that excludes certain modules from the version
+    consistency check.  This allows different versioning to be used for
+    modules that provide DBIx::Class schemata.
+
+    Move common code between tests/perl/module-version-t and
+    perl/t/style/module-version.t into a new Test::RRA::ModuleVersion test
+    module.  This adds support for the Perl 5.12 module version syntax to
+    the tests/perl/module-version-t version of the test.
+
     Fix the Perl docs/synopsis.t test to not use UNIX-specific path
     delimiters to exclude files in blib/script.  This fixes portability to
     older builds of Perl on Windows.

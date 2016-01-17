@@ -27,22 +27,23 @@ BEGIN {
     @ISA       = qw(Exporter);
     @EXPORT_OK = qw(
       $COVERAGE_LEVEL @COVERAGE_SKIP_TESTS @CRITIC_IGNORE $LIBRARY_PATH
-      $MINIMUM_VERSION %MINIMUM_VERSION @POD_COVERAGE_EXCLUDE @STRICT_IGNORE
-      @STRICT_PREREQ
+      $MINIMUM_VERSION %MINIMUM_VERSION @MODULE_VERSION_IGNORE
+      @POD_COVERAGE_EXCLUDE @STRICT_IGNORE @STRICT_PREREQ
     );
 
     # This version should match the corresponding rra-c-util release, but with
     # two digits for the minor version, including a leading zero if necessary,
     # so that it will sort properly.
-    $VERSION = '5.09';
+    $VERSION = '5.10';
 }
 
 # If BUILD or SOURCE are set in the environment, look for data/perl.conf under
 # those paths for a C Automake package.  Otherwise, look in t/data/perl.conf
-# for a standalone Perl module.  Don't use Test::RRA::Automake since it may
-# not exist.
+# for a standalone Perl module or tests/data/perl.conf for Perl tests embedded
+# in a larger distribution.  Don't use Test::RRA::Automake since it may not
+# exist.
 our $PATH;
-for my $base ($ENV{BUILD}, $ENV{SOURCE}, 't') {
+for my $base ($ENV{BUILD}, $ENV{SOURCE}, 't', 'tests') {
     next if !defined($base);
     my $path = "$base/data/perl.conf";
     if (-r $path) {
@@ -61,6 +62,7 @@ our @CRITIC_IGNORE;
 our $LIBRARY_PATH;
 our $MINIMUM_VERSION = '5.008';
 our %MINIMUM_VERSION;
+our @MODULE_VERSION_IGNORE;
 our @POD_COVERAGE_EXCLUDE;
 our @STRICT_IGNORE;
 our @STRICT_PREREQ;
@@ -144,6 +146,13 @@ minimum versions of Perl to enforce.  The value for each key should be a
 reference to an array of either top-level directory names or directory names
 starting with F<tests/>.  All files in those directories will have that
 minimum Perl version constraint imposed instead of $MINIMUM_VERSION.
+
+=item @MODULE_VERSION_IGNORE
+
+File names to ignore when checking that all modules in a distribution have the
+same version.  Sometimes, some specific modules need separate, special version
+handling, such as modules defining database schemata for DBIx::Class, and
+can't follow the version of the larger package.
 
 =item @POD_COVERAGE_EXCLUDE
 
