@@ -62,12 +62,12 @@ ipv6_works(void)
      */
     fd = network_bind_ipv6(SOCK_STREAM, "::1", 11119);
     if (fd != INVALID_SOCKET) {
-        client = network_connect_host("::1", 11119, 1);
+        client = network_connect_host("::1", 11119, NULL, 1);
         close(fd);
-    }
-    if (client != INVALID_SOCKET) {
-        close(client);
-        return true;
+        if (client != INVALID_SOCKET) {
+            close(client);
+            return true;
+        }
     }
 
     /* IPv6 not recognized, indicating no support. */
