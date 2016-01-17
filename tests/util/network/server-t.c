@@ -54,12 +54,19 @@
 static bool
 ipv6_works(void)
 {
-    socket_type fd;
+    socket_type fd, client;
 
-    /* Create the socket.  If this works, ipv6 is supported. */
+    /*
+     * Create the socket and then try to connect to it with a short timeout.
+     * If this works, IPv6 is supported.
+     */
     fd = network_bind_ipv6(SOCK_STREAM, "::1", 11119);
     if (fd != INVALID_SOCKET) {
+        client = network_connect_host("::1", 11119, 1);
         close(fd);
+    }
+    if (client != INVALID_SOCKET) {
+        close(client);
         return true;
     }
 
