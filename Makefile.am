@@ -1,13 +1,14 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <eagle@eyrie.org
+# Copyright 2015, 2016 Russ Allbery <eagle@eyrie.org>
 # Copyright 2008, 2009, 2010, 2011, 2012, 2013, 2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
 # See LICENSE for licensing terms.
 
 ACLOCAL_AMFLAGS = -I m4
-EXTRA_DIST = .gitignore LICENSE autogen docs/api/xmalloc.3		    \
+EXTRA_DIST = .gitignore .travis.yml LICENSE autogen docs/api/xmalloc.3	    \
 	docs/api/xmalloc.pod m4/apache.m4 m4/apr.m4 m4/aprutil.m4	    \
 	m4/curl.m4 m4/ld-version.m4 m4/ldap.m4 m4/openssl.m4 m4/pcre.m4	    \
 	m4/remctl.m4 m4/tinycdb.m4 portable/winsock.c perl/t/data/perl.conf \
