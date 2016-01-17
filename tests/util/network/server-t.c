@@ -5,7 +5,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2005, 2013 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2005, 2013, 2016 Russ Allbery <eagle@eyrie.org>
  * Copyright 2009, 2010, 2011, 2012, 2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -187,9 +187,16 @@ test_server_accept(socket_type fd)
 {
     socket_type client;
 
+    /* If there are firewalls that block connections, we could hang here. */
+    alarm(5);
+
+    /* Accept the connection and writes from the client. */
     client = accept(fd, NULL, NULL);
     test_server_connection(client);
     socket_close(fd);
+
+    /* Cancel the alarm. */
+    alarm(0);
 }
 
 
@@ -212,6 +219,10 @@ test_server_accept_any(socket_type fds[], unsigned int count)
     struct sockaddr *saddr;
     socklen_t slen;
 
+    /* If there are firewalls that block connections, we could hang here. */
+    alarm(5);
+
+    /* Accept the connection and writes from the client. */
     slen = sizeof(struct sockaddr_storage);
     saddr = bcalloc(1, slen);
     client = network_accept_any(fds, count, saddr, &slen);
@@ -223,6 +234,9 @@ test_server_accept_any(socket_type fds[], unsigned int count)
     free(saddr);
     for (i = 0; i < count; i++)
         socket_close(fds[i]);
+
+    /* Cancel the alarm. */
+    alarm(0);
 }
 
 
