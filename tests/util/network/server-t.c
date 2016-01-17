@@ -64,15 +64,19 @@ ipv6_works(void)
     fd = network_bind_ipv6(SOCK_STREAM, "::1", 11119);
     if (fd != INVALID_SOCKET) {
         fdflag_nonblocking(fd, true);
+        warn("connecting to test socket");
         client = network_connect_host("::1", 11119, NULL, 1);
         if (client == INVALID_SOCKET) {
+            syswarn("connecting to test socket failed");
             close(fd);
             if (errno == ETIMEDOUT)
                 return false;
         } else {
+            warn("accepting connection");
             server = accept(fd, NULL, NULL);
             close(fd);
             if (server == INVALID_SOCKET) {
+                syswarn("accepting connection failed");
                 close(client);
                 if (errno == EAGAIN || errno == EWOULDBLOCK)
                     return false;
