@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.10 (unreleased)
+
+    Fix the Perl docs/synopsis.t test to not use UNIX-specific path
+    delimiters to exclude files in blib/script.  This fixes portability to
+    older builds of Perl on Windows.
+
 rra-c-util 5.9 (2015-11-27)
 
     Fix the portability defines for the anonymous principal strings to
