@@ -65,16 +65,23 @@ ipv6_works(void)
     if (fd != INVALID_SOCKET) {
         fdflag_nonblocking(fd, true);
         client = network_connect_host("::1", 11119, NULL, 1);
-        if (client != INVALID_SOCKET) {
+        if (client == INVALID_SOCKET) {
+            close(fd);
+            if (errno == ETIMEDOUT)
+                return false;
+        } else {
             server = accept(fd, NULL, NULL);
-            if (server != INVALID_SOCKET) {
+            close(fd);
+            if (server == INVALID_SOCKET) {
+                close(client);
+                if (errno == EAGAIN || errno == EWOULDBLOCK)
+                    return false;
+            } else {
                 close(server);
                 close(client);
                 return true;
             }
-            close(client);
         }
-        close(fd);
     }
 
     /* IPv6 not recognized, indicating no support. */
