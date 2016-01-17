@@ -16,6 +16,10 @@ rra-c-util 5.10 (unreleased)
     delimiters to exclude files in blib/script.  This fixes portability to
     older builds of Perl on Windows.
 
+    The util/network/server-t test has been made more robust against
+    additional ways that IPv6 could not be available, such as the
+    restrictions in the current Travis-CI build environment.
+
 rra-c-util 5.9 (2015-11-27)
 
     Fix the portability defines for the anonymous principal strings to
