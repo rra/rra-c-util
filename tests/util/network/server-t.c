@@ -37,6 +37,7 @@
 #include <signal.h>
 
 #include <tests/tap/basic.h>
+#include <util/fdflag.h>
 #include <util/macros.h>
 #include <util/messages.h>
 #include <util/network.h>
@@ -54,20 +55,26 @@
 static bool
 ipv6_works(void)
 {
-    socket_type fd, client;
+    socket_type fd, client, server;
 
     /*
-     * Create the socket and then try to connect to it with a short timeout.
-     * If this works, IPv6 is supported.
+     * Create the socket and then try to connect to it with a short timeout
+     * and accept it on the server side.  If this works, IPv6 is supported.
      */
     fd = network_bind_ipv6(SOCK_STREAM, "::1", 11119);
     if (fd != INVALID_SOCKET) {
+        fdflag_nonblocking(fd, true);
         client = network_connect_host("::1", 11119, NULL, 1);
-        close(fd);
         if (client != INVALID_SOCKET) {
+            server = accept(fd, NULL, NULL);
+            if (server != INVALID_SOCKET) {
+                close(server);
+                close(client);
+                return true;
+            }
             close(client);
-            return true;
         }
+        close(fd);
     }
 
     /* IPv6 not recognized, indicating no support. */
