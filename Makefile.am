@@ -23,7 +23,8 @@ EXTRA_DIST = .gitignore .travis.yml LICENSE autogen docs/api/xmalloc.3	    \
 	tests/perl/minimum-version-t tests/perl/module-version-t	    \
 	tests/perl/strict-t tests/tap/kerberos.sh tests/tap/libtap.sh	    \
 	tests/tap/perl/Test/RRA.pm tests/tap/perl/Test/RRA/Automake.pm	    \
-	tests/tap/perl/Test/RRA/Config.pm tests/tap/remctl.sh		    \
+	tests/tap/perl/Test/RRA/Config.pm				    \
+	tests/tap/perl/Test/RRA/ModuleVersion.pm tests/tap/remctl.sh	    \
 	tests/util/xmalloc-t
 
 # Enable kafs support when running distcheck.
