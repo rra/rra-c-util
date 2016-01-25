@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 5.11 (unreleased)
+
+    Rename the script to bootstrap from a Git checkout to bootstrap,
+    matching the emerging consensus in the Autoconf world.
+
 rra-c-util 5.10 (2016-01-17)
 
     New option, @MODULE_VERSION_IGNORE, for the test perl.conf
