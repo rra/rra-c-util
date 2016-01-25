@@ -1,7 +1,8 @@
 dnl Autoconf configuration for rra-c-util.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2000, 2003, 2013, 2014, 2015 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2000, 2003, 2013, 2014, 2015, 2016
+dnl     Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
 dnl     2012, 2013, 2014
 dnl     The Board of Trustees of the Leland Stanford Junior University
@@ -177,7 +178,7 @@ dnl portable replacements, and the messages utility library.  sys/filio.h is
 dnl only used by fdflag.
 AC_HEADER_STDBOOL
 AC_CHECK_HEADERS([sys/bitypes.h sys/filio.h sys/uio.h sys/time.h syslog.h])
-AC_CHECK_DECLS([snprintf, strlcat, strlcpy, vsnprintf])
+AC_CHECK_DECLS([snprintf, vsnprintf])
 RRA_C_C99_VAMACROS
 RRA_C_GNU_VAMACROS
 AC_TYPE_LONG_LONG_INT
@@ -190,7 +191,7 @@ AC_CHECK_TYPES([ssize_t], [], [],
 RRA_FUNC_SNPRINTF
 AC_CHECK_FUNCS([setrlimit setsid])
 AC_REPLACE_FUNCS([asprintf daemon getopt issetugid mkstemp reallocarray])
-AC_REPLACE_FUNCS([setenv seteuid strlcat strlcpy strndup])
+AC_REPLACE_FUNCS([setenv seteuid strndup])
 
 dnl Additional probes for networking portability, used for packages that have
 dnl network code and support IPv6.  Probing for sys/select.h is also required

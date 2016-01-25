@@ -150,12 +150,6 @@ extern int setenv(const char *, const char *, int);
 #if !HAVE_SETEUID
 extern int seteuid(uid_t);
 #endif
-#if !HAVE_DECL_STRLCAT
-extern size_t strlcat(char *, const char *, size_t);
-#endif
-#if !HAVE_DECL_STRLCPY
-extern size_t strlcpy(char *, const char *, size_t);
-#endif
 #if !HAVE_STRNDUP
 extern char *strndup(const char *, size_t);
 #endif

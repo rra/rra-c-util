@@ -117,8 +117,7 @@ check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	   \
 	tests/portable/inet_aton-t tests/portable/inet_ntoa-t		   \
 	tests/portable/inet_ntop-t tests/portable/mkstemp-t		   \
 	tests/portable/reallocarray-t tests/portable/setenv-t		   \
-	tests/portable/snprintf-t tests/portable/strlcat-t		   \
-	tests/portable/strlcpy-t tests/portable/strndup-t		   \
+	tests/portable/snprintf-t tests/portable/strndup-t		   \
 	tests/util/buffer-t tests/util/fdflag-t tests/util/messages-t	   \
 	tests/util/messages-krb5-t tests/util/network/addr-ipv4-t	   \
 	tests/util/network/addr-ipv6-t tests/util/network/client-t	   \
@@ -214,12 +213,6 @@ tests_portable_setenv_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_snprintf_t_SOURCES = tests/portable/snprintf-t.c \
 	tests/portable/snprintf.c
 tests_portable_snprintf_t_LDADD = tests/tap/libtap.a portable/libportable.a
-tests_portable_strlcat_t_SOURCES = tests/portable/strlcat-t.c \
-	tests/portable/strlcat.c
-tests_portable_strlcat_t_LDADD = tests/tap/libtap.a portable/libportable.a
-tests_portable_strlcpy_t_SOURCES = tests/portable/strlcpy-t.c \
-	tests/portable/strlcpy.c
-tests_portable_strlcpy_t_LDADD = tests/tap/libtap.a portable/libportable.a
 tests_portable_strndup_t_SOURCES = tests/portable/strndup-t.c \
 	tests/portable/strndup.c
 tests_portable_strndup_t_LDADD = tests/tap/libtap.a portable/libportable.a

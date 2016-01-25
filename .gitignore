@@ -30,8 +30,6 @@
 /tests/portable/reallocarray-t
 /tests/portable/setenv-t
 /tests/portable/snprintf-t
-/tests/portable/strlcat-t
-/tests/portable/strlcpy-t
 /tests/portable/strndup-t
 /tests/runtests
 /tests/util/buffer-t

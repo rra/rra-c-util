@@ -23,8 +23,6 @@ portable/mkstemp
 portable/reallocarray
 portable/setenv
 portable/snprintf
-portable/strlcat
-portable/strlcpy
 portable/strndup
 util/buffer
 util/fdflag

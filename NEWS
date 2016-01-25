@@ -5,6 +5,12 @@ rra-c-util 5.11 (unreleased)
     Rewrite vector_join and cvector_join to use memcpy instead of strlcpy
     and strlcat.
 
+    Remove the portable replacements for strlcat and strlcpy.  These had
+    various bugs around edge cases, and I've been convinced that these
+    interfaces are a bad idea.  They're no longer used by any of the
+    utility libraries and should normally be replaced with asprintf or
+    similar functions.
+
     Rename the script to bootstrap from a Git checkout to bootstrap,
     matching the emerging consensus in the Autoconf world.
 
