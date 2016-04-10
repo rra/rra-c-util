@@ -123,8 +123,8 @@ check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	   \
 	tests/util/network/addr-ipv6-t tests/util/network/client-t	   \
 	tests/util/network/server-t tests/util/vector-t tests/util/xmalloc \
 	tests/util/xwrite-t
-tests_runtests_CPPFLAGS = -DSOURCE='"$(abs_top_srcdir)/tests"' \
-	-DBUILD='"$(abs_top_builddir)/tests"'
+tests_runtests_CPPFLAGS = -DC_TAP_SOURCE='"$(abs_top_srcdir)/tests"' \
+	-DC_TAP_BUILD='"$(abs_top_builddir)/tests"'
 check_LIBRARIES = tests/fakepam/libfakepam.a tests/tap/libtap.a
 tests_fakepam_libfakepam_a_CPPFLAGS = $(KRB5_CPPFLAGS)
 tests_fakepam_libfakepam_a_SOURCES = tests/fakepam/config.c		   \

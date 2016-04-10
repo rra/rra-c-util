@@ -14,12 +14,12 @@ use 5.006;
 use strict;
 use warnings;
 
-# SOURCE may not be set if we're running this script manually to update
+# C_TAP_SOURCE may not be set if we're running this script manually to update
 # version numbers.  If it isn't, assume we're being run from the top of the
 # tree.
 BEGIN {
-    if ($ENV{SOURCE}) {
-        unshift(@INC, "$ENV{SOURCE}/tap/perl");
+    if ($ENV{C_TAP_SOURCE}) {
+        unshift(@INC, "$ENV{C_TAP_SOURCE}/tap/perl");
     } else {
         unshift(@INC, 'tests/tap/perl');
     }

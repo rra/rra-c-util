@@ -7,8 +7,9 @@
 # require closely following the conventions implemented by the rra-c-util
 # utility collection.
 #
-# All the functions here assume that BUILD and SOURCE are set in the
-# environment.  This is normally done via the C TAP Harness runtests wrapper.
+# All the functions here assume that C_TAP_BUILD and C_TAP_SOURCE are set in
+# the environment.  This is normally done via the C TAP Harness runtests
+# wrapper.
 
 package Test::RRA::Automake;
 
@@ -34,9 +35,9 @@ BEGIN {
     $PERL_BLIB_ARCH = File::Spec->catdir(qw(perl blib arch));
     $PERL_BLIB_LIB  = File::Spec->catdir(qw(perl blib lib));
 
-    # If BUILD is set, we can come up with better values.
-    if (defined($ENV{BUILD})) {
-        my ($vol, $dirs) = File::Spec->splitpath($ENV{BUILD}, 1);
+    # If C_TAP_BUILD is set, we can come up with better values.
+    if (defined($ENV{C_TAP_BUILD})) {
+        my ($vol, $dirs) = File::Spec->splitpath($ENV{C_TAP_BUILD}, 1);
         my @dirs = File::Spec->splitdir($dirs);
         pop(@dirs);
         $PERL_BLIB_ARCH = File::Spec->catdir(@dirs, qw(perl blib arch));
@@ -76,28 +77,35 @@ my @GLOBAL_SKIP = qw(.git _build perl);
 my $TMPDIR;
 
 # Perform initial test setup for running a Perl test in an Automake package.
-# This verifies that BUILD and SOURCE are set and then changes directory to
-# the SOURCE directory by default.  Sets LD_LIBRARY_PATH if the $LIBRARY_PATH
-# configuration option is set.  Calls BAIL_OUT if BUILD or SOURCE are missing
-# or if anything else fails.
+# This verifies that C_TAP_BUILD and C_TAP_SOURCE are set and then changes
+# directory to the C_TAP_SOURCE directory by default.  Sets LD_LIBRARY_PATH if
+# the $LIBRARY_PATH configuration option is set.  Calls BAIL_OUT if
+# C_TAP_BUILD or C_TAP_SOURCE are missing or if anything else fails.
 #
 # $args_ref - Reference to a hash of arguments to configure behavior:
-#   chdir_build - If set to a true value, changes to BUILD instead of SOURCE
+#   chdir_build - If set to a true value, changes to C_TAP_BUILD instead of
+#                 C_TAP_SOURCE
 #
 # Returns: undef
 sub automake_setup {
     my ($args_ref) = @_;
 
-    # Bail if BUILD or SOURCE are not set.
-    if (!$ENV{BUILD}) {
-        BAIL_OUT('BUILD not defined (run under runtests)');
+    # Bail if C_TAP_BUILD or C_TAP_SOURCE are not set.
+    if (!$ENV{C_TAP_BUILD}) {
+        BAIL_OUT('C_TAP_BUILD not defined (run under runtests)');
     }
-    if (!$ENV{SOURCE}) {
-        BAIL_OUT('SOURCE not defined (run under runtests)');
+    if (!$ENV{C_TAP_SOURCE}) {
+        BAIL_OUT('C_TAP_SOURCE not defined (run under runtests)');
     }
 
-    # BUILD or SOURCE will be the test directory.  Change to the parent.
-    my $start = $args_ref->{chdir_build} ? $ENV{BUILD} : $ENV{SOURCE};
+    # C_TAP_BUILD or C_TAP_SOURCE will be the test directory.  Change to the
+    # parent.
+    my $start;
+    if ($args_ref->{chdir_build}) {
+        $start = $ENV{C_TAP_BUILD};
+    } else {
+        $start = $ENV{C_TAP_SOURCE};
+    }
     my ($vol, $dirs) = File::Spec->splitpath($start, 1);
     my @dirs = File::Spec->splitdir($dirs);
     pop(@dirs);
@@ -116,8 +124,9 @@ sub automake_setup {
     my $root = File::Spec->catpath($vol, File::Spec->catdir(@dirs), q{});
     chdir($root) or BAIL_OUT("cannot chdir to $root: $!");
 
-    # If BUILD is a subdirectory of SOURCE, add it to the global ignore list.
-    my ($buildvol, $builddirs) = File::Spec->splitpath($ENV{BUILD}, 1);
+    # If C_TAP_BUILD is a subdirectory of C_TAP_SOURCE, add it to the global
+    # ignore list.
+    my ($buildvol, $builddirs) = File::Spec->splitpath($ENV{C_TAP_BUILD}, 1);
     my @builddirs = File::Spec->splitdir($builddirs);
     pop(@builddirs);
     if ($buildvol eq $vol && @builddirs == @dirs + 1) {
@@ -206,9 +215,9 @@ sub perl_dirs {
     return @dirs;
 }
 
-# Find a configuration file for the test suite.  Searches relative to BUILD
-# first and then SOURCE and returns whichever is found first.  Calls BAIL_OUT
-# if the file could not be found.
+# Find a configuration file for the test suite.  Searches relative to
+# C_TAP_BUILD first and then C_TAP_SOURCE and returns whichever is found
+# first.  Calls BAIL_OUT if the file could not be found.
 #
 # $file - Partial path to the file
 #
@@ -216,7 +225,7 @@ sub perl_dirs {
 sub test_file_path {
     my ($file) = @_;
   BASE:
-    for my $base ($ENV{BUILD}, $ENV{SOURCE}) {
+    for my $base ($ENV{C_TAP_BUILD}, $ENV{C_TAP_SOURCE}) {
         next if !defined($base);
         if (-f "$base/$file") {
             return "$base/$file";
@@ -236,11 +245,16 @@ sub test_tmpdir {
     my $path;
 
     # If we already figured out what directory to use, reuse the same path.
-    # Otherwise, create a directory relative to BUILD if set.
+    # Otherwise, create a directory relative to C_TAP_BUILD if set.
     if (defined($TMPDIR)) {
         $path = $TMPDIR;
     } else {
-        my $base = defined($ENV{BUILD}) ? $ENV{BUILD} : File::Spec->curdir;
+        my $base;
+        if (defined($ENV{C_TAP_BUILD})) {
+            $base = $ENV{C_TAP_BUILD};
+        } else {
+            $base = File::Spec->curdir;
+        }
         $path = File::Spec->catdir($base, 'tmp');
     }
 
@@ -297,11 +311,11 @@ layout of a package that uses rra-c-util and C TAP Harness for the test
 structure.
 
 Loading this module will also add the directories C<perl/blib/arch> and
-C<perl/blib/lib> to the Perl library search path, relative to BUILD if that
-environment variable is set.  This is harmless for C Automake projects that
-don't contain an embedded Perl module, and for those projects that do, this
-will allow subsequent C<use> calls to find modules that are built as part of
-the package build process.
+C<perl/blib/lib> to the Perl library search path, relative to C_TAP_BUILD if
+that environment variable is set.  This is harmless for C Automake projects
+that don't contain an embedded Perl module, and for those projects that do,
+this will allow subsequent C<use> calls to find modules that are built as part
+of the package build process.
 
 The automake_setup() function should be called before calling any other
 functions provided by this module.
@@ -316,9 +330,10 @@ BAIL_OUT (from Test::More).
 
 =item automake_setup([ARGS])
 
-Verifies that the BUILD and SOURCE environment variables are set and then
-changes directory to the top of the source tree (which is one directory up
-from the SOURCE path, since SOURCE points to the top of the tests directory).
+Verifies that the C_TAP_BUILD and C_TAP_SOURCE environment variables are set
+and then changes directory to the top of the source tree (which is one
+directory up from the C_TAP_SOURCE path, since C_TAP_SOURCE points to the top
+of the tests directory).
 
 If ARGS is given, it should be a reference to a hash of configuration options.
 Only one option is supported: C<chdir_build>.  If it is set to a true value,
@@ -343,20 +358,36 @@ C<tests/> that should be skipped.
 
 Given FILE, which should be a relative path, locates that file relative to the
 test directory in either the source or build tree.  FILE will be checked for
-relative to the environment variable BUILD first, and then relative to SOURCE.
-test_file_path() returns the full path to FILE or calls BAIL_OUT if FILE could
-not be found.
+relative to the environment variable C_TAP_BUILD first, and then relative to
+C_TAP_SOURCE.  test_file_path() returns the full path to FILE or calls
+BAIL_OUT if FILE could not be found.
 
 =item test_tmpdir()
 
 Create a temporary directory for tests to use for transient files and return
-the path to that directory.  The directory is created relative to the BUILD
-environment variable, which must be set.  Permissions on the directory are set
-using the current umask.  test_tmpdir() returns the full path to the temporary
-directory or calls BAIL_OUT if it could not be created.
+the path to that directory.  The directory is created relative to the
+C_TAP_BUILD environment variable, which must be set.  Permissions on the
+directory are set using the current umask.  test_tmpdir() returns the full
+path to the temporary directory or calls BAIL_OUT if it could not be created.
 
 The directory is automatically removed if possible on program exit.  Failure
 to remove the directory on exit is reported with diag() and otherwise ignored.
+
+=back
+
+=head1 ENVIRONMENT
+
+=over 4
+
+=item C_TAP_BUILD
+
+The root of the tests directory in Automake build directory for this package,
+used to find files as documented above.
+
+=item C_TAP_SOURCE
+
+The root of the tests directory in the source tree for this package, used to
+find files as documented above.
 
 =back
 

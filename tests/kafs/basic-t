@@ -6,6 +6,7 @@
 # which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
 # Written by Russ Allbery <eagle@eyrie.org>
+# Copyright 2016 Russ Allbery <eagle@eyrie.org>
 # Copyright 2009
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -27,8 +28,8 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-. "$SOURCE/tap/libtap.sh"
-cd "$BUILD/kafs"
+. "$C_TAP_SOURCE/tap/libtap.sh"
+cd "$C_TAP_BUILD/kafs"
 
 # Check whether we already have a token.
 if tokens | grep -i 'tokens for ' >/dev/null ; then

@@ -10,6 +10,7 @@
  * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2016 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011, 2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -252,9 +253,9 @@ check_output(const struct output *wanted, const struct output *seen)
 
 /*
  * The core of the work.  Given the path to a PAM interaction script, which
- * may be relative to SOURCE or BUILD, the user (may be NULL), and the stored
- * password (may be NULL), run that script, outputing the results in TAP
- * format.
+ * may be relative to C_TAP_SOURCE or C_TAP_BUILD, the user (may be NULL), and
+ * the stored password (may be NULL), run that script, outputing the results
+ * in TAP format.
  */
 void
 run_script(const char *file, const struct script_config *config)
