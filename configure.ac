@@ -107,7 +107,6 @@ AC_CHECK_FUNCS([kadm5_init_krb5_context kadm5_init_with_skey_ctx])
 RRA_LIB_KADM5CLNT_RESTORE
 
 dnl Probe for libevent.
-dnl Check for libevent, used by the server.
 RRA_LIB_EVENT_OPTIONAL
 AS_IF([test x"$rra_use_LIBEVENT" = xtrue],
    [RRA_LIB_EVENT_SWITCH
