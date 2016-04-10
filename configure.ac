@@ -43,6 +43,12 @@ m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_INSTALL
 AC_PROG_RANLIB
 
+dnl Probe for Perl.  This isn't used by this package except in tests, but
+dnl probe for it anyway to exercise the macros.  The Perl module is included
+dnl in core, so that test should always succed.
+RRA_PROG_PERL([5.006])
+RRA_PERL_CHECK_MODULE([File::Spec], [])
+
 dnl Probes for networking libraries.  Only needed for packages that make or
 dnl receive network connections or do DNS lookups.
 AC_SEARCH_LIBS([gethostbyname], [nsl])
@@ -158,6 +164,10 @@ AC_DEFINE([MODULE_NAME], ["pam_example"],
 
 dnl Only required for the PAM test script facility.
 AC_CHECK_HEADER([regex.h], [AC_CHECK_FUNCS([regcomp])])
+
+dnl Probe for the flags to embed Perl.  This isn't used by the package, but
+dnl this ensures that we exercise the macros.
+RRA_LIB_PERL
 
 dnl Run other optional library probing checks, even though they're unused by
 dnl the rra-c-util code itself, so that they're exercised during the

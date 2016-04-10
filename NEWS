@@ -19,6 +19,13 @@ rra-c-util 6.0 (unreleased)
     of SSL_library_init, fixing OpenSSL 1.1.0 detection.  Thanks, Julien
     ÉLIE.
 
+    Add a new RRA_PROG_PERL macro that finds the path of a Perl
+    interpreter of the given version or newer.  Add a new
+    RRA_PERL_CHECK_MODULE macro that checks whether a given module can be
+    loaded by Perl.  Add a new RRA_LIB_PERL macro that finds the compiler
+    and linker flags for embedding Perl.  These are based on the configure
+    macros used in INN.
+
     Use C_TAP_SOURCE and C_TAP_BUILD environment variables in all test
     support code instead of SOURCE and BUILD, following the change in C
     TAP Harness 4.0.  Upgrading to any test support libraries from this
