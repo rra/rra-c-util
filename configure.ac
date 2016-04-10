@@ -23,6 +23,7 @@ AM_INIT_AUTOMAKE([1.11 check-news dist-xz foreign silent-rules subdir-objects
 AM_MAINTAINER_MODE
 
 dnl Detect unexpanded macros.
+m4_pattern_forbid([^PKG_])
 m4_pattern_forbid([^_?RRA_])
 
 dnl Standard probes for the basic compilation environment.  These are
