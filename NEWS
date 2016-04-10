@@ -11,6 +11,10 @@ rra-c-util 6.0 (unreleased)
     utility libraries and should normally be replaced with asprintf or
     similar functions.
 
+    network_set_freebind, network_set_reuseaddr, and network_set_v6only
+    are now public functions for clients that need additional control over
+    when these options are set or can't use the network_bind functions.
+
     Fix the m4/openssl.m4 probe for OpenSSL to look for SSL_accept instead
     of SSL_library_init, fixing OpenSSL 1.1.0 detection.  Thanks, Julien
     ÉLIE.
