@@ -104,6 +104,7 @@ AC_CHECK_DECLS([GSS_KRB5_MECHANISM], [],
    [AC_CHECK_DECLS([gss_mech_krb5], [],
        [AC_LIBOBJ([gssapi-mech])], [RRA_INCLUDES_GSSAPI])],
    [RRA_INCLUDES_GSSAPI])
+AC_CHECK_FUNCS([gss_oid_equal])
 RRA_LIB_GSSAPI_RESTORE
 
 dnl Probe for Kerberos kadmin client libraries.
