@@ -280,8 +280,6 @@ pam_putenv(pam_handle_t *pamh, const char *setting)
     size_t i, j;
     char **env;
 
-    if (setting == NULL)
-        return PAM_PERM_DENIED;
     equals = strchr(setting, '=');
     if (equals != NULL)
         namelen = equals - setting;
