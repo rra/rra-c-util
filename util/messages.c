@@ -239,7 +239,7 @@ message_log_syslog(int pri, size_t len, const char *fmt, va_list args, int err)
         exit(message_fatal_cleanup ? (*message_fatal_cleanup)() : 1);
     }
     status = vsnprintf(buffer, len + 1, fmt, args);
-    if (status < 0 || status >= len + 1) {
+    if (status < 0 || (size_t) status >= len + 1) {
         warn("failed to format output with vsnprintf in syslog handler");
         free(buffer);
         return;
