@@ -7,6 +7,12 @@ rra-c-util 6.1 (unreleased)
     should have been safe anyway for other reasons, but be certain.)
     Based on a patch by Yuriy M. Kaminskiy to INN.
 
+    Test::RRA::Config could not load perl.conf when run outside the test
+    suite under current Perl (5.22.2) because the semantics of "do" with
+    relative paths changed.  Fix by making the relative search paths more
+    explicit.  This fixes running module-version-t -u outside the test
+    suite to bump version numbers.
+
 rra-c-util 6.0 (2016-05-07)
 
     Rewrite vector_join and cvector_join to use memcpy instead of strlcpy
