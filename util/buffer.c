@@ -155,13 +155,13 @@ buffer_append_vsprintf(struct buffer *buffer, const char *format, va_list args)
     va_end(args_copy);
     if (status < 0)
         return;
-    if ((size_t) status + 1 <= avail) {
+    if ((size_t) status < avail) {
         buffer->left += status;
     } else {
         buffer_resize(buffer, total + status + 1);
         avail = buffer->size - total;
         status = vsnprintf(buffer->data + total, avail, format, args);
-        if (status < 0 || (size_t) status + 1 > avail)
+        if (status < 0 || (size_t) status >= avail)
             return;
         buffer->left += status;
     }
