@@ -1,5 +1,12 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 6.1 (unreleased)
+
+    Correct the return-value checks for snprintf to avoid an off-by-one
+    error when verifying the output was not truncated.  (All locations
+    should have been safe anyway for other reasons, but be certain.)
+    Based on a patch by Yuriy M. Kaminskiy to INN.
+
 rra-c-util 6.0 (2016-05-07)
 
     Rewrite vector_join and cvector_join to use memcpy instead of strlcpy
