@@ -79,32 +79,12 @@ MAINTAINERCLEANFILES = Makefile.in aclocal.m4 build-aux/ar-lib		\
 distclean-local:
 	rm -rf autom4te.cache
 
-# A set of flags for warnings.  Add -O because gcc won't find some warnings
-# without optimization turned on.  Desirable warnings that can't be turned
-# on due to other problems:
-#
-#     -Wconversion	http://bugs.debian.org/488884 (htons warnings)
-#
-# Last checked against gcc 4.8.2 (2014-04-12).  -D_FORTIFY_SOURCE=2 enables
-# warn_unused_result attribute markings on glibc functions on Linux, which
-# catches a few more issues.
-if WARNINGS_GCC
-    WARNINGS = -g -O -fstrict-overflow -fstrict-aliasing -D_FORTIFY_SOURCE=2 \
-	-Wall -Wextra -Wendif-labels -Wformat=2 -Winit-self -Wswitch-enum    \
-	-Wstrict-overflow=5 -Wmissing-format-attribute -Wfloat-equal	     \
-	-Wdeclaration-after-statement -Wshadow -Wpointer-arith		     \
-	-Wbad-function-cast -Wcast-align -Wwrite-strings -Wjump-misses-init  \
-	-Wlogical-op -Wstrict-prototypes -Wold-style-definition		     \
-	-Wmissing-prototypes -Wnormalized=nfc -Wpacked -Wredundant-decls     \
-	-Wnested-externs -Winline -Wvla -Werror
-endif
-if WARNINGS_CLANG
-    WARNINGS = -Weverything -Wno-padded
-endif
-
+# Separate target for a human to request building everything with as many
+# compiler warnings enabled as possible.
 warnings:
-	$(MAKE) V=0 CFLAGS='$(WARNINGS)' KRB5_CPPFLAGS='$(KRB5_CPPFLAGS_GCC)'
-	$(MAKE) V=0 CFLAGS='$(WARNINGS)' \
+	$(MAKE) V=0 CFLAGS='$(WARNINGS_CFLAGS) $(AM_CFLAGS)' \
+	    KRB5_CPPFLAGS='$(KRB5_CPPFLAGS_GCC)'
+	$(MAKE) V=0 CFLAGS='$(WARNINGS_CFLAGS) $(AM_CFLAGS)' \
 	    KRB5_CPPFLAGS='$(KRB5_CPPFLAGS_GCC)' $(check_PROGRAMS)
 
 # The bits below are for the test suite, not for the main package.

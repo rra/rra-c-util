@@ -7,6 +7,13 @@ rra-c-util 6.1 (unreleased)
     should have been safe anyway for other reasons, but be certain.)
     Based on a patch by Yuriy M. Kaminskiy to INN.
 
+    New RRA_PROG_CC_FLAG macro, from INN, which determines whether the
+    compiler supports a given flag.  New RRA_PROG_CC_WARNINGS_FLAGS macro,
+    replacing the WARNINGS variable in Makefile.am, to calculate all of
+    the warning flags supported by the current compiler, and use it for
+    the make warnings target.  The warning flags have been updated for new
+    flags available in GCC 6.1.0.
+
     Test::RRA::Config could not load perl.conf when run outside the test
     suite under current Perl (5.22.2) because the semantics of "do" with
     relative paths changed.  Fix by making the relative search paths more

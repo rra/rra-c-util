@@ -36,7 +36,7 @@ dnl AM_PROG_AR is required for Automake 1.12 by Libtool but not defined at all
 dnl (or needed) in Automake 1.11.  Work around this bug.
 AC_PROG_CC
 AC_USE_SYSTEM_EXTENSIONS
-RRA_PROG_CC_CLANG
+RRA_PROG_CC_WARNINGS_FLAGS
 AC_SYS_LARGEFILE
 AM_PROG_CC_C_O
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
@@ -47,7 +47,7 @@ dnl Probe for Perl.  This isn't used by this package except in tests, but
 dnl probe for it anyway to exercise the macros.  The Perl module is included
 dnl in core, so that test should always succed.
 RRA_PROG_PERL([5.006])
-RRA_PERL_CHECK_MODULE([File::Spec], [])
+RRA_PERL_CHECK_MODULE([File::Spec])
 
 dnl Probes for networking libraries.  Only needed for packages that make or
 dnl receive network connections or do DNS lookups.
@@ -242,10 +242,6 @@ dnl Additional probes for UNIX domain socket support.  These are only needed
 dnl by packages that want to use UNIX domain sockets.
 RRA_SYS_UNIX_SOCKETS
 RRA_MACRO_SUN_LEN
-
-dnl Enable appropriate warnings.
-AM_CONDITIONAL([WARNINGS_GCC], [test x"$GCC" = xyes && test x"$CLANG" != xyes])
-AM_CONDITIONAL([WARNINGS_CLANG], [test x"$CLANG" = xyes])
 
 dnl Output section.  This is generally the same for all packages.
 AC_CONFIG_FILES([Makefile])
