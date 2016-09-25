@@ -459,6 +459,7 @@ test_any(void)
 
     if (!network_bind_all(SOCK_STREAM, 11119, &fds, &count))
         sysbail("cannot create or bind socket");
+    ok(1, "network_accept_any test");
     for (i = 0; i < count; i++)
         if (listen(fds[i], 1) < 0)
             sysbail("cannot listen to socket %d", fds[i]);
@@ -544,7 +545,7 @@ int
 main(void)
 {
     /* Set up the plan. */
-    plan(42);
+    plan(43);
 
     /* Test network_bind functions. */
     test_ipv4(NULL);
