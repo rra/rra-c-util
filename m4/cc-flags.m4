@@ -56,6 +56,7 @@ dnl problems:
 dnl
 dnl   -Wconversion       http://bugs.debian.org/488884 (htons warnings)
 dnl   -Wsign-conversion  Too much noise from ssize_t and flag variables
+dnl   -Wstack-protector  Too many false positives from small buffers
 dnl
 dnl Last checked against gcc 6.1.0 (2016-09-25).  -D_FORTIFY_SOURCE=2 enables
 dnl warn_unused_result attribute markings on glibc functions on Linux, which
@@ -85,7 +86,7 @@ AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
          -Wjump-misses-init -Wfloat-conversion -Wlogical-op
          -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes
          -Wnormalized=nfc -Wpacked -Wredundant-decls -Wnested-externs -Winline
-         -Wvla -Wstack-protector -Werror],
+         -Wvla -Werror],
         [RRA_PROG_CC_FLAG(flag,
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])])
  AC_SUBST([WARNINGS_CFLAGS])])
