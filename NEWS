@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 6.1 (unreleased)
+rra-c-util 6.1 (2016-10-10)
 
     Correct the return-value checks for snprintf to avoid an off-by-one
     error when verifying the output was not truncated.  (All locations
