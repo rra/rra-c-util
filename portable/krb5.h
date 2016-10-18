@@ -17,7 +17,7 @@
  * krb5_free_unparsed_name() for both APIs since it's the most specific call.
  *
  * The canonical version of this file is maintained in the rra-c-util package,
- * which can be found at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+ * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
  *

@@ -86,7 +86,7 @@ Other equivalent wrappers that also use xmalloc_error_handler:
 L<xasprintf(3)>, L<xstrdup(3)>, L<xstrndup(3)>, L<xvasprintf(3)>
 
 The current version of the rra-c-util library is available from its web
-page at L<http://www.eyrie.org/~eagle/software/rra-c-util/>.
+page at L<https://www.eyrie.org/~eagle/software/rra-c-util/>.
 
 =head1 AUTHOR
 

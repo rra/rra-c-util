@@ -1,15 +1,15 @@
 #!/usr/bin/perl
 #
-# Check all POD documents in the tree, except for any embedded Perl module
-# distribution, for POD formatting errors.
+# Check URLs in source files.
+#
+# Examine all source files in a distribution for bad URL patterns and report
+# on files that fail this check.  Currently, this just checks that all the
+# links to www.eyrie.org are https.
 #
 # The canonical version of this file is maintained in the rra-c-util package,
 # which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
-# Written by Russ Allbery <eagle@eyrie.org>
 # Copyright 2016 Russ Allbery <eagle@eyrie.org>
-# Copyright 2012, 2013, 2014
-#     The Board of Trustees of the Leland Stanford Junior University
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -36,18 +36,34 @@ use warnings;
 use lib "$ENV{C_TAP_SOURCE}/tap/perl";
 
 use Test::More;
-use Test::RRA qw(skip_unless_automated use_prereq);
-use Test::RRA::Automake qw(automake_setup perl_dirs);
+use Test::RRA qw(skip_unless_author);
+use Test::RRA::Automake qw(all_files automake_setup);
 
-# Skip this test for normal user installs, since we normally pre-generate all
-# of the documentation and the end user doesn't care.
-skip_unless_automated('POD syntax tests');
+# Bad URL patterns to search for.
+my @BAD_URLS = qw(http://www.eyrie.org/);
 
-# Load prerequisite modules.
-use_prereq('Test::Pod');
+# Only run this test for the package author, since it doesn't indicate any
+# user-noticable flaw in the package itself.
+skip_unless_author('Documentation URL tests');
 
 # Set up Automake testing.
 automake_setup();
 
-# Run the tests.
-all_pod_files_ok(perl_dirs());
+# Scan every file for any of the bad URL patterns, although be careful to
+# exclude this test file.
+my @files = grep { -T && $_ ne 'tests/docs/urls-t' } all_files();
+plan tests => scalar(@files);
+FILE: for my $file (@files) {
+    open(my $fh, '<', $file) or BAIL_OUT("Cannot open $file");
+    while (defined(my $line = <$fh>)) {
+        for my $url (@BAD_URLS) {
+            if (index($line, $url) != -1) {
+                ok(0, "$file contains $url");
+                close($fh) or BAIL_OUT("Cannot close $file");
+                next FILE;
+            }
+        }
+    }
+    close($fh) or BAIL_OUT("Cannot close $file");
+    ok(1, $file);
+}

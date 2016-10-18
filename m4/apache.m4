@@ -13,7 +13,7 @@ dnl RRA_LIB_APACHE_SWITCH.  The configure script will exit with an error if
 dnl apxs could not be found or does not support the desired options.
 dnl
 dnl The canonical version of this file is maintained in the rra-c-util
-dnl package, available at <http://www.eyrie.org/~eagle/software/rra-c-util/>.
+dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2010
