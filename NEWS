@@ -2,6 +2,10 @@
 
 rra-c-util 6.2 (unreleased)
 
+    Add new is_file_contents function to Test::RRA for Perl tests.  This
+    compares a string with the contents of a file and displays a diff if
+    they don't match.
+
     Add a new test for bad URLs in all distribution files, initially just
     checking for non-https www.eyrie.org URLs.  In the process, add a new
     all_files function to Test::RRA::Automake that returns all
