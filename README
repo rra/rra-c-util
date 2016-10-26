@@ -1,13 +1,11 @@
                               rra-c-util 6.1
                  (Russ Allbery's utility libraries for C)
+               Maintained by Russ Allbery <eagle@eyrie.org>
 
-                Written by Russ Allbery <eagle@eyrie.org>
-
-  Copyright 2000, 2009, 2010, 2013, 2014, 2015, 2016 Russ Allbery
-  <eagle@eyrie.org>.  Copyright 2009, 2010, 2011, 2012, 2013, 2014 The
-  Board of Trustees of the Leland Stanford Junior University.  This
-  software is distributed under a BSD-style license.  Please see the
-  section LICENSE below for more information.
+  Copyright 2000, 2009-2010, 2013-2016 Russ Allbery <eagle@eyrie.org>.
+  Copyright 2009-2014 The Board of Trustees of the Leland Stanford Junior
+  University.  This software is distributed under a BSD-style license.
+  Please see the section LICENSE below for more information.
 
 BLURB
 
@@ -38,10 +36,19 @@ DESCRIPTION
   version before each release and gain from the improvements made for all
   other packages.
 
+  As well as C portability frameworks, Autoconf macros, and a general C
+  utility library, this package has also accumulated a considerable
+  collection of standard tests (for C and Perl packages) and a large
+  library of test utilities and support functions.  It also includes
+  extensive support for writing and testing PAM modules, and a portable
+  implementation of AFS PAGs.
+
   This package uses the infrastructure of C TAP Harness for testing, but
   is not the canonical version of tests/runtests.c, tests/tap/basic.[ch],
-  or tests/tap/libtap.sh.  Those files should be pulled from C TAP Harness
-  instead.
+  tests/tap/macros.h, or tests/tap/libtap.sh.  Those files should be
+  pulled from C TAP Harness [1] instead.
+
+  [1] https://www.eyrie.org/~eagle/software/c-tap-harness/
 
 REQUIREMENTS
 
@@ -71,12 +78,12 @@ REQUIREMENTS
   Perl 5.6.2 or later is required.  The following additional Perl modules
   will be used if present:
 
-      IPC::System::Simple
-      Test::MinimumVersion
-      Test::Perl::Critic
-      Test::Pod
-      Test::Spelling
-      Test::Strict
+  * IPC::System::Simple
+  * Test::MinimumVersion
+  * Test::Perl::Critic
+  * Test::Pod
+  * Test::Spelling
+  * Test::Strict
 
   All are available on CPAN.  Those tests will be skipped if the modules
   are not available.
@@ -92,7 +99,8 @@ REQUIREMENTS
   and need to regenerate Makefile.in, you will need Automake 1.11 or
   later.  For bootstrap or if you change configure.ac or any of the m4
   files it includes and need to regenerate configure or config.h.in, you
-  will need Autoconf 2.64 or later.
+  will need Autoconf 2.64 or later.  Perl is also required to generate
+  manual pages from a fresh Git checkout.
 
 BUILDING
 
@@ -103,8 +111,8 @@ BUILDING
 
   Pass --enable-kafs to configure to attempt to build kafs support, which
   will use either an existing libkafs or libkopenafs library or build the
-  kafs replacement included in this package.  Also add --without-libkafs
-  to force the use of the internal kafs replacement.
+  kafs replacement included in this package.  You can also add
+  --without-libkafs to force the use of the internal kafs replacement.
 
   Pass --enable-silent-rules to configure for a quieter build (similar to
   the Linux kernel).  Use make warnings instead of make to build with full
@@ -265,7 +273,7 @@ USING THIS CODE
   utility layer are tested along with the rest of the package.  The test
   driver should come from C TAP Harness.
 
-HOMEPAGE AND SOURCE REPOSITORY
+SUPPORT
 
   The rra-c-util web page at:
 
@@ -274,56 +282,66 @@ HOMEPAGE AND SOURCE REPOSITORY
   will always have the current version of this package, the current
   documentation, and pointers to any additional resources.
 
-  rra-c-util is maintained using Git.  You can access the current source
-  by cloning the repository at:
+  For bug tracking, use the issue tracker on GitHub:
 
-      git://git.eyrie.org/devel/rra-c-util.git
+      https://github.com/rra/rra-c-util/issues
+
+  However, please be aware that I tend to be extremely busy and work
+  projects often take priority.  I'll save your report and get to it as
+  soon as I can, but it may take me a couple of months.
+
+SOURCE REPOSITORY
+
+  rra-c-util is maintained using Git.  You can access the current source
+  on GitHub at:
+
+      https://github.com/rra/c-tap-harness
+
+  or by cloning the repository at:
+
+      https://git.eyrie.org/git/devel/rra-c-util.git
 
   or view the repository via the web at:
 
-      http://git.eyrie.org/?p=devel/rra-c-util.git
+      https://git.eyrie.org/?p=devel/rra-c-util.git
 
-  Please send any bug reports, patches, or questions to eagle@eyrie.org.
+  The eyrie.org repository is the canonical one, maintained by the author,
+  but using GitHub is probably more convenient for most purposes.  Pull
+  requests are gratefully reviewed and normally accepted.
 
 LICENSE
 
-  The rra-c-util package as a whole covered by the following copyright
+  The rra-c-util package as a whole is covered by the following copyright
   statement and license:
 
-    Copyright 2000, 2009, 2010, 2013, 2014, 2015, 2016
-        Russ Allbery <eagle@eyrie.org>
-    Copyright 2009, 2010, 2011, 2012, 2013, 2014
+    Copyright 2000, 2009-2010, 2013-2016 Russ Allbery <eagle@eyrie.org>
+    Copyright 2009-2014
         The Board of Trustees of the Leland Stanford Junior University
 
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
     "Software"), to deal in the Software without restriction, including
     without limitation the rights to use, copy, modify, merge, publish,
     distribute, sublicense, and/or sell copies of the Software, and to
     permit persons to whom the Software is furnished to do so, subject to
     the following conditions:
 
-    The above copyright notice and this permission notice shall be included
-    in all copies or substantial portions of the Software.
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
 
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
     MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
     IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
     CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-  All individual files without an explicit exception below are released
-  under this license.  Some files may have additional copyright holders as
-  noted in those files.  There is detailed information about the licensing
-  of each file in the LICENSE file in this distribution.
-
   Some files in this distribution are individually released under
   different licenses, all of which are compatible with the above general
   package license but which may require preservation of additional
-  notices.  All required notices are preserved in the LICENSE file.  Each
-  file intended for copying into other software packages contains a
-  copyright and license notice at the top or bottom of the file.  Please
-  take note of any attribution and notice requirements specified in that
-  license.
+  notices.  All required notices, and detailed information about the
+  licensing of each file, are recorded in the LICENSE file.
+
+  For any copyright range specified by files in this package as YYYY-ZZZZ,
+  the range specifies every single year in that closed interval.
