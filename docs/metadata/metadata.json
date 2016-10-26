@@ -40,6 +40,9 @@
             { "title": "Using This Code" },
         ],
     },
+    "quote": {
+        "author": "Phil Greenspun",
+    },
     "distribution": {
         "section": "devel",
         "tarname": "rra-c-util",
