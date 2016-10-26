@@ -59,12 +59,19 @@ sub is_file_contents {
         return;
     }
 
-    # They're not equal.  Write out what we got so that we can run diff.
-    my ($tmp, $tmpname) = File::Temp->new();
-    print {$tmp} $got or BAIL_OUT("Cannot write to $tmpname: $!\n");
+    # Otherwise, we show a diff, but only if we have IPC::System::Simple.
+    eval { require IPC::System::Simple };
+    if ($@) {
+        ok(0, $message);
+        return;
+    }
 
-    # Run diff and report the results.
-    my $diff = capturex([0 .. 1], 'diff', '-u', $expected, 'tmp');
+    # They're not equal.  Write out what we got so that we can run diff.
+    my $tmp     = File::Temp->new();
+    my $tmpname = $tmp->filename;
+    print {$tmp} $got or BAIL_OUT("Cannot write to $tmpname: $!\n");
+    my @command = ('diff', '-u', $expected, $tmpname);
+    my $diff = IPC::System::Simple::capturex([0 .. 1], @command);
     diag($diff);
 
     # Remove the temporary file and report failure.
