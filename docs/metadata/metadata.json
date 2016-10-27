@@ -30,7 +30,7 @@
         "type": "Git",
         "url": "https://git.eyrie.org/git/devel/rra-c-util.git",
         "browse": "https://git.eyrie.org/?p=devel/rra-c-util.git",
-        "github": "rra/c-tap-harness",
+        "github": "rra/rra-c-util",
         "openhub": "https://www.openhub.net/p/rra-c-util",
     },
     "readme": {

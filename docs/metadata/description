@@ -12,7 +12,9 @@ The goal of this package is to merge all the various versions of any
 portability or utility code that's used in more than one of my packages in
 one place.  Then, each package can update to the latest rra-c-util version
 before each release and gain from the improvements made for all other
-packages.
+packages.  You can think of it as my version of
+[Gnulib](https://www.gnu.org/software/gnulib/), with everything released
+under a permissive license (no GPL).
 
 As well as C portability frameworks, Autoconf macros, and a general C
 utility library, this package has also accumulated a considerable
