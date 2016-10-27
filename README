@@ -34,7 +34,8 @@ DESCRIPTION
   portability or utility code that's used in more than one of my packages
   in one place.  Then, each package can update to the latest rra-c-util
   version before each release and gain from the improvements made for all
-  other packages.
+  other packages.  You can think of it as my version of Gnulib [1], with
+  everything released under a permissive license (no GPL).
 
   As well as C portability frameworks, Autoconf macros, and a general C
   utility library, this package has also accumulated a considerable
@@ -46,16 +47,18 @@ DESCRIPTION
   This package uses the infrastructure of C TAP Harness for testing, but
   is not the canonical version of tests/runtests.c, tests/tap/basic.[ch],
   tests/tap/macros.h, or tests/tap/libtap.sh.  Those files should be
-  pulled from C TAP Harness [1] instead.
+  pulled from C TAP Harness [2] instead.
 
-  [1] https://www.eyrie.org/~eagle/software/c-tap-harness/
+  [1] https://www.gnu.org/software/gnulib/
+  [2] https://www.eyrie.org/~eagle/software/c-tap-harness/
 
 REQUIREMENTS
 
   Everything requires a C compiler to build and expects an ISO C89 or
   later C compiler and libraries.  Presence of strdup is also assumed,
   which is guaranteed by POSIX 2008 but common in many earlier C libraries
-  as well.
+  as well.  Otherwise, the files are meant to be copied into packages and
+  the requirements depend on which files one copies.
 
   A Kerberos library, either MIT Kerberos or Heimdal, is required to build
   this package as-is, since the Kerberos portability layer is built and
@@ -295,7 +298,7 @@ SOURCE REPOSITORY
   rra-c-util is maintained using Git.  You can access the current source
   on GitHub at:
 
-      https://github.com/rra/c-tap-harness
+      https://github.com/rra/rra-c-util
 
   or by cloning the repository at:
 

@@ -31,7 +31,9 @@ The goal of this package is to merge all the various versions of any
 portability or utility code that's used in more than one of my packages in
 one place.  Then, each package can update to the latest rra-c-util version
 before each release and gain from the improvements made for all other
-packages.
+packages.  You can think of it as my version of
+[Gnulib](https://www.gnu.org/software/gnulib/), with everything released
+under a permissive license (no GPL).
 
 As well as C portability frameworks, Autoconf macros, and a general C
 utility library, this package has also accumulated a considerable
@@ -51,6 +53,8 @@ Harness](https://www.eyrie.org/~eagle/software/c-tap-harness/) instead.
 Everything requires a C compiler to build and expects an ISO C89 or later
 C compiler and libraries.  Presence of strdup is also assumed, which is
 guaranteed by POSIX 2008 but common in many earlier C libraries as well.
+Otherwise, the files are meant to be copied into packages and the
+requirements depend on which files one copies.
 
 A Kerberos library, either MIT Kerberos or Heimdal, is required to build
 this package as-is, since the Kerberos portability layer is built and
@@ -296,8 +300,8 @@ take me a couple of months.
 ## Source Repository
 
 rra-c-util is maintained using Git.  You can access the current source on
-[GitHub](https://github.com/rra/c-tap-harness) or by cloning the
-repository at:
+[GitHub](https://github.com/rra/rra-c-util) or by cloning the repository
+at:
 
 https://git.eyrie.org/git/devel/rra-c-util.git
 
