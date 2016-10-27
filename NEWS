@@ -8,10 +8,10 @@ rra-c-util 6.2 (unreleased)
 
     Add a new test (tests/docs/urls-t, and perl/t/docs/urls.t for Perl
     modules) for bad URLs or other strings in all distribution files,
-    initially just checking for non-https www.eyrie.org URLs.  In the
-    process, add a new all_files function to Test::RRA::Automake that
-    returns all "interesting" files in the distribution that a test may
-    want to look at.
+    initially just checking for non-https www.eyrie.org URLs and my old
+    email address.  In the process, add a new all_files function to
+    Test::RRA::Automake that returns all "interesting" files in the
+    distribution that a test may want to look at.
 
 rra-c-util 6.1 (2016-10-10)
 

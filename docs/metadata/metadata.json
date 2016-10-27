@@ -46,6 +46,7 @@
     "distribution": {
         "section": "devel",
         "tarname": "rra-c-util",
+        "version": "rra-c-util",
     },
     "docs": {
         "user": [
