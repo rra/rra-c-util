@@ -40,7 +40,9 @@ AC_DEFUN([RRA_PROG_CC_FLAG],
  AC_MSG_CHECKING([if $CC supports $1])
  AC_CACHE_VAL([_RRA_PROG_CC_FLAG_CACHE([$1])],
     [save_CFLAGS=$CFLAGS
-     CFLAGS="$CFLAGS $1"
+     AS_CASE([$1],
+        [-Wno-*], [CFLAGS="$CFLAGS `echo "$1" | sed 's/-Wno-/-W/'`"],
+        [*],      [CFLAGS="$CFLAGS $1"])
      AC_COMPILE_IFELSE([AC_LANG_PROGRAM([], [int foo = 0;])],
         [_RRA_PROG_CC_FLAG_CACHE([$1])=yes],
         [_RRA_PROG_CC_FLAG_CACHE([$1])=no])
@@ -70,12 +72,12 @@ dnl Sets WARNINGS_CFLAGS as a substitution variable.
 AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
 [AC_REQUIRE([RRA_PROG_CC_CLANG])
  AS_IF([test x"$CLANG" = xyes],
-    [WARNINGS_CFLAGS=""
+    [WARNINGS_CFLAGS="-Werror"
      m4_foreach_w([flag],
         [-Weverything -Wno-padded],
         [RRA_PROG_CC_FLAG(flag,
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])],
-    [WARNINGS_CFLAGS="-g -O -D_FORTIFY_SOURCE=2"
+    [WARNINGS_CFLAGS="-g -O -D_FORTIFY_SOURCE=2 -Werror"
      m4_foreach_w([flag],
         [-fstrict-overflow -fstrict-aliasing -Wcomments -Wendif-labels -Wall
          -Wextra -Wformat=2 -Wformat-signedness -Wnull-dereference -Winit-self
@@ -86,7 +88,7 @@ AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
          -Wjump-misses-init -Wfloat-conversion -Wlogical-op
          -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes
          -Wnormalized=nfc -Wpacked -Wredundant-decls -Wnested-externs -Winline
-         -Wvla -Werror],
+         -Wvla],
         [RRA_PROG_CC_FLAG(flag,
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])])
  AC_SUBST([WARNINGS_CFLAGS])])

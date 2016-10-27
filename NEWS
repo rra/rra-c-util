@@ -2,6 +2,15 @@
 
 rra-c-util 6.2 (unreleased)
 
+    Correctly handle -Wno-* options in RRA_PROG_CC_FLAG.  GCC and Clang
+    both don't produce fatal errors for unknown -Wno-* flags, so test the
+    corresponding positive -W flag instead when determining if they're
+    supported.  Thanks to Guillem Jover for the information.
+
+    In RRA_PROG_CC_WARNINGS_FLAGS, always add -Werror to warning flags for
+    both GCC and Clang, rather than probing for whether it's supported in
+    GCC and not using it with Clang.
+
     Add new is_file_contents function to Test::RRA for Perl tests.  This
     compares a string with the contents of a file and displays a diff if
     they don't match.
