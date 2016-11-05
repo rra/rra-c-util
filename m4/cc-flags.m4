@@ -62,7 +62,7 @@ dnl   -Wstack-protector  Too many false positives from small buffers
 dnl
 dnl Last checked against gcc 6.1.0 (2016-09-25).  -D_FORTIFY_SOURCE=2 enables
 dnl warn_unused_result attribute markings on glibc functions on Linux, which
-dnl catches a few more issues.  Add -O because gcc won't find some warnings
+dnl catches a few more issues.  Add -O2 because gcc won't find some warnings
 dnl without optimization turned on.
 dnl
 dnl The warnings here are listed in the same order they're listed in the
@@ -77,7 +77,7 @@ AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
         [-Weverything -Wno-padded],
         [RRA_PROG_CC_FLAG(flag,
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])],
-    [WARNINGS_CFLAGS="-g -O -D_FORTIFY_SOURCE=2 -Werror"
+    [WARNINGS_CFLAGS="-g -O2 -D_FORTIFY_SOURCE=2 -Werror"
      m4_foreach_w([flag],
         [-fstrict-overflow -fstrict-aliasing -Wcomments -Wendif-labels -Wall
          -Wextra -Wformat=2 -Wformat-signedness -Wnull-dereference -Winit-self
