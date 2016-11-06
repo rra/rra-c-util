@@ -47,7 +47,7 @@ use Test::RRA::Config qw(@STRICT_IGNORE @STRICT_PREREQ);
 skip_unless_automated('Strictness tests');
 
 # Load prerequisite modules.
-use_prereq('Test::Strict');
+use_prereq('Test::Strict', '0.25');
 
 # Check whether all prerequisites are available, and skip the test if any of
 # them are not.
