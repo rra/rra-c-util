@@ -76,7 +76,7 @@ my @GLOBAL_SKIP = qw(.git _build autom4te.cache build-aux);
 # Additional paths to skip when building a list of all files in the
 # distribution.  This primarily skips build artifacts that aren't interesting
 # to any of the tests.  These match any path component.
-my @FILES_SKIP = qw(.deps .dirstamp config.h.in~ configure);
+my @FILES_SKIP = qw(.deps .dirstamp .libs config.h.in~ configure);
 
 # The temporary directory created by test_tmpdir, if any.  If this is set,
 # attempt to remove the directory stored here on program exit (but ignore
@@ -94,12 +94,12 @@ sub all_files {
     my %files_skip = map { $_ => 1 } @FILES_SKIP;
 
     # Wanted function for find.  Prune anything matching either of the skip
-    # lists, and then add all regular files to the list.
+    # lists, or *.lo files, and then add all regular files to the list.
     my $wanted = sub {
         my $file = $_;
         my $path = $File::Find::name;
         $path =~ s{ \A [.]/ }{}xms;
-        if ($skip{$path} or $files_skip{$file}) {
+        if ($skip{$path} or $files_skip{$file} or $file =~ m{ [.] lo \z }xms) {
             $File::Find::prune = 1;
             return;
         }
