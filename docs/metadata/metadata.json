@@ -1,6 +1,6 @@
 {
     "name": "rra-c-util",
-    "version": "6.1",
+    "version": "6.2",
     "synopsis": "Russ Allbery's utility libraries for C",
     "maintainer": "Russ Allbery <eagle@eyrie.org>",
     "copyrights": [
