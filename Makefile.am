@@ -8,20 +8,22 @@
 # See LICENSE for licensing terms.
 
 ACLOCAL_AMFLAGS = -I m4
-EXTRA_DIST = .gitignore .travis.yml LICENSE bootstrap docs/api/xmalloc.3    \
-	docs/api/xmalloc.pod m4/apache.m4 m4/apr.m4 m4/aprutil.m4	    \
-	m4/curl.m4 m4/ld-version.m4 m4/ldap.m4 m4/openssl.m4 m4/pcre.m4	    \
-	m4/remctl.m4 m4/tinycdb.m4 portable/winsock.c perl/t/data/perl.conf \
-	perl/t/docs/pod-coverage.t perl/t/docs/pod-spelling.t		    \
-	perl/t/docs/pod.t perl/t/docs/synopsis.t perl/t/style/coverage.t    \
-	perl/t/style/critic.t perl/t/style/minimum-version.t		    \
-	perl/t/style/module-version.t perl/t/style/strict.t tests/README    \
-	tests/TESTS tests/data/generate-krb5-conf tests/data/krb5-pam.conf  \
+EXTRA_DIST = .gitignore .travis.yml LICENSE README.md bootstrap		    \
+	docs/api/xmalloc.3 docs/api/xmalloc.pod docs/metadata m4/apache.m4  \
+	m4/apr.m4 m4/aprutil.m4 m4/curl.m4 m4/ld-version.m4 m4/ldap.m4	    \
+	m4/openssl.m4 m4/pcre.m4 m4/remctl.m4 m4/tinycdb.m4		    \
+	portable/winsock.c perl/t/data/perl.conf perl/t/docs/pod-coverage.t \
+	perl/t/docs/pod-spelling.t perl/t/docs/pod.t perl/t/docs/synopsis.t \
+	perl/t/docs/urls.t perl/t/style/coverage.t perl/t/style/critic.t    \
+	perl/t/style/minimum-version.t perl/t/style/module-version.t	    \
+	perl/t/style/strict.t tests/README tests/TESTS			    \
+	tests/data/generate-krb5-conf tests/data/krb5-pam.conf		    \
 	tests/data/perl.conf tests/data/perlcriticrc tests/data/perltidyrc  \
 	tests/data/valgrind.supp tests/docs/pod-spelling-t tests/docs/pod-t \
-	tests/fakepam/README tests/kafs/basic-t tests/perl/critic-t	    \
-	tests/perl/minimum-version-t tests/perl/module-version-t	    \
-	tests/perl/strict-t tests/tap/kerberos.sh tests/tap/libtap.sh	    \
+	tests/docs/urls-t tests/fakepam/README tests/kafs/basic-t	    \
+	tests/perl/critic-t tests/perl/minimum-version-t		    \
+	tests/perl/module-version-t tests/perl/strict-t			    \
+	tests/tap/kerberos.sh tests/tap/libtap.sh			    \
 	tests/tap/perl/Test/RRA.pm tests/tap/perl/Test/RRA/Automake.pm	    \
 	tests/tap/perl/Test/RRA/Config.pm				    \
 	tests/tap/perl/Test/RRA/ModuleVersion.pm tests/tap/remctl.sh	    \
