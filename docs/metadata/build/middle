@@ -1,0 +1,4 @@
+Pass `--enable-kafs` to configure to attempt to build kafs support, which
+will use either an existing libkafs or libkopenafs library or build the
+kafs replacement included in this package.  You can also add
+`--without-libkafs` to force the use of the internal kafs replacement.

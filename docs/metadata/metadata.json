@@ -15,11 +15,15 @@
     ],
     "license": "Expat",
     "build": {
-        "lancaster": true,
         "autotools": true,
         "automake": "1.11",
         "autoconf": "2.64",
+        "gssapi": true,
+        "install": false,
+        "kerberos": true,
+        "lancaster": true,
         "manpages": true,
+        "type": "Autoconf",
     },
     "support": {
         "email": "eagle@eyrie.org",
@@ -35,8 +39,6 @@
     },
     "readme": {
         "sections": [
-            { "title": "Building" },
-            { "title": "Testing" },
             { "title": "Using This Code" },
         ],
     },

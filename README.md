@@ -103,30 +103,39 @@ fresh Git checkout.
 
 ## Building
 
-You can build rra-c-util with:
+You can build rra-c-util with the standard commands:
 
 ```
     ./configure
     make
 ```
 
+If you are building from a Git clone, first run `./bootstrap` in the
+source directory to generate the build files.  Building outside of the
+source directory is also supported, if you wish, by creating an empty
+directory and then running configure with the correct relative path.
+
 Pass `--enable-kafs` to configure to attempt to build kafs support, which
 will use either an existing libkafs or libkopenafs library or build the
 kafs replacement included in this package.  You can also add
 `--without-libkafs` to force the use of the internal kafs replacement.
 
-Pass `--enable-silent-rules` to configure for a quieter build (similar to
-the Linux kernel).  Use `make warnings` instead of make to build with full
-GCC compiler warnings (requires a relatively current version of GCC).
-
 Normally, configure will use `krb5-config` to determine the flags to use
-to compile with your Kerberos libraries.  If `krb5-config` isn't found, it
-will look for the standard Kerberos libraries in locations already
-searched by your compiler.  If the the `krb5-config` script first in your
-path is not the one corresponding to the Kerberos libraries you want to
-use or if your Kerberos libraries and includes aren't in a location
-searched by default by your compiler, you need to specify a different
-Kerberos installation root via `--with-krb5=PATH`.  For example:
+to compile with your Kerberos libraries.  To specify a particular
+`krb5-config` script to use, either set the `PATH_KRB5_CONFIG` environment
+variable or pass it to configure like:
+
+```
+    ./configure PATH_KRB5_CONFIG=/path/to/krb5-config
+```
+
+If `krb5-config` isn't found, configure will look for the standard
+Kerberos libraries in locations already searched by your compiler.  If the
+the `krb5-config` script first in your path is not the one corresponding
+to the Kerberos libraries you want to use, or if your Kerberos libraries
+and includes aren't in a location searched by default by your compiler,
+you need to specify a different Kerberos installation root via
+`--with-krb5=PATH`.  For example:
 
 ```
     ./configure --with-krb5=/usr/pubsw
@@ -134,18 +143,11 @@ Kerberos installation root via `--with-krb5=PATH`.  For example:
 
 You can also individually set the paths to the include directory and the
 library directory with `--with-krb5-include` and `--with-krb5-lib`.  You
-may need to do this if Autoconf can't figure out whether to use `lib`,
-`lib32`, or `lib64` on your platform.
+may need to do this if Autoconf can't figure out whether to use lib,
+lib32, or lib64 on your platform.
 
-To specify a particular `krb5-config` script to use, either set the
-`PATH_KRB5_CONFIG` environment variable or pass it to configure like:
-
-```
-    ./configure PATH_KRB5_CONFIG=/path/to/krb5-config
-```
-
-To not use `krb5-config` and force library probing even if there is a
-`krb5-config` script on your path, set `PATH_KRB5_CONFIG` to a nonexistent
+To not use krb5-config and force library probing even if there is a
+krb5-config script on your path, set PATH_KRB5_CONFIG to a nonexistent
 path:
 
 ```
@@ -157,14 +159,20 @@ path:
 
 GSS-API libraries are found the same way: with `krb5-config` by default if
 it is found, and a `--with-gssapi=PATH` flag to specify the installation
-root.  `PATH_KRB5_CONFIG` is similarly used to find krb5-config for the
+root.  `PATH_KRB5_CONFIG` is similarly used to find `krb5-config` for the
 GSS-API libraries, and `--with-gssapi-include` and `--with-gssapi-lib` can
 be used to specify the exact paths, overriding any `krb5-config` results.
 
+Pass `--enable-silent-rules` to configure for a quieter build (similar to
+the Linux kernel).  Use `make warnings` instead of `make` to build with
+full GCC compiler warnings (requires a relatively current version of GCC).
+
+Installing rra-c-util is not normally done.  Instead, see the section on
+using this code below.
+
 ## Testing
 
-rra-c-util comes with an extensive test suite, which you can run after
-building with:
+rra-c-util comes with a test suite, which you can run after building with:
 
 ```
     make check
@@ -294,8 +302,8 @@ pointers to any additional resources.
 For bug tracking, use the [issue tracker on
 GitHub](https://github.com/rra/rra-c-util/issues).  However, please be
 aware that I tend to be extremely busy and work projects often take
-priority.  I'll save your mail and get to it as soon as I can, but it may
-take me a couple of months.
+priority.  I'll save your report and get to it as soon as I can, but it
+may take me a couple of months.
 
 ## Source Repository
 
