@@ -43,6 +43,9 @@ TAP add-ons:
    localhost.  This message to libc-alpha has code to do this:
    https://sourceware.org/ml/libc-alpha/2016-12/msg01058.html
 
+ * Add support for setting up a UID/GID namespace and running tests under
+   it, equivalent to fakeroot support (but using newer kernel features).
+
 Build system:
 
  * Support an --enable-rpath configure flag that adds the library
