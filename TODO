@@ -37,6 +37,12 @@ TAP add-ons:
  * Check the Kerberos password if password was requested and abort if
    authentication fails.
 
+ * Add support for setting up a network namespace so that tests using
+   localhost can be done in that namespace and be guaranteed not to
+   interfere with any services running on the host and listening on
+   localhost.  This message to libc-alpha has code to do this:
+   https://sourceware.org/ml/libc-alpha/2016-12/msg01058.html
+
 Build system:
 
  * Support an --enable-rpath configure flag that adds the library
