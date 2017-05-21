@@ -80,6 +80,7 @@
  *    fixed return value to comply with C99
  *    fixed handling of snprintf(NULL, ...)
  *    added explicit casts for double to long long int conversion
+ *    fixed various warnings with GCC 7
  *
  *  Hrvoje Niksic <hniksic@arsdigita.com> 2000-11-04
  *    include <stdio.h> for NULL.
@@ -352,6 +353,7 @@ static int dopr (char *buffer, size_t maxlen, const char *format, va_list args)
 	break;
       case 'X':
 	flags |= DP_F_UP;
+        /* fallthrough */
       case 'x':
 	flags |= DP_F_UNSIGNED;
 	if (cflags == DP_C_SHORT)
@@ -373,6 +375,7 @@ static int dopr (char *buffer, size_t maxlen, const char *format, va_list args)
 	break;
       case 'E':
 	flags |= DP_F_UP;
+        /* fallthrough */
       case 'e':
 	if (cflags == DP_C_LDOUBLE)
 	  fvalue = va_arg (args, LDOUBLE);
@@ -382,6 +385,7 @@ static int dopr (char *buffer, size_t maxlen, const char *format, va_list args)
 	break;
       case 'G':
 	flags |= DP_F_UP;
+        /* fallthrough */
       case 'g':
         flags |= DP_F_FP_G;
 	if (cflags == DP_C_LDOUBLE)
@@ -613,7 +617,7 @@ static LDOUBLE abs_val (LDOUBLE value)
   return result;
 }
 
-static LLONG pow10_int (int exp)
+static LLONG pow10_int (unsigned int exp)
 {
   LDOUBLE result = 1;
 
@@ -637,6 +641,14 @@ static LLONG round_int (LDOUBLE value)
 
   return intpart;
 }
+
+/*
+ * GCC 7.1 issues this warning at the point of the function definition header
+ * (not in any actual code), and I can't figure out what's triggering it since
+ * the comparison form doesn't appear anywhere in this code.  Since this is
+ * rarely-used portability code, suppress the warning.
+ */
+#pragma GCC diagnostic ignored "-Wstrict-overflow"
 
 static int fmtfp (char *buffer, size_t *currlen, size_t maxlen,
 		  LDOUBLE fvalue, int min, int max, int flags)

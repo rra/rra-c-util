@@ -1,5 +1,9 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 6.3 (unreleased)
+
+    Fix new warnings in GCC 7.
+
 rra-c-util 6.2 (2016-12-24)
 
     Correctly handle -Wno-* options in RRA_PROG_CC_FLAG.  GCC and Clang
