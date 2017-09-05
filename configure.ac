@@ -52,7 +52,7 @@ RRA_PERL_CHECK_MODULE([File::Spec])
 dnl Probes for networking libraries.  Only needed for packages that make or
 dnl receive network connections or do DNS lookups.
 AC_SEARCH_LIBS([gethostbyname], [nsl])
-AC_SEARCH_LIBS([socket], [socket], ,
+AC_SEARCH_LIBS([socket], [socket], [],
     [AC_CHECK_LIB([nsl], [socket], [LIBS="-lnsl -lsocket $LIBS"], [],
         [-lsocket])])
 
