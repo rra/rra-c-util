@@ -12,7 +12,7 @@
  * This file is part of C TAP Harness.  The current version plus supporting
  * documentation is at <https://www.eyrie.org/~eagle/software/c-tap-harness/>.
  *
- * Copyright 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016
+ * Copyright 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017
  *     Russ Allbery <eagle@eyrie.org>
  * Copyright 2001, 2002, 2004, 2005, 2006, 2007, 2008, 2011, 2012, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
@@ -769,6 +769,10 @@ breallocarray(void *p, size_t n, size_t size)
 {
     if (n > 0 && UINT_MAX / n <= size)
         bail("reallocarray too large");
+    if (n == 0 || size == 0) {
+        n = 1;
+        size = 1;
+    }
     p = realloc(p, n * size);
     if (p == NULL)
         sysbail("failed to realloc %lu bytes", (unsigned long) (n * size));

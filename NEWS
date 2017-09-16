@@ -4,6 +4,11 @@ rra-c-util 6.3 (unreleased)
 
     Fix new warnings in GCC 7.
 
+    Fix all warnings from the Clang static analyzer.  Ensure that
+    allocations in reallocarray replacements have a minimum size of 1 and
+    that pam-util/vector.c always allocates the strings array with a
+    minimum size of 1 to simplify static analysis.
+
 rra-c-util 6.2 (2016-12-24)
 
     Correctly handle -Wno-* options in RRA_PROG_CC_FLAG.  GCC and Clang

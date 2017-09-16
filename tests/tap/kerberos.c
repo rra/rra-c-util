@@ -15,6 +15,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017 Russ Allbery <eagle@eyrie.org>
  * Copyright 2006, 2007, 2009, 2010, 2011, 2012, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -361,7 +362,7 @@ kerberos_setup(enum kerberos_needs needs)
     path = test_file_path("config/pkinit-principal");
     if (path != NULL)
         file = fopen(path, "r");
-    if (file != NULL) {
+    if (path != NULL && file != NULL) {
         if (fgets(buffer, sizeof(buffer), file) == NULL)
             bail("cannot read %s", path);
         if (buffer[strlen(buffer) - 1] != '\n')

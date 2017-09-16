@@ -10,6 +10,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011, 2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -36,6 +37,7 @@
 #include <portable/pam.h>
 #include <portable/system.h>
 
+#include <assert.h>
 #include <ctype.h>
 #include <dirent.h>
 #include <errno.h>
@@ -358,6 +360,7 @@ expand_string(const char *template, const struct script_config *config)
             p++;
             switch (*p) {
             case 'i':
+                assert(uid != NULL);
                 memcpy(out, uid, strlen(uid));
                 out += strlen(uid);
                 break;
@@ -452,7 +455,9 @@ parse_options(FILE *script, struct work *work,
             break;
         type = string_to_group(group);
         token = strtok(NULL, " ");
-        if (token == NULL || strcmp(token, "=") != 0)
+        if (token == NULL)
+            bail("malformed action line");
+        if (strcmp(token, "=") != 0)
             bail("malformed action line near %s", token);
         token = strtok(NULL, "");
         split_options(token, &work->options[type], config);
@@ -520,7 +525,9 @@ parse_run(FILE *script)
         next->name = bstrdup(token);
         call = token;
         token = strtok(NULL, " ");
-        if (token == NULL || strcmp(token, "=") != 0)
+        if (token == NULL)
+            bail("malformed action line");
+        if (strcmp(token, "=") != 0)
             bail("malformed action line near %s", token);
         token = strtok(NULL, " ");
         next->status = string_to_status(token);
@@ -617,7 +624,9 @@ parse_prompts(FILE *script, const struct script_config *config)
         prompt = &prompts->prompts[prompts->size];
         style = token;
         token = strtok(NULL, " ");
-        if (token == NULL || strcmp(token, "=") != 0)
+        if (token == NULL)
+            bail("malformed prompt line");
+        if (strcmp(token, "=") != 0)
             bail("malformed prompt line near %s", token);
         prompt->style = string_to_style(style);
         token = strtok(NULL, "");
@@ -626,7 +635,7 @@ parse_prompts(FILE *script, const struct script_config *config)
         else {
             end = strrchr(token, '|');
             if (end == NULL)
-                bail("malformed prompt line near %s", prompt->prompt);
+                bail("malformed prompt line near %s", token);
             *end = '\0';
             prompt->prompt = expand_string(token, config);
             token = end + 1;
