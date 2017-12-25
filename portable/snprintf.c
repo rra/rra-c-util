@@ -25,6 +25,11 @@
 # define vsnprintf test_vsnprintf
 #endif
 
+/* Specific to rra-c-util, but only when debugging is enabled. */
+#ifdef DEBUG_SNPRINTF
+# include <util/messages.h>
+#endif
+
 /*
  * Copyright Patrick Powell 1995
  * This code is based on code written by Patrick Powell (papowell@astart.com)
@@ -113,7 +118,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <sys/types.h>
-#include <util/messages.h>
 
 #ifndef NULL
 # define NULL 0
@@ -575,8 +579,8 @@ static int fmtint (char *buffer, size_t *currlen, size_t maxlen,
     spadlen = -spadlen; /* Left Justifty */
 
 #ifdef DEBUG_SNPRINTF
-  debug("zpad: %d, spad: %d, min: %d, max: %d, place: %d\n",
-        zpadlen, spadlen, min, max, place);
+  debug ("zpad: %d, spad: %d, min: %d, max: %d, place: %u\n",
+         zpadlen, spadlen, min, max, place);
 #endif
 
   /* Spaces */
@@ -766,9 +770,9 @@ static int fmtfp (char *buffer, size_t *currlen, size_t maxlen,
 
 #ifdef DEBUG_SNPRINTF
 # ifdef HAVE_LONG_LONG_INT
-  debug("fmtfp: %Lf =? %lld.%lld\n", fvalue, intpart, fracpart);
+  debug ("fmtfp: %Lf =? %lld.%lld\n", fvalue, intpart, fracpart);
 # else
-  debug("fmtfp: %Lf =? %ld.%ld\n", fvalue, intpart, fracpart);
+  debug ("fmtfp: %Lf =? %ld.%ld\n", fvalue, intpart, fracpart);
 # endif
 #endif
 
