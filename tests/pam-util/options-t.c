@@ -65,7 +65,7 @@ static struct option options[] = {
     { K(minimum_uid), true,  NUMBER (0)     },
     { K(program),     true,  STRING (NULL)  },
 };
-const static size_t optlen = sizeof(options) / sizeof(options[0]);
+static const size_t optlen = sizeof(options) / sizeof(options[0]);
 
 /*
  * A macro used to parse the various ways of spelling booleans.  This reuses
