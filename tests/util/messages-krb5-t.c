@@ -56,7 +56,7 @@ main(void)
 /*
  * Test functions.
  */
-static void
+static void __attribute__((__noreturn__))
 test_warn(void *data UNUSED)
 {
     krb5_context ctx;
@@ -74,7 +74,7 @@ test_warn(void *data UNUSED)
     exit(0);
 }
 
-static void
+static void __attribute__((__noreturn__))
 test_die(void *data UNUSED)
 {
     krb5_context ctx;

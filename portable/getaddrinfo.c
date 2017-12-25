@@ -252,7 +252,7 @@ gai_service(const char *servname, int flags, int *type, unsigned short *port)
     if (convert_service(servname, &value)) {
         if (value > (1L << 16) - 1)
             return EAI_SERVICE;
-        *port = value;
+        *port = (unsigned short) value;
     } else {
         if (flags & AI_NUMERICSERV)
             return EAI_NONAME;
@@ -275,7 +275,9 @@ gai_service(const char *servname, int flags, int *type, unsigned short *port)
             *type = SOCK_STREAM;
         else
             return EAI_SERVICE;
-        *port = htons(servent->s_port);
+        if (servent->s_port > (1L << 16) - 1)
+            return EAI_SERVICE;
+        *port = htons((unsigned short) servent->s_port);
     }
     return 0;
 }

@@ -1,7 +1,7 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <eagle@eyrie.org
-# Copyright 2015, 2016 Russ Allbery <eagle@eyrie.org>
+# Copyright 2015, 2016, 2017 Russ Allbery <eagle@eyrie.org>
 # Copyright 2008, 2009, 2010, 2011, 2012, 2013, 2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -219,8 +219,8 @@ tests_util_network_server_t_LDADD = tests/tap/libtap.a util/libutil.a \
 tests_util_vector_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 tests_util_xmalloc_LDADD = util/libutil.a portable/libportable.a
-tests_util_xwrite_t_SOURCES = tests/util/fakewrite.c tests/util/xwrite.c \
-	tests/util/xwrite-t.c
+tests_util_xwrite_t_SOURCES = tests/util/fakewrite.c tests/util/fakewrite.h \
+	tests/util/xwrite.c tests/util/xwrite-t.c
 tests_util_xwrite_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 

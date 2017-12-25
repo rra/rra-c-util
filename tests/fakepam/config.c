@@ -443,7 +443,7 @@ parse_options(FILE *script, struct work *work,
               const struct script_config *config)
 {
     char *line, *group, *token;
-    size_t length;
+    size_t length = 0;
     enum group_type type;
 
     for (line = readline(script); line != NULL; line = readline(script)) {
@@ -507,9 +507,9 @@ parse_call(char *token, struct action *action)
 static struct action *
 parse_run(FILE *script)
 {
-    struct action *head = NULL, *current, *next;
+    struct action *head = NULL, *current = NULL, *next;
     char *line, *token, *call;
-    size_t length;
+    size_t length = 0;
 
     for (line = readline(script); line != NULL; line = readline(script)) {
         length = strlen(line);
@@ -600,7 +600,8 @@ parse_prompts(FILE *script, const struct script_config *config)
     struct prompts *prompts = NULL;
     struct prompt *prompt;
     char *line, *token, *style, *end;
-    size_t size, count, i, length;
+    size_t size, count, i;
+    size_t length = 0;
 
     for (line = readline(script); line != NULL; line = readline(script)) {
         length = strlen(line);

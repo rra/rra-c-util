@@ -10,7 +10,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Copyright 1997, 2000, 2001, 2002 Benjamin Sittler
- * Copyright 2008 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2008, 2017 Russ Allbery <eagle@eyrie.org>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -51,6 +51,10 @@ int test_getopt(int, char **, const char *);
 # define opterr test_opterr
 # define optopt test_optopt
 # define optarg test_optarg
+extern int test_optind;
+extern int test_opterr;
+extern int test_optopt;
+extern char *test_optarg;
 #endif
 
 /* Initialize global interface variables. */

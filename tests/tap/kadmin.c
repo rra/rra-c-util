@@ -111,7 +111,7 @@ kerberos_expire_password(const char *principal, time_t expires)
     }
     memset(&ent, 0, sizeof(ent));
     ent.principal = princ;
-    ent.pw_expiration = expires;
+    ent.pw_expiration = (krb5_timestamp) expires;
     code = kadm5_modify_principal(handle, &ent, KADM5_PW_EXPIRATION);
     if (code == 0)
         okay = true;

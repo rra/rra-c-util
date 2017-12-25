@@ -932,7 +932,7 @@ network_addr_match(const char *a, const char *b, const char *mask)
     unsigned long cidr;
     char *end;
     unsigned int i;
-    unsigned long bits, addr_mask;
+    uint32_t bits, addr_mask;
 #ifdef HAVE_INET6
     struct in6_addr a6, b6;
 #endif
