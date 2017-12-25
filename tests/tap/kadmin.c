@@ -9,6 +9,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -68,7 +69,7 @@ kerberos_expire_password(const char *principal, time_t expires)
     krb5_context ctx;
     krb5_principal admin = NULL;
     krb5_principal princ = NULL;
-    krb5_error_code code;
+    kadm5_ret_t code;
     kadm5_config_params params;
     kadm5_principal_ent_rec ent;
     void *handle;

@@ -14,6 +14,9 @@ rra-c-util 7.0 (unreleased)
     second argument for better compatibility with other networking
     functions it calls.
 
+    Allow bail_krb5 and diag_krb5 TAP library functions to take either a
+    krb5_error_code or a kadm5_ret_t as their second argument.
+
     Fix new warnings in GCC 7.
 
     Fix all warnings from the Clang static analyzer.  Ensure that
