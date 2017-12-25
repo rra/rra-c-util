@@ -203,7 +203,7 @@ x_strndup(const char *s, size_t size, const char *file, int line)
     /* Don't assume that the source string is nul-terminated. */
     for (p = s; (size_t) (p - s) < size && *p != '\0'; p++)
         ;
-    length = p - s;
+    length = (size_t) (p - s);
     copy = malloc(length + 1);
     while (copy == NULL) {
         (*xmalloc_error_handler)("strndup", length + 1, file, line);
@@ -221,6 +221,7 @@ x_vasprintf(char **strp, const char *fmt, va_list args, const char *file,
 {
     va_list args_copy;
     int status;
+    size_t wanted;
 
     va_copy(args_copy, args);
     status = vasprintf(strp, fmt, args_copy);
@@ -229,8 +230,8 @@ x_vasprintf(char **strp, const char *fmt, va_list args, const char *file,
         va_copy(args_copy, args);
         status = vsnprintf(NULL, 0, fmt, args_copy);
         va_end(args_copy);
-        status = (status < 0) ? 0 : status + 1;
-        (*xmalloc_error_handler)("vasprintf", status, file, line);
+        wanted = (status < 0) ? 0 : (size_t) status + 1;
+        (*xmalloc_error_handler)("vasprintf", wanted, file, line);
         va_copy(args_copy, args);
         status = vasprintf(strp, fmt, args_copy);
         va_end(args_copy);
@@ -244,6 +245,7 @@ x_asprintf(char **strp, const char *file, int line, const char *fmt, ...)
 {
     va_list args, args_copy;
     int status;
+    size_t wanted;
 
     va_start(args, fmt);
     va_copy(args_copy, args);
@@ -253,8 +255,8 @@ x_asprintf(char **strp, const char *file, int line, const char *fmt, ...)
         va_copy(args_copy, args);
         status = vsnprintf(NULL, 0, fmt, args_copy);
         va_end(args_copy);
-        status = (status < 0) ? 0 : status + 1;
-        (*xmalloc_error_handler)("asprintf", status, file, line);
+        wanted = (status < 0) ? 0 : (size_t) status + 1;
+        (*xmalloc_error_handler)("asprintf", wanted, file, line);
         va_copy(args_copy, args);
         status = vasprintf(strp, fmt, args_copy);
         va_end(args_copy);

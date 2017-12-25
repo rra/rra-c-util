@@ -10,7 +10,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2016 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2016, 2017 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011, 2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -37,6 +37,7 @@
 #include <portable/pam.h>
 #include <portable/system.h>
 
+#include <assert.h>
 #include <ctype.h>
 #include <dirent.h>
 #include <errno.h>
@@ -161,7 +162,8 @@ converse(int num_msg, const struct pam_message **msg,
     size_t length;
     int i;
 
-    *resp = bcalloc(num_msg, sizeof(struct pam_response));
+    assert(num_msg >= 0);
+    *resp = bcalloc((size_t) num_msg, sizeof(struct pam_response));
     for (i = 0; i < num_msg; i++) {
         message = bstrdup(msg[i]->msg);
 

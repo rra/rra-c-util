@@ -53,7 +53,7 @@ AC_DEFUN([RRA_PROG_CC_FLAG],
 dnl Determine the full set of viable warning flags for the current compiler.
 dnl
 dnl This is based partly on personal preference and is a fairly aggressive set
-dnl of warnings.  Desirable warnings that can't be turned on due to other
+dnl of warnings.  Desirable CC warnings that can't be turned on due to other
 dnl problems:
 dnl
 dnl   -Wconversion       http://bugs.debian.org/488884 (htons warnings)
@@ -65,6 +65,19 @@ dnl warn_unused_result attribute markings on glibc functions on Linux, which
 dnl catches a few more issues.  Add -O2 because gcc won't find some warnings
 dnl without optimization turned on.
 dnl
+dnl For Clang, we mostly just use -Weverything, but we have to disable some
+dnl of the warnings:
+dnl
+dnl   -Wcast-qual                     Some structs require casting away const
+dnl   -Wpadded                        Not an actual problem
+dnl   -Wreserved-id-macros            Autoconf sets several of these normally
+dnl   -Wtautological-pointer-compare  False positives with for loops
+dnl   -Wundef                         Conflicts with Autoconf probe results
+dnl   -Wunreachable-code              Happens with optional compilation
+dnl   -Wunreachable-code-return       Other compilers get confused
+dnl   -Wunused-macros                 Often used on suppressed branches
+dnl   -Wused-but-marked-unused        Happens a lot with conditional code
+dnl
 dnl The warnings here are listed in the same order they're listed in the
 dnl "Preprocessor Options" and "Warning Options" chapters of the GCC manual.
 dnl
@@ -74,7 +87,10 @@ AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
  AS_IF([test x"$CLANG" = xyes],
     [WARNINGS_CFLAGS="-Werror"
      m4_foreach_w([flag],
-        [-Weverything -Wno-padded],
+        [-Weverything -Wno-cast-qual -Wno-padded -Wno-reserved-id-macro
+         -Wno-tautological-pointer-compare -Wno-undef -Wno-unreachable-code
+         -Wno-unreachable-code-return -Wno-unused-macros
+         -Wno-used-but-marked-unused],
         [RRA_PROG_CC_FLAG(flag,
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])],
     [WARNINGS_CFLAGS="-g -O2 -D_FORTIFY_SOURCE=2 -Werror"

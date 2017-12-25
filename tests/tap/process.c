@@ -14,7 +14,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2002, 2004, 2005, 2013, 2016 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2002, 2004, 2005, 2013, 2016, 2017 Russ Allbery <eagle@eyrie.org>
  * Copyright 2009, 2010, 2011, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -99,7 +99,8 @@ run_child_function(test_function_type function, void *data, int *status,
     int fds[2];
     pid_t child;
     char *buf;
-    ssize_t count, ret, buflen;
+    ssize_t ret;
+    size_t buflen, count;
     int rval;
 
     /* Flush stdout before we start to avoid odd forking issues. */
@@ -134,10 +135,11 @@ run_child_function(test_function_type function, void *data, int *status,
         count = 0;
         do {
             ret = read(fds[0], buf + count, buflen - count - 1);
-            if (SSIZE_MAX - count <= ret)
-                bail("maximum output size exceeded in run_child_function");
-            if (ret > 0)
-                count += ret;
+            if (ret > 0) {
+                if (SSIZE_MAX - count <= (size_t) ret)
+                    bail("maximum output size exceeded in run_child_function");
+                count += (size_t) ret;
+            }
             if (count >= buflen - 1) {
                 buflen += BUFSIZ;
                 buf = brealloc(buf, buflen);
@@ -267,7 +269,7 @@ process_kill(struct process *process)
     int result, i;
     int status = -1;
     struct timeval tv;
-    unsigned long pid = process->pid;
+    unsigned long pid = (unsigned long) process->pid;
 
     /* If the process is not a child, just kill it and hope. */
     if (!process->is_child) {
@@ -321,7 +323,7 @@ void
 process_stop(struct process *process)
 {
     int status;
-    unsigned long pid = process->pid;
+    unsigned long pid = (unsigned long) process->pid;
 
     /* Stop the process. */
     status = process_kill(process);
@@ -366,7 +368,7 @@ process_stop_all(int success UNUSED, int primary)
  * Read the PID of a process from a file.  This is necessary when running
  * under fakeroot to get the actual PID of the remctld process.
  */
-static long
+static pid_t
 read_pidfile(const char *path)
 {
     FILE *file;
@@ -382,7 +384,7 @@ read_pidfile(const char *path)
     pid = strtol(buffer, NULL, 10);
     if (pid <= 0)
         bail("cannot read PID from %s", path);
-    return pid;
+    return (pid_t) pid;
 }
 
 

@@ -16,7 +16,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2015, 2016 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2015, 2016, 2017 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011, 2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006
@@ -147,6 +147,7 @@ buffer_append_vsprintf(struct buffer *buffer, const char *format, va_list args)
 {
     size_t total, avail;
     ssize_t status;
+    size_t written;
     va_list args_copy;
 
     total = buffer->used + buffer->left;
@@ -156,15 +157,19 @@ buffer_append_vsprintf(struct buffer *buffer, const char *format, va_list args)
     va_end(args_copy);
     if (status < 0)
         return;
-    if ((size_t) status < avail) {
-        buffer->left += status;
+    written = (size_t) status;
+    if (written < avail) {
+        buffer->left += written;
     } else {
-        buffer_resize(buffer, total + status + 1);
+        buffer_resize(buffer, total + written + 1);
         avail = buffer->size - total;
         status = vsnprintf(buffer->data + total, avail, format, args);
-        if (status < 0 || (size_t) status >= avail)
+        if (status < 0)
             return;
-        buffer->left += status;
+        written = (size_t) status;
+        if (written >= avail)
+            return;
+        buffer->left += written;
     }
 }
 
@@ -250,7 +255,7 @@ buffer_find_string(struct buffer *buffer, const char *string, size_t start,
         terminator = memchr(data, string[0], buffer->left - start);
         if (terminator == NULL)
             return false;
-        start = (terminator - buffer->data) - buffer->used;
+        start = (size_t) (terminator - buffer->data) - buffer->used;
         if (buffer->left - start < length)
             return false;
         start++;
@@ -274,7 +279,7 @@ buffer_read(struct buffer *buffer, int fd)
         count = read(fd, buffer->data + used, buffer->size - used);
     } while (count == -1 && (errno == EAGAIN || errno == EINTR));
     if (count > 0)
-        buffer->left += count;
+        buffer->left += (size_t) count;
     return count;
 }
 
@@ -316,6 +321,6 @@ buffer_read_file(struct buffer *buffer, int fd)
 
     if (fstat(fd, &st) < 0)
         return false;
-    buffer_resize(buffer, st.st_size + used);
+    buffer_resize(buffer, (size_t) st.st_size + used);
     return buffer_read_all(buffer, fd);
 }

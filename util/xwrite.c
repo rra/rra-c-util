@@ -78,7 +78,7 @@ ssize_t fake_writev(int, const struct iovec *, int);
 ssize_t
 xwrite(int fd, const void *buffer, size_t size)
 {
-    size_t total;
+    size_t total, written;
     ssize_t status;
     unsigned int count = 0;
 
@@ -86,16 +86,19 @@ xwrite(int fd, const void *buffer, size_t size)
 	return 0;
 
     /* Abort the write if we try ten times with no forward progress. */
-    for (total = 0; total < size; total += status) {
+    for (total = 0; total < size; total += written) {
         if (++count > 10)
             break;
         status = write(fd, (const char *) buffer + total, size - total);
-        if (status > 0)
+        if (status > 0) {
             count = 0;
-        if (status < 0) {
+            written = (size_t) status;
+        } else if (status == 0) {
+            written = 0;
+        } else {
             if (errno != EINTR)
                 break;
-            status = 0;
+            written = 0;
         }
     }
     return (total < size) ? -1 : (ssize_t) total;
@@ -106,7 +109,7 @@ xwrite(int fd, const void *buffer, size_t size)
 ssize_t
 xpwrite(int fd, const void *buffer, size_t size, off_t offset)
 {
-    size_t total;
+    size_t total, written;
     ssize_t status;
     unsigned int count = 0;
 
@@ -114,17 +117,20 @@ xpwrite(int fd, const void *buffer, size_t size, off_t offset)
 	return 0;
 
     /* Abort the write if we try ten times with no forward progress. */
-    for (total = 0; total < size; total += status) {
+    for (total = 0; total < size; total += written) {
         if (++count > 10)
             break;
         status = pwrite(fd, (const char *) buffer + total, size - total,
-                        offset + total);
-        if (status > 0)
+                        offset + (off_t) total);
+        if (status > 0) {
             count = 0;
-        if (status < 0) {
+            written = (size_t) status;
+        } else if (status == 0) {
+            written = 0;
+        } else {
             if (errno != EINTR)
                 break;
-            status = 0;
+            written = 0;
         }
     }
     return (total < size) ? -1 : (ssize_t) total;
@@ -135,8 +141,8 @@ xpwrite(int fd, const void *buffer, size_t size, off_t offset)
 ssize_t
 xwritev(int fd, const struct iovec iov[], int iovcnt)
 {
-    ssize_t total, status = 0;
-    size_t left, offset;
+    ssize_t status = 0;
+    size_t left, offset, total;
     unsigned int iovleft, i, count;
     struct iovec *tmpiov;
 
@@ -173,8 +179,8 @@ xwritev(int fd, const struct iovec iov[], int iovcnt)
     } while (status < 0 && errno == EINTR);
     if (status < 0)
         return -1;
-    if (status == total)
-        return total;
+    if ((size_t) status == total)
+        return (ssize_t) total;
 
     /*
      * If we fell through to here, the first write partially succeeded.
@@ -182,11 +188,11 @@ xwritev(int fd, const struct iovec iov[], int iovcnt)
      * rest of it so that we can modify it to reflect how much we manage to
      * write on successive tries.
      */
-    offset = status;
-    left = total - offset;
+    offset = (size_t) status;
+    left = (size_t) total - offset;
     for (i = 0; offset >= (size_t) iov[i].iov_len; i++)
         offset -= iov[i].iov_len;
-    iovleft = iovcnt - i;
+    iovleft = (unsigned int) iovcnt - i;
     assert(iovleft > 0);
     tmpiov = calloc(iovleft, sizeof(struct iovec));
     if (tmpiov == NULL)
@@ -213,11 +219,11 @@ xwritev(int fd, const struct iovec iov[], int iovcnt)
         tmpiov[i].iov_len -= offset;
 
         /* Write out what's left and return success if it's all written. */
-        status = writev(fd, tmpiov + i, iovleft);
+        status = writev(fd, tmpiov + i, (int) iovleft);
         if (status <= 0)
             offset = 0;
         else {
-            offset = status;
+            offset = (size_t) status;
             left -= offset;
             count = 0;
         }
@@ -225,5 +231,5 @@ xwritev(int fd, const struct iovec iov[], int iovcnt)
 
     /* We're either done or got an error; if we're done, left is now 0. */
     free(tmpiov);
-    return (left == 0) ? total : -1;
+    return (left == 0) ? (ssize_t) total : -1;
 }

@@ -263,10 +263,10 @@ vector_split(const char *string, char separator, struct vector *vector)
     /* Walk the string and create the new strings with xstrndup. */
     for (start = string, p = string, i = 0; *p != '\0'; p++)
         if (*p == separator) {
-            vector->strings[i++] = xstrndup(start, p - start);
+            vector->strings[i++] = xstrndup(start, (size_t) (p - start));
             start = p + 1;
         }
-    vector->strings[i++] = xstrndup(start, p - start);
+    vector->strings[i++] = xstrndup(start, (size_t) (p - start));
     vector->count = i;
     return vector;
 }
@@ -370,11 +370,11 @@ vector_split_multi(const char *string, const char *seps,
     for (start = string, p = string, i = 0; *p != '\0'; p++)
         if (strchr(seps, *p) != NULL) {
             if (start != p)
-                vector->strings[i++] = xstrndup(start, p - start);
+                vector->strings[i++] = xstrndup(start, (size_t) (p - start));
             start = p + 1;
         }
     if (start != p)
-        vector->strings[i++] = xstrndup(start, p - start);
+        vector->strings[i++] = xstrndup(start, (size_t) (p - start));
     vector->count = i;
     return vector;
 }

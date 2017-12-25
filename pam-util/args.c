@@ -15,6 +15,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010, 2012, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -69,7 +70,7 @@ putil_args_new(pam_handle_t *pamh, int flags)
         return NULL;
     }
     args->pamh = pamh;
-    args->silent = ((flags & PAM_SILENT) == PAM_SILENT);
+    args->silent = (((unsigned int) flags & PAM_SILENT) == PAM_SILENT);
 
 #ifdef HAVE_KRB5
     if (issetugid())

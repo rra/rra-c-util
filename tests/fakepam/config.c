@@ -197,7 +197,7 @@ string_to_call(const char *name, enum group_type *group)
  * Given a PAM flag value without the leading PAM_, map it to the numeric
  * value of that flag.  Fails on any unrecognized string.
  */
-static enum group_type
+static int
 string_to_flag(const char *name)
 {
     size_t i;
@@ -284,7 +284,11 @@ string_to_style(const char *name)
 static void
 rewind_section(FILE *script, size_t length)
 {
-    if (fseek(script, -length - 1, SEEK_CUR) != 0)
+    ssize_t offset;
+
+    assert(length < SSIZE_MAX);
+    offset = -((ssize_t) length) - 1;
+    if (fseek(script, offset, SEEK_CUR) != 0)
         sysbail("cannot rewind file");
 }
 
@@ -415,7 +419,7 @@ split_options(char *string, struct options *options,
             options->argv[0] = expand_string(opt, config);
             options->argc = 1;
         } else {
-            count = (options->argc + 2);
+            count = (size_t) options->argc + 2;
             size = sizeof(const char *);
             options->argv = breallocarray(options->argv, count, size);
             options->argv[options->argc] = expand_string(opt, config);
@@ -443,7 +447,7 @@ parse_options(FILE *script, struct work *work,
               const struct script_config *config)
 {
     char *line, *group, *token;
-    size_t length;
+    size_t length = 0;
     enum group_type type;
 
     for (line = readline(script); line != NULL; line = readline(script)) {
@@ -507,9 +511,9 @@ parse_call(char *token, struct action *action)
 static struct action *
 parse_run(FILE *script)
 {
-    struct action *head = NULL, *current, *next;
+    struct action *head = NULL, *current = NULL, *next;
     char *line, *token, *call;
-    size_t length;
+    size_t length = 0;
 
     for (line = readline(script); line != NULL; line = readline(script)) {
         length = strlen(line);
@@ -518,7 +522,7 @@ parse_run(FILE *script)
             break;
         next = bmalloc(sizeof(struct action));
         next->next = NULL;
-        if (head == NULL)
+        if (head == NULL || current == NULL)
             head = next;
         else
             current->next = next;
@@ -600,7 +604,8 @@ parse_prompts(FILE *script, const struct script_config *config)
     struct prompts *prompts = NULL;
     struct prompt *prompt;
     char *line, *token, *style, *end;
-    size_t size, count, i, length;
+    size_t size, count, i;
+    size_t length = 0;
 
     for (line = readline(script); line != NULL; line = readline(script)) {
         length = strlen(line);

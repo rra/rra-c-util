@@ -20,7 +20,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2014, 2015, 2016 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2014, 2015, 2016, 2017 Russ Allbery <eagle@eyrie.org>
  * Copyright 2009, 2011, 2012, 2013, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright (c) 2004, 2005, 2006, 2007, 2008
@@ -650,23 +650,24 @@ network_client_create(int domain, int type, const char *source)
 static ssize_t
 socket_xread(socket_type fd, void *buffer, size_t size)
 {
-    size_t total;
+    size_t total, written;
     ssize_t status;
     unsigned int count = 0;
 
     /* Abort the read if we try 100 times with no forward progress. */
-    for (total = 0, status = 0; total < size; total += status) {
+    for (total = 0, status = 0; total < size; total += written) {
         if (++count > 100)
             break;
         status = socket_read(fd, (char *) buffer + total, size - total);
-        if (status > 0)
+        if (status > 0) {
             count = 0;
-        else if (status == 0)
+            written = (size_t) status;
+        } else if (status == 0) {
             break;
-        else {
+        } else {
             if ((socket_errno != EINTR) && (socket_errno != EAGAIN))
                 break;
-            status = 0;
+            written = 0;
         }
     }
     if (status == 0 && total < size)
@@ -728,7 +729,7 @@ network_read(socket_type fd, void *buffer, size_t total, time_t timeout)
             socket_set_errno(EPIPE);
             return false;
         }
-        got += status;
+        got += (size_t) status;
         if (got == total)
             return true;
         now = time(NULL);
@@ -788,7 +789,7 @@ network_write(socket_type fd, const void *buffer, size_t total, time_t timeout)
                 continue;
             goto fail;
         }
-        sent += status;
+        sent += (size_t) status;
         if (sent == total) {
             fdflag_nonblocking(fd, false);
             return true;
@@ -812,7 +813,7 @@ fail:
  * it should always be as large as the latter.  Returns success or failure.
  */
 bool
-network_sockaddr_sprint(char *dst, size_t size, const struct sockaddr *addr)
+network_sockaddr_sprint(char *dst, socklen_t size, const struct sockaddr *addr)
 {
     const char *result;
 
@@ -932,7 +933,7 @@ network_addr_match(const char *a, const char *b, const char *mask)
     unsigned long cidr;
     char *end;
     unsigned int i;
-    unsigned long bits, addr_mask;
+    uint32_t bits, addr_mask;
 #ifdef HAVE_INET6
     struct in6_addr a6, b6;
 #endif

@@ -273,7 +273,7 @@ fail:
 int
 pam_putenv(pam_handle_t *pamh, const char *setting)
 {
-    char *copy;
+    char *copy = NULL;
     const char *equals;
     size_t namelen;
     bool delete = false;
@@ -283,7 +283,7 @@ pam_putenv(pam_handle_t *pamh, const char *setting)
 
     equals = strchr(setting, '=');
     if (equals != NULL)
-        namelen = equals - setting;
+        namelen = (size_t) (equals - setting);
     else {
         delete = true;
         namelen = strlen(setting);
