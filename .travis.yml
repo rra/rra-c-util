@@ -7,7 +7,3 @@ before_install:
   - sudo apt-get install libevent-dev libkrb5-dev libpam0g-dev pkg-config libtest-minimumversion-perl libtest-pod-perl libtest-strict-perl libtest-synopsis-perl
 env: AUTHOR_TESTING=1
 script: ./bootstrap && ./configure && make warnings && make check
-
-branches:
-  only:
-    - master
