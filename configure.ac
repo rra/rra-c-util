@@ -232,7 +232,6 @@ AC_CHECK_TYPES([struct sockaddr_storage],
     [#include <sys/types.h>
      #include <sys/socket.h>])
 RRA_MACRO_IN6_ARE_ADDR_EQUAL
-RRA_MACRO_SA_LEN
 RRA_FUNC_INET_NTOA
 AC_CHECK_FUNCS([getaddrinfo],
     [RRA_FUNC_GETADDRINFO_ADDRCONFIG],

@@ -1,6 +1,14 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 6.3 (unreleased)
+rra-c-util 7.0 (unreleased)
+
+    Drop the SA_LEN macro from portable/macros.h.  This macro came from
+    INN's portability code, and can be useful when adding IPv6 support to
+    old code bases that didn't pass address lengths.  But it was fairly
+    easy to remove the remaining uses of it from INN, and it's never
+    caught on and been standardized.  It wasn't necessary in any of my
+    other projects and was causing warnings with some new warning options
+    in GCC 7, so drop it entirely.
 
     Fix new warnings in GCC 7.
 
