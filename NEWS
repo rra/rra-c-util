@@ -9,6 +9,10 @@ rra-c-util 6.3 (unreleased)
     that pam-util/vector.c always allocates the strings array with a
     minimum size of 1 to simplify static analysis.
 
+    Support testing flags containing + characters using RRA_PROG_CC_FLAG.
+    This character has to be replaced when creating cache variables.
+    Thanks to Julien ÉLIE for the report.
+
 rra-c-util 6.2 (2016-12-24)
 
     Correctly handle -Wno-* options in RRA_PROG_CC_FLAG.  GCC and Clang
