@@ -10,6 +10,10 @@ rra-c-util 7.0 (unreleased)
     other projects and was causing warnings with some new warning options
     in GCC 7, so drop it entirely.
 
+    network_sockaddr_sprint takes a socklen_t instead of a size_t as its
+    second argument for better compatibility with other networking
+    functions it calls.
+
     Fix new warnings in GCC 7.
 
     Fix all warnings from the Clang static analyzer.  Ensure that
