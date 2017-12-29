@@ -31,9 +31,7 @@ rra-c-util 7.0 (unreleased)
 
     Flesh out support for Clang warnings and compile cleanly under Clang
     with most warnings enabled (-Weverything with some exclusions).  See
-    m4/cc-flags.m4 for the list of Clang warning options excluded.  Add
-    -Wno-unknown-pragmas to the GCC warning flags so that #pragma clang
-    can be used to suppress warnings.
+    m4/cc-flags.m4 for the list of Clang warning options excluded.
 
     Support testing flags containing + characters using RRA_PROG_CC_FLAG.
     This character has to be replaced when creating cache variables.
