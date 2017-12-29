@@ -93,18 +93,17 @@ AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])],
     [WARNINGS_CFLAGS="-g -O2 -D_FORTIFY_SOURCE=2 -Werror"
      m4_foreach_w([flag],
-        [-fstrict-overflow -fstrict-aliasing -fstack-protector-strong
-         -Wall -Wextra -Wformat=2 -Wformat-overflow=2 -Wformat-signedness
-         -Wformat-truncation=2 -Wnull-dereference -Winit-self -Wswitch-enum
-         -Wno-unknown-pragmas -Wstrict-overflow=5 -Wmissing-format-attribute
-         -Walloc-zero -Wduplicated-branches -Wduplicated-cond -Wtrampolines
-         -Wfloat-equal -Wdeclaration-after-statement -Wshadow -Wpointer-arith
-         -Wbad-function-cast -Wcast-align -Wwrite-strings
-         -Wconversion -Wno-sign-conversion -Wdate-time -Wjump-misses-init
-         -Wlogical-op -Wstrict-prototypes -Wold-style-definition
-         -Wmissing-prototypes -Wmissing-declarations -Wnormalized=nfc
-         -Wpacked -Wredundant-decls -Wrestrict -Wnested-externs -Winline
-         -Wvla -Wstack-protector],
+        [-fstrict-overflow -fstrict-aliasing -Wall -Wextra -Wformat=2
+         -Wformat-overflow=2 -Wformat-signedness -Wformat-truncation=2
+         -Wnull-dereference -Winit-self -Wswitch-enum -Wno-unknown-pragmas
+         -Wstrict-overflow=5 -Wmissing-format-attribute -Walloc-zero
+         -Wduplicated-branches -Wduplicated-cond -Wtrampolines -Wfloat-equal
+         -Wdeclaration-after-statement -Wshadow -Wpointer-arith
+         -Wbad-function-cast -Wcast-align -Wwrite-strings -Wconversion
+         -Wno-sign-conversion -Wdate-time -Wjump-misses-init -Wlogical-op
+         -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes
+         -Wmissing-declarations -Wnormalized=nfc -Wpacked -Wredundant-decls
+         -Wrestrict -Wnested-externs -Winline -Wvla],
         [RRA_PROG_CC_FLAG(flag,
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])])
  AC_SUBST([WARNINGS_CFLAGS])])
