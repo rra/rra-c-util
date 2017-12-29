@@ -17,7 +17,12 @@ rra-c-util 7.0 (unreleased)
     Allow bail_krb5 and diag_krb5 TAP library functions to take either a
     krb5_error_code or a kadm5_ret_t as their second argument.
 
-    Fix new warnings in GCC 7.
+    Fix new warnings in GCC 7.  Add -Wformat-overflow=2,
+    -Wformat-truncation=2, -Walloc-zero, -Wduplicated-branches,
+    -Wconversion -Wno-sign-conversion, -Wmissing-declarations, -Wrestrict,
+    and -fstack-protector-strong -Wstack-protector to the default GCC
+    warning flags, and fix resulting issues.  Remove various warning
+    options that are now the default or implied by other flags.
 
     Fix all warnings from the Clang static analyzer.  Ensure that
     allocations in reallocarray replacements have a minimum size of 1 and

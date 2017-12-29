@@ -56,17 +56,16 @@ dnl This is based partly on personal preference and is a fairly aggressive set
 dnl of warnings.  Desirable CC warnings that can't be turned on due to other
 dnl problems:
 dnl
-dnl   -Wconversion       http://bugs.debian.org/488884 (htons warnings)
-dnl   -Wsign-conversion  Too much noise from ssize_t and flag variables
+dnl   -Wsign-conversion  Too many fiddly chnages for the benefit
 dnl   -Wstack-protector  Too many false positives from small buffers
 dnl
-dnl Last checked against gcc 6.1.0 (2016-09-25).  -D_FORTIFY_SOURCE=2 enables
+dnl Last checked against gcc 7.2.0 (2017-12-28).  -D_FORTIFY_SOURCE=2 enables
 dnl warn_unused_result attribute markings on glibc functions on Linux, which
 dnl catches a few more issues.  Add -O2 because gcc won't find some warnings
 dnl without optimization turned on.
 dnl
-dnl For Clang, we mostly just use -Weverything, but we have to disable some
-dnl of the warnings:
+dnl For Clang, we try to use -Weverything, but we have to disable some of the
+dnl warnings:
 dnl
 dnl   -Wcast-qual                     Some structs require casting away const
 dnl   -Wpadded                        Not an actual problem
@@ -78,9 +77,6 @@ dnl   -Wunreachable-code              Happens with optional compilation
 dnl   -Wunreachable-code-return       Other compilers get confused
 dnl   -Wunused-macros                 Often used on suppressed branches
 dnl   -Wused-but-marked-unused        Happens a lot with conditional code
-dnl
-dnl The warnings here are listed in the same order they're listed in the
-dnl "Preprocessor Options" and "Warning Options" chapters of the GCC manual.
 dnl
 dnl Sets WARNINGS_CFLAGS as a substitution variable.
 AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
@@ -96,16 +92,18 @@ AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])],
     [WARNINGS_CFLAGS="-g -O2 -D_FORTIFY_SOURCE=2 -Werror"
      m4_foreach_w([flag],
-        [-fstrict-overflow -fstrict-aliasing -Wcomments -Wendif-labels -Wall
-         -Wextra -Wformat=2 -Wformat-signedness -Wnull-dereference -Winit-self
-         -Wswitch-enum -Wuninitialized -Wstrict-overflow=5
-         -Wmissing-format-attribute -Wduplicated-cond -Wtrampolines
-         -Wfloat-equal -Wdeclaration-after-statement -Wshadow -Wpointer-arith
-         -Wbad-function-cast -Wcast-align -Wwrite-strings -Wdate-time
-         -Wjump-misses-init -Wfloat-conversion -Wlogical-op
-         -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes
-         -Wnormalized=nfc -Wpacked -Wredundant-decls -Wnested-externs -Winline
-         -Wvla],
+        [-fstrict-overflow -fstrict-aliasing -fstack-protector-strong
+         -Wall -Wextra -Wformat=2 -Wformat-overflow=2 -Wformat-signedness
+         -Wformat-truncation=2 -Wnull-dereference -Winit-self -Wswitch-enum
+         -Wstrict-overflow=5 -Wmissing-format-attribute -Walloc-zero
+         -Wduplicated-branches -Wduplicated-cond -Wtrampolines -Wfloat-equal
+         -Wdeclaration-after-statement -Wshadow -Wpointer-arith
+         -Wbad-function-cast -Wcast-align -Wwrite-strings
+         -Wconversion -Wno-sign-conversion -Wdate-time -Wjump-misses-init
+         -Wlogical-op -Wstrict-prototypes -Wold-style-definition
+         -Wmissing-prototypes -Wmissing-declarations -Wnormalized=nfc
+         -Wpacked -Wredundant-decls -Wrestrict -Wnested-externs -Winline
+         -Wvla -Wstack-protector],
         [RRA_PROG_CC_FLAG(flag,
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])])
  AC_SUBST([WARNINGS_CFLAGS])])
