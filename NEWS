@@ -37,6 +37,9 @@ rra-c-util 7.0 (unreleased)
     This character has to be replaced when creating cache variables.
     Thanks to Julien ÉLIE for the report.
 
+    Update valgrind configuration to exclude more false positives from MIT
+    and Heimdal libraries doing load-time allocations.
+
     Update to C TAP Harness 4.2:
 
     * Add is_blob and is_bool functions to the C test library.
