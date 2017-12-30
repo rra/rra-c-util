@@ -197,7 +197,7 @@ string_to_call(const char *name, enum group_type *group)
  * Given a PAM flag value without the leading PAM_, map it to the numeric
  * value of that flag.  Fails on any unrecognized string.
  */
-static enum group_type
+static int
 string_to_flag(const char *name)
 {
     size_t i;
