@@ -37,6 +37,11 @@ rra-c-util 7.0 (unreleased)
     This character has to be replaced when creating cache variables.
     Thanks to Julien ÉLIE for the report.
 
+    Update to C TAP Harness 4.2:
+
+    * Add is_blob and is_bool functions to the C test library.
+    * Avoid zero-length realloc allocations in breallocarray.
+
 rra-c-util 6.2 (2016-12-24)
 
     Correctly handle -Wno-* options in RRA_PROG_CC_FLAG.  GCC and Clang
