@@ -11,30 +11,30 @@ License: Expat
 
 Files: *
 Copyright: 1997, 2000-2002 Benjamin Sittler
-  2000-2002, 2004-2016 Russ Allbery <eagle@eyrie.org>
+  2000-2002, 2004-2017 Russ Allbery <eagle@eyrie.org>
   2001-2002, 2004-2014
     The Board of Trustees of the Leland Stanford Junior University
 License: Expat
 
 Files: Makefile.in
-Copyright: 1994-2014 Free Software Foundation, Inc.
+Copyright: 1994-2017 Free Software Foundation, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2015-2016 Russ Allbery <eagle@eyrie.org>
+  2015-2017 Russ Allbery <eagle@eyrie.org>
 License: FSF-unlimited and Expat
 
 Files: aclocal.m4
-Copyright: 1996-2016 Free Software Foundation, Inc.
+Copyright: 1996-2017 Free Software Foundation, Inc.
   2004 Scott James Remnant <scott@netsplit.com>
   2012-2015 Dan Nicholson <dbn.lists@gmail.com>
 License: FSF-unlimited, and GPL-2+ with Autoconf exception or Expat
 
 Files: build-aux/ar-lib build-aux/compile build-aux/depcomp
  build-aux/missing
-Copyright: 1996-2014 Free Software Foundation, Inc.
+Copyright: 1996-2017 Free Software Foundation, Inc.
 License: GPL-2+ with Autoconf exception or Expat
 
 Files: build-aux/config.guess build-aux/config.sub
-Copyright: 1992-2016 Free Software Foundation, Inc.
+Copyright: 1992-2017 Free Software Foundation, Inc.
 License: GPL-3+ with Autoconf exception or Expat
 
 Files: build-aux/install-sh
@@ -77,7 +77,7 @@ Files: configure.ac m4/apache.m4 m4/apr.m4 m4/aprutil.m4 m4/bdb.m4
  m4/openssl.m4 m4/pam-const.m4 m4/pcre.m4 m4/remctl.m4 m4/sasl.m4
  m4/snprintf.m4 m4/sqlite.m4 m4/systemd.m4 m4/tinycdb.m4 m4/vamacros.m4
  m4/zlib.m4
-Copyright: 1999-2001, 2003, 2007, 2013-2016 Russ Allbery <eagle@eyrie.org>
+Copyright: 1999-2001, 2003, 2007, 2013-2017 Russ Allbery <eagle@eyrie.org>
   2002-2014 The Board of Trustees of the Leland Stanford Junior University
   2007-2008 Markus Moeller
   2008-2010 Free Software Foundation, Inc.
@@ -133,7 +133,7 @@ Copyright: 1991, 1994-2003 The Internet Software Consortium and Rich Salz
   1998-2003 The Internet Software Consortium
   2004-2011, 2016 Internet Systems Consortium, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2014-2016 Russ Allbery <eagle@eyrie.org>
+  2014-2017 Russ Allbery <eagle@eyrie.org>
 License: ISC
  Permission to use, copy, modify, and distribute this software for any
  purpose with or without fee is hereby granted, provided that the above

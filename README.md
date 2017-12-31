@@ -1,6 +1,6 @@
-# rra-c-util 6.1
+# rra-c-util 7.0
 
-Copyright 2000, 2009-2010, 2013-2016 Russ Allbery <eagle@eyrie.org>.
+Copyright 2000, 2009-2010, 2013-2017 Russ Allbery <eagle@eyrie.org>.
 Copyright 2009-2014 The Board of Trustees of the Leland Stanford Junior
 University.  This software is distributed under a BSD-style license.
 Please see the section [License](#license) below for more information.
@@ -325,7 +325,7 @@ requests are gratefully reviewed and normally accepted.
 The rra-c-util package as a whole is covered by the following copyright
 statement and license:
 
-> Copyright 2000, 2009-2010, 2013-2016
+> Copyright 2000, 2009-2010, 2013-2017
 >     Russ Allbery <eagle@eyrie.org>
 >
 > Copyright 2009-2014

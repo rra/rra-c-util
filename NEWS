@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 7.0 (unreleased)
+rra-c-util 7.0 (2017-12-30)
 
     Drop the SA_LEN macro from portable/macros.h.  This macro came from
     INN's portability code, and can be useful when adding IPv6 support to
