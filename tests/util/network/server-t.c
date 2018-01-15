@@ -533,7 +533,7 @@ test_any_udp(void)
          * blindly trust the client IP address is correct, since it seems
          * unlikely we'll have a server code bug here.
          */
-        sin.sin_addr = ((struct sockaddr_in *) saddr)->sin_addr;
+        sin.sin_addr = ((struct sockaddr_in *) &addr)->sin_addr;
         ok(network_sockaddr_equal((struct sockaddr *) &sin, saddr),
            "...from correct family and port");
         buffer[13] = '\0';
