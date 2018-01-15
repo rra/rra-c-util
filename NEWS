@@ -2,6 +2,8 @@
 
 rra-c-util 7.1 (unreleased)
 
+    Fix misplaced va_end in the pam-util putil_log_failure function.
+
     Avoid testing the client IP address when accepting TCP and UDP client
     connections using network_bind_all.  Some hosts with unusual network
     configurations may rewrite client packets to appear to come from an IP
