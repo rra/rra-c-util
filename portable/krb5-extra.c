@@ -94,7 +94,7 @@ krb5_cc_get_full_name(krb5_context ctx, krb5_ccache ccache, char **out)
 const char *
 krb5_get_error_message(krb5_context ctx UNUSED, krb5_error_code code UNUSED)
 {
-    const char *msg = NULL;
+    const char *msg;
 
 # if defined(HAVE_KRB5_GET_ERROR_STRING)
     msg = krb5_get_error_string(ctx);

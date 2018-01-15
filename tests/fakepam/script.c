@@ -10,8 +10,8 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2016 Russ Allbery <eagle@eyrie.org>
- * Copyright 2011, 2012, 2014
+ * Copyright 2016, 2018 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2011-2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -68,7 +68,7 @@ like(const char *wanted, const char *seen, const char *format, ...)
 
     if (seen == NULL) {
         fflush(stderr);
-        printf("# wanted: /%s/\n#   seen: %s\n", wanted, seen);
+        printf("# wanted: /%s/\n#   seen: (null)\n", wanted);
         va_start(args, format);
         okv(0, format, args);
         va_end(args);

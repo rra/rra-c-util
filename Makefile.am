@@ -227,6 +227,12 @@ tests_util_xwrite_t_LDADD = tests/tap/libtap.a util/libutil.a \
 check-local: $(check_PROGRAMS)
 	cd tests && ./runtests -l '$(abs_top_srcdir)/tests/TESTS'
 
+# Used by maintainers to check the source code with cppcheck.
+check-cppcheck:
+	cd $(abs_top_srcdir) && cppcheck -q --error-exitcode=2	\
+	    --suppressions-list=tests/data/cppcheck.supp	\
+	    --enable=warning,performance,portability,style .
+
 # Used by maintainers to run the main test suite under valgrind.  Suppress
 # the xmalloc and pod-spelling tests because the former won't work properly
 # under valgrind (due to increased memory usage) and the latter is pointless

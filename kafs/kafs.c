@@ -17,7 +17,8 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2006, 2007, 2009
+ * Copyright 2018 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2006-2007, 2009
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -138,7 +139,9 @@ k_hasafs(void)
 {
     struct ViceIoctl iob;
     int rval, saved_errno, okay;
+#ifdef SIGSYS
     void (*saved_func)(int);
+#endif
 
     saved_errno = errno;
 

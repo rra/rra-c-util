@@ -10,7 +10,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2017 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017-2018 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011, 2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -560,7 +560,7 @@ static struct output *
 parse_output(FILE *script, const struct script_config *config)
 {
     char *line, *token, *message;
-    struct output *output = NULL;
+    struct output *output;
     int priority;
 
     output = output_new();

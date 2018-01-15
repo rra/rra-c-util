@@ -5,8 +5,8 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2005, 2013, 2016, 2017 Russ Allbery <eagle@eyrie.org>
- * Copyright 2009, 2010, 2011, 2012, 2013
+ * Copyright 2005, 2013, 2016-2018 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2009-2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -57,8 +57,7 @@ is_addr_compare(bool expected, const char *a, const char *b, const char *mask)
 int
 main(void)
 {
-    int flag, status;
-    socklen_t flaglen;
+    int status;
     struct addrinfo *ai4, *ai6;
     struct addrinfo hints;
     char addr[INET6_ADDRSTRLEN];
@@ -66,6 +65,10 @@ main(void)
     socket_type fd;
     static const char *port = "119";
     static const char *ipv6_addr = "FEDC:BA98:7654:3210:FEDC:BA98:7654:3210";
+#if defined(SO_REUSEADDR) || defined(IPV6_V6ONLY) || defined(IP_FREEBIND)
+    int flag;
+    socklen_t flaglen;
+#endif
 
 #ifndef HAVE_INET6
     skip_all("IPv6 not supported");

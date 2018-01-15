@@ -29,7 +29,7 @@ int
 main(void)
 {
     char buffer[3];
-    char *result = NULL;
+    char *result;
 
     plan(7);
 

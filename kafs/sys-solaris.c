@@ -14,7 +14,8 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2006, 2007, 2009, 2010
+ * Copyright 2018 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2006-2007, 2009-2010
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -74,7 +75,7 @@ static int
 k_syscall(long call, long param1, long param2, long param3, long param4,
           int *rval)
 {
-    int fd, code, oerrno, callnum;
+    int fd, oerrno, callnum;
 
 #ifdef _ILP32
     struct afssysargs syscall_data;
