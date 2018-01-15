@@ -1,5 +1,13 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 7.1 (unreleased)
+
+    Avoid testing the client IP address when accepting TCP and UDP client
+    connections using network_bind_all.  Some hosts with unusual network
+    configurations may rewrite client packets to appear to come from an IP
+    address other than 127.0.0.1, resulting in false positives in earlier
+    versions of this test.
+
 rra-c-util 7.0 (2017-12-30)
 
     Drop the SA_LEN macro from portable/socket.h.  This macro came from
