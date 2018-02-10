@@ -13,6 +13,9 @@ rra-c-util 7.1 (unreleased)
     Add maintainer check-cppcheck target to run cppcheck across the source
     base with a standard configuration.  Fix all issues found by cppcheck.
 
+    Skip more Autoconf and Automake files in the all_files function of
+    Test::RRA::Automake.
+
 rra-c-util 7.0 (2017-12-30)
 
     Drop the SA_LEN macro from portable/socket.h.  This macro came from
