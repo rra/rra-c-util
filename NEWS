@@ -16,6 +16,10 @@ rra-c-util 7.1 (unreleased)
     Skip more Autoconf and Automake files in the all_files function of
     Test::RRA::Automake.
 
+    Update to C TAP Harness 4.3:
+
+    * Add SPDX-License-Identifier headers to all substantial source files.
+
 rra-c-util 7.0 (2017-12-30)
 
     Drop the SA_LEN macro from portable/socket.h.  This macro came from
