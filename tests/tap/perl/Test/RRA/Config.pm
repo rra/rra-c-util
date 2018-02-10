@@ -4,6 +4,8 @@
 # configuration file to store some package-specific data.  This module loads
 # that configuration and provides the namespace for the configuration
 # settings.
+#
+# SPDX-License-Identifier: MIT
 
 package Test::RRA::Config;
 
@@ -220,3 +222,7 @@ The C TAP Harness test driver and libraries for TAP-based C testing are
 available from L<https://www.eyrie.org/~eagle/software/c-tap-harness/>.
 
 =cut
+
+# Local Variables:
+# copyright-at-end-flag: t
+# End:

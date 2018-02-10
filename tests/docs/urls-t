@@ -3,13 +3,13 @@
 # Check URLs in source files.
 #
 # Examine all source files in a distribution for bad URL patterns and report
-# on files that fail this check.  Currently, this just checks that all the
-# links to www.eyrie.org are https.
+# on files that fail this check.  Currently, this just checks for my old email
+# address and that all the links to www.eyrie.org are https.
 #
 # The canonical version of this file is maintained in the rra-c-util package,
 # which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
-# Copyright 2016 Russ Allbery <eagle@eyrie.org>
+# Copyright 2016, 2018 Russ Allbery <eagle@eyrie.org>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -28,6 +28,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
+#
+# SPDX-License-Identifier: MIT
 
 use 5.006;
 use strict;

@@ -10,6 +10,8 @@
 # All the functions here assume that C_TAP_BUILD and C_TAP_SOURCE are set in
 # the environment.  This is normally done via the C TAP Harness runtests
 # wrapper.
+#
+# SPDX-License-Identifier: MIT
 
 package Test::RRA::Automake;
 
@@ -480,3 +482,7 @@ The C TAP Harness test driver and libraries for TAP-based C testing are
 available from L<https://www.eyrie.org/~eagle/software/c-tap-harness/>.
 
 =cut
+
+# Local Variables:
+# copyright-at-end-flag: t
+# End:

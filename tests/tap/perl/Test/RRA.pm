@@ -5,6 +5,8 @@
 # by both C packages with Automake and by stand-alone Perl modules.  See
 # Test::RRA::Automake for additional functions specifically for C Automake
 # distributions.
+#
+# SPDX-License-Identifier: MIT
 
 package Test::RRA;
 
@@ -277,3 +279,7 @@ by the L<Lancaster
 Consensus|https://github.com/Perl-Toolchain-Gang/toolchain-site/blob/master/lancaster-consensus.md>.
 
 =cut
+
+# Local Variables:
+# copyright-at-end-flag: t
+# End:
