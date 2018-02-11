@@ -13,6 +13,13 @@ rra-c-util 7.1 (unreleased)
     Add maintainer check-cppcheck target to run cppcheck across the source
     base with a standard configuration.  Fix all issues found by cppcheck.
 
+    Switch the license of the essentially public domain source files from
+    a license statement I borrowed from the IETF to a more standard FSF
+    all-permissive license.
+
+    Add SPDX-License-Identifier headers to all substantial source files,
+    and add a test to check for them.
+
     Skip more Autoconf and Automake files in the all_files function of
     Test::RRA::Automake.
 

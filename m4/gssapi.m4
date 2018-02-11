@@ -22,12 +22,14 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2005, 2006, 2007, 2008, 2009, 2011, 2012
+dnl Copyright 2005-2009, 2011-2012
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
 dnl This file is free software; the authors give unlimited permission to copy
 dnl and/or distribute it, with or without modifications, as long as this
 dnl notice is preserved.
+dnl
+dnl SPDX-License-Identifier: FSFULLR
 
 dnl Headers to include when probing for Kerberos library properties.
 AC_DEFUN([RRA_INCLUDES_GSSAPI], [[

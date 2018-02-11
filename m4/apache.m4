@@ -22,6 +22,8 @@ dnl
 dnl This file is free software; the authors give unlimited permission to copy
 dnl and/or distribute it, with or without modifications, as long as this
 dnl notice is preserved.
+dnl
+dnl SPDX-License-Identifier: FSFULLR
 
 dnl Headers to include when probing for Apache properties.
 AC_DEFUN([RRA_INCLUDES_APACHE], [[

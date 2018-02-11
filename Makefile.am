@@ -1,11 +1,11 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <eagle@eyrie.org
-# Copyright 2015, 2016, 2017 Russ Allbery <eagle@eyrie.org>
-# Copyright 2008, 2009, 2010, 2011, 2012, 2013, 2014
+# Copyright 2015-2018 Russ Allbery <eagle@eyrie.org>
+# Copyright 2008-2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
-# See LICENSE for licensing terms.
+# SPDX-License-Identifier: MIT
 
 ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST = .gitignore .travis.yml LICENSE README.md bootstrap		    \
@@ -20,8 +20,8 @@ EXTRA_DIST = .gitignore .travis.yml LICENSE README.md bootstrap		    \
 	tests/data/generate-krb5-conf tests/data/krb5-pam.conf		    \
 	tests/data/perl.conf tests/data/perlcriticrc tests/data/perltidyrc  \
 	tests/data/valgrind.supp tests/docs/pod-spelling-t tests/docs/pod-t \
-	tests/docs/urls-t tests/fakepam/README tests/kafs/basic-t	    \
-	tests/perl/critic-t tests/perl/minimum-version-t		    \
+	tests/docs/spdx-license-t tests/docs/urls-t tests/fakepam/README    \
+	tests/kafs/basic-t tests/perl/critic-t tests/perl/minimum-version-t \
 	tests/perl/module-version-t tests/perl/strict-t			    \
 	tests/tap/kerberos.sh tests/tap/libtap.sh			    \
 	tests/tap/perl/Test/RRA.pm tests/tap/perl/Test/RRA/Automake.pm	    \

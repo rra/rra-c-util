@@ -16,7 +16,7 @@
  *
  * Written by Russ Allbery <eagle@eyrie.org>
  * Copyright 2017 Russ Allbery <eagle@eyrie.org>
- * Copyright 2006, 2007, 2009, 2010, 2011, 2012, 2013, 2014
+ * Copyright 2006-2007, 2009-2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -36,6 +36,8 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
+ *
+ * SPDX-License-Identifier: MIT
  */
 
 #include <config.h>

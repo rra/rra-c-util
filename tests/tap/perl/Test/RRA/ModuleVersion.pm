@@ -3,6 +3,8 @@
 # This module contains the common code for testing and updating Perl module
 # versions for consistency within a Perl module distribution and within a
 # larger package that contains both Perl modules and other code.
+#
+# SPDX-License-Identifier: MIT
 
 package Test::RRA::ModuleVersion;
 
@@ -293,3 +295,7 @@ This module is maintained in the rra-c-util package.  The current version
 is available from L<https://www.eyrie.org/~eagle/software/rra-c-util/>.
 
 =cut
+
+# Local Variables:
+# copyright-at-end-flag: t
+# End:
