@@ -39,7 +39,7 @@ use lib "$ENV{C_TAP_SOURCE}/tap/perl";
 
 use File::Basename qw(basename);
 use Test::More;
-use Test::RRA qw(skip_unless_author);
+use Test::RRA qw(skip_unless_automated);
 use Test::RRA::Automake qw(all_files automake_setup);
 
 # File name (the file without any directory component) and path patterns to
@@ -56,9 +56,9 @@ my @IGNORE_PATHS = (
 );
 ## use critic
 
-# Only run this test for the package author, since it doesn't indicate any
-# user-noticable flaw in the package itself.
-skip_unless_author('Documentation URL tests');
+# Only run this test during automated testing, since failure doesn't indicate
+# any user-noticable flaw in the package itself.
+skip_unless_automated('SPDX license identifier tests');
 
 # Set up Automake testing.
 automake_setup();
