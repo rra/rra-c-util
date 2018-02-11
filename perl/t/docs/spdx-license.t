@@ -40,19 +40,28 @@ use lib 't/lib';
 use File::Find qw(find);
 use Test::More;
 use Test::RRA qw(skip_unless_automated);
-use Test::RRA::Automake qw(all_files automake_setup);
 
 # File name (the file without any directory component) and path patterns to
 # skip for this check.
 ## no critic (RegularExpressions::ProhibitFixedStringMatches)
 my @IGNORE = (
-    qr{ \A LICENSE \z }xms,             # Generated file with no license itself
-    qr{ \A (Changes|NEWS|TODO) \z }xms, # Package license should be fine
-    qr{ \A README ( [.] .* )? \z }xms,  # Package license should be fine
-    qr{ [.] output \z }xms,             # Test data
+    qr{ \A Build \z }xms,                   # Generated file from Build.PL
+    qr{ \A LICENSE \z }xms,                 # Generated file, no license itself
+    qr{ \A (Changes|NEWS|TODO) \z }xms,     # Package license should be fine
+    qr{ \A MANIFEST ( [.] .* )? \z }xms,    # Package license should be fine
+    qr{ \A (MY)? META [.] .* }xms,          # Generated file, no license itself
+    qr{ \A README ( [.] .* )? \z }xms,      # Package license should be fine
+    qr{ [.] output \z }xms,                 # Test data
 );
 my @IGNORE_PATHS = (
-    qr{ \A docs/metadata/ }xms,         # Package license covers DocKnot data
+    qr{ \A [.] / [.] git/ }xms,              # Version control files
+    qr{ \A [.] /_build/ }xms,                # Module::Build metadata
+    qr{ \A [.] /blib/ }xms,                  # Perl build system artifacts
+    qr{ \A [.] /cover_db/ }xms,              # Artifacts from coverage testing
+    qr{ \A [.] /docs/metadata/ }xms,         # Package license should be fine
+    qr{ \A [.] /share/ }xms,                 # Package license should be fine
+    qr{ \A [.] /t/data .* /metadata/ }xms,   # Test metadata
+    qr{ \A [.] /t/data .* /output/ }xms,     # Test output
 );
 ## use critic
 
@@ -67,7 +76,7 @@ skip_unless_automated('SPDX license identifier tests');
 # Returns: undef
 sub check_file {
     my $filename = $_;
-    my $path = $File::Find::name;
+    my $path     = $File::Find::name;
 
     # Ignore files in the whitelist, binary files, and files under 1KB.  The
     # latter can be rolled up into the overall project license and the license
@@ -76,10 +85,14 @@ sub check_file {
         return if $filename =~ $pattern;
     }
     for my $pattern (@IGNORE_PATHS) {
-        return if $path =~ $pattern;
+        if ($path =~ $pattern) {
+            $File::Find::prune = 1;
+            return;
+        }
     }
-    return if !-T $path;
-    return if -s $path < 1024;
+    return if -d $filename;
+    return if !-T $filename;
+    return if -s $filename < 1024;
 
     # Scan the file.
     my ($saw_spdx, $skip_spdx);
