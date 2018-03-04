@@ -49,19 +49,20 @@ my @IGNORE = (
     qr{ \A LICENSE \z }xms,                 # Generated file, no license itself
     qr{ \A (Changes|NEWS|TODO) \z }xms,     # Package license should be fine
     qr{ \A MANIFEST ( [.] .* )? \z }xms,    # Package license should be fine
+    qr{ \A Makefile \z }xms,                # Generated file, no license itself
     qr{ \A (MY)? META [.] .* }xms,          # Generated file, no license itself
-    qr{ \A README ( [.] .* )? \z }xms,      # Package license should be fine
     qr{ [.] output \z }xms,                 # Test data
 );
 my @IGNORE_PATHS = (
-    qr{ \A [.] / [.] git/ }xms,              # Version control files
-    qr{ \A [.] /_build/ }xms,                # Module::Build metadata
-    qr{ \A [.] /blib/ }xms,                  # Perl build system artifacts
-    qr{ \A [.] /cover_db/ }xms,              # Artifacts from coverage testing
-    qr{ \A [.] /docs/metadata/ }xms,         # Package license should be fine
-    qr{ \A [.] /share/ }xms,                 # Package license should be fine
-    qr{ \A [.] /t/data .* /metadata/ }xms,   # Test metadata
-    qr{ \A [.] /t/data .* /output/ }xms,     # Test output
+    qr{ \A [.] / [.] git/ }xms,               # Version control files
+    qr{ \A [.] /_build/ }xms,                 # Module::Build metadata
+    qr{ \A [.] /blib/ }xms,                   # Perl build system artifacts
+    qr{ \A [.] /cover_db/ }xms,               # Artifacts from coverage testing
+    qr{ \A [.] /docs/metadata/ }xms,          # Package license should be fine
+    qr{ \A [.] /README ( [.] .* )? \z }xms,   # Package license should be fine
+    qr{ \A [.] /share/ }xms,                  # Package license should be fine
+    qr{ \A [.] /t/data .* /metadata/ }xms,    # Test metadata
+    qr{ \A [.] /t/data .* /output/ }xms,      # Test output
 );
 ## use critic
 
