@@ -33,6 +33,9 @@ rra-c-util 7.1 (unreleased)
     support and automatically check the valgrind log files for errors at
     the end of the test suite.
 
+    Add support for running remctld under valgrind when spawning it for
+    test cases.
+
     Update to C TAP Harness 4.3:
 
     * Add support for valgrind testing via test list options.
