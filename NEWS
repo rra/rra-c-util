@@ -29,6 +29,9 @@ rra-c-util 7.1 (unreleased)
 
     Update to C TAP Harness 4.3:
 
+    * Add support for valgrind testing via test list options.
+    * Report test failures as left and right, not wanted and seen.
+    * Fix is_string comparisons involving NULL pointers and "(null)".
     * Add SPDX-License-Identifier headers to all substantial source files.
 
 rra-c-util 7.0 (2017-12-30)
