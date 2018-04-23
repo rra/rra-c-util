@@ -49,6 +49,10 @@ dnl in core, so that test should always succed.
 RRA_PROG_PERL([5.006])
 RRA_PERL_CHECK_MODULE([File::Spec])
 
+dnl Only used for the test suite.
+AC_ARG_VAR([PATH_VALGRIND], [Path to valgrind for the test suite])
+AC_PATH_PROG([PATH_VALGRIND], [valgrind])
+
 dnl Probes for networking libraries.  Only needed for packages that make or
 dnl receive network connections or do DNS lookups.
 AC_SEARCH_LIBS([gethostbyname], [nsl])

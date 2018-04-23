@@ -43,6 +43,7 @@
 /tests/portable/snprintf-t
 /tests/portable/strndup-t
 /tests/runtests
+/tests/tmp/
 /tests/util/buffer-t
 /tests/util/concat-t
 /tests/util/fdflag-t

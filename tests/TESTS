@@ -1,39 +1,50 @@
+# Test list for rra-c-util.  -*- conf -*-
+#
+# Copyright 2008-2014, 2016, 2018 Russ Allbery <eagle@eyrie.org>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+#
+# SPDX-License-Identifier: FSFAP
+
 docs/pod
 docs/pod-spelling
 docs/spdx-license
 docs/urls
 kafs/basic
-kafs/haspag
-pam-util/args
-pam-util/fakepam
-pam-util/logging
-pam-util/options
-pam-util/vector
+kafs/haspag             valgrind
+pam-util/args           valgrind
+pam-util/fakepam        valgrind
+pam-util/logging        valgrind
+pam-util/options        valgrind
+pam-util/vector         valgrind
 perl/critic
 perl/minimum-version
 perl/module-version
 perl/strict
-portable/asprintf
-portable/daemon
-portable/getaddrinfo
-portable/getnameinfo
-portable/getopt
-portable/inet_aton
-portable/inet_ntoa
-portable/inet_ntop
-portable/mkstemp
-portable/reallocarray
+portable/asprintf       valgrind
+portable/daemon         valgrind
+portable/getaddrinfo    valgrind
+portable/getnameinfo    valgrind
+portable/getopt         valgrind
+portable/inet_aton      valgrind
+portable/inet_ntoa      valgrind
+portable/inet_ntop      valgrind
+portable/mkstemp        valgrind
+portable/reallocarray   valgrind
 portable/setenv
-portable/snprintf
-portable/strndup
-util/buffer
-util/fdflag
-util/messages
-util/messages-krb5
-util/network/addr-ipv4
-util/network/addr-ipv6
-util/network/client
-util/network/server
-util/vector
+portable/snprintf       valgrind
+portable/strndup        valgrind
+util/buffer             valgrind
+util/fdflag             valgrind
+util/messages           valgrind
+util/messages-krb5      valgrind
+util/network/addr-ipv4  valgrind
+util/network/addr-ipv6  valgrind
+util/network/client     valgrind
+util/network/server     valgrind
+util/vector             valgrind
 util/xmalloc
-util/xwrite
+util/xwrite             valgrind
