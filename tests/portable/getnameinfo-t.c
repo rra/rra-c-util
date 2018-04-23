@@ -120,20 +120,20 @@ main(void)
      * some well-known host and make sure that getnameinfo returns the same
      * results.  This may need to be skipped.
      */
-    hp = gethostbyname("www.google.com");
+    hp = gethostbyname("a.root-servers.net");
     if (hp == NULL)
-        skip_block(2, "cannot look up www.google.com");
+        skip_block(2, "cannot look up a.root-servers.net");
     else {
         memcpy(&sin.sin_addr, hp->h_addr, sizeof(sin.sin_addr));
         hp = gethostbyaddr((const void *) &sin.sin_addr, sizeof(sin.sin_addr),
                            AF_INET);
         if (hp == NULL || strchr(hp->h_name, '.') == NULL)
-            skip_block(2, "cannot reverse-lookup www.google.com");
+            skip_block(2, "cannot reverse-lookup a.root-servers.net");
         else {
             name = xstrdup(hp->h_name);
             status = test_getnameinfo(sa, sizeof(sin), node, sizeof(node),
                                       NULL, 0, 0);
-            is_int(0, status, "lookup of www.google.com IP address");
+            is_int(0, status, "lookup of a.root-servers.net IP address");
             is_string(name, node, "...matches gethostbyaddr");
             free(name);
         }
