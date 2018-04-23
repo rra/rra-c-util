@@ -17,6 +17,8 @@ rra-c-util 7.1 (unreleased)
     provided to the corresponding configure flag.  This was harmless but
     resulted in confusing output.
 
+    Define UINT32_MAX for systems that don't have it.
+
     Switch the license of the essentially public domain source files from
     a license statement I borrowed from the IETF to a more standard FSF
     all-permissive license.
