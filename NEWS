@@ -36,6 +36,9 @@ rra-c-util 7.1 (unreleased)
     Add support for running remctld under valgrind when spawning it for
     test cases.
 
+    Update perlcriticrc for Perl tests to disable a false positive on
+    postfix dereferencing and allow package variables in another module.
+
     Update to C TAP Harness 4.3:
 
     * Add support for valgrind testing via test list options.
