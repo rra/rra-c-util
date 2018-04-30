@@ -1,17 +1,17 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Comment: This file documents the copyright statements and licenses for
  every file in this package in a machine-readable format.  For a less
  detailed, higher-level overview, see README.
  .
  For any copyright year range specified as YYYY-ZZZZ in this file, the
  range specifies every single year in that closed interval.
-Copyright: 2000, 2009-2010, 2013-2017 Russ Allbery <eagle@eyrie.org>
+Copyright: 2000, 2009-2010, 2013-2018 Russ Allbery <eagle@eyrie.org>
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
 License: Expat
 
 Files: *
 Copyright: 1997, 2000-2002 Benjamin Sittler
-  2000-2002, 2004-2017 Russ Allbery <eagle@eyrie.org>
+  2000-2002, 2004-2018 Russ Allbery <eagle@eyrie.org>
   2001-2002, 2004-2014
     The Board of Trustees of the Leland Stanford Junior University
 License: Expat
@@ -19,7 +19,7 @@ License: Expat
 Files: Makefile.in
 Copyright: 1994-2017 Free Software Foundation, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2015-2017 Russ Allbery <eagle@eyrie.org>
+  2015-2018 Russ Allbery <eagle@eyrie.org>
 License: FSF-unlimited and Expat
 
 Files: aclocal.m4
@@ -34,7 +34,7 @@ Copyright: 1996-2017 Free Software Foundation, Inc.
 License: GPL-2+ with Autoconf exception or Expat
 
 Files: build-aux/config.guess build-aux/config.sub
-Copyright: 1992-2017 Free Software Foundation, Inc.
+Copyright: 1992-2018 Free Software Foundation, Inc.
 License: GPL-3+ with Autoconf exception or Expat
 
 Files: build-aux/install-sh
@@ -72,12 +72,12 @@ License: FSF-configure
 
 Files: configure.ac m4/apache.m4 m4/apr.m4 m4/aprutil.m4 m4/bdb.m4
  m4/clang.m4 m4/curl.m4 m4/gssapi.m4 m4/inet-ntoa.m4 m4/kadm5clnt.m4
- m4/kafs.m4 m4/krb5-config.m4 m4/krb5.m4 m4/ld-version.m4 m4/ldap.m4
- m4/lib-depends.m4 m4/lib-helper.m4 m4/lib-pathname.m4 m4/libevent.m4
- m4/openssl.m4 m4/pam-const.m4 m4/pcre.m4 m4/remctl.m4 m4/sasl.m4
- m4/snprintf.m4 m4/sqlite.m4 m4/systemd.m4 m4/tinycdb.m4 m4/vamacros.m4
- m4/zlib.m4
-Copyright: 1999-2001, 2003, 2007, 2013-2017 Russ Allbery <eagle@eyrie.org>
+ m4/kafs.m4 m4/krb5-config.m4 m4/krb5-pkinit.m4 m4/krb5.m4 m4/ld-version.m4
+ m4/ldap.m4 m4/lib-depends.m4 m4/lib-helper.m4 m4/lib-pathname.m4
+ m4/libevent.m4 m4/openssl.m4 m4/pam-const.m4 m4/pcre.m4 m4/remctl.m4
+ m4/sasl.m4 m4/snprintf.m4 m4/sqlite.m4 m4/systemd.m4 m4/tinycdb.m4
+ m4/vamacros.m4 m4/zlib.m4
+Copyright: 1999-2001, 2003, 2007, 2013-2018 Russ Allbery <eagle@eyrie.org>
   2002-2014 The Board of Trustees of the Leland Stanford Junior University
   2007-2008 Markus Moeller
   2008-2010 Free Software Foundation, Inc.
@@ -86,28 +86,19 @@ License: unlimited
  and/or distribute it, with or without modifications, as long as this
  notice is preserved.
 
-Files: docs/api/xmalloc.3 docs/api/xmalloc.pod tests/README
- tests/fakepam/README
-Copyright: 2010-2012, 2016 Russ Allbery <eagle@eyrie.org>
-  2012-2013 The Board of Trustees of the Leland Stanford Junior University
-License: all-permissive
- Copying and distribution of this file, with or without modification, are
- permitted in any medium without royalty provided the copyright notice and
- this notice are preserved.  This file is offered as-is, without any
- warranty.
-
-Files: kafs/sys-syscall.c pam-util/vector.c pam-util/vector.h
- portable/apr.h portable/asprintf.c portable/daemon.c portable/dummy.c
- portable/event-extra.c portable/event.h portable/getaddrinfo.c
- portable/getaddrinfo.h portable/getnameinfo.c portable/getnameinfo.h
- portable/gssapi-mech.c portable/gssapi.h portable/inet_aton.c
- portable/inet_ntoa.c portable/inet_ntop.c portable/issetugid.c
- portable/k_haspag.c portable/kadmin.h portable/krb5-extra.c
- portable/krb5.h portable/macros.h portable/mkstemp.c portable/pam.h
- portable/pam_syslog.c portable/pam_vsyslog.c portable/reallocarray.c
- portable/sd-daemon.h portable/setenv.c portable/seteuid.c
- portable/socket-unix.h portable/statvfs.h portable/stdbool.h
- portable/strndup.c portable/system.h portable/uio.h portable/winsock.c
+Files: docs/api/xmalloc.3 docs/api/xmalloc.pod kafs/sys-syscall.c
+ pam-util/vector.c pam-util/vector.h portable/apr.h portable/asprintf.c
+ portable/daemon.c portable/dummy.c portable/event-extra.c portable/event.h
+ portable/getaddrinfo.c portable/getaddrinfo.h portable/getnameinfo.c
+ portable/getnameinfo.h portable/gssapi-mech.c portable/gssapi.h
+ portable/inet_aton.c portable/inet_ntoa.c portable/inet_ntop.c
+ portable/issetugid.c portable/k_haspag.c portable/kadmin.h
+ portable/krb5-extra.c portable/krb5.h portable/macros.h portable/mkstemp.c
+ portable/pam.h portable/pam_syslog.c portable/pam_vsyslog.c
+ portable/reallocarray.c portable/sd-daemon.h portable/setenv.c
+ portable/seteuid.c portable/socket-unix.h portable/statvfs.h
+ portable/stdbool.h portable/strndup.c portable/system.h portable/uio.h
+ portable/winsock.c tests/data/cppcheck.supp tests/data/perltidyrc
  tests/pam-util/vector-t.c tests/portable/asprintf-t.c
  tests/portable/daemon-t.c tests/portable/getaddrinfo-t.c
  tests/portable/getnameinfo-t.c tests/portable/inet_aton-t.c
@@ -115,15 +106,14 @@ Files: kafs/sys-syscall.c pam-util/vector.c pam-util/vector.h
  tests/portable/mkstemp-t.c tests/portable/reallocarray-t.c
  tests/portable/setenv-t.c tests/portable/strndup-t.c tests/util/buffer-t.c
  tests/util/vector-t.c util/macros.h util/vector.c util/vector.h
-Copyright: no copyright notice, see License below
-License: rra-public-domain
- The authors hereby relinquish any claim to any copyright that they may
- have in this work, whether granted under contract or by operation of law
- or international treaty, and hereby commit to the public, at large, that
- they shall not, at any time in the future, seek to enforce any copyright
- in this work against any person or entity, or prevent any person or
- entity from copying, publishing, distributing or creating derivative
- works of this work.
+Copyright: 2000-2007, 2014-2018 Russ Allbery <eagle@eyrie.org>
+  2005-2014 The Board of Trustees of the Leland Stanford Junior University
+  2015 Julien ÉLIE <julien@trigofacile.com>
+License: all-permissive
+ Copying and distribution of this file, with or without modification, are
+ permitted in any medium without royalty provided the copyright notice and
+ this notice are preserved.  This file is offered as-is, without any
+ warranty.
 
 Files: m4/cc-flags.m4 m4/perl.m4 m4/socket-unix.m4 m4/socket.m4
  portable/socket.h util/buffer.c util/buffer.h util/fdflag.c util/fdflag.h
@@ -133,7 +123,7 @@ Copyright: 1991, 1994-2003 The Internet Software Consortium and Rich Salz
   1998-2003 The Internet Software Consortium
   2004-2011, 2016 Internet Systems Consortium, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2014-2017 Russ Allbery <eagle@eyrie.org>
+  2014-2018 Russ Allbery <eagle@eyrie.org>
 License: ISC
  Permission to use, copy, modify, and distribute this software for any
  purpose with or without fee is hereby granted, provided that the above
@@ -188,7 +178,7 @@ License: MIT-Kerberos
 
 Files: portable/snprintf.c tests/portable/snprintf-t.c
 Copyright: 1995 Patrick Powell
-  2000-2006 Russ Allbery <eagle@eyrie.org>
+  2000-2006, 2018 Russ Allbery <eagle@eyrie.org>
   2001 Hrvoje Niksic
   2009-2010 The Board of Trustees of the Leland Stanford Junior University
 License: Powell-snprintf
