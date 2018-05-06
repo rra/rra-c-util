@@ -3,7 +3,7 @@
 [![Build
 status](https://travis-ci.org/rra/rra-c-util.svg?branch=master)](https://travis-ci.org/rra/rra-c-util)
 
-Copyright 2000, 2009-2010, 2013-2017 Russ Allbery <eagle@eyrie.org>.
+Copyright 2000, 2009-2010, 2013-2018 Russ Allbery <eagle@eyrie.org>.
 Copyright 2009-2014 The Board of Trustees of the Leland Stanford Junior
 University.  This software is distributed under a BSD-style license.
 Please see the section [License](#license) below for more information.
@@ -75,20 +75,6 @@ other platform besides AIX or IRIX), or AFS libraries (on AIX and IRIX) is
 required.  AIX binaries with AFS PAG support may not run on AIX systems
 that do not have an AFS client installed due to how AIX handles system
 calls.
-
-To run the full test suite, and to use the Perl test support libraries,
-Perl 5.6.2 or later is required.  The following additional Perl modules
-will be used if present:
-
-* IPC::System::Simple
-* Test::MinimumVersion
-* Test::Perl::Critic
-* Test::Pod
-* Test::Spelling
-* Test::Strict
-
-All are available on CPAN.  Those tests will be skipped if the modules are
-not available.
 
 To bootstrap from a Git checkout, or if you change the Automake files and
 need to regenerate Makefile.in, you will need Automake 1.11 or later.  For
@@ -182,6 +168,20 @@ If a test fails, you can run a single test with verbose output via:
 
 Do this instead of running the test program directly since it will ensure
 that necessary environment variables are set up.
+
+To run the full test suite, and to use the Perl test support libraries,
+Perl 5.6.2 or later is required.  The following additional Perl modules
+will be used if present:
+
+* IPC::System::Simple
+* Test::MinimumVersion
+* Test::Perl::Critic
+* Test::Pod
+* Test::Spelling
+* Test::Strict
+
+All are available on CPAN.  Those tests will be skipped if the modules are
+not available.
 
 To enable tests that don't detect functionality problems but are used to
 sanity-check the release, set the environment variable `RELEASE_TESTING`
@@ -328,7 +328,7 @@ requests are gratefully reviewed and normally accepted.
 The rra-c-util package as a whole is covered by the following copyright
 statement and license:
 
-> Copyright 2000, 2009-2010, 2013-2017
+> Copyright 2000, 2009-2010, 2013-2018
 >     Russ Allbery <eagle@eyrie.org>
 >
 > Copyright 2009-2014
