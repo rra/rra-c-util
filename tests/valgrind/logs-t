@@ -69,8 +69,8 @@ for my $file (@logs) {
         unlink($path);
     } else {
         for my $line (@log) {
-            chomp($line);
-            diag($line);
+            print '# ', $line
+              or BAIL_OUT("cannot print to standard output: $!");
         }
     }
     ok($okay, $path);
