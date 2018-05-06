@@ -46,11 +46,11 @@ use Test::RRA::Automake qw(all_files automake_setup);
 # skip for this check.
 ## no critic (RegularExpressions::ProhibitFixedStringMatches)
 my @IGNORE = (
-    qr{ \A LICENSE \z }xms,            # Generated file with no license itself
-    qr{ \A (NEWS|THANKS|TODO) \z }xms, # Package license should be fine
-    qr{ \A README ( [.] .* )? \z }xms, # Package license should be fine
-    qr{ \A (Makefile|libtool) \z }xms, # Generated file
-    qr{ [.] output \z }xms,            # Test data
+    qr{ \A LICENSE \z }xms,             # Generated file with no license itself
+    qr{ \A (NEWS|THANKS|TODO) \z }xms,  # Package license should be fine
+    qr{ \A README ( [.] .* )? \z }xms,  # Package license should be fine
+    qr{ \A (Makefile|libtool) \z }xms,  # Generated file
+    qr{ [.] output \z }xms,             # Test data
 );
 my @IGNORE_PATHS = (
     qr{ \A docs/metadata/ }xms,                # Package license should be fine
@@ -103,10 +103,10 @@ sub check_file {
 
     # Scan the file.
     my ($saw_spdx, $skip_spdx);
-    open(my $file, '<', $path) or BAIL_OUT("Cannot open $path");
+    open(my $file, '<', $path) or BAIL_OUT("Cannot open $path: $!");
     while (defined(my $line = <$file>)) {
         if ($line =~ m{ Generated [ ] by [ ] libtool [ ] }xms) {
-            close($file);
+            close($file) or BAIL_OUT("Cannot close $path: $!");
             return;
         }
         if ($line =~ m{ \b SPDX-License-Identifier: \s+ \S+ }xms) {
@@ -118,7 +118,7 @@ sub check_file {
             last;
         }
     }
-    close($file) or BAIL_OUT("Cannot close $path");
+    close($file) or BAIL_OUT("Cannot close $path: $!");
     ok($saw_spdx || $skip_spdx, $path);
     return;
 }
