@@ -57,16 +57,23 @@ for my $file (@logs) {
     my $path = File::Spec->catfile('tests', 'tmp', 'valgrind', $file);
     open(my $log, '<', $path) or BAIL_OUT("cannot open $path: $!");
     my $okay = 1;
+    my @log;
     while (defined(my $line = <$log>)) {
+        push(@log, $line);
         if ($line =~ m{ ERROR [ ] SUMMARY: [ ] (\d+) [ ] errors }xms) {
             $okay = ($1 == 0);
         }
     }
     close($log) or BAIL_OUT("cannot close $path: $!");
-    ok($okay, $path);
     if ($okay) {
         unlink($path);
+    } else {
+        for my $line (@log) {
+            chomp($line);
+            diag($line);
+        }
     }
+    ok($okay, $path);
 }
 
 # Remove tests/tmp/valgrind if it's now empty.
