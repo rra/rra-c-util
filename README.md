@@ -1,4 +1,7 @@
-# rra-c-util 7.0
+# rra-c-util 7.1
+
+[![Build
+status](https://travis-ci.org/rra/rra-c-util.svg?branch=master)](https://travis-ci.org/rra/rra-c-util)
 
 Copyright 2000, 2009-2010, 2013-2017 Russ Allbery <eagle@eyrie.org>.
 Copyright 2009-2014 The Board of Trustees of the Leland Stanford Junior
@@ -86,13 +89,6 @@ will be used if present:
 
 All are available on CPAN.  Those tests will be skipped if the modules are
 not available.
-
-To enable tests that don't detect functionality problems but are used to
-sanity-check the release, set the environment variable `RELEASE_TESTING`
-to a true value.  To enable tests that may be sensitive to the local
-environment or that produce a lot of false positives without uncovering
-many problems, set the environment variable `AUTHOR_TESTING` to a true
-value.
 
 To bootstrap from a Git checkout, or if you change the Automake files and
 need to regenerate Makefile.in, you will need Automake 1.11 or later.  For
@@ -186,6 +182,13 @@ If a test fails, you can run a single test with verbose output via:
 
 Do this instead of running the test program directly since it will ensure
 that necessary environment variables are set up.
+
+To enable tests that don't detect functionality problems but are used to
+sanity-check the release, set the environment variable `RELEASE_TESTING`
+to a true value.  To enable tests that may be sensitive to the local
+environment or that produce a lot of false positives without uncovering
+many problems, set the environment variable `AUTHOR_TESTING` to a true
+value.
 
 ## Using This Code
 
@@ -354,6 +357,10 @@ licenses, all of which are compatible with the above general package
 license but which may require preservation of additional notices.  All
 required notices, and detailed information about the licensing of each
 file, are recorded in the LICENSE file.
+
+Files covered by a license with an assigned SPDX License Identifier
+include SPDX-License-Identifier tags to enable automated processing of
+license information.  See https://spdx.org/licenses/ for more information.
 
 For any copyright range specified by files in this package as YYYY-ZZZZ,
 the range specifies every single year in that closed interval.

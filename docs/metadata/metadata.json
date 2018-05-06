@@ -1,6 +1,6 @@
 {
     "name": "rra-c-util",
-    "version": "7.0",
+    "version": "7.1",
     "synopsis": "Russ Allbery's utility libraries for C",
     "maintainer": "Russ Allbery <eagle@eyrie.org>",
     "copyrights": [
@@ -36,6 +36,7 @@
         "browse": "https://git.eyrie.org/?p=devel/rra-c-util.git",
         "github": "rra/rra-c-util",
         "openhub": "https://www.openhub.net/p/rra-c-util",
+        "travis": "rra/rra-c-util",
     },
     "readme": {
         "sections": [

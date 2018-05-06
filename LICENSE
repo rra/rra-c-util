@@ -98,15 +98,16 @@ Files: docs/api/xmalloc.3 docs/api/xmalloc.pod kafs/sys-syscall.c
  portable/reallocarray.c portable/sd-daemon.h portable/setenv.c
  portable/seteuid.c portable/socket-unix.h portable/statvfs.h
  portable/stdbool.h portable/strndup.c portable/system.h portable/uio.h
- portable/winsock.c tests/data/cppcheck.supp tests/data/perltidyrc
- tests/pam-util/vector-t.c tests/portable/asprintf-t.c
- tests/portable/daemon-t.c tests/portable/getaddrinfo-t.c
- tests/portable/getnameinfo-t.c tests/portable/inet_aton-t.c
- tests/portable/inet_ntoa-t.c tests/portable/inet_ntop-t.c
- tests/portable/mkstemp-t.c tests/portable/reallocarray-t.c
- tests/portable/setenv-t.c tests/portable/strndup-t.c tests/util/buffer-t.c
- tests/util/vector-t.c util/macros.h util/vector.c util/vector.h
-Copyright: 2000-2007, 2014-2018 Russ Allbery <eagle@eyrie.org>
+ portable/winsock.c tests/README tests/TESTS tests/data/cppcheck.supp
+ tests/data/perltidyrc tests/fakepam/README tests/pam-util/vector-t.c
+ tests/portable/asprintf-t.c tests/portable/daemon-t.c
+ tests/portable/getaddrinfo-t.c tests/portable/getnameinfo-t.c
+ tests/portable/inet_aton-t.c tests/portable/inet_ntoa-t.c
+ tests/portable/inet_ntop-t.c tests/portable/mkstemp-t.c
+ tests/portable/reallocarray-t.c tests/portable/setenv-t.c
+ tests/portable/strndup-t.c tests/util/buffer-t.c tests/util/vector-t.c
+ util/macros.h util/vector.c util/vector.h
+Copyright: 2000-2018 Russ Allbery <eagle@eyrie.org>
   2005-2014 The Board of Trustees of the Leland Stanford Junior University
   2015 Julien ÉLIE <julien@trigofacile.com>
 License: all-permissive
