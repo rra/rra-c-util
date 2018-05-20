@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 #
-# Check URLs in source files.
+# Check for obsolete strings in source files.
 #
-# Examine all source files in a distribution for bad URL patterns and report
-# on files that fail this check.  Currently, this just checks for my old email
-# address and that all the links to www.eyrie.org are https.
+# Examine all source files in a distribution for obsolete strings and report
+# on files that fail this check.  This catches various transitions I want to
+# do globally in all my packages, like changing my personal URLs to https.
 #
 # The canonical version of this file is maintained in the rra-c-util package,
 # which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
@@ -35,65 +35,59 @@ use 5.006;
 use strict;
 use warnings;
 
-use lib "$ENV{C_TAP_SOURCE}/tap/perl";
+use lib 't/lib';
 
-use File::Basename qw(basename);
+use File::Find qw(find);
 use Test::More;
-use Test::RRA qw(skip_unless_author);
-use Test::RRA::Automake qw(all_files automake_setup);
+use Test::RRA qw(skip_unless_automated);
 
 # Bad patterns to search for.
 my @BAD_REGEXES = (qr{ http:// \S+ [.]eyrie[.]org }xms);
-my @BAD_STRINGS = qw(rra@stanford.edu);
+my @BAD_STRINGS = qw(rra@stanford.edu RRA_MAINTAINER_TESTS);
 
-# Only run this test for the package author, since it doesn't indicate any
-# user-noticable flaw in the package itself.
-skip_unless_author('Documentation URL tests');
+# File or directory names to always skip.
+my %SKIP = map { $_ => 1 } qw(.git _build blib cover_db obsolete-strings.t);
 
-# Set up Automake testing.
-automake_setup();
+# Only run this test during automated testing, since failure doesn't indicate
+# any user-noticable flaw in the package itself.
+skip_unless_automated('Obsolete strings tests');
 
-# Check a single file for one of the bad patterns.
-#
-# $path - Path to the file
-#
-# Returns: undef
+# Scan files for bad URL patterns.  This is meant to be run as the wanted
+# function from File::Find.
 sub check_file {
-    my ($path) = @_;
-    my $filename = basename($path);
+    my $filename = $_;
 
-    # Ignore this check itself (or the Perl version of it) and binary files.
-    return if ($filename eq 'urls.t' || $filename eq 'urls-t');
-    return if !-T $path;
+    # Ignore and prune any skipped files.  Ignore directories and binaries.
+    if ($SKIP{$filename}) {
+        $File::Find::prune = 1;
+        return;
+    }
+    return if -d $filename;
+    return if !-T $filename;
 
     # Scan the file.
-    open(my $fh, '<', $path) or BAIL_OUT("Cannot open $path");
+    open(my $fh, '<', $filename) or BAIL_OUT("Cannot open $File::Find::name");
     while (defined(my $line = <$fh>)) {
         for my $regex (@BAD_REGEXES) {
             if ($line =~ $regex) {
-                ok(0, "$path contains $regex");
-                close($fh) or BAIL_OUT("Cannot close $path");
+                ok(0, "$File::Find::name contains $regex");
+                close($fh) or BAIL_OUT("Cannot close $File::Find::name");
                 return;
             }
         }
         for my $string (@BAD_STRINGS) {
             if (index($line, $string) != -1) {
-                ok(0, "$path contains $string");
-                close($fh) or BAIL_OUT("Cannot close $path");
+                ok(0, "$File::Find::name contains $string");
+                close($fh) or BAIL_OUT("Cannot close $File::Find::name");
                 return;
             }
         }
     }
-    close($fh) or BAIL_OUT("Cannot close $path");
-    ok(1, $path);
+    close($fh) or BAIL_OUT("Cannot close $File::Find::name");
+    ok(1, $File::Find::name);
     return;
 }
 
-# Scan every file for any of the bad patterns or strings.  We don't declare a
-# plan since we skip a lot of files and don't want to precalculate the file
-# list.
-my @paths = all_files();
-for my $path (@paths) {
-    check_file($path);
-}
+# Use File::Find to scan all files from the top of the directory.
+find(\&check_file, q{.});
 done_testing();

@@ -2,6 +2,11 @@
 
 rra-c-util 7.2 (unreleased)
 
+    Rename the docs/urls test (for both Perl and non-Perl packages) to
+    style/obsolete-strings, which more correctly reflects its purpose.
+    Add a check for RRA_MAINTAINER_TESTS, which has been replaced by
+    Lancaster Consensus environment variables.
+
     Add more exclusions to the Perl docs/spdx-license.t test.
 
 rra-c-util 7.1 (2018-05-06)

@@ -12,7 +12,6 @@
 docs/pod
 docs/pod-spelling
 docs/spdx-license
-docs/urls
 kafs/basic
 kafs/haspag             valgrind
 pam-util/args           valgrind
@@ -37,6 +36,7 @@ portable/reallocarray   valgrind
 portable/setenv
 portable/snprintf       valgrind
 portable/strndup        valgrind
+style/obsolete-strings
 util/buffer             valgrind
 util/fdflag             valgrind
 util/messages           valgrind
