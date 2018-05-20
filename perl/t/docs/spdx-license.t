@@ -47,11 +47,13 @@ use Test::RRA qw(skip_unless_automated);
 my @IGNORE = (
     qr{ \A Build ( [.] .* )? \z }ixms,      # Generated file from Build.PL
     qr{ \A LICENSE \z }xms,                 # Generated file, no license itself
-    qr{ \A (Changes|NEWS|TODO) \z }xms,     # Package license should be fine
+    qr{ \A (Changes|NEWS|THANKS) \z }xms,   # Package license should be fine
+    qr{ \A TODO \z }xms,                    # Package license should be fine
     qr{ \A MANIFEST ( [.] .* )? \z }xms,    # Package license should be fine
     qr{ \A Makefile \z }xms,                # Generated file, no license itself
     qr{ \A (MY)? META [.] .* }xms,          # Generated file, no license itself
     qr{ [.] output \z }xms,                 # Test data
+    qr{ pod2htm . [.] tmp \z }xms,          # Windows pod2html output
 );
 my @IGNORE_PATHS = (
     qr{ \A [.] / [.] git/ }xms,               # Version control files

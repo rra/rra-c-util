@@ -1,5 +1,9 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 7.2 (unreleased)
+
+    Add more exclusions to the Perl docs/spdx-license.t test.
+
 rra-c-util 7.1 (2018-05-06)
 
     Fix misplaced va_end in the pam-util putil_log_failure function.
