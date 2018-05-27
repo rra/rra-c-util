@@ -2,6 +2,15 @@
 
 rra-c-util 7.2 (unreleased)
 
+    Add new Python Autoconf macros RRA_PROG_PYTHON, RRA_PYTHON_MODULE, and
+    RRA_LIB_PYTHON written by Julien ÉLIE and based on earlier work in
+    INN.  The first finds Python through an environment variable or a PATH
+    search, checking for a sufficiently high version, and supports
+    requiring Python 2, Python 3, or either.  The second checks whether a
+    Python module can be loaded by the discovered Python interpreter, and
+    the third reports the flags required to link with the Python library
+    to embed it in another program.
+
     The Autoconf RRA_PROG_PERL macro now also makes PERL a substitution
     variable.  Thanks, Julien ÉLIE.
 

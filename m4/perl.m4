@@ -5,16 +5,22 @@ dnl
 dnl RRA_PROG_PERL
 dnl     Checks for a specific Perl version and sets the PERL environment
 dnl     variable to the full path, or aborts the configure run if the version
-dnl     of Perl is not new enough or couldn't be found.  Also sets up PERL as
-dnl     a substitution variable.
+dnl     of Perl is not new enough or couldn't be found.  Marks PERL as a
+dnl     substitution variable.
 dnl
 dnl RRA_PERL_CHECK_MODULE
-dnl     Checks for the existence of a Perl module and runs provided code based
-dnl     on whether or not it was found.
+dnl     Checks for the existence of a Perl module.  Runs the second argument
+dnl     if it is present and the third if it is not.
 dnl
 dnl RRA_LIB_PERL
 dnl     Determines the flags required for embedding Perl and sets
 dnl     PERL_CPPFLAGS and PERL_LIBS.
+dnl
+dnl RRA_PROG_PERL should generally be called before the other two macros.  If
+dnl it isn't, the PERL environment variable must be set in some other way.
+dnl (It cannot be run automatically via dependencies because it takes a
+dnl mandatory minimum version argument, which should be provided by the
+dnl calling configure script.)
 dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.

@@ -49,6 +49,12 @@ dnl in core, so that test should always succeed.
 RRA_PROG_PERL([5.006])
 RRA_PERL_CHECK_MODULE([File::Spec])
 
+dnl Probe for Python.  This isn't used by this package at all, but probe for
+dnl it anyway to exercise the macros.  The Python module is included in Python
+dnl core, so that test should always succeed.
+RRA_PROG_PYTHON([2.3], [3.0])
+RRA_PYTHON_CHECK_MODULE([distutils])
+
 dnl Only used for the test suite.
 AC_ARG_VAR([PATH_VALGRIND], [Path to valgrind for the test suite])
 AC_PATH_PROG([PATH_VALGRIND], [valgrind])
@@ -173,6 +179,9 @@ AC_CHECK_HEADER([regex.h], [AC_CHECK_FUNCS([regcomp])])
 dnl Probe for the flags to embed Perl.  This isn't used by the package, but
 dnl this ensures that we exercise the macros.
 RRA_LIB_PERL
+
+dnl Likewise for Python.
+RRA_LIB_PYTHON
 
 dnl Run other optional library probing checks, even though they're unused by
 dnl the rra-c-util code itself, so that they're exercised during the
