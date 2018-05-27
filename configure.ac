@@ -45,7 +45,7 @@ AC_PROG_RANLIB
 
 dnl Probe for Perl.  This isn't used by this package except in tests, but
 dnl probe for it anyway to exercise the macros.  The Perl module is included
-dnl in core, so that test should always succed.
+dnl in core, so that test should always succeed.
 RRA_PROG_PERL([5.006])
 RRA_PERL_CHECK_MODULE([File::Spec])
 

@@ -2,6 +2,9 @@
 
 rra-c-util 7.2 (unreleased)
 
+    The Autoconf RRA_PROG_PERL macro now also makes PERL a substitution
+    variable.  Thanks, Julien ÉLIE.
+
     Rename the docs/urls test (for both Perl and non-Perl packages) to
     style/obsolete-strings, which more correctly reflects its purpose.
     Add a check for RRA_MAINTAINER_TESTS, which has been replaced by

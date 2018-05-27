@@ -5,7 +5,8 @@ dnl
 dnl RRA_PROG_PERL
 dnl     Checks for a specific Perl version and sets the PERL environment
 dnl     variable to the full path, or aborts the configure run if the version
-dnl     of Perl is not new enough or couldn't be found.
+dnl     of Perl is not new enough or couldn't be found.  Also sets up PERL as
+dnl     a substitution variable.
 dnl
 dnl RRA_PERL_CHECK_MODULE
 dnl     Checks for the existence of a Perl module and runs provided code based
@@ -18,7 +19,7 @@ dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
-dnl Copyright 2016 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2016, 2018 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2006, 2009, 2011 Internet Systems Consortium, Inc. ("ISC")
 dnl Copyright 1998-2003 The Internet Software Consortium
 dnl
@@ -53,7 +54,8 @@ AC_DEFUN([RRA_PROG_PERL],
                  ac_path_PERL_found=:])])])
      AS_IF([test x"$ac_cv_path_PERL" = x],
          [AC_MSG_ERROR([Perl $1 or greater is required])])
-     PERL="$ac_cv_path_PERL"])])
+     PERL="$ac_cv_path_PERL"
+     AC_SUBST([PERL])])])
 
 dnl Check whether a given Perl module can be loaded.  Runs the second argument
 dnl if it can, and the third argument if it cannot.
