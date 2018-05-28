@@ -131,4 +131,14 @@ AC_DEFUN([RRA_LIB_PYTHON],
  py_libpython=`echo $py_ldlibrary | sed "s/^lib//" | sed "s/\.@<:@a-z@:>@*$//"`
  PYTHON_LIBS="-L$py_libdir -l$py_libpython $py_linkage"
  PYTHON_LIBS=`echo $PYTHON_LIBS | sed -e 's/[ \\t]*/ /g'`
- AC_MSG_RESULT([$PYTHON_LIBS])])
+ AC_MSG_RESULT([$PYTHON_LIBS])
+ rra_python_save_CPPFLAGS="$CPPFLAGS"
+ rra_python_save_LIBS="$LIBS"
+ CPPFLAGS="$PYTHON_CPPFLAGS $CPPFLAGS"
+ LIBS="$PYTHON_LIBS $LIBS"
+ AC_CHECK_HEADER([Python.h], [],
+    [AC_MSG_FAILURE([unable to compile with Python.h])])
+ AC_CHECK_FUNC([Py_Initialize], [],
+    [AC_MSG_FAILURE([unable to link with Python library])])
+ CPPFLAGS="$rra_python_save_CPPFLAGS"
+ LIBS="$rra_python_save_LIBS"])

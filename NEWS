@@ -14,6 +14,11 @@ rra-c-util 7.2 (unreleased)
     The Autoconf RRA_PROG_PERL macro now also makes PERL a substitution
     variable.  Thanks, Julien ÉLIE.
 
+    The Autoconf RRA_LIB_PERL macro now checks for the EXTERN.h header and
+    for perl_alloc in the libperl library, to double-check that the
+    discovered linkage information actually works.  (It may not on, for
+    example, a Debian host without libperl-dev installed.)
+
     Rename the docs/urls test (for both Perl and non-Perl packages) to
     style/obsolete-strings, which more correctly reflects its purpose.
     Add a check for RRA_MAINTAINER_TESTS, which has been replaced by
