@@ -31,6 +31,11 @@ rra-c-util 7.2 (unreleased)
     Add a check for RRA_MAINTAINER_TESTS, which has been replaced by
     Lancaster Consensus environment variables.
 
+    Fix updating of Perl module versions using the new-style package
+    syntax by tests/perl/module-version-t -u.  Previous versions were
+    quoting two-part version numbers, but this is a syntax error when the
+    version is set with the package directive.
+
     Add more exclusions to the Perl docs/spdx-license.t test.
 
 rra-c-util 7.1 (2018-05-06)
