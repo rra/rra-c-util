@@ -19,6 +19,13 @@ rra-c-util 7.2 (unreleased)
     discovered linkage information actually works.  (It may not on, for
     example, a Debian host without libperl-dev installed.)
 
+    The Autoconf RRA_LIB_BDB, RRA_LIB_OPENSSL, RRA_LIB_SASL, and
+    RRA_LIB_ZLIB macros, and their _OPTIONAL counterparts, all now check
+    that the library's key header can be found as well as the library.
+    The _OPTIONAL versions treat the library as missing if the header is
+    not present; the non-optional versions will abort configure with an
+    error if the header is not present.
+
     Rename the docs/urls test (for both Perl and non-Perl packages) to
     style/obsolete-strings, which more correctly reflects its purpose.
     Add a check for RRA_MAINTAINER_TESTS, which has been replaced by

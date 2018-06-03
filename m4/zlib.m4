@@ -23,6 +23,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2018 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -46,10 +47,13 @@ dnl says to fail if the zlib library could not be found.
 AC_DEFUN([_RRA_LIB_ZLIB_INTERNAL],
 [RRA_LIB_HELPER_PATHS([ZLIB])
  RRA_LIB_ZLIB_SWITCH
- AC_CHECK_LIB([z], [compress],
-    [ZLIB_LIBS="-lz"],
+ AC_CHECK_HEADER([zlib.h],
+    [AC_CHECK_LIB([z], [compress],
+        [ZLIB_LIBS="-lz"],
+        [AS_IF([test x"$1" = xtrue],
+            [AC_MSG_ERROR([cannot find usable zlib library])])])],
     [AS_IF([test x"$1" = xtrue],
-        [AC_MSG_ERROR([cannot find usable zlib library])])])
+        [AC_MSG_ERROR([cannot find usable zlib header])])])
  RRA_LIB_ZLIB_RESTORE])
 
 dnl The main macro for packages with mandatory zlib support.
@@ -68,6 +72,7 @@ AC_DEFUN([RRA_LIB_ZLIB_OPTIONAL],
     [AS_IF([test x"$rra_use_ZLIB" = xtrue],
         [_RRA_LIB_ZLIB_INTERNAL([true])],
         [_RRA_LIB_ZLIB_INTERNAL([false])])])
- AS_IF([test x"$ZLIB_LIBS" != x],
+ AS_IF([test x"$ZLIB_LIBS" = x],
+    [RRA_LIB_HELPER_VAR_CLEAR([ZLIB])],
     [rra_use_ZLIB=true
      AC_DEFINE([HAVE_ZLIB], 1, [Define if libz is available.])])])

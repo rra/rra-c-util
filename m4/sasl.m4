@@ -25,6 +25,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2018 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -48,10 +49,13 @@ dnl "true", says to fail if the Cyrus SASL library could not be found.
 AC_DEFUN([_RRA_LIB_SASL_INTERNAL],
 [RRA_LIB_HELPER_PATHS([SASL])
  RRA_LIB_SASL_SWITCH
- AC_CHECK_LIB([sasl2], [sasl_getprop],
-    [SASL_LIBS="-lsasl2"],
+ AC_CHECK_HEADER([sasl/sasl.h],
+    [AC_CHECK_LIB([sasl2], [sasl_getprop],
+        [SASL_LIBS="-lsasl2"],
+        [AS_IF([test x"$1" = xtrue],
+            [AC_MSG_ERROR([cannot find usable Cyrus SASL library])])])],
     [AS_IF([test x"$1" = xtrue],
-        [AC_MSG_ERROR([cannot find usable Cyrus SASL library])])])
+        [AC_MSG_ERROR([cannot find usable Cyrus SASL header])])])
  RRA_LIB_SASL_RESTORE])
 
 dnl The main macro for packages with mandatory Cyrus SASL support.
@@ -70,6 +74,7 @@ AC_DEFUN([RRA_LIB_SASL_OPTIONAL],
     [AS_IF([test x"$rra_use_SASL" = xtrue],
         [_RRA_LIB_SASL_INTERNAL([true])],
         [_RRA_LIB_SASL_INTERNAL([false])])])
- AS_IF([test x"$SASL_LIBS" != x],
+ AS_IF([test x"$SASL_LIBS" = x],
+    [RRA_LIB_HELPER_VAR_CLEAR([SASL])],
     [rra_use_SASL=true
      AC_DEFINE([HAVE_SASL], 1, [Define if libsasl2 is available.])])])

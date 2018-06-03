@@ -29,6 +29,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2018 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -52,10 +53,13 @@ dnl if "true", says to fail if the Berkeley DB library could not be found.
 AC_DEFUN([_RRA_LIB_BDB_INTERNAL],
 [RRA_LIB_HELPER_PATHS([BDB])
  RRA_LIB_BDB_SWITCH
- AC_CHECK_LIB([db], [db_create],
-    [BDB_LIBS="-ldb"],
+ AC_CHECK_HEADER([db.h],
+    [AC_CHECK_LIB([db], [db_create],
+        [BDB_LIBS="-ldb"],
+        [AS_IF([test x"$1" = xtrue],
+            [AC_MSG_ERROR([cannot find usable Berkeley DB library])])])],
     [AS_IF([test x"$1" = xtrue],
-        [AC_MSG_ERROR([cannot find usable Berkeley DB library])])])
+        [AC_MSG_ERROR([cannot find usable Berkeley DB header])])])
  RRA_LIB_BDB_RESTORE])
 
 dnl The main macro for packages with mandatory Berkeley DB support.
@@ -74,7 +78,8 @@ AC_DEFUN([RRA_LIB_BDB_OPTIONAL],
     [AS_IF([test x"$rra_use_BDB" = xtrue],
         [_RRA_LIB_BDB_INTERNAL([true])],
         [_RRA_LIB_BDB_INTERNAL([false])])])
- AS_IF([test x"$BDB_LIBS" != x],
+ AS_IF([test x"$BDB_LIBS" = x],
+    [RRA_LIB_HELPER_VAR_CLEAR([BDB])],
     [rra_use_BDB=true
      AC_DEFINE([HAVE_BDB], 1, [Define if libdb is available.])])])
 
