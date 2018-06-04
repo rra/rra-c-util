@@ -1,6 +1,6 @@
 {
     "name": "rra-c-util",
-    "version": "7.1",
+    "version": "7.2",
     "synopsis": "Russ Allbery's utility libraries for C",
     "maintainer": "Russ Allbery <eagle@eyrie.org>",
     "copyrights": [

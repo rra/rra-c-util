@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 7.2 (unreleased)
+rra-c-util 7.2 (2018-06-03)
 
     Add new Python Autoconf macros RRA_PROG_PYTHON, RRA_PYTHON_MODULE, and
     RRA_LIB_PYTHON written by Julien ÉLIE and based on earlier work in

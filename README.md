@@ -1,4 +1,4 @@
-# rra-c-util 7.1
+# rra-c-util 7.2
 
 [![Build
 status](https://travis-ci.org/rra/rra-c-util.svg?branch=master)](https://travis-ci.org/rra/rra-c-util)
@@ -147,7 +147,8 @@ be used to specify the exact paths, overriding any `krb5-config` results.
 
 Pass `--enable-silent-rules` to configure for a quieter build (similar to
 the Linux kernel).  Use `make warnings` instead of `make` to build with
-full GCC compiler warnings (requires a relatively current version of GCC).
+full GCC compiler warnings (requires either GCC or Clang and may require a
+relatively current version of the compiler).
 
 Installing rra-c-util is not normally done.  Instead, see the section on
 using this code below.

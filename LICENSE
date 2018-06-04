@@ -116,14 +116,15 @@ License: all-permissive
  this notice are preserved.  This file is offered as-is, without any
  warranty.
 
-Files: m4/cc-flags.m4 m4/perl.m4 m4/socket-unix.m4 m4/socket.m4
- portable/socket.h util/buffer.c util/buffer.h util/fdflag.c util/fdflag.h
- util/messages.c util/messages.h util/network.c util/network.h
- util/xmalloc.c util/xmalloc.h util/xwrite.c util/xwrite.h
+Files: m4/cc-flags.m4 m4/perl.m4 m4/python.m4 m4/socket-unix.m4
+ m4/socket.m4 portable/socket.h util/buffer.c util/buffer.h util/fdflag.c
+ util/fdflag.h util/messages.c util/messages.h util/network.c
+ util/network.h util/xmalloc.c util/xmalloc.h util/xwrite.c util/xwrite.h
 Copyright: 1991, 1994-2003 The Internet Software Consortium and Rich Salz
   1998-2003 The Internet Software Consortium
   2004-2011, 2016 Internet Systems Consortium, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
+  2009, 2011, 2015, 2018 Julien ÉLIE <julien@trigofacile.com>
   2014-2018 Russ Allbery <eagle@eyrie.org>
 License: ISC
  Permission to use, copy, modify, and distribute this software for any
