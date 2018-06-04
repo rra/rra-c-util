@@ -60,6 +60,7 @@ my @IGNORE_PATHS = (
     qr{ \A [.] /_build/ }xms,                 # Module::Build metadata
     qr{ \A [.] /blib/ }xms,                   # Perl build system artifacts
     qr{ \A [.] /cover_db/ }xms,               # Artifacts from coverage testing
+    qr{ \A [.] /debian/ }xms,                 # Found in debian/* branches
     qr{ \A [.] /docs/metadata/ }xms,          # Package license should be fine
     qr{ \A [.] /README ( [.] .* )? \z }xms,   # Package license should be fine
     qr{ \A [.] /share/ }xms,                  # Package license should be fine
