@@ -36,7 +36,7 @@ rra-c-util 7.2 (unreleased)
     quoting two-part version numbers, but this is a syntax error when the
     version is set with the package directive.
 
-    Add more exclusions to the Perl docs/spdx-license.t test.
+    Add more exclusions to the spdx-license tests.
 
 rra-c-util 7.1 (2018-05-06)
 
