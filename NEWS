@@ -1,5 +1,13 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 7.3 (unreleased)
+
+    Fix RRA_LIB_KRB5_OPTIONAL probing in the --enable-reduced-depends case
+    when linking with libkrb5 is not possible but libcom_err is present.
+    The probes for com_err were previously not skipped, resulting in a
+    non-empty KRB5_LIBS containing only -lcom_err, which incorrectly
+    caused the macro to indicate that Kerberos libraries were present.
+
 rra-c-util 7.2 (2018-06-03)
 
     Add new Python Autoconf macros RRA_PROG_PYTHON, RRA_PYTHON_MODULE, and
