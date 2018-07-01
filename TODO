@@ -14,6 +14,8 @@ General:
 
  * Use krb5_free_string for appdefaults code.
 
+ * Support clean compilation with GCC -Wsign-conversion.
+
 Autoconf probes:
 
  * Check the usability of headers in library probes and treat the library
