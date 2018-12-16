@@ -91,9 +91,7 @@ sub check_file {
     my ($path) = @_;
     my $filename = basename($path);
 
-    # Ignore files in the whitelist, binary files, and files under 1KB.  The
-    # latter can be rolled up into the overall project license and the license
-    # notice may be a substantial portion of the file size.
+    # Ignore files in the whitelist and binary files.
     for my $pattern (@IGNORE) {
         return if $filename =~ $pattern;
     }
@@ -101,15 +99,17 @@ sub check_file {
         return if $path =~ $pattern;
     }
     return if !-T $path;
-    return if -s $path < 1024;
 
     # Scan the file.
-    my ($saw_spdx, $skip_spdx);
+    my ($saw_legacy_notice, $saw_spdx, $skip_spdx);
     open(my $file, '<', $path) or BAIL_OUT("Cannot open $path: $!");
     while (defined(my $line = <$file>)) {
         if ($line =~ m{ Generated [ ] by [ ] libtool [ ] }xms) {
             close($file) or BAIL_OUT("Cannot close $path: $!");
             return;
+        }
+        if ($line =~ m{ \b See \s+ LICENSE \s+ for \s+ licensing }xms) {
+            $saw_legacy_notice = 1;
         }
         if ($line =~ m{ \b SPDX-License-Identifier: \s+ \S+ }xms) {
             $saw_spdx = 1;
@@ -121,7 +121,16 @@ sub check_file {
         }
     }
     close($file) or BAIL_OUT("Cannot close $path: $!");
-    ok($saw_spdx || $skip_spdx, $path);
+
+    # If there is a legacy license notice, report a failure regardless of file
+    # size.  Otherwise, skip files under 1KB.  They can be rolled up into the
+    # overall project license and the license notice may be a substantial
+    # portion of the file size.
+    if ($saw_legacy_notice) {
+        ok(!$saw_legacy_notice, "$path has legacy license notice");
+    } else {
+        ok($saw_spdx || $skip_spdx || -s $path < 1024, $path);
+    }
     return;
 }
 
