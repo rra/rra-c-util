@@ -22,6 +22,11 @@ rra-c-util 8.0 (unreleased)
     skipped by the test to ensure that all license notices are replaced
     with the new SPDX notices.
 
+    Update to C TAP Harness 4.4:
+
+    * New test_cleanup_register_with_data function.
+    * Fixed malloc error checking in bstrndup.
+
 rra-c-util 7.2 (2018-06-03)
 
     Add new Python Autoconf macros RRA_PROG_PYTHON, RRA_PYTHON_MODULE, and
