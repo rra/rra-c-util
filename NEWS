@@ -14,9 +14,13 @@ rra-c-util 8.0 (unreleased)
     non-empty KRB5_LIBS containing only -lcom_err, which incorrectly
     caused the macro to indicate that Kerberos libraries were present.
 
-    In tests/docs/spdx-license-t, check for my legacy "see LICENSE" notice
-    even in short files that are otherwise skipped by the test to ensure
-    that all license notices are replaced with the new SPDX notices.
+    Don't erroneously exclude Build.PL files from SPDX license identifier
+    checks in Perl packages.
+
+    In tests/docs/spdx-license-t and the Perl equivalent, check for my
+    legacy "see LICENSE" notice even in short files that are otherwise
+    skipped by the test to ensure that all license notices are replaced
+    with the new SPDX notices.
 
 rra-c-util 7.2 (2018-06-03)
 

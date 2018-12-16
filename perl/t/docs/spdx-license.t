@@ -46,7 +46,7 @@ use Test::More;
 # skip for this check.
 ## no critic (RegularExpressions::ProhibitFixedStringMatches)
 my @IGNORE = (
-    qr{ \A Build ( [.] .* )? \z }ixms,      # Generated file from Build.PL
+    qr{ \A Build ( [.] (?!PL) .* )? \z }ixms,    # Generated file from Build.PL
     qr{ \A LICENSE \z }xms,                 # Generated file, no license itself
     qr{ \A (Changes|NEWS|THANKS) \z }xms,   # Package license should be fine
     qr{ \A TODO \z }xms,                    # Package license should be fine
@@ -83,9 +83,7 @@ sub check_file {
     my $filename = $_;
     my $path     = $File::Find::name;
 
-    # Ignore files in the whitelist, binary files, and files under 1KB.  The
-    # latter can be rolled up into the overall project license and the license
-    # notice may be a substantial portion of the file size.
+    # Ignore files in the whitelist and binary files.
     for my $pattern (@IGNORE) {
         return if $filename =~ $pattern;
     }
@@ -97,12 +95,14 @@ sub check_file {
     }
     return if -d $filename;
     return if !-T $filename;
-    return if -s $filename < 1024;
 
     # Scan the file.
-    my ($saw_spdx, $skip_spdx);
+    my ($saw_legacy_notice, $saw_spdx, $skip_spdx);
     open(my $file, '<', $filename) or BAIL_OUT("Cannot open $path");
     while (defined(my $line = <$file>)) {
+        if ($line =~ m{ \b See \s+ LICENSE \s+ for \s+ licensing }xms) {
+            $saw_legacy_notice = 1;
+        }
         if ($line =~ m{ \b SPDX-License-Identifier: \s+ \S+ }xms) {
             $saw_spdx = 1;
             last;
@@ -113,7 +113,16 @@ sub check_file {
         }
     }
     close($file) or BAIL_OUT("Cannot close $path");
-    ok($saw_spdx || $skip_spdx, $path);
+
+    # If there is a legacy license notice, report a failure regardless of file
+    # size.  Otherwise, skip files under 1KB.  They can be rolled up into the
+    # overall project license and the license notice may be a substantial
+    # portion of the file size.
+    if ($saw_legacy_notice) {
+        ok(!$saw_legacy_notice, "$path has legacy license notice");
+    } else {
+        ok($saw_spdx || $skip_spdx || -s $filename < 1024, $path);
+    }
     return;
 }
 
