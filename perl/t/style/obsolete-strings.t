@@ -37,9 +37,10 @@ use warnings;
 
 use lib 't/lib';
 
+use Test::RRA qw(skip_unless_automated);
+
 use File::Find qw(find);
 use Test::More;
-use Test::RRA qw(skip_unless_automated);
 
 # Bad patterns to search for.
 my @BAD_REGEXES = (qr{ http:// \S+ [.]eyrie[.]org }xms);

@@ -40,10 +40,11 @@ use warnings;
 
 use lib "$ENV{C_TAP_SOURCE}/tap/perl";
 
-use Test::More;
 use Test::RRA qw(skip_unless_automated use_prereq);
 use Test::RRA::Automake qw(automake_setup perl_dirs);
 use Test::RRA::Config qw($MINIMUM_VERSION %MINIMUM_VERSION);
+
+use Test::More;
 
 # Skip for normal user installs since this doesn't affect functionality.
 skip_unless_automated('Minimum version tests');

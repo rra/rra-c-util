@@ -36,8 +36,9 @@ use warnings;
 
 use lib 't/lib';
 
-use File::Spec;
 use Test::RRA qw(skip_unless_automated use_prereq);
+
+use File::Spec;
 
 # Skip for normal user installs since this doesn't affect functionality.
 skip_unless_automated('Strictness tests');

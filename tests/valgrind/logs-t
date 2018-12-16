@@ -33,9 +33,11 @@ use warnings;
 
 use lib "$ENV{C_TAP_SOURCE}/tap/perl";
 
+use Test::RRA ();
+use Test::RRA::Automake qw(automake_setup);
+
 use File::Spec;
 use Test::More;
-use Test::RRA::Automake qw(automake_setup);
 
 # Skip this test if C_TAP_VALGRIND was not set.
 if (!exists $ENV{C_TAP_VALGRIND}) {

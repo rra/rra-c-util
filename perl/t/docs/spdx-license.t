@@ -37,9 +37,10 @@ use warnings;
 
 use lib 't/lib';
 
+use Test::RRA qw(skip_unless_automated);
+
 use File::Find qw(find);
 use Test::More;
-use Test::RRA qw(skip_unless_automated);
 
 # File name (the file without any directory component) and path patterns to
 # skip for this check.

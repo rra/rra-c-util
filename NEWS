@@ -1,6 +1,12 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 7.3 (unreleased)
+rra-c-util 8.0 (unreleased)
+
+    Test::RRA now must be imported before Test::More, and will check
+    whether Test::More is available and skip the whole test if it is not
+    (such as Red Hat systems with perl but not perl-core installed).  All
+    included tests written in Perl have been updated to import Test::RRA
+    before Test::More.
 
     Fix RRA_LIB_KRB5_OPTIONAL probing in the --enable-reduced-depends case
     when linking with libkrb5 is not possible but libcom_err is present.

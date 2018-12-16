@@ -37,10 +37,11 @@ use warnings;
 
 use lib "$ENV{C_TAP_SOURCE}/tap/perl";
 
-use File::Basename qw(basename);
-use Test::More;
 use Test::RRA qw(skip_unless_automated);
 use Test::RRA::Automake qw(all_files automake_setup);
+
+use File::Basename qw(basename);
+use Test::More;
 
 # File name (the file without any directory component) and path patterns to
 # skip for this check.
