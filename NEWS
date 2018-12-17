@@ -14,6 +14,12 @@ rra-c-util 8.0 (unreleased)
     non-empty KRB5_LIBS containing only -lcom_err, which incorrectly
     caused the macro to indicate that Kerberos libraries were present.
 
+    Work around Test::Strict not skipping .git directories by testing an
+    explicit list of files and directories in the Perl t/style/strict.t
+    test.  This means that test now assumes the only interesting files are
+    in subdirectories or end in *.PL.  It also now skips blib, so no
+    longer double-checks library files and scripts.
+
     Don't erroneously exclude Build.PL files from SPDX license identifier
     checks in Perl packages.
 
