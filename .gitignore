@@ -20,6 +20,17 @@
 /config.log
 /config.status
 /configure
+/perl/Build
+/perl/MYMETA.json
+/perl/MYMETA.json.lock
+/perl/MYMETA.yml
+/perl/_build/
+/perl/blib/
+/perl/cover_db/
+/perl/t/data/perlcriticrc
+/perl/t/data/perltidyrc
+/perl/t/lib/Test/RRA.pm
+/perl/t/lib/Test/RRA/
 /rra-c-util-*
 /stamp-h1
 /tests/kafs/basic

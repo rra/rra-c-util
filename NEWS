@@ -24,6 +24,11 @@ rra-c-util 8.0 (unreleased)
 
     Ignore Changes when checking Perl files for obsolete strings.
 
+    rra-c-util now tests the Perl test utilities that it includes, and
+    therefore builds and tests a dummy Perl module during its build.
+    Therefore, Perl 5.6.2 or later and the Module::Build module are now
+    required to build rra-c-util (but not to use its components).
+
     Update to C TAP Harness 4.4:
 
     * New test_cleanup_register_with_data function.

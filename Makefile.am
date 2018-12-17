@@ -7,17 +7,31 @@
 #
 # SPDX-License-Identifier: MIT
 
+# Use the m4 directory for Autoconf macros.
 ACLOCAL_AMFLAGS = -I m4
+
+# These three lists of files are needed for Perl builds.  They're listed
+# here to be added to EXTRA_DIST and so that they can be copied over
+# properly for builddir != srcdir builds.
+PERL_FILES = perl/Build.PL perl/MANIFEST perl/MANIFEST.SKIP		\
+	perl/t/data/perl.conf perl/t/docs/pod-coverage.t		\
+	perl/t/docs/pod-spelling.t perl/t/docs/pod.t			\
+	perl/t/docs/spdx-license.t perl/t/docs/synopsis.t		\
+	perl/t/style/coverage.t perl/t/style/critic.t			\
+	perl/t/style/minimum-version.t perl/t/style/module-version.t	\
+	perl/t/style/obsolete-strings.t perl/t/style/strict.t
+
+# Directories that have to be created in builddir != srcdir builds before
+# copying PERL_FILES over.
+PERL_DIRECTORIES = perl perl/lib perl/t perl/t/data perl/t/docs perl/t/lib \
+	perl/t/lib/Test perl/t/style
+
+# Additional files to include in the distribution.
 EXTRA_DIST = .gitignore .travis.yml LICENSE README.md bootstrap		    \
 	docs/api/xmalloc.3 docs/api/xmalloc.pod docs/metadata m4/apache.m4  \
 	m4/apr.m4 m4/aprutil.m4 m4/curl.m4 m4/ld-version.m4 m4/ldap.m4	    \
 	m4/openssl.m4 m4/pcre.m4 m4/remctl.m4 m4/tinycdb.m4		    \
-	portable/winsock.c perl/t/data/perl.conf perl/t/docs/pod-coverage.t \
-	perl/t/docs/pod-spelling.t perl/t/docs/pod.t perl/t/docs/synopsis.t \
-	perl/t/docs/spdx-license.t perl/t/style/coverage.t		    \
-	perl/t/style/critic.t perl/t/style/minimum-version.t		    \
-	perl/t/style/module-version.t perl/t/style/obsolete-strings.t	    \
-	perl/t/style/strict.t tests/README tests/TESTS			    \
+	portable/winsock.c tests/README tests/TESTS			    \
 	tests/data/cppcheck.supp tests/data/generate-krb5-conf		    \
 	tests/data/krb5-pam.conf tests/data/perl.conf			    \
 	tests/data/perlcriticrc tests/data/perltidyrc			    \
@@ -30,7 +44,7 @@ EXTRA_DIST = .gitignore .travis.yml LICENSE README.md bootstrap		    \
 	tests/tap/perl/Test/RRA/Automake.pm				    \
 	tests/tap/perl/Test/RRA/Config.pm				    \
 	tests/tap/perl/Test/RRA/ModuleVersion.pm tests/tap/remctl.sh	    \
-	tests/util/xmalloc-t tests/valgrind/logs-t
+	tests/util/xmalloc-t tests/valgrind/logs-t $(PERL_FILES)
 
 # Enable kafs support when running distcheck.
 DISTCHECK_CONFIGURE_FLAGS = --enable-kafs
@@ -41,6 +55,7 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-kafs
 # member.
 AM_CPPFLAGS = $(KAFS_CPPFLAGS)
 
+# Build the included libraries.
 noinst_LIBRARIES = pam-util/libpamutil.a portable/libportable.a util/libutil.a
 pam_util_libpamutil_a_SOURCES = pam-util/args.c pam-util/args.h		\
 	pam-util/logging.c pam-util/logging.h pam-util/options.c	\
@@ -71,18 +86,44 @@ if NEED_KAFS
     kafs_libkafs_a_CPPFLAGS = $(KAFS_CPPFLAGS)
 endif
 
+# Build the Perl module.
+all-local: perl/blib/lib/Empty.pm
+perl/blib/lib/Empty.pm: $(PERL_FILES)
+	set -e; if [ x'$(builddir)' != x'$(srcdir)' ]; then		\
+	    for d in $(PERL_DIRECTORIES); do				\
+		[ -d "$(builddir)/$$d" ] || mkdir "$(builddir)/$$d";	\
+	    done;							\
+	    for f in $(PERL_FILES); do					\
+		cp "$(srcdir)/$$f" "$(builddir)/$$f";			\
+	    done;							\
+	fi
+	cd perl && perl Build.PL
+	cd perl && ./Build
+
 # Work around the GNU Coding Standards, which leave all the Autoconf and
 # Automake stuff around after make maintainer-clean, thus making that command
 # mostly worthless.
-DISTCLEANFILES = config.h.in~
+DISTCLEANFILES = config.h.in~ perl/t/data/perlcriticrc perl/t/data/perltidyrc
 MAINTAINERCLEANFILES = Makefile.in aclocal.m4 build-aux/ar-lib		\
         build-aux/compile build-aux/config.guess build-aux/config.sub	\
         build-aux/depcomp build-aux/install-sh build-aux/missing	\
         config.h.in configure
 
-# Remove the Autoconf cache directory on make distclean.
+# Also clean the perl directory if needed.
+clean-local:
+	set -e; if [ -f "perl/Build" ]; then	\
+	    cd perl && ./Build realclean;	\
+	fi
+
+# Remove the Autoconf cache directory on make distclean and clean up the
+# copies of Perl files if needed.
 distclean-local:
 	rm -rf autom4te.cache
+	set -e; if [ x"$(builddir)" != x"$(srcdir)" ]; then	\
+	    for f in $(PERL_FILES); do				\
+		rm -f "$(builddir)/$$f";			\
+	    done;						\
+	fi
 
 # Separate target for a human to request building everything with as many
 # compiler warnings enabled as possible.
@@ -229,6 +270,13 @@ tests_util_xwrite_t_LDADD = tests/tap/libtap.a util/libutil.a \
 
 check-local: $(check_PROGRAMS)
 	tests/runtests -l '$(abs_top_srcdir)/tests/TESTS'
+	@set -e; if [ -f perl/Build ]; then			\
+	    echo '';						\
+	    cp -R $(srcdir)/tests/tap/perl/* perl/t/lib/;	\
+	    cp $(srcdir)/tests/data/perlcriticrc		\
+		$(srcdir)/tests/data/perltidyrc perl/t/data/;	\
+	    cd perl && ./Build test;				\
+	fi
 
 # Used by maintainers to check the source code with cppcheck.
 check-cppcheck:
