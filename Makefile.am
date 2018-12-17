@@ -268,14 +268,15 @@ tests_util_xwrite_t_SOURCES = tests/util/fakewrite.c tests/util/fakewrite.h \
 tests_util_xwrite_t_LDADD = tests/tap/libtap.a util/libutil.a \
 	portable/libportable.a
 
-check-local: $(check_PROGRAMS)
+check-local: $(check_PROGRAMS) perl/blib/lib/Empty.pm
 	tests/runtests -l '$(abs_top_srcdir)/tests/TESTS'
-	@set -e; if [ -f perl/Build ]; then			\
-	    echo '';						\
-	    cp -R $(srcdir)/tests/tap/perl/* perl/t/lib/;	\
-	    cp $(srcdir)/tests/data/perlcriticrc		\
-		$(srcdir)/tests/data/perltidyrc perl/t/data/;	\
-	    cd perl && ./Build test;				\
+	@set -e; if [ -f perl/Build ]; then				\
+	    echo '';							\
+	    $(MKDIR_P) perl/t/lib/Test;					\
+	    cp -R $(srcdir)/tests/tap/perl/Test/* perl/t/lib/Test/;	\
+	    cp $(srcdir)/tests/data/perlcriticrc			\
+		$(srcdir)/tests/data/perltidyrc perl/t/data/;		\
+	    cd perl && ./Build test;					\
 	fi
 
 # Used by maintainers to check the source code with cppcheck.

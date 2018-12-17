@@ -43,6 +43,9 @@ m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_INSTALL
 AC_PROG_RANLIB
 
+dnl Only needed when running mkdir -p in Makefile.am.
+AC_PROG_MKDIR_P
+
 dnl Probe for Perl.  This isn't used by this package except in tests, but
 dnl probe for it anyway to exercise the macros.  The Perl module is included
 dnl in core, so that test should always succeed.
