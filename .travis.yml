@@ -3,11 +3,13 @@ compiler:
   - gcc
   - clang
 
-# Perl::Tidy installed separately to get the latest version, since it
-# sometimes changes formatting rules compared to the version in Ubuntu.
+# Perl::Tidy and Test::Perl::Critic installed separately to get the latest
+# version, since they sometimes change formatting and style rules compared
+# to the version in Ubuntu.
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install cpanminus cppcheck libevent-dev libkrb5-dev libpam0g-dev libperl-dev libpython-dev pkg-config libdevel-cover-perl libtest-minimumversion-perl libtest-perl-critic-perl libtest-pod-perl libtest-pod-coverage-perl libtest-strict-perl libtest-synopsis-perl
+  - sudo apt-get install cpanminus cppcheck libevent-dev libkrb5-dev libpam0g-dev libperl-dev libpython-dev pkg-config libdevel-cover-perl libtest-minimumversion-perl libtest-pod-perl libtest-pod-coverage-perl libtest-strict-perl libtest-synopsis-perl
   - sudo cpanm Perl::Tidy
+  - sudo cpanm Test::Perl::Critic
 env: AUTHOR_TESTING=1 C_TAP_VERBOSE=1
 script: ./bootstrap && ./configure && make warnings && make check
