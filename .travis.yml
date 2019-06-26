@@ -1,3 +1,9 @@
+# Configuration for Travis-CI continuous integration.
+#
+# Copyright 2015-2019 Russ Allbery <eagle@eyrie.org>
+#
+# SPDX-License-Identifier: MIT
+
 language: c
 compiler:
   - gcc
@@ -6,13 +12,14 @@ compiler:
 # Perl::Tidy, Perl::Critic, and Test::Perl::Critic installed separately to
 # get the latest version, since they sometimes change formatting and style
 # rules compared to the version in Ubuntu.  Allow the installation of
-# Test::Perl::Critic to fail, since this seems to fail regularly on
-# Travis-CI.  (We'll just skip the test if it won't install.)
+# Perl::Critic and Test::Perl::Critic to fail, since this seems to fail
+# regularly on Travis-CI.  (We'll just skip the test if it won't install.)
+
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install cpanminus cppcheck libevent-dev libkrb5-dev libpam0g-dev libperl-dev libpython-dev pkg-config libdevel-cover-perl libtest-minimumversion-perl libtest-pod-perl libtest-pod-coverage-perl libtest-strict-perl libtest-synopsis-perl
   - sudo cpanm Perl::Tidy
-  - sudo cpanm Perl::Critic
+  - sudo cpanm Perl::Critic || true
   - sudo cpanm Test::Perl::Critic || true
 env: AUTHOR_TESTING=1 C_TAP_VERBOSE=1
 script: ./bootstrap && ./configure && make warnings && make check
