@@ -8,6 +8,10 @@ rra-c-util 8.0 (unreleased)
     included tests written in Perl have been updated to import Test::RRA
     before Test::More.
 
+    The is_file_contents Test::RRA function now falls back on printing the
+    expected and seen output if diff does not work, primarily to support
+    platforms like Windows with no standard diff program.
+
     Fix RRA_LIB_KRB5_OPTIONAL probing in the --enable-reduced-depends case
     when linking with libkrb5 is not possible but libcom_err is present.
     The probes for com_err were previously not skipped, resulting in a
