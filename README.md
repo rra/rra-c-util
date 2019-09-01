@@ -1,9 +1,9 @@
-# rra-c-util 7.2
+# rra-c-util 8.0
 
 [![Build
 status](https://travis-ci.org/rra/rra-c-util.svg?branch=master)](https://travis-ci.org/rra/rra-c-util)
 
-Copyright 2000, 2009-2010, 2013-2018 Russ Allbery <eagle@eyrie.org>.
+Copyright 2000, 2009-2010, 2013-2019 Russ Allbery <eagle@eyrie.org>.
 Copyright 2009-2014 The Board of Trustees of the Leland Stanford Junior
 University.  This software is distributed under a BSD-style license.
 Please see the section [License](#license) below for more information.
@@ -75,6 +75,12 @@ other platform besides AIX or IRIX), or AFS libraries (on AIX and IRIX) is
 required.  AIX binaries with AFS PAG support may not run on AIX systems
 that do not have an AFS client installed due to how AIX handles system
 calls.
+
+A dummy Perl module is built and tested as part of the rra-c-util build in
+order to exercise the included Perl test support libraries.  This requires
+Perl 5.6.2 or later and Module::Build (available from CPAN).  The included
+components of rra-c-util are usable without Perl (by copying them to
+another package), even though the build will fail.
 
 To bootstrap from a Git checkout, or if you change the Automake files and
 need to regenerate Makefile.in, you will need Automake 1.11 or later.  For
@@ -174,12 +180,15 @@ To run the full test suite, and to use the Perl test support libraries,
 Perl 5.6.2 or later is required.  The following additional Perl modules
 will be used if present:
 
+* Devel::Cover
 * IPC::System::Simple
 * Test::MinimumVersion
 * Test::Perl::Critic
 * Test::Pod
+* Test::Pod::Coverage
 * Test::Spelling
 * Test::Strict
+* Test::Synopsis
 
 All are available on CPAN.  Those tests will be skipped if the modules are
 not available.
@@ -329,7 +338,7 @@ requests are gratefully reviewed and normally accepted.
 The rra-c-util package as a whole is covered by the following copyright
 statement and license:
 
-> Copyright 2000, 2009-2010, 2013-2018
+> Copyright 2000, 2009-2010, 2013-2019
 >     Russ Allbery <eagle@eyrie.org>
 >
 > Copyright 2009-2014

@@ -5,32 +5,32 @@ Comment: This file documents the copyright statements and licenses for
  .
  For any copyright year range specified as YYYY-ZZZZ in this file, the
  range specifies every single year in that closed interval.
-Copyright: 2000, 2009-2010, 2013-2018 Russ Allbery <eagle@eyrie.org>
+Copyright: 2000, 2009-2010, 2013-2019 Russ Allbery <eagle@eyrie.org>
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
 License: Expat
 
 Files: *
 Copyright: 1997, 2000-2002 Benjamin Sittler
-  2000-2002, 2004-2018 Russ Allbery <eagle@eyrie.org>
+  2000-2002, 2004-2019 Russ Allbery <eagle@eyrie.org>
   2001-2002, 2004-2014
     The Board of Trustees of the Leland Stanford Junior University
 License: Expat
 
 Files: Makefile.in
-Copyright: 1994-2017 Free Software Foundation, Inc.
+Copyright: 1994-2018 Free Software Foundation, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
   2015-2018 Russ Allbery <eagle@eyrie.org>
 License: FSF-unlimited and Expat
 
 Files: aclocal.m4
-Copyright: 1996-2017 Free Software Foundation, Inc.
+Copyright: 1996-2018 Free Software Foundation, Inc.
   2004 Scott James Remnant <scott@netsplit.com>
   2012-2015 Dan Nicholson <dbn.lists@gmail.com>
 License: FSF-unlimited, and GPL-2+ with Autoconf exception or Expat
 
 Files: build-aux/ar-lib build-aux/compile build-aux/depcomp
  build-aux/missing
-Copyright: 1996-2017 Free Software Foundation, Inc.
+Copyright: 1996-2018 Free Software Foundation, Inc.
 License: GPL-2+ with Autoconf exception or Expat
 
 Files: build-aux/config.guess build-aux/config.sub
@@ -107,7 +107,7 @@ Files: docs/api/xmalloc.3 docs/api/xmalloc.pod kafs/sys-syscall.c
  tests/portable/reallocarray-t.c tests/portable/setenv-t.c
  tests/portable/strndup-t.c tests/util/buffer-t.c tests/util/vector-t.c
  util/macros.h util/vector.c util/vector.h
-Copyright: 2000-2018 Russ Allbery <eagle@eyrie.org>
+Copyright: 2000-2019 Russ Allbery <eagle@eyrie.org>
   2005-2014 The Board of Trustees of the Leland Stanford Junior University
   2015 Julien ÉLIE <julien@trigofacile.com>
 License: all-permissive
@@ -125,7 +125,7 @@ Copyright: 1991, 1994-2003 The Internet Software Consortium and Rich Salz
   2004-2011, 2016 Internet Systems Consortium, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
   2009, 2011, 2015, 2018 Julien ÉLIE <julien@trigofacile.com>
-  2014-2018 Russ Allbery <eagle@eyrie.org>
+  2014-2019 Russ Allbery <eagle@eyrie.org>
 License: ISC
  Permission to use, copy, modify, and distribute this software for any
  purpose with or without fee is hereby granted, provided that the above
@@ -229,7 +229,7 @@ License: GPL-2+ with Autoconf exception
  Public License for more details.
  .
  You should have received a copy of the GNU General Public License along
- with this program.  If not, see <http://www.gnu.org/licenses/>.
+ with this program.  If not, see <https://www.gnu.org/licenses/>.
  .
  As a special exception to the GNU General Public License, if you
  distribute this file as part of a program that contains a configuration
@@ -251,7 +251,7 @@ License: GPL-3+ with Autoconf exception
  Public License for more details.
  .
  You should have received a copy of the GNU General Public License along
- with this program; if not, see <http://www.gnu.org/licenses/>.
+ with this program; if not, see <https://www.gnu.org/licenses/>.
  .
  As a special exception to the GNU General Public License, if you
  distribute this file as part of a program that contains a configuration

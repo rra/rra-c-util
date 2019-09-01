@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 8.0 (unreleased)
+rra-c-util 8.0 (2019-09-01)
 
     Test::RRA now must be imported before Test::More, and will check
     whether Test::More is available and skip the whole test if it is not
