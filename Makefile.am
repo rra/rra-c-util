@@ -124,6 +124,7 @@ distclean-local:
 		rm -f "$(builddir)/$$f";			\
 	    done;						\
 	fi
+	rm -rf perl/t/lib/Test
 
 # Separate target for a human to request building everything with as many
 # compiler warnings enabled as possible.
@@ -272,8 +273,11 @@ check-local: $(check_PROGRAMS) perl/blib/lib/Empty.pm
 	tests/runtests -l '$(abs_top_srcdir)/tests/TESTS'
 	@set -e; if [ -f perl/Build ]; then				\
 	    echo '';							\
-	    $(MKDIR_P) perl/t/lib/Test;					\
-	    cp -R $(srcdir)/tests/tap/perl/Test/* perl/t/lib/Test/;	\
+	    $(MKDIR_P) perl/t/lib/Test/RRA;				\
+	    cp $(srcdir)/tests/tap/perl/Test/RRA.pm perl/t/lib/Test/;	\
+	    cp $(srcdir)/tests/tap/perl/Test/RRA/Config.pm		\
+		$(srcdir)/tests/tap/perl/Test/RRA/ModuleVersion.pm	\
+		perl/t/lib/Test/RRA/;					\
 	    cp $(srcdir)/tests/data/perlcriticrc			\
 		$(srcdir)/tests/data/perltidyrc perl/t/data/;		\
 	    cd perl && ./Build test;					\
