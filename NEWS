@@ -39,10 +39,12 @@ rra-c-util 8.0 (unreleased)
     Therefore, Perl 5.6.2 or later and the Module::Build module are now
     required to build rra-c-util (but not to use its components).
 
-    Update to C TAP Harness 4.4:
+    Update to C TAP Harness 4.5:
 
     * New test_cleanup_register_with_data function.
     * Fixed malloc error checking in bstrndup.
+    * New bcalloc_type and breallocarray_type utility functions.
+    * Fix (harmless) allocation error in runtests driver.
 
 rra-c-util 7.2 (2018-06-03)
 
