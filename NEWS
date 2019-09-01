@@ -39,6 +39,9 @@ rra-c-util 8.0 (unreleased)
     Therefore, Perl 5.6.2 or later and the Module::Build module are now
     required to build rra-c-util (but not to use its components).
 
+    Minor updates to fix warnings and tests with GCC 9.2.1, perltidy
+    20190601, and Perl::Critic 1.134.
+
     Update to C TAP Harness 4.5:
 
     * New test_cleanup_register_with_data function.
