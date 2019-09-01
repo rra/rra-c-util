@@ -1,7 +1,7 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <eagle@eyrie.org
-# Copyright 2015-2018 Russ Allbery <eagle@eyrie.org>
+# Copyright 2015-2019 Russ Allbery <eagle@eyrie.org>
 # Copyright 2008-2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -13,18 +13,18 @@ ACLOCAL_AMFLAGS = -I m4
 # These three lists of files are needed for Perl builds.  They're listed
 # here to be added to EXTRA_DIST and so that they can be copied over
 # properly for builddir != srcdir builds.
-PERL_FILES = perl/Build.PL perl/MANIFEST perl/MANIFEST.SKIP		\
-	perl/t/data/perl.conf perl/t/docs/pod-coverage.t		\
-	perl/t/docs/pod-spelling.t perl/t/docs/pod.t			\
-	perl/t/docs/spdx-license.t perl/t/docs/synopsis.t		\
-	perl/t/style/coverage.t perl/t/style/critic.t			\
-	perl/t/style/minimum-version.t perl/t/style/module-version.t	\
+PERL_FILES = perl/Build.PL perl/MANIFEST perl/MANIFEST.SKIP		    \
+	perl/lib/Empty.pm perl/t/api/empty.t perl/t/data/perl.conf	    \
+	perl/t/docs/pod-coverage.t perl/t/docs/pod-spelling.t		    \
+	perl/t/docs/pod.t perl/t/docs/spdx-license.t perl/t/docs/synopsis.t \
+	perl/t/style/coverage.t perl/t/style/critic.t			    \
+	perl/t/style/minimum-version.t perl/t/style/module-version.t	    \
 	perl/t/style/obsolete-strings.t perl/t/style/strict.t
 
 # Directories that have to be created in builddir != srcdir builds before
 # copying PERL_FILES over.
-PERL_DIRECTORIES = perl perl/lib perl/t perl/t/data perl/t/docs perl/t/lib \
-	perl/t/lib/Test perl/t/style
+PERL_DIRECTORIES = perl perl/lib perl/t perl/t/api perl/t/data perl/t/docs \
+	perl/t/lib perl/t/lib/Test perl/t/style
 
 # Additional files to include in the distribution.
 EXTRA_DIST = .gitignore .travis.yml LICENSE README.md bootstrap		    \
