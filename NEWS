@@ -2,6 +2,8 @@
 
 rra-c-util 8.1 (unreleased)
 
+    Update suppressions and fix issues found by cppcheck 1.89.
+
     Remove snprintf tests that surpassed the promised precision of C
     floating point numbers.
 
