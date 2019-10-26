@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 8.1 (unreleased)
+
+    Remove snprintf tests that surpassed the promised precision of C
+    floating point numbers.
+
 rra-c-util 8.0 (2019-09-01)
 
     Test::RRA now must be imported before Test::More, and will check
