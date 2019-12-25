@@ -23,6 +23,6 @@ calls.
 
 A dummy Perl module is built and tested as part of the rra-c-util build in
 order to exercise the included Perl test support libraries.  This requires
-Perl 5.6.2 or later and Module::Build (available from CPAN).  The included
+Perl 5.8 or later and Module::Build (available from CPAN).  The included
 components of rra-c-util are usable without Perl (by copying them to
 another package), even though the build will fail.

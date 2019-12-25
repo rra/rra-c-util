@@ -15,12 +15,10 @@
 
 package Test::RRA::Automake;
 
-use 5.006;
+use 5.008;
+use base qw(Exporter);
 use strict;
 use warnings;
-
-# For Perl 5.006 compatibility.
-## no critic (ClassHierarchies::ProhibitExplicitISA)
 
 use Exporter;
 use File::Find qw(find);
@@ -54,13 +52,12 @@ use lib $PERL_BLIB_ARCH;
 use lib $PERL_BLIB_LIB;
 
 # Declare variables that should be set in BEGIN for robustness.
-our (@EXPORT_OK, @ISA, $VERSION);
+our (@EXPORT_OK, $VERSION);
 
 # Set $VERSION and everything export-related in a BEGIN block for robustness
 # against circular module loading (not that we load any modules, but
 # consistency is good).
 BEGIN {
-    @ISA       = qw(Exporter);
     @EXPORT_OK = qw(
       all_files automake_setup perl_dirs test_file_path test_tmpdir
     );
@@ -451,7 +448,7 @@ Russ Allbery <eagle@eyrie.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2014-2015, 2018 Russ Allbery <eagle@eyrie.org>
+Copyright 2014-2015, 2018-2019 Russ Allbery <eagle@eyrie.org>
 
 Copyright 2013 The Board of Trustees of the Leland Stanford Junior University
 

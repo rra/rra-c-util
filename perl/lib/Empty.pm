@@ -8,7 +8,7 @@
 
 package Empty;
 
-use 5.006;
+use 5.008;
 use strict;
 use warnings;
 
@@ -62,7 +62,7 @@ Russ Allbery <eagle@eyrie.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2018 Russ Allbery <eagle@eyrie.org>
+Copyright 2018-2019 Russ Allbery <eagle@eyrie.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
