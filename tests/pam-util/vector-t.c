@@ -5,7 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2014, 2016, 2018 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2014, 2016, 2018-2019 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010-2011, 2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -92,6 +92,8 @@ main(void)
 
     vector = vector_split_multi("foo, bar, baz", ", ", NULL);
     ok(vector != NULL, "vector_split_multi returns non-NULL");
+    if (vector == NULL)
+        bail("vector_split_multi returned NULL");
     is_int(3, vector->count, "vector_split_multi returns right count");
     is_string("foo", vector->strings[0], "...first string");
     is_string("bar", vector->strings[1], "...second string");
