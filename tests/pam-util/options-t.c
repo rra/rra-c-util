@@ -5,6 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010-2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -60,12 +61,14 @@ struct pam_config {
 
 /* The rules specifying the configuration options. */
 static struct option options[] = {
+    /* clang-format off */
     { K(cells),       true,  LIST   (NULL)  },
     { K(debug),       true,  BOOL   (false) },
     { K(expires),     true,  TIME   (10)    },
     { K(ignore_root), false, BOOL   (true)  },
     { K(minimum_uid), true,  NUMBER (0)     },
     { K(program),     true,  STRING (NULL)  },
+    /* clang-format on */
 };
 static const size_t optlen = sizeof(options) / sizeof(options[0]);
 

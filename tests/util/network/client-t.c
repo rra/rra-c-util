@@ -5,7 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2005, 2013-2014, 2016-2019 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2005, 2013-2014, 2016-2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2009-2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -49,7 +49,7 @@
  * and expects to always succeed on the connection, taking the source address
  * to pass into network_client_create.
  */
-static void __attribute__((__noreturn__))
+__attribute__((__noreturn__)) static void
 client_create_writer(const char *source)
 {
     socket_type fd;
@@ -79,7 +79,7 @@ client_create_writer(const char *source)
  * sleeps for 10 seconds before sending another string so that timeouts can be
  * tested.  Meant to be run in a child process.
  */
-static void __attribute__((__noreturn__))
+__attribute__((__noreturn__)) static void
 client_delay_writer(const char *host)
 {
     socket_type fd;
@@ -102,7 +102,7 @@ client_delay_writer(const char *host)
  * Used to test network_write.  Connects, reads 64KB from the network, then
  * sleeps before reading another 64KB.  Meant to be run in a child process.
  */
-static void __attribute__((__noreturn__))
+__attribute__((__noreturn__)) static void
 client_delay_reader(const char *host)
 {
     char *buffer;

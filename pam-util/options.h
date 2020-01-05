@@ -10,6 +10,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010-2011, 2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -104,12 +105,14 @@ struct option {
  * specifies how to convert the configuration into a struct.  They provide an
  * initializer for the type and default fields.
  */
+/* clang-format off */
 #define BOOL(def)    TYPE_BOOLEAN, { (def),     0,  NULL,  NULL }
 #define NUMBER(def)  TYPE_NUMBER,  {     0, (def),  NULL,  NULL }
 #define TIME(def)    TYPE_TIME,    {     0, (def),  NULL,  NULL }
 #define STRING(def)  TYPE_STRING,  {     0,     0, (def),  NULL }
 #define LIST(def)    TYPE_LIST,    {     0,     0,  NULL, (def) }
 #define STRLIST(def) TYPE_STRLIST, {     0,     0, (def),  NULL }
+/* clang-format on */
 
 /*
  * The user of this file should also define a macro of the following form:

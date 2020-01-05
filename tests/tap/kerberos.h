@@ -5,7 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2017 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017, 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2006-2007, 2009, 2011-2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -59,11 +59,13 @@ struct kerberos_config {
  * tests require both keytab and password, but PKINIT is not required.
  */
 enum kerberos_needs {
+    /* clang-format off */
     TAP_KRB_NEEDS_NONE     = 0x00,
     TAP_KRB_NEEDS_KEYTAB   = 0x01,
     TAP_KRB_NEEDS_PASSWORD = 0x02,
     TAP_KRB_NEEDS_BOTH     = 0x01 | 0x02,
     TAP_KRB_NEEDS_PKINIT   = 0x04
+    /* clang-format on */
 };
 
 BEGIN_DECLS

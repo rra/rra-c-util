@@ -10,7 +10,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2000-2001, 2017 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2000-2001, 2017, 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2008, 2011, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -43,8 +43,10 @@ inet_ntoa(struct in_addr in)
     const unsigned char *p;
 
     p = (const unsigned char *) &in.s_addr;
+    /* clang-format off */
     sprintf(buf, "%u.%u.%u.%u",
             (unsigned int) (p[0] & 0xff), (unsigned int) (p[1] & 0xff),
             (unsigned int) (p[2] & 0xff), (unsigned int) (p[3] & 0xff));
+    /* clang-format on */
     return buf;
 }

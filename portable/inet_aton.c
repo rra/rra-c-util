@@ -9,7 +9,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2000-2001, 2017, 2019 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2000-2001, 2017, 2019-2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2008, 2011, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -97,6 +97,7 @@ inet_aton(const char *s, struct in_addr *addr)
              * Use a switch statement to parse each digit rather than assuming
              * ASCII.  Probably pointless portability.
              */
+            /* clang-format off */
             switch (*p) {
             case '0':           i = 0;  break;
             case '1':           i = 1;  break;
@@ -116,6 +117,7 @@ inet_aton(const char *s, struct in_addr *addr)
             case 'F': case 'f': i = 15; break;
             default:            return 0;
             }
+            /* clang-format on */
             if (i >= base)
                 return 0;
             octet[part] = (octet[part] * base) + i;

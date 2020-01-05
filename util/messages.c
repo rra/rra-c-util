@@ -54,7 +54,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2015-2016 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2015-2016, 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2008-2010, 2013-2014
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright 2004-2006 Internet Systems Consortium, Inc. ("ISC")
@@ -144,16 +144,18 @@ message_handlers(message_handler_func **list, unsigned int count, va_list args)
  * duplication since we can't assume variadic macros, but I can at least make
  * it easier to write and keep them consistent.
  */
-#define HANDLER_FUNCTION(type)                                  \
-    void                                                        \
-    message_handlers_ ## type(unsigned int count, ...)          \
-    {                                                           \
-        va_list args;                                           \
-                                                                \
-        va_start(args, count);                                  \
-        message_handlers(& type ## _handlers, count, args);     \
-        va_end(args);                                           \
+/* clang-format off */
+#define HANDLER_FUNCTION(type)                              \
+    void                                                    \
+    message_handlers_ ## type(unsigned int count, ...)      \
+    {                                                       \
+        va_list args;                                       \
+                                                            \
+        va_start(args, count);                              \
+        message_handlers(& type ## _handlers, count, args); \
+        va_end(args);                                       \
     }
+/* clang-format on */
 HANDLER_FUNCTION(debug)
 HANDLER_FUNCTION(notice)
 HANDLER_FUNCTION(warn)
@@ -268,6 +270,7 @@ message_log_syslog(int pri, size_t len, const char *fmt, va_list args, int err)
  * Do the same sort of wrapper to generate all of the separate syslog logging
  * functions.
  */
+/* clang-format off */
 #define SYSLOG_FUNCTION(name, type)                                        \
     void                                                                   \
     message_log_syslog_ ## name(size_t l, const char *f, va_list a, int e) \
@@ -280,6 +283,7 @@ SYSLOG_FUNCTION(notice,  NOTICE)
 SYSLOG_FUNCTION(warning, WARNING)
 SYSLOG_FUNCTION(err,     ERR)
 SYSLOG_FUNCTION(crit,    CRIT)
+/* clang-format on */
 
 
 /*

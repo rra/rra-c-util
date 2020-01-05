@@ -10,7 +10,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2017-2018 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017-2018, 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011-2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -59,12 +59,14 @@ static const struct {
     pam_call call;
     enum group_type group;
 } CALLS[] = {
-    { "acct_mgmt",     pam_sm_acct_mgmt,     GROUP_ACCOUNT  },
-    { "authenticate",  pam_sm_authenticate,  GROUP_AUTH     },
-    { "setcred",       pam_sm_setcred,       GROUP_AUTH     },
-    { "chauthtok",     pam_sm_chauthtok,     GROUP_PASSWORD },
-    { "open_session",  pam_sm_open_session,  GROUP_SESSION  },
-    { "close_session", pam_sm_close_session, GROUP_SESSION  },
+    /* clang-format off */
+    {"acct_mgmt",     pam_sm_acct_mgmt,     GROUP_ACCOUNT },
+    {"authenticate",  pam_sm_authenticate,  GROUP_AUTH    },
+    {"setcred",       pam_sm_setcred,       GROUP_AUTH    },
+    {"chauthtok",     pam_sm_chauthtok,     GROUP_PASSWORD},
+    {"open_session",  pam_sm_open_session,  GROUP_SESSION },
+    {"close_session", pam_sm_close_session, GROUP_SESSION },
+    /* clang-format on */
 };
 
 /* Mapping of PAM flag names without the leading PAM_ to values. */
@@ -72,15 +74,17 @@ static const struct {
     const char *name;
     int value;
 } FLAGS[] = {
-    { "CHANGE_EXPIRED_AUTHTOK", PAM_CHANGE_EXPIRED_AUTHTOK },
-    { "DISALLOW_NULL_AUTHTOK",  PAM_DISALLOW_NULL_AUTHTOK  },
-    { "DELETE_CRED",            PAM_DELETE_CRED            },
-    { "ESTABLISH_CRED",         PAM_ESTABLISH_CRED         },
-    { "PRELIM_CHECK",           PAM_PRELIM_CHECK           },
-    { "REFRESH_CRED",           PAM_REFRESH_CRED           },
-    { "REINITIALIZE_CRED",      PAM_REINITIALIZE_CRED      },
-    { "SILENT",                 PAM_SILENT                 },
-    { "UPDATE_AUTHTOK",         PAM_UPDATE_AUTHTOK         },
+    /* clang-format off */
+    {"CHANGE_EXPIRED_AUTHTOK", PAM_CHANGE_EXPIRED_AUTHTOK},
+    {"DISALLOW_NULL_AUTHTOK",  PAM_DISALLOW_NULL_AUTHTOK },
+    {"DELETE_CRED",            PAM_DELETE_CRED           },
+    {"ESTABLISH_CRED",         PAM_ESTABLISH_CRED        },
+    {"PRELIM_CHECK",           PAM_PRELIM_CHECK          },
+    {"REFRESH_CRED",           PAM_REFRESH_CRED          },
+    {"REINITIALIZE_CRED",      PAM_REINITIALIZE_CRED     },
+    {"SILENT",                 PAM_SILENT                },
+    {"UPDATE_AUTHTOK",         PAM_UPDATE_AUTHTOK        },
+    /* clang-format on */
 };
 
 /* Mapping of strings to PAM groups. */
@@ -88,10 +92,12 @@ static const struct {
     const char *name;
     enum group_type group;
 } GROUPS[] = {
-    { "account",  GROUP_ACCOUNT  },
-    { "auth",     GROUP_AUTH     },
-    { "password", GROUP_PASSWORD },
-    { "session",  GROUP_SESSION  },
+    /* clang-format off */
+    {"account",  GROUP_ACCOUNT },
+    {"auth",     GROUP_AUTH    },
+    {"password", GROUP_PASSWORD},
+    {"session",  GROUP_SESSION },
+    /* clang-format on */
 };
 
 /* Mapping of strings to PAM return values. */
@@ -99,13 +105,15 @@ static const struct {
     const char *name;
     int status;
 } RETURNS[] = {
-    { "PAM_AUTH_ERR",         PAM_AUTH_ERR         },
-    { "PAM_AUTHINFO_UNAVAIL", PAM_AUTHINFO_UNAVAIL },
-    { "PAM_IGNORE",           PAM_IGNORE           },
-    { "PAM_NEW_AUTHTOK_REQD", PAM_NEW_AUTHTOK_REQD },
-    { "PAM_SESSION_ERR",      PAM_SESSION_ERR      },
-    { "PAM_SUCCESS",          PAM_SUCCESS          },
-    { "PAM_USER_UNKNOWN",     PAM_USER_UNKNOWN     },
+    /* clang-format off */
+    {"PAM_AUTH_ERR",         PAM_AUTH_ERR        },
+    {"PAM_AUTHINFO_UNAVAIL", PAM_AUTHINFO_UNAVAIL},
+    {"PAM_IGNORE",           PAM_IGNORE          },
+    {"PAM_NEW_AUTHTOK_REQD", PAM_NEW_AUTHTOK_REQD},
+    {"PAM_SESSION_ERR",      PAM_SESSION_ERR     },
+    {"PAM_SUCCESS",          PAM_SUCCESS         },
+    {"PAM_USER_UNKNOWN",     PAM_USER_UNKNOWN    },
+    /* clang-format on */
 };
 
 /* Mapping of PAM prompt styles to their values. */
@@ -113,10 +121,12 @@ static const struct {
     const char *name;
     int style;
 } STYLES[] = {
-    { "echo_off",  PAM_PROMPT_ECHO_OFF },
-    { "echo_on",   PAM_PROMPT_ECHO_ON  },
-    { "error_msg", PAM_ERROR_MSG       },
-    { "info",      PAM_TEXT_INFO       },
+    /* clang-format off */
+    {"echo_off",  PAM_PROMPT_ECHO_OFF},
+    {"echo_on",   PAM_PROMPT_ECHO_ON },
+    {"error_msg", PAM_ERROR_MSG      },
+    {"info",      PAM_TEXT_INFO      },
+    /* clang-format on */
 };
 
 /* Mappings of strings to syslog priorities. */
@@ -124,11 +134,13 @@ static const struct {
     const char *name;
     int priority;
 } PRIORITIES[] = {
-    { "DEBUG",  LOG_DEBUG  },
-    { "INFO",   LOG_INFO   },
-    { "NOTICE", LOG_NOTICE },
-    { "ERR",    LOG_ERR    },
-    { "CRIT",   LOG_CRIT   },
+    /* clang-format off */
+    {"DEBUG",  LOG_DEBUG },
+    {"INFO",   LOG_INFO  },
+    {"NOTICE", LOG_NOTICE},
+    {"ERR",    LOG_ERR   },
+    {"CRIT",   LOG_CRIT  },
+    /* clang-format on */
 };
 
 

@@ -5,7 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2000-2006, 2018-2019 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2000-2006, 2018-2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2009-2010
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright 1995 Patrick Powell
@@ -40,20 +40,12 @@ int test_vsnprintf(char *str, size_t count, const char *fmt, va_list args);
 
 static const char string[] = "abcdefghijklmnopqrstuvwxyz0123456789";
 
+/* clang-format off */
+
 static const char *const fp_formats[] = {
     "%-1.5f",   "%1.5f",    "%31.6f",   "%10.5f",   "% 10.5f",  "%+22.6f",
     "%+4.6f",   "%01.3f",   "%3.1f",    "%3.2f",    "%.0f",     "%.1f",
     "%f",
-
-    /* %e and %g formats aren't really implemented yet. */
-#if 0
-    "%-1.5e",   "%1.5e",    "%31.9e",   "%10.5e",   "% 10.5e",  "%+22.9e",
-    "%+4.9e",   "%01.3e",   "%3.1e",    "%3.2e",    "%.0e",     "%.1e",
-    "%e",
-    "%-1.5g",   "%1.5g",    "%31.9g",   "%10.5g",   "% 10.5g",  "%+22.9g",
-    "%+4.9g",   "%01.3g",   "%3.1g",    "%3.2g",    "%.0g",     "%.1g",
-    "%g",
-#endif
     NULL
 };
 static const char *const int_formats[] = {
@@ -98,6 +90,8 @@ static unsigned long long ullong_nums[] = {
     134, 91340, 341,
     0
 };
+
+/* clang-format on */
 
 
 static void

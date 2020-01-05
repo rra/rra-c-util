@@ -9,6 +9,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2006-2008, 2010-2011, 2013-2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -54,20 +55,24 @@
  * offset into a pointer to the appropriate type.  Scary violations of the C
  * type system lurk here.
  */
+/* clang-format off */
 #define CONF_BOOL(c, o)   (bool *)          (void *)((char *) (c) + (o))
 #define CONF_NUMBER(c, o) (long *)          (void *)((char *) (c) + (o))
 #define CONF_STRING(c, o) (char **)         (void *)((char *) (c) + (o))
 #define CONF_LIST(c, o)   (struct vector **)(void *)((char *) (c) + (o))
+/* clang-format on */
 
 /*
  * We can only process times properly if we have Kerberos.  If not, they fall
  * back to longs and we convert them as numbers.
  */
+/* clang-format off */
 #ifdef HAVE_KRB5
-# define CONF_TIME(c, o) (krb5_deltat *)(void *)((char *) (c) + (o))
+#    define CONF_TIME(c, o) (krb5_deltat *)(void *)((char *) (c) + (o))
 #else
-# define CONF_TIME(c, o) (long *)       (void *)((char *) (c) + (o))
+#    define CONF_TIME(c, o) (long *)       (void *)((char *) (c) + (o))
 #endif
+/* clang-format on */
 
 
 /*
@@ -515,6 +520,7 @@ convert_boolean(struct pam_args *args, const char *arg, bool *setting)
         *setting = true;
     else {
         value++;
+        /* clang-format off */
         if      (   strcasecmp(value, "true") == 0
                  || strcasecmp(value, "yes")  == 0
                  || strcasecmp(value, "on")   == 0
@@ -527,6 +533,7 @@ convert_boolean(struct pam_args *args, const char *arg, bool *setting)
             *setting = false;
         else
             putil_err(args, "invalid boolean in setting: %s", arg);
+        /* clang-format on */
     }
 }
 

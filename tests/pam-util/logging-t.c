@@ -5,6 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010-2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -49,7 +50,7 @@
         is_int((p), seen->lines[0].priority, "priority %d", (p));       \
         is_string("foo", seen->lines[0].line, "line %s", (n));          \
         pam_output_free(seen);                                          \
-    } while (0);
+    } while (0)
 
 /* Test a PAM error logging function. */
 #define TEST_PAM(func, c, p, n)                                         \
@@ -65,7 +66,7 @@
         is_string(expected, seen->lines[0].line, "line %s", (n));       \
         pam_output_free(seen);                                          \
         free(expected);                                                 \
-    } while (0);
+    } while (0)
 
 /* Test a PAM Kerberos error logging function .*/
 #define TEST_KRB5(func, p, n)                                             \
@@ -83,7 +84,7 @@
         pam_output_free(seen);                                            \
         free(expected);                                                   \
         krb5_free_error_message(args->ctx, msg);                          \
-    } while (0);
+    } while (0)
 
 
 int

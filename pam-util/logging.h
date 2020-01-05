@@ -5,6 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2006-2010, 2012-2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -115,10 +116,13 @@ END_DECLS
 #define ENTRY(args, flags)                                              \
     if (args->debug)                                                    \
         putil_log_entry((args), __func__, (flags));
-#define EXIT(args, pamret)                                              \
-    if (args != NULL && args->debug)                                    \
-        pam_syslog((args)->pamh, LOG_DEBUG, "%s: exit (%s)", __func__,  \
-                   ((pamret) == PAM_SUCCESS) ? "success"                \
-                   : (((pamret) == PAM_IGNORE) ? "ignore" : "failure"))
+/* clang-format off */
+#define EXIT(args, pamret)                                             \
+    if (args != NULL && args->debug)                                   \
+        pam_syslog((args)->pamh, LOG_DEBUG, "%s: exit (%s)", __func__, \
+                   ((pamret) == PAM_SUCCESS)                           \
+                       ? "success"                                     \
+                       : (((pamret) == PAM_IGNORE) ? "ignore" : "failure"))
+/* clang-format on */
 
 #endif /* !PAM_UTIL_LOGGING_H */

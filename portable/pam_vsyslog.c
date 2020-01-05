@@ -13,6 +13,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010-2011
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -52,9 +53,11 @@ pam_vsyslog(const pam_handle_t *pamh, int priority, const char *fmt,
                "cannot allocate memory in vasprintf: %m");
         return;
     }
+    /* clang-format off */
     syslog(priority | LOG_AUTHPRIV, MODULE_NAME "%s%s%s: %s",
            (service == NULL) ? "" : "(",
            (service == NULL) ? "" : service,
            (service == NULL) ? "" : ")", msg);
+    /* clang-format on */
     free(msg);
 }

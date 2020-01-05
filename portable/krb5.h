@@ -20,7 +20,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2015, 2017 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2015, 2017, 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010-2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -179,7 +179,7 @@ krb5_error_code krb5_get_init_creds_opt_alloc(krb5_context,
 
 /* Not available in versions of Heimdal prior to 7.0.1. */
 #ifndef HAVE_KRB5_GET_INIT_CREDS_OPT_SET_CHANGE_PASSWORD_PROMPT
-# define krb5_get_init_creds_opt_set_change_password_prompt(o, f) /* empty */
+# define krb5_get_init_creds_opt_set_change_password_prompt(o, f) /* */
 #endif
 
 /* Heimdal-specific. */
@@ -271,7 +271,7 @@ const char *krb5_principal_get_realm(krb5_context, krb5_const_principal);
  * krb5_verify_init_creds function but not this function.
  */
 #ifndef HAVE_KRB5_VERIFY_INIT_CREDS_OPT_INIT
-void krb5_verify_init_creds_opt_init(krb5_verify_init_creds_opt *opt)
+void krb5_verify_init_creds_opt_init(krb5_verify_init_creds_opt *opt);
 #endif
 
 /* Undo default visibility change. */
