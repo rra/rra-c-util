@@ -1,7 +1,7 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <eagle@eyrie.org
-# Copyright 2015-2019 Russ Allbery <eagle@eyrie.org>
+# Copyright 2015-2020 Russ Allbery <eagle@eyrie.org>
 # Copyright 2008-2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -305,3 +305,9 @@ check-valgrind: $(check_PROGRAMS)
 	mkdir $(abs_top_builddir)/tests/tmp/valgrind
 	C_TAP_VALGRIND="$(VALGRIND_COMMAND)" tests/runtests \
 	    -l '$(abs_top_srcdir)/tests/TESTS'
+
+# Used by maintainers to reformat all source code using clang-format and
+# excluding some files.
+reformat:
+	find . -name '*.[ch]' \! -name snprintf.c \! -name krb5-profile.c \
+	     -print | xargs clang-format-10 -style=file -i
