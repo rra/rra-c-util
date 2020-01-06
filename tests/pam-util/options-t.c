@@ -85,7 +85,7 @@ static const size_t optlen = sizeof(options) / sizeof(options[0]);
         ok(status, "Parse of %s", (a));                                 \
         is_int((v), (c), "...and value is correct");                    \
         ok(pam_output() == NULL, "...and no output");                   \
-    } while (0);
+    } while (0)
 
 /*
  * A macro used to test error reporting from putil_args_parse().  This reuses
@@ -106,7 +106,7 @@ static const size_t optlen = sizeof(options) / sizeof(options[0]);
             is_string((e), seen->lines[0].line, "...error for %s", (a));     \
         }                                                                    \
         pam_output_free(seen);                                               \
-    } while (0);
+    } while (0)
 
 
 /*
