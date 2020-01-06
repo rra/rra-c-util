@@ -1,12 +1,12 @@
 {
     "name": "rra-c-util",
-    "version": "8.0",
+    "version": "8.1",
     "synopsis": "Russ Allbery's utility libraries for C",
     "maintainer": "Russ Allbery <eagle@eyrie.org>",
     "copyrights": [
         {
             "holder": "Russ Allbery <eagle@eyrie.org>",
-            "years": "2000, 2009-2010, 2013-2019",
+            "years": "2000, 2009-2010, 2013-2020",
         },
         {
             "holder": "The Board of Trustees of the Leland Stanford Junior University",

@@ -11,15 +11,45 @@ License: Expat
 
 Files: *
 Copyright: 1997, 2000-2002 Benjamin Sittler
-  2000-2002, 2004-2019 Russ Allbery <eagle@eyrie.org>
+  2000-2002, 2004-2020 Russ Allbery <eagle@eyrie.org>
   2001-2002, 2004-2014
     The Board of Trustees of the Leland Stanford Junior University
 License: Expat
 
+Files: .clang-format docs/api/xmalloc.3 docs/api/xmalloc.pod
+ kafs/sys-syscall.c pam-util/vector.c pam-util/vector.h portable/apr.h
+ portable/asprintf.c portable/daemon.c portable/dummy.c
+ portable/event-extra.c portable/event.h portable/getaddrinfo.c
+ portable/getaddrinfo.h portable/getnameinfo.c portable/getnameinfo.h
+ portable/gssapi-mech.c portable/gssapi.h portable/inet_aton.c
+ portable/inet_ntoa.c portable/inet_ntop.c portable/issetugid.c
+ portable/k_haspag.c portable/kadmin.h portable/krb5-extra.c
+ portable/krb5.h portable/macros.h portable/mkstemp.c portable/pam.h
+ portable/pam_syslog.c portable/pam_vsyslog.c portable/reallocarray.c
+ portable/sd-daemon.h portable/setenv.c portable/seteuid.c
+ portable/socket-unix.h portable/statvfs.h portable/stdbool.h
+ portable/strndup.c portable/system.h portable/uio.h portable/winsock.c
+ tests/README tests/TESTS tests/data/cppcheck.supp tests/data/perltidyrc
+ tests/fakepam/README tests/pam-util/vector-t.c tests/portable/asprintf-t.c
+ tests/portable/daemon-t.c tests/portable/getaddrinfo-t.c
+ tests/portable/getnameinfo-t.c tests/portable/inet_aton-t.c
+ tests/portable/inet_ntoa-t.c tests/portable/inet_ntop-t.c
+ tests/portable/mkstemp-t.c tests/portable/reallocarray-t.c
+ tests/portable/setenv-t.c tests/portable/strndup-t.c tests/util/buffer-t.c
+ tests/util/vector-t.c util/macros.h util/vector.c util/vector.h
+Copyright: 2000-2020 Russ Allbery <eagle@eyrie.org>
+  2005-2014 The Board of Trustees of the Leland Stanford Junior University
+  2015 Julien ÉLIE <julien@trigofacile.com>
+License: all-permissive
+ Copying and distribution of this file, with or without modification, are
+ permitted in any medium without royalty provided the copyright notice and
+ this notice are preserved.  This file is offered as-is, without any
+ warranty.
+
 Files: Makefile.in
 Copyright: 1994-2018 Free Software Foundation, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2015-2018 Russ Allbery <eagle@eyrie.org>
+  2015-2020 Russ Allbery <eagle@eyrie.org>
 License: FSF-unlimited and Expat
 
 Files: aclocal.m4
@@ -86,36 +116,6 @@ License: unlimited
  and/or distribute it, with or without modifications, as long as this
  notice is preserved.
 
-Files: docs/api/xmalloc.3 docs/api/xmalloc.pod kafs/sys-syscall.c
- pam-util/vector.c pam-util/vector.h portable/apr.h portable/asprintf.c
- portable/daemon.c portable/dummy.c portable/event-extra.c portable/event.h
- portable/getaddrinfo.c portable/getaddrinfo.h portable/getnameinfo.c
- portable/getnameinfo.h portable/gssapi-mech.c portable/gssapi.h
- portable/inet_aton.c portable/inet_ntoa.c portable/inet_ntop.c
- portable/issetugid.c portable/k_haspag.c portable/kadmin.h
- portable/krb5-extra.c portable/krb5.h portable/macros.h portable/mkstemp.c
- portable/pam.h portable/pam_syslog.c portable/pam_vsyslog.c
- portable/reallocarray.c portable/sd-daemon.h portable/setenv.c
- portable/seteuid.c portable/socket-unix.h portable/statvfs.h
- portable/stdbool.h portable/strndup.c portable/system.h portable/uio.h
- portable/winsock.c tests/README tests/TESTS tests/data/cppcheck.supp
- tests/data/perltidyrc tests/fakepam/README tests/pam-util/vector-t.c
- tests/portable/asprintf-t.c tests/portable/daemon-t.c
- tests/portable/getaddrinfo-t.c tests/portable/getnameinfo-t.c
- tests/portable/inet_aton-t.c tests/portable/inet_ntoa-t.c
- tests/portable/inet_ntop-t.c tests/portable/mkstemp-t.c
- tests/portable/reallocarray-t.c tests/portable/setenv-t.c
- tests/portable/strndup-t.c tests/util/buffer-t.c tests/util/vector-t.c
- util/macros.h util/vector.c util/vector.h
-Copyright: 2000-2019 Russ Allbery <eagle@eyrie.org>
-  2005-2014 The Board of Trustees of the Leland Stanford Junior University
-  2015 Julien ÉLIE <julien@trigofacile.com>
-License: all-permissive
- Copying and distribution of this file, with or without modification, are
- permitted in any medium without royalty provided the copyright notice and
- this notice are preserved.  This file is offered as-is, without any
- warranty.
-
 Files: m4/cc-flags.m4 m4/perl.m4 m4/python.m4 m4/socket-unix.m4
  m4/socket.m4 portable/socket.h util/buffer.c util/buffer.h util/fdflag.c
  util/fdflag.h util/messages.c util/messages.h util/network.c
@@ -125,7 +125,7 @@ Copyright: 1991, 1994-2003 The Internet Software Consortium and Rich Salz
   2004-2011, 2016 Internet Systems Consortium, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
   2009, 2011, 2015, 2018 Julien ÉLIE <julien@trigofacile.com>
-  2014-2019 Russ Allbery <eagle@eyrie.org>
+  2014-2020 Russ Allbery <eagle@eyrie.org>
 License: ISC
  Permission to use, copy, modify, and distribute this software for any
  purpose with or without fee is hereby granted, provided that the above
@@ -180,7 +180,7 @@ License: MIT-Kerberos
 
 Files: portable/snprintf.c tests/portable/snprintf-t.c
 Copyright: 1995 Patrick Powell
-  2000-2006, 2018 Russ Allbery <eagle@eyrie.org>
+  2000-2006, 2018-2020 Russ Allbery <eagle@eyrie.org>
   2001 Hrvoje Niksic
   2009-2010 The Board of Trustees of the Leland Stanford Junior University
 License: Powell-snprintf

@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 8.1 (unreleased)
+rra-c-util 8.1 (2020-01-05)
 
     Drop support for Perl 5.6.  Perl tests and supporting libraries now
     require Perl 5.8 or later.  Not even CPAN testers are still testing

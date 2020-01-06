@@ -1,9 +1,9 @@
-# rra-c-util 8.0
+# rra-c-util 8.1
 
 [![Build
 status](https://travis-ci.org/rra/rra-c-util.svg?branch=master)](https://travis-ci.org/rra/rra-c-util)
 
-Copyright 2000, 2009-2010, 2013-2019 Russ Allbery <eagle@eyrie.org>.
+Copyright 2000, 2009-2010, 2013-2020 Russ Allbery <eagle@eyrie.org>.
 Copyright 2009-2014 The Board of Trustees of the Leland Stanford Junior
 University.  This software is distributed under a BSD-style license.
 Please see the section [License](#license) below for more information.
@@ -78,7 +78,7 @@ calls.
 
 A dummy Perl module is built and tested as part of the rra-c-util build in
 order to exercise the included Perl test support libraries.  This requires
-Perl 5.6.2 or later and Module::Build (available from CPAN).  The included
+Perl 5.8 or later and Module::Build (available from CPAN).  The included
 components of rra-c-util are usable without Perl (by copying them to
 another package), even though the build will fail.
 
@@ -338,7 +338,7 @@ requests are gratefully reviewed and normally accepted.
 The rra-c-util package as a whole is covered by the following copyright
 statement and license:
 
-> Copyright 2000, 2009-2010, 2013-2019
+> Copyright 2000, 2009-2010, 2013-2020
 >     Russ Allbery <eagle@eyrie.org>
 >
 > Copyright 2009-2014
