@@ -18,8 +18,8 @@
  */
 
 #include <config.h>
-#include <portable/system.h>
 #include <portable/socket.h>
+#include <portable/system.h>
 
 #include <errno.h>
 
@@ -27,7 +27,7 @@
 
 /* Some systems too old to have inet_ntop don't have EAFNOSUPPORT. */
 #ifndef EAFNOSUPPORT
-# define EAFNOSUPPORT EDOM
+#    define EAFNOSUPPORT EDOM
 #endif
 
 const char *test_inet_ntop(int, const void *, char *, socklen_t);

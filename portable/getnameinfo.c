@@ -42,19 +42,19 @@
  * constants, but that should be okay (except possibly for gai_strerror).
  */
 #if TESTING
-# undef getnameinfo
-# define getnameinfo test_getnameinfo
+#    undef getnameinfo
+#    define getnameinfo test_getnameinfo
 int test_getnameinfo(const struct sockaddr *, socklen_t, char *, socklen_t,
                      char *, socklen_t, int);
 
 /* Linux doesn't provide EAI_OVERFLOW, so make up our own for testing. */
-# ifndef EAI_OVERFLOW
-#  define EAI_OVERFLOW 10
-# endif
+#    ifndef EAI_OVERFLOW
+#        define EAI_OVERFLOW 10
+#    endif
 #endif
 
 /* Used for unused parameters to silence gcc warnings. */
-#define UNUSED  __attribute__((__unused__))
+#define UNUSED __attribute__((__unused__))
 
 
 /*

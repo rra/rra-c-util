@@ -31,12 +31,12 @@
  */
 
 #include <config.h>
-#include <portable/system.h>
 #include <portable/socket.h>
+#include <portable/system.h>
 
 #include <errno.h>
-#include <sys/wait.h>
 #include <signal.h>
+#include <sys/wait.h>
 
 #include <tests/tap/basic.h>
 #include <util/fdflag.h>
@@ -429,9 +429,9 @@ test_all(const char *source_ipv4, const char *source_ipv6 UNUSED)
                 client_writer("127.0.0.1", source_ipv4, true);
 #ifdef HAVE_INET6
             } else if (family == AF_INET6) {
-# ifdef IPV6_V6ONLY
+#    ifdef IPV6_V6ONLY
                 client_writer("127.0.0.1", source_ipv4, false);
-# endif
+#    endif
                 client_writer("::1", source_ipv6, true);
 #endif
             } else {

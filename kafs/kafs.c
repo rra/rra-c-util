@@ -50,7 +50,7 @@
 #include <fcntl.h>
 #include <signal.h>
 #ifdef HAVE_SYS_IOCCOM_H
-# include <sys/ioccom.h>
+#    include <sys/ioccom.h>
 #endif
 #include <sys/ioctl.h>
 #include <sys/stat.h>
@@ -69,17 +69,17 @@ static int k_syscall(long, long, long, long, long, int *);
  * The included file must provide a k_syscall implementation.
  */
 #if defined(HAVE_KAFS_DARWIN8)
-# include <kafs/sys-darwin8.c>
+#    include <kafs/sys-darwin8.c>
 #elif defined(HAVE_KAFS_DARWIN10)
-# include <kafs/sys-darwin10.c>
+#    include <kafs/sys-darwin10.c>
 #elif defined(HAVE_KAFS_LINUX)
-# include <kafs/sys-linux.c>
+#    include <kafs/sys-linux.c>
 #elif defined(HAVE_KAFS_SOLARIS)
-# include <kafs/sys-solaris.c>
+#    include <kafs/sys-solaris.c>
 #elif defined(HAVE_KAFS_SYSCALL)
-# include <kafs/sys-syscall.c>
+#    include <kafs/sys-syscall.c>
 #else
-# error "Unknown AFS system call implementation"
+#    error "Unknown AFS system call implementation"
 #endif
 
 /*

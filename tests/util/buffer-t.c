@@ -62,8 +62,8 @@ test_append_vsprintf(struct buffer *buffer, const char *format, ...)
 int
 main(void)
 {
-    struct buffer one = { 0, 0, 0, NULL };
-    struct buffer two = { 0, 0, 0, NULL };
+    struct buffer one = {0, 0, 0, NULL};
+    struct buffer two = {0, 0, 0, NULL};
     struct buffer *three;
     int fd;
     char *data;
@@ -93,7 +93,9 @@ main(void)
     ok(memcmp(one.data + one.used, test_string2, sizeof(test_string2)) == 0,
        "and the middle data is unchanged");
     ok(memcmp(one.data + one.used + sizeof(test_string2), test_string1,
-              sizeof(test_string1)) == 0, "and the final data is correct");
+              sizeof(test_string1))
+           == 0,
+       "and the final data is correct");
     buffer_set(&one, test_string1, sizeof(test_string1));
     buffer_set(&two, test_string2, sizeof(test_string2));
     buffer_swap(&one, &two);

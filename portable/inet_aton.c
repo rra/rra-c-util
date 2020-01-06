@@ -22,16 +22,16 @@
  */
 
 #include <config.h>
-#include <portable/system.h>
 #include <portable/socket.h>
+#include <portable/system.h>
 
 /*
  * If we're running the test suite, rename inet_aton to avoid conflicts with
  * the system version.
  */
 #if TESTING
-# undef inet_aton
-# define inet_aton test_inet_aton
+#    undef inet_aton
+#    define inet_aton test_inet_aton
 int test_inet_aton(const char *, struct in_addr *);
 #endif
 

@@ -42,7 +42,7 @@ int
 main(void)
 {
     pam_handle_t *pamh;
-    struct pam_conv conv = { NULL, NULL };
+    struct pam_conv conv = {NULL, NULL};
     struct pam_args *args;
 
     plan(12);

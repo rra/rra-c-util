@@ -23,16 +23,16 @@
  */
 
 #include <config.h>
-#include <portable/system.h>
 #include <portable/socket.h>
+#include <portable/system.h>
 
 /*
  * If we're running the test suite, rename inet_ntoa to avoid conflicts with
  * the system version.
  */
 #if TESTING
-# undef inet_ntoa
-# define inet_ntoa test_inet_ntoa
+#    undef inet_ntoa
+#    define inet_ntoa test_inet_ntoa
 char *test_inet_ntoa(struct in_addr);
 #endif
 

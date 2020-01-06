@@ -45,13 +45,13 @@
 
 #include <config.h>
 #ifdef HAVE_KRB5
-# include <portable/krb5.h>
+#    include <portable/krb5.h>
 #endif
 #include <portable/macros.h>
 
 #include <errno.h>
 #ifdef HAVE_SYS_IOCCOM_H
-# include <sys/ioccom.h>
+#    include <sys/ioccom.h>
 #endif
 #include <sys/ioctl.h>
 
@@ -62,11 +62,11 @@ BEGIN_DECLS
 
 /* We have a libkafs or libkopenafs library. */
 #if HAVE_K_HASAFS
-# if HAVE_KAFS_H
-#  include <kafs.h>
-# elif HAVE_KOPENAFS_H
-#  include <kopenafs.h>
-# else
+#    if HAVE_KAFS_H
+#        include <kafs.h>
+#    elif HAVE_KOPENAFS_H
+#        include <kopenafs.h>
+#    else
 struct ViceIoctl {
     void *in, *out;
     short in_size;
@@ -76,33 +76,33 @@ int k_hasafs(void);
 int k_pioctl(char *, struct ViceIoctl *, void *, int);
 int k_setpag(void);
 int k_unlog(void);
-# endif
-# ifdef HAVE_K_HASPAG
-#  if !defined(HAVE_KAFS_H) && !defined(HAVE_KOPENAFS_H)
+#    endif
+#    ifdef HAVE_K_HASPAG
+#        if !defined(HAVE_KAFS_H) && !defined(HAVE_KOPENAFS_H)
 int k_haspag(void);
-#  endif
-# else
+#        endif
+#    else
 int k_haspag(void) __attribute__((__visibility__("hidden")));
-# endif
+#    endif
 
 /* We're linking directly to the OpenAFS libraries. */
 #elif HAVE_LSETPAG
-# if HAVE_AFS_AFSSYSCALLS_H
-#  include <afs/afssyscalls.h>
-# else
+#    if HAVE_AFS_AFSSYSCALLS_H
+#        include <afs/afssyscalls.h>
+#    else
 int lsetpag(void);
 int lpioctl(char *, int, void *, int);
-# endif
-# define k_hasafs()           (1)
-# define k_pioctl(p, c, a, f) lpioctl((p), (c), (a), (f))
-# define k_setpag()           lsetpag()
-# define k_unlog()            (errno = ENOSYS, -1)
+#    endif
+#    define k_hasafs()           (1)
+#    define k_pioctl(p, c, a, f) lpioctl((p), (c), (a), (f))
+#    define k_setpag()           lsetpag()
+#    define k_unlog()            (errno = ENOSYS, -1)
 
 int k_haspag(void) __attribute__((__visibility__("hidden")));
 
 /* We're using our local kafs replacement. */
 #elif HAVE_KAFS_REPLACEMENT
-# define HAVE_K_PIOCTL 1
+#    define HAVE_K_PIOCTL 1
 
 struct ViceIoctl {
     void *in, *out;
@@ -111,7 +111,7 @@ struct ViceIoctl {
 };
 
 /* Default to a hidden visibility for all portability functions. */
-#pragma GCC visibility push(hidden)
+#    pragma GCC visibility push(hidden)
 
 int k_hasafs(void);
 int k_haspag(void);
@@ -120,16 +120,16 @@ int k_setpag(void);
 int k_unlog(void);
 
 /* Undo default visibility change. */
-#pragma GCC visibility pop
+#    pragma GCC visibility pop
 
 /* We have no kafs implementation available. */
 #else
-# undef HAVE_KAFS
-# define k_hasafs()           (0)
-# define k_haspag()           (0)
-# define k_pioctl(p, c, a, f) (errno = ENOSYS, -1)
-# define k_setpag()           (errno = ENOSYS, -1)
-# define k_unlog()            (errno = ENOSYS, -1)
+#    undef HAVE_KAFS
+#    define k_hasafs()           (0)
+#    define k_haspag()           (0)
+#    define k_pioctl(p, c, a, f) (errno = ENOSYS, -1)
+#    define k_setpag()           (errno = ENOSYS, -1)
+#    define k_unlog()            (errno = ENOSYS, -1)
 #endif
 
 END_DECLS

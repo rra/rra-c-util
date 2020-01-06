@@ -32,7 +32,7 @@
 
 #include <config.h>
 #ifdef HAVE_KRB5
-# include <portable/krb5.h>
+#    include <portable/krb5.h>
 #endif
 #include <portable/system.h>
 
@@ -40,7 +40,7 @@
 #include <tests/tap/process.h>
 #include <util/macros.h>
 #ifdef HAVE_KRB5
-# include <util/messages-krb5.h>
+#    include <util/messages-krb5.h>
 #endif
 #include <util/messages.h>
 #include <util/xmalloc.h>

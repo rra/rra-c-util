@@ -36,7 +36,7 @@
 
 #include <config.h>
 #ifdef HAVE_KRB5
-# include <portable/krb5.h>
+#    include <portable/krb5.h>
 #endif
 #include <portable/pam.h>
 #include <portable/system.h>
@@ -47,7 +47,7 @@
 #include <pam-util/logging.h>
 
 #ifndef LOG_AUTHPRIV
-# define LOG_AUTHPRIV LOG_AUTH
+#    define LOG_AUTHPRIV LOG_AUTH
 #endif
 
 /* Used for iterating through arrays. */
@@ -79,7 +79,7 @@ static const struct {
  * Utility function to format a message into newly allocated memory, reporting
  * an error via syslog if vasprintf fails.
  */
-static char * __attribute__((__format__(printf, 1, 0)))
+static char *__attribute__((__format__(printf, 1, 0)))
 format(const char *fmt, va_list args)
 {
     char *msg;
@@ -296,8 +296,7 @@ putil_log_failure(struct pam_args *pargs, const char *fmt, ...)
  * authenticated if known, followed by a colon and the formatted Kerberos
  * error.
  */
-__attribute__((__format__(printf, 4, 0)))
-static void
+__attribute__((__format__(printf, 4, 0))) static void
 log_krb5(struct pam_args *pargs, int priority, int status, const char *fmt,
          va_list args)
 {

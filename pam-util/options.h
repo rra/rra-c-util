@@ -40,7 +40,7 @@
 
 #include <config.h>
 #ifdef HAVE_KRB5
-# include <portable/krb5.h>
+#    include <portable/krb5.h>
 #endif
 #include <portable/macros.h>
 #include <portable/stdbool.h>
@@ -151,8 +151,7 @@ BEGIN_DECLS
  * putil_args_parse(), since neither of those functions set defaults.
  */
 bool putil_args_defaults(struct pam_args *, const struct option options[],
-                         size_t optlen)
-    __attribute__((__nonnull__));
+                         size_t optlen) __attribute__((__nonnull__));
 
 /*
  * Fill out options from krb5.conf.  Takes the PAM args structure, the name of

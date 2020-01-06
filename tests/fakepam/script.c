@@ -43,7 +43,7 @@
 #include <dirent.h>
 #include <errno.h>
 #ifdef HAVE_REGCOMP
-# include <regex.h>
+#    include <regex.h>
 #endif
 #include <syslog.h>
 
@@ -101,7 +101,7 @@ like(const char *wanted, const char *seen, const char *format, ...)
     }
     regfree(&regex);
 }
-#else /* !HAVE_REGCOMP */
+#else  /* !HAVE_REGCOMP */
 static void
 like(const char *wanted, const char *seen, const char *format UNUSED, ...)
 {
@@ -223,7 +223,7 @@ check_output(const struct output *wanted, const struct output *seen)
     } else if (seen == NULL) {
         for (i = 0; i < wanted->count; i++) {
             is_int(wanted->lines[i].priority, 0, "output priority %lu",
-                      (unsigned long) i + 1);
+                   (unsigned long) i + 1);
             is_string(wanted->lines[i].line, NULL, "output line %lu",
                       (unsigned long) i + 1);
         }
@@ -251,7 +251,7 @@ check_output(const struct output *wanted, const struct output *seen)
         }
     }
 }
-        
+
 
 /*
  * The core of the work.  Given the path to a PAM interaction script, which
@@ -268,11 +268,11 @@ run_script(const char *file, const struct script_config *config)
     struct work *work;
     struct options *opts;
     struct action *action, *oaction;
-    struct pam_conv conv = { NULL, NULL };
+    struct pam_conv conv = {NULL, NULL};
     pam_handle_t *pamh;
     int status;
     size_t i, j;
-    const char *argv_empty[] = { NULL };
+    const char *argv_empty[] = {NULL};
 
     /* Open and parse the script. */
     if (access(file, R_OK) == 0)
@@ -319,7 +319,7 @@ run_script(const char *file, const struct script_config *config)
 
     /* If we have a test callback, call it now. */
     if (config->callback != NULL)
-        config->callback (pamh, config, config->data);
+        config->callback(pamh, config, config->data);
 
     /* Free memory and return. */
     pam_end(pamh, PAM_SUCCESS);

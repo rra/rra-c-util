@@ -45,7 +45,7 @@ int
 main(void)
 {
     pam_handle_t *pamh;
-    struct pam_conv conv = { NULL, NULL };
+    struct pam_conv conv = {NULL, NULL};
     char **env;
     size_t i;
 

@@ -31,12 +31,12 @@
  */
 
 #include <config.h>
-#include <portable/system.h>
 #include <portable/socket.h>
+#include <portable/system.h>
 
 #include <errno.h>
-#include <sys/wait.h>
 #include <signal.h>
+#include <sys/wait.h>
 
 #include <tests/tap/basic.h>
 #include <util/macros.h>
@@ -413,8 +413,7 @@ test_network_write(void)
      */
     socket_set_errno(0);
     ok(network_write(c, buffer, 32 * 1024, 0), "network_write");
-    ok(network_write(c, buffer, 32 * 1024, 1),
-       "network_write with timeout");
+    ok(network_write(c, buffer, 32 * 1024, 1), "network_write with timeout");
 
     /*
      * A longer write cannot be completely absorbed before the client sleep,

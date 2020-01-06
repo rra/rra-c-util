@@ -83,17 +83,17 @@
 
 #include <errno.h>
 #ifdef HAVE_SYSLOG_H
-# include <syslog.h>
+#    include <syslog.h>
 #endif
 
 #ifdef _WIN32
-# include <windows.h>
-# define LOG_DEBUG      EVENTLOG_SUCCESS
-# define LOG_INFO       EVENTLOG_INFORMATION_TYPE
-# define LOG_NOTICE     EVENTLOG_INFORMATION_TYPE
-# define LOG_WARNING    EVENTLOG_WARNING_TYPE
-# define LOG_ERR        EVENTLOG_ERROR_TYPE
-# define LOG_CRIT       EVENTLOG_ERROR_TYPE
+#    include <windows.h>
+#    define LOG_DEBUG   EVENTLOG_SUCCESS
+#    define LOG_INFO    EVENTLOG_INFORMATION_TYPE
+#    define LOG_NOTICE  EVENTLOG_INFORMATION_TYPE
+#    define LOG_WARNING EVENTLOG_WARNING_TYPE
+#    define LOG_ERR     EVENTLOG_ERROR_TYPE
+#    define LOG_CRIT    EVENTLOG_ERROR_TYPE
 #endif
 
 #include <util/macros.h>
@@ -101,18 +101,14 @@
 #include <util/xmalloc.h>
 
 /* The default handler lists. */
-static message_handler_func stdout_handlers[2] = {
-    message_log_stdout, NULL
-};
-static message_handler_func stderr_handlers[2] = {
-    message_log_stderr, NULL
-};
+static message_handler_func stdout_handlers[2] = {message_log_stdout, NULL};
+static message_handler_func stderr_handlers[2] = {message_log_stderr, NULL};
 
 /* The list of logging functions currently in effect. */
-static message_handler_func *debug_handlers  = NULL;
+static message_handler_func *debug_handlers = NULL;
 static message_handler_func *notice_handlers = stdout_handlers;
-static message_handler_func *warn_handlers   = stderr_handlers;
-static message_handler_func *die_handlers    = stderr_handlers;
+static message_handler_func *warn_handlers = stderr_handlers;
+static message_handler_func *die_handlers = stderr_handlers;
 
 /* If non-NULL, called before exit and its return value passed to exit. */
 int (*message_fatal_cleanup)(void) = NULL;
@@ -256,7 +252,7 @@ message_log_syslog(int pri, size_t len, const char *fmt, va_list args, int err)
             CloseEventLog(eventlog);
         }
     }
-#else /* !_WIN32 */
+#else  /* !_WIN32 */
     if (err == 0)
         syslog(pri, "%s", buffer);
     else

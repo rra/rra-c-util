@@ -52,8 +52,7 @@ BEGIN_DECLS
 #pragma GCC visibility push(hidden)
 
 /* Create a new, empty vector.  Returns NULL on memory allocation failure. */
-struct vector *vector_new(void)
-    __attribute__((__malloc__));
+struct vector *vector_new(void) __attribute__((__malloc__));
 
 /*
  * Create a new vector that's a copy of an existing vector.  Returns NULL on
@@ -74,16 +73,14 @@ bool vector_add(struct vector *, const char *string)
  * in vector_add if it's known in advance how many entries there will be.
  * Returns false on failure to allocate memory.
  */
-bool vector_resize(struct vector *, size_t size)
-    __attribute__((__nonnull__));
+bool vector_resize(struct vector *, size_t size) __attribute__((__nonnull__));
 
 /*
  * Reset the number of elements to zero, freeing all of the strings for a
  * regular vector, but not freeing the strings array (to cut down on memory
  * allocations if the vector will be reused).
  */
-void vector_clear(struct vector *)
-    __attribute__((__nonnull__));
+void vector_clear(struct vector *) __attribute__((__nonnull__));
 
 /* Free the vector and all resources allocated for it. */
 void vector_free(struct vector *);

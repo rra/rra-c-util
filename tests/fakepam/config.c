@@ -151,7 +151,7 @@ static const struct {
 static char *
 skip_whitespace(char *p)
 {
-    while (isspace((unsigned char)(*p)))
+    while (isspace((unsigned char) (*p)))
         p++;
     return p;
 }
@@ -351,8 +351,16 @@ expand_string(const char *template, const struct script_config *config)
             case 'u':
                 length += strlen(config->user);
                 break;
-            case '0': case '1': case '2': case '3': case '4':
-            case '5': case '6': case '7': case '8': case '9':
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
                 if (config->extra[*p - '0'] == NULL)
                     bail("extra script parameter %%%c not set", *p);
                 length += strlen(config->extra[*p - '0']);
@@ -390,8 +398,16 @@ expand_string(const char *template, const struct script_config *config)
                 memcpy(out, config->user, strlen(config->user));
                 out += strlen(config->user);
                 break;
-            case '0': case '1': case '2': case '3': case '4':
-            case '5': case '6': case '7': case '8': case '9':
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
                 extra = config->extra[*p - '0'];
                 memcpy(out, extra, strlen(extra));
                 out += strlen(extra);

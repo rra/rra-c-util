@@ -101,8 +101,8 @@ cvector_resize(struct cvector *vector, size_t size)
         vector->count = size;
     if (size == 0)
         size = 1;
-    vector->strings
-        = xreallocarray(vector->strings, size, sizeof(const char *));
+    vector->strings =
+        xreallocarray(vector->strings, size, sizeof(const char *));
     vector->allocated = size;
 }
 
@@ -350,8 +350,7 @@ split_multi_count(const char *string, const char *seps)
  * are considered a single separator.  Reuse the provided vector if non-NULL.
  */
 struct vector *
-vector_split_multi(const char *string, const char *seps,
-                   struct vector *vector)
+vector_split_multi(const char *string, const char *seps, struct vector *vector)
 {
     const char *p, *start;
     size_t i, count;
@@ -549,7 +548,7 @@ vector_exec(const char *path, struct vector *vector)
     if (vector->allocated == vector->count)
         vector_resize(vector, vector->count + 1);
     vector->strings[vector->count] = NULL;
-    return execv(path, (char * const *) vector->strings);
+    return execv(path, (char *const *) vector->strings);
 }
 
 int
@@ -559,5 +558,5 @@ cvector_exec(const char *path, struct cvector *vector)
     if (vector->allocated == vector->count)
         cvector_resize(vector, vector->count + 1);
     vector->strings[vector->count] = NULL;
-    return execv(path, (char * const *) vector->strings);
+    return execv(path, (char *const *) vector->strings);
 }

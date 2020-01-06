@@ -36,8 +36,8 @@
 
 #include <config.h>
 #ifdef HAVE_KADM5CLNT
-# include <portable/kadmin.h>
-# include <portable/krb5.h>
+#    include <portable/kadmin.h>
+#    include <portable/krb5.h>
 #endif
 #include <portable/system.h>
 
@@ -129,7 +129,7 @@ done:
     test_file_path_free(path);
     return okay;
 }
-#else /* !HAVE_KADM5CLNT */
+#else  /* !HAVE_KADM5CLNT */
 bool
 kerberos_expire_password(const char *principal UNUSED, time_t expires UNUSED)
 {

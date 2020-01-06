@@ -34,8 +34,8 @@
  * another name.
  */
 #if TESTING
-# undef daemon
-# define daemon test_daemon
+#    undef daemon
+#    define daemon test_daemon
 int test_daemon(int, int);
 #endif
 

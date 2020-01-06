@@ -211,8 +211,7 @@ split_multi_count(const char *string, const char *seps)
  * partial results.
  */
 struct vector *
-vector_split_multi(const char *string, const char *seps,
-                   struct vector *vector)
+vector_split_multi(const char *string, const char *seps, struct vector *vector)
 {
     const char *p, *start;
     size_t i, count;
@@ -232,7 +231,7 @@ vector_split_multi(const char *string, const char *seps,
     for (start = string, p = string, i = 0; *p != '\0'; p++)
         if (strchr(seps, *p) != NULL) {
             if (start != p) {
-                vector->strings[i] = strndup(start, (size_t) (p - start));
+                vector->strings[i] = strndup(start, (size_t)(p - start));
                 if (vector->strings[i] == NULL)
                     goto fail;
                 i++;
@@ -241,7 +240,7 @@ vector_split_multi(const char *string, const char *seps,
             start = p + 1;
         }
     if (start != p) {
-        vector->strings[i] = strndup(start, (size_t) (p - start));
+        vector->strings[i] = strndup(start, (size_t)(p - start));
         if (vector->strings[i] == NULL)
             goto fail;
         vector->count++;
@@ -268,7 +267,7 @@ vector_exec(const char *path, struct vector *vector)
         if (!vector_resize(vector, vector->count + 1))
             return -1;
     vector->strings[vector->count] = NULL;
-    return execv(path, (char * const *) vector->strings);
+    return execv(path, (char *const *) vector->strings);
 }
 
 
@@ -280,12 +279,11 @@ vector_exec(const char *path, struct vector *vector)
  */
 int
 vector_exec_env(const char *path, struct vector *vector,
-                const char * const env[])
+                const char *const env[])
 {
     if (vector->allocated == vector->count)
         if (!vector_resize(vector, vector->count + 1))
             return -1;
     vector->strings[vector->count] = NULL;
-    return execve(path, (char * const *) vector->strings,
-                  (char * const *) env);
+    return execve(path, (char *const *) vector->strings, (char *const *) env);
 }

@@ -36,7 +36,7 @@
 #include <config.h>
 #include <portable/macros.h>
 #ifdef HAVE_KRB5
-# include <portable/krb5.h>
+#    include <portable/krb5.h>
 #endif
 #include <portable/pam.h>
 
@@ -105,16 +105,16 @@ END_DECLS
 
 /* __func__ is C99, but not provided by all implementations. */
 #if (__STDC_VERSION__ < 199901L) && !defined(__func__)
-# if (__GNUC__ >= 2)
-#  define __func__ __FUNCTION__
-# else
-#  define __func__ "<unknown>"
-# endif
+#    if (__GNUC__ >= 2)
+#        define __func__ __FUNCTION__
+#    else
+#        define __func__ "<unknown>"
+#    endif
 #endif
 
 /* Macros to record entry and exit from the main PAM functions. */
-#define ENTRY(args, flags)                                              \
-    if (args->debug)                                                    \
+#define ENTRY(args, flags) \
+    if (args->debug)       \
         putil_log_entry((args), __func__, (flags));
 /* clang-format off */
 #define EXIT(args, pamret)                                             \

@@ -34,7 +34,7 @@
 #include <syslog.h>
 
 #ifndef LOG_AUTHPRIV
-# define LOG_AUTHPRIV LOG_AUTH
+#    define LOG_AUTHPRIV LOG_AUTH
 #endif
 
 void

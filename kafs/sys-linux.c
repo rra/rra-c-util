@@ -38,7 +38,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-/* 
+/*
  * The struct passed to ioctl to do an AFS system call.  Definition taken from
  * the afs/afs_args.h OpenAFS header.
  */

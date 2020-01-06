@@ -28,7 +28,7 @@
  * formats for easy testing.
  */
 #if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ > 2) || defined(__clang__)
-# pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#    pragma GCC diagnostic ignored "-Wformat-nonliteral"
 #endif
 
 /*
@@ -95,8 +95,8 @@ static unsigned long long ullong_nums[] = {
 
 
 static void
-test_format(bool trunc, const char *expected, int count,
-            const char *format, ...)
+test_format(bool trunc, const char *expected, int count, const char *format,
+            ...)
 {
     char buf[128];
     int result;
@@ -118,12 +118,13 @@ main(void)
     long lcount;
     char lgbuf[128];
 
-    plan(8 +
-         (18 + (ARRAY_SIZE(fp_formats) - 1) * ARRAY_SIZE(fp_nums)
-          + (ARRAY_SIZE(int_formats) - 1) * ARRAY_SIZE(int_nums)
-          + (ARRAY_SIZE(uint_formats) - 1) * ARRAY_SIZE(uint_nums)
-          + (ARRAY_SIZE(llong_formats) - 1) * ARRAY_SIZE(llong_nums)
-          + (ARRAY_SIZE(ullong_formats) - 1) * ARRAY_SIZE(ullong_nums)) * 2);
+    plan(8
+         + (18 + (ARRAY_SIZE(fp_formats) - 1) * ARRAY_SIZE(fp_nums)
+            + (ARRAY_SIZE(int_formats) - 1) * ARRAY_SIZE(int_nums)
+            + (ARRAY_SIZE(uint_formats) - 1) * ARRAY_SIZE(uint_nums)
+            + (ARRAY_SIZE(llong_formats) - 1) * ARRAY_SIZE(llong_nums)
+            + (ARRAY_SIZE(ullong_formats) - 1) * ARRAY_SIZE(ullong_nums))
+               * 2);
 
     is_int(4, test_snprintf(NULL, 0, "%s", "abcd"), "simple string length");
     is_int(2, test_snprintf(NULL, 0, "%d", 20), "number length");
@@ -150,8 +151,8 @@ main(void)
                 string, -2.5);
     test_format(true, "abcdefghij4444", 14, "%.10s%n%d", string, &count, 4444);
     is_int(10, count, "correct output from %%n");
-    test_format(true, "abcdefghijklmnopqrstuvwxyz01234", 36, "%n%s%ln",
-                &count, string, &lcount);
+    test_format(true, "abcdefghijklmnopqrstuvwxyz01234", 36, "%n%s%ln", &count,
+                string, &lcount);
     is_int(0, count, "correct output from two %%n");
     is_int(31, lcount, "correct output from long %%ln");
     test_format(true, "(null)", 6, "%s", (char *) NULL);

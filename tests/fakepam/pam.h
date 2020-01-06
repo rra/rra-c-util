@@ -33,13 +33,13 @@
  *
  * SPDX-License-Identifier: MIT
  */
- 
+
 #ifndef FAKEPAM_PAM_H
 #define FAKEPAM_PAM_H 1
 
 #include <config.h>
-#include <portable/pam.h>
 #include <portable/macros.h>
+#include <portable/pam.h>
 
 /* Used inside the fake PAM library to hold data items. */
 struct fakepam_data {
@@ -75,7 +75,7 @@ struct output {
     struct {
         int priority;
         char *line;
-    } *lines;
+    } * lines;
 };
 
 BEGIN_DECLS

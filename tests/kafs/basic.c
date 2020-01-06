@@ -51,7 +51,7 @@
  * user's path.
  */
 #ifndef PATH_AKLOG
-# define PATH_AKLOG "aklog"
+#    define PATH_AKLOG "aklog"
 #endif
 
 

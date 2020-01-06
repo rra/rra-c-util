@@ -24,19 +24,19 @@
  */
 
 #include <config.h>
-#include <portable/system.h>
 #include <portable/socket.h>
+#include <portable/system.h>
 
 #include <errno.h>
 
 /* This may already be defined by the system headers. */
 #ifndef INET_ADDRSTRLEN
-# define INET_ADDRSTRLEN 16
+#    define INET_ADDRSTRLEN 16
 #endif
 
 /* Systems old enough to not support inet_ntop may not have this either. */
 #ifndef EAFNOSUPPORT
-# define EAFNOSUPPORT EDOM
+#    define EAFNOSUPPORT EDOM
 #endif
 
 /*
@@ -44,8 +44,8 @@
  * the system version.
  */
 #if TESTING
-# undef inet_ntop
-# define inet_ntop test_inet_ntop
+#    undef inet_ntop
+#    define inet_ntop test_inet_ntop
 const char *test_inet_ntop(int, const void *, char *, socklen_t);
 #endif
 

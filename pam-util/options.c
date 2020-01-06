@@ -36,7 +36,7 @@
 
 #include <config.h>
 #ifdef HAVE_KRB5
-# include <portable/krb5.h>
+#    include <portable/krb5.h>
 #endif
 #include <portable/system.h>
 
@@ -208,9 +208,9 @@ default_boolean(struct pam_args *args, const char *section, const char *realm,
                 const char *opt, bool *result)
 {
     int tmp;
-#ifdef HAVE_KRB5_REALM
+#    ifdef HAVE_KRB5_REALM
     krb5_const_realm rdata = realm;
-#else
+#    else
     krb5_data realm_struct;
     const krb5_data *rdata;
 
@@ -222,7 +222,7 @@ default_boolean(struct pam_args *args, const char *section, const char *realm,
         realm_struct.data = (void *) realm;
         realm_struct.length = (unsigned int) strlen(realm);
     }
-#endif
+#    endif
 
     /*
      * The MIT version of krb5_appdefault_boolean takes an int * and the
@@ -247,9 +247,9 @@ default_number(struct pam_args *args, const char *section, const char *realm,
     char *tmp = NULL;
     char *end;
     long value;
-#ifdef HAVE_KRB5_REALM
+#    ifdef HAVE_KRB5_REALM
     krb5_const_realm rdata = realm;
-#else
+#    else
     krb5_data realm_struct;
     const krb5_data *rdata;
 
@@ -261,7 +261,7 @@ default_number(struct pam_args *args, const char *section, const char *realm,
         realm_struct.data = (void *) realm;
         realm_struct.length = (unsigned int) strlen(realm);
     }
-#endif
+#    endif
 
     krb5_appdefault_string(args->ctx, section, rdata, opt, "", &tmp);
     if (tmp != NULL && tmp[0] != '\0') {
@@ -290,9 +290,9 @@ default_time(struct pam_args *args, const char *section, const char *realm,
     char *tmp = NULL;
     krb5_deltat value;
     krb5_error_code retval;
-#ifdef HAVE_KRB5_REALM
+#    ifdef HAVE_KRB5_REALM
     krb5_const_realm rdata = realm;
-#else
+#    else
     krb5_data realm_struct;
     const krb5_data *rdata;
 
@@ -304,7 +304,7 @@ default_time(struct pam_args *args, const char *section, const char *realm,
         realm_struct.data = (void *) realm;
         realm_struct.length = (unsigned int) strlen(realm);
     }
-#endif
+#    endif
 
     krb5_appdefault_string(args->ctx, section, rdata, opt, "", &tmp);
     if (tmp != NULL && tmp[0] != '\0') {
@@ -334,9 +334,9 @@ default_string(struct pam_args *args, const char *section, const char *realm,
                const char *opt, char **result)
 {
     char *value = NULL;
-#ifdef HAVE_KRB5_REALM
+#    ifdef HAVE_KRB5_REALM
     krb5_const_realm rdata = realm;
-#else
+#    else
     krb5_data realm_struct;
     const krb5_data *rdata;
 
@@ -348,7 +348,7 @@ default_string(struct pam_args *args, const char *section, const char *realm,
         realm_struct.data = (void *) realm;
         realm_struct.length = (unsigned int) strlen(realm);
     }
-#endif
+#    endif
 
     krb5_appdefault_string(args->ctx, section, rdata, opt, "", &value);
     if (value != NULL) {
@@ -493,7 +493,7 @@ option_compare(const void *key, const void *member)
     if (p == NULL)
         return strcmp(string, option->name);
     else {
-        length = (size_t) (p - string);
+        length = (size_t)(p - string);
         if (length == 0)
             return -1;
         result = strncmp(string, option->name, length);

@@ -225,15 +225,15 @@ test22(void *data UNUSED)
     die("hi mom!");
 }
 
-static
-void test23(void *data UNUSED)
+static void
+test23(void *data UNUSED)
 {
     message_handlers_warn(0);
     warn("this is a test");
 }
 
-static
-void test24(void *data UNUSED)
+static void
+test24(void *data UNUSED)
 {
     notice("first");
     message_handlers_notice(0);
@@ -305,7 +305,7 @@ main(void)
     is_function_output(test20, NULL, 0, "3 0 foo\n", "test20");
     is_function_output(test21, NULL, 0, "test23: baz\n", "test21");
 
-    /* Make sure that it's possible to turn off a message type entirely. */ 
+    /* Make sure that it's possible to turn off a message type entirely. */
     is_function_output(test22, NULL, 1, "", "test22");
     is_function_output(test23, NULL, 0, "", "test23");
     is_function_output(test24, NULL, 0, "first\nthird\n", "test24");

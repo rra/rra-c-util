@@ -31,8 +31,8 @@
  */
 
 #include <config.h>
-#include <portable/system.h>
 #include <portable/getopt.h>
+#include <portable/system.h>
 
 #include <tests/tap/basic.h>
 

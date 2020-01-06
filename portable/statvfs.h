@@ -32,13 +32,13 @@
  * stripped-down version of config.h with a different name.
  */
 #ifndef CONFIG_H_INCLUDED
-# include <config.h>
+#    include <config.h>
 #endif
 
 #ifdef HAVE_SYS_STATVFS_H
-# include <sys/statvfs.h>
+#    include <sys/statvfs.h>
 #elif HAVE_SYS_VFS_H
-# include <sys/vfs.h>
+#    include <sys/vfs.h>
 #endif
 
 /*
@@ -48,10 +48,10 @@
  * more-general, fallback statfs struct member names.
  */
 #ifndef HAVE_STATVFS
-# define statvfs  statfs
-# define f_frsize f_bsize
-# define f_bavail f_bfree
-# define f_favail f_ffree
+#    define statvfs  statfs
+#    define f_frsize f_bsize
+#    define f_bavail f_bfree
+#    define f_favail f_ffree
 #endif
 
 #endif /* !PORTABLE_STATVFS_H */

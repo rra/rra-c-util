@@ -55,8 +55,7 @@ static struct passwd *pwd_info = NULL;
  */
 int
 pam_start(const char *service_name, const char *user,
-          const struct pam_conv *pam_conversation,
-          pam_handle_t **pamh)
+          const struct pam_conv *pam_conversation, pam_handle_t **pamh)
 {
     struct pam_handle *handle;
 
@@ -93,7 +92,7 @@ pam_end(pam_handle_t *pamh, int status)
     free(pamh->rhost);
     free(pamh->ruser);
     free(pamh->tty);
-    for (item = pamh->data; item != NULL; ) {
+    for (item = pamh->data; item != NULL;) {
         if (item->cleanup != NULL)
             item->cleanup(pamh, item->data, status);
         free(item->name);
