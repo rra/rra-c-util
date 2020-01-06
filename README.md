@@ -177,8 +177,8 @@ Do this instead of running the test program directly since it will ensure
 that necessary environment variables are set up.
 
 To run the full test suite, and to use the Perl test support libraries,
-Perl 5.6.2 or later is required.  The following additional Perl modules
-will be used if present:
+Perl 5.8 or later is required.  The following additional Perl modules will
+be used if present:
 
 * Devel::Cover
 * IPC::System::Simple
