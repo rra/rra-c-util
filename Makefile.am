@@ -295,10 +295,7 @@ VALGRIND_COMMAND = $(PATH_VALGRIND) --leak-check=full			\
 	--trace-children=yes --trace-children-skip=/bin/sh		\
 	--log-file=$(abs_top_builddir)/tests/tmp/valgrind/log.%p
 
-# Used by maintainers to run the main test suite under valgrind.  Suppress
-# the xmalloc and pod-spelling tests because the former won't work properly
-# under valgrind (due to increased memory usage) and the latter is pointless
-# to run under valgrind.
+# Used by maintainers to run the main test suite under valgrind.
 check-valgrind: $(check_PROGRAMS)
 	rm -rf $(abs_top_builddir)/tests/tmp
 	mkdir $(abs_top_builddir)/tests/tmp
