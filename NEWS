@@ -8,6 +8,9 @@ rra-c-util 8.1 (unreleased)
     at best.  Dropping support for Perl 5.6 allows cleaning up some old
     compatibility code.
 
+    Reformat all C source using clang-format 10 and the formatting rules
+    specified in .clang-format.
+
     Update suppressions and fix issues found by cppcheck 1.89.
 
     Remove snprintf tests that surpassed the promised precision of C
