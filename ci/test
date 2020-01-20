@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# Run tests for continuous integration.
+#
+# This script is normally run in a test container, such as in Travis-CI.
+#
+# Copyright 2015-2020 Russ Allbery <eagle@eyrie.org>
+#
+# SPDX-License-Identifier: MIT
+
+set -eux
+
+# Configure the build.
+export AUTHOR_TESTING=1
+export C_TAP_VERBOSE=1
+
+# Build everything.
+./bootstrap
+./configure --enable-perl --enable-php --enable-python --enable-ruby
+make warnings
+
+# Run the regular tests.
+make check

@@ -28,13 +28,13 @@ PERL_DIRECTORIES = perl perl/lib perl/t perl/t/api perl/t/data perl/t/docs \
 
 # Additional files to include in the distribution.
 EXTRA_DIST = .clang-format .gitignore .travis.yml LICENSE README.md	    \
-	bootstrap docs/api/xmalloc.3 docs/api/xmalloc.pod docs/metadata	    \
-	m4/apache.m4 m4/apr.m4 m4/aprutil.m4 m4/curl.m4 m4/ld-version.m4    \
-	m4/ldap.m4 m4/openssl.m4 m4/pcre.m4 m4/remctl.m4 m4/tinycdb.m4	    \
-	portable/winsock.c tests/README tests/TESTS			    \
-	tests/data/cppcheck.supp tests/data/generate-krb5-conf		    \
-	tests/data/krb5-pam.conf tests/data/perl.conf			    \
-	tests/data/perlcriticrc tests/data/perltidyrc			    \
+	bootstrap ci/README ci/install ci/test docs/api/xmalloc.3	    \
+	docs/api/xmalloc.pod docs/metadata m4/apache.m4 m4/apr.m4	    \
+	m4/aprutil.m4 m4/curl.m4 m4/ld-version.m4 m4/ldap.m4 m4/openssl.m4  \
+	m4/pcre.m4 m4/remctl.m4 m4/tinycdb.m4 portable/winsock.c	    \
+	tests/README tests/TESTS tests/data/cppcheck.supp		    \
+	tests/data/generate-krb5-conf tests/data/krb5-pam.conf		    \
+	tests/data/perl.conf tests/data/perlcriticrc tests/data/perltidyrc  \
 	tests/data/valgrind.supp tests/docs/pod-spelling-t tests/docs/pod-t \
 	tests/docs/spdx-license-t tests/fakepam/README tests/kafs/basic-t   \
 	tests/perl/critic-t tests/perl/minimum-version-t		    \
