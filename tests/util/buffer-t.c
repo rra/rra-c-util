@@ -5,7 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2002-2004, 2006, 2014-2015 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2002-2004, 2006, 2014-2015, 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011-2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -77,7 +77,7 @@ main(void)
     is_int(1024, one.size, "minimum size is 1024");
     is_int(0, one.used, "used starts at 0");
     is_int(sizeof(test_string1), one.left, "left is correct");
-    is_string(test_string1, one.data, "data is corect");
+    is_string(test_string1, one.data, "data is correct");
     buffer_append(&one, test_string2, sizeof(test_string2));
     is_int(1024, one.size, "appended data doesn't change size");
     is_int(0, one.used, "or used");

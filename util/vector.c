@@ -24,7 +24,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2001-2006, 2016 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2001-2006, 2016, 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2005-2006, 2008-2011, 2013-2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -327,7 +327,7 @@ split_multi_count(const char *string, const char *seps)
         return 0;
 
     /*
-     * Walk the string looking for the first separator not preceeded by
+     * Walk the string looking for the first separator not preceded by
      * another separator (and ignore a separator at the start of the string).
      */
     for (count = 1, p = string + 1; *p != '\0'; p++)

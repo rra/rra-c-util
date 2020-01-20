@@ -2,7 +2,7 @@
  * Replacement for a missing getaddrinfo.
  *
  * This is an implementation of getaddrinfo for systems that don't have one so
- * that networking code can use a consistant interface without #ifdef.  It is
+ * that networking code can use a consistent interface without #ifdef.  It is
  * a fairly minimal implementation, with the following limitations:
  *
  *   - IPv4 support only.  IPv6 is not supported.
@@ -20,7 +20,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2003-2005, 2016-2017, 2019 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2003-2005, 2016-2017, 2019-2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2015 Julien ÉLIE <julien@trigofacile.com>
  * Copyright 2008, 2011, 2013-2014
  *     The Board of Trustees of the Leland Stanford Junior University

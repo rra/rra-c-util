@@ -3,7 +3,7 @@
  *
  * This header includes kafs.h if it's available, prototypes k_hasafs,
  * k_setpag, and k_unlog replacements (generally provided by the kafs
- * replacement library) imlemented in terms of our system call layer or
+ * replacement library) implemented in terms of our system call layer or
  * lsetpag if it is available and libkafs isn't, and as a last resort provides
  * a k_hasafs function that always fails and k_setpag and k_unlog functions
  * that always succeed.
@@ -16,6 +16,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2006-2008, 2010, 2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *

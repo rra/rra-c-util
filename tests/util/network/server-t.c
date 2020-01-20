@@ -233,7 +233,7 @@ test_server_accept(socket_type fd)
 
 
 /*
- * A varient version of the server portion of the test.  Takes an array of
+ * A variant version of the server portion of the test.  Takes an array of
  * sockets and the size of the sockets and accepts a connection on any of
  * those sockets.  Ensures that the client address information is stored
  * correctly by checking that it is an IPv4 address.  For skipping purposes,

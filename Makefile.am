@@ -167,7 +167,7 @@ tests_tap_libtap_a_SOURCES = tests/tap/basic.c tests/tap/basic.h	\
 	tests/tap/remctl.c tests/tap/remctl.h tests/tap/string.c	\
 	tests/tap/string.h
 
-# kafs tests are buit differently depending on whether we use our local
+# kafs tests are built differently depending on whether we use our local
 # libkafs replacement.
 tests_kafs_basic_CPPFLAGS = $(KAFS_CPPFLAGS)
 tests_kafs_basic_LDFLAGS = $(KAFS_LDFLAGS)

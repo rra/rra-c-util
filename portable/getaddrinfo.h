@@ -3,7 +3,7 @@
  *
  * This is an implementation of the getaddrinfo family of functions for
  * systems that lack it, so that code can use getaddrinfo always.  It provides
- * IPv4 support only; for IPv6 support, a native getaddrinfo implemenation is
+ * IPv4 support only; for IPv6 support, a native getaddrinfo implementation is
  * required.
  *
  * This file should generally be included by way of portable/socket.h rather
@@ -13,7 +13,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2003, 2005 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2003, 2005, 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2008-2011
  *     The Board of Trustees of the Leland Stanford Junior University
  *

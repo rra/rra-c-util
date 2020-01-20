@@ -9,7 +9,7 @@ dnl specify paths at a more granular level; and --with-afs,
 dnl --with-afs-include, and --with-afs-lib configure options to specify the
 dnl location of the AFS libraries.
 dnl
-dnl Provides the macro RRA_LIB_KAFS and sets the substition variables
+dnl Provides the macro RRA_LIB_KAFS and sets the substitution variables
 dnl KAFS_CPPFLAGS, KAFS_LDFLAGS, and KAFS_LIBS.  If Kerberos libraries may be
 dnl needed, LIBS and LDFLAGS must already be set appropriately before calling
 dnl this.  Also provides RRA_LIB_KAFS_SWITCH to set CPPFLAGS, LDFLAGS, and
@@ -35,6 +35,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2020 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2008-2010
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl

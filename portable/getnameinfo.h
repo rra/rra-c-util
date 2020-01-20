@@ -3,7 +3,7 @@
  *
  * This is an implementation of the getnameinfo function for systems that lack
  * it, so that code can use getnameinfo always.  It provides IPv4 support
- * only; for IPv6 support, a native getnameinfo implemenation is required.
+ * only; for IPv6 support, a native getnameinfo implementation is required.
  *
  * This file should generally be included by way of portable/socket.h rather
  * than directly.
@@ -12,7 +12,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2005, 2007 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2005, 2007, 2020 Russ Allbery <eagle@eyrie.org>
  * Copyright 2008, 2010-2011
  *     The Board of Trustees of the Leland Stanford Junior University
  *

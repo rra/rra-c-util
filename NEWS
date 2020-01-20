@@ -380,7 +380,7 @@ rra-c-util 5.6 (2014-12-25)
     factored out into Test::RRA.)
 
     Fix visibility for util/buffer.c functions and for inet_aton and
-    inet_ntoa replacements to match the default hidden visiblity of other
+    inet_ntoa replacements to match the default hidden visibility of other
     portability and util functions.  Thanks, Julien ÉLIE.
 
     network_addr_match now always fails (returns false) if either of the
@@ -1490,7 +1490,7 @@ rra-c-util 2.7 (2010-09-20)
     commented out so that it is tested when building rra-c-util.  Building
     this package directly will now require working GSS-API libraries, but
     since it already required working Kerberos libraries, this should not
-    make a noticable difference.
+    make a noticeable difference.
 
 rra-c-util 2.6 (2010-08-25)
 
