@@ -5,6 +5,9 @@ rra-c-util 8.2 (unreleased)
     Change ENTRY logging macro for PAM modules to not end in a semicolon
     so that it can be used like a function call.
 
+    Ignore files in tests/config other than README when checking for SPDX
+    license identifiers.
+
 rra-c-util 8.1 (2020-01-05)
 
     Drop support for Perl 5.6.  Perl tests and supporting libraries now
