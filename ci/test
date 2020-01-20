@@ -21,3 +21,6 @@ make warnings
 
 # Run the regular tests.
 make check
+
+# Check source with cppcheck.
+make check-cppcheck
