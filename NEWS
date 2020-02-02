@@ -2,6 +2,9 @@
 
 rra-c-util 8.2 (unreleased)
 
+    Fix support for configuring Kerberos tests with their own krb5.conf
+    file.  Path from Jeffrey Hutzelman.
+
     Change ENTRY logging macro for PAM modules to not end in a semicolon
     so that it can be used like a function call.
 
