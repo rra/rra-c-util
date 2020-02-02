@@ -8,6 +8,8 @@ rra-c-util 8.2 (unreleased)
     Change ENTRY and EXIT logging macros for PAM modules to use do/while
     syntax so that it can be used like a function call.
 
+    Add a definition of PAM_MAX_RESP_SIZE to portable/pam.h.
+
     Ignore files in tests/config other than README when checking for SPDX
     license identifiers.
 
