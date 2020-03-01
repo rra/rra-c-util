@@ -18,6 +18,10 @@ rra-c-util 8.2 (unreleased)
     directory is used by quilt (and thus some Debian packaging) for
     metadata.
 
+    Fix header ordering in some of the portability socket code to restore
+    compatibility with some ancient UNIX systems.  This was broken by the
+    include reordering done by clang-format.  Thanks, Julien ÉLIE.
+
 rra-c-util 8.1 (2020-01-05)
 
     Drop support for Perl 5.6.  Perl tests and supporting libraries now
