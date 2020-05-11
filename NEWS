@@ -27,6 +27,8 @@ rra-c-util 8.2 (unreleased)
     compatibility with some ancient UNIX systems.  This was broken by the
     include reordering done by clang-format.  Thanks, Julien ÉLIE.
 
+    Fix warnings with Clang 10.
+
 rra-c-util 8.1 (2020-01-05)
 
     Drop support for Perl 5.6.  Perl tests and supporting libraries now
