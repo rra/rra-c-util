@@ -19,7 +19,7 @@ our $VERSION;
 # against circular module loading (not that we load any modules, but
 # consistency is good).
 BEGIN {
-    $VERSION = '8.01';
+    $VERSION = '8.02';
 }
 
 # Empty function for testing purposes.
