@@ -21,6 +21,8 @@ rra-c-util 8.2 (unreleased)
     directory is used by quilt (and thus some Debian packaging) for
     metadata.
 
+    Ignore object files when checking for SPDX license identifiers.
+
     Fix header ordering in some of the portability socket code to restore
     compatibility with some ancient UNIX systems.  This was broken by the
     include reordering done by clang-format.  Thanks, Julien ÉLIE.
