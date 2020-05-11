@@ -32,6 +32,10 @@ rra-c-util 8.2 (unreleased)
 
     Fix warnings with Clang 10.
 
+    Update to C TAP Harness 4.7:
+
+    * Fix warning with GCC 10.
+
 rra-c-util 8.1 (2020-01-05)
 
     Drop support for Perl 5.6.  Perl tests and supporting libraries now
