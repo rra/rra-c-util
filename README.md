@@ -1,7 +1,7 @@
 # rra-c-util 8.1
 
 [![Build
-status](https://travis-ci.org/rra/rra-c-util.svg?branch=master)](https://travis-ci.org/rra/rra-c-util)
+status](https://github.com/rra/rra-c-util/workflows/build/badge.svg)](https://github.com/rra/rra-c-util/actions)
 
 Copyright 2000, 2009-2010, 2013-2020 Russ Allbery <eagle@eyrie.org>.
 Copyright 2009-2014 The Board of Trustees of the Leland Stanford Junior

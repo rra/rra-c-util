@@ -37,7 +37,9 @@
         "browse": "https://git.eyrie.org/?p=devel/rra-c-util.git",
         "github": "rra/rra-c-util",
         "openhub": "https://www.openhub.net/p/rra-c-util",
-        "travis": "rra/rra-c-util",
+        "status": {
+            "workflow": "build",
+        },
     },
     "readme": {
         "sections": [
