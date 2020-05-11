@@ -6,7 +6,10 @@ rra-c-util 8.2 (unreleased)
     available.
 
     Fix support for configuring Kerberos tests with their own krb5.conf
-    file.  Path from Jeffrey Hutzelman.
+    file.  Patch from Jeffrey Hutzelman.
+
+    Fix support for configuring Kerberos tests when the system krb5.conf
+    file does not contain a default_realm setting.
 
     Change ENTRY and EXIT logging macros for PAM modules to use do/while
     syntax so that it can be used like a function call.
