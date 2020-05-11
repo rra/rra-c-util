@@ -128,7 +128,7 @@ distclean-local:
 
 # Separate target for a human to request building everything with as many
 # compiler warnings enabled as possible.
-warnings:
+warnings: perl/blib/lib/Empty.pm
 	$(MAKE) V=0 CFLAGS='$(WARNINGS_CFLAGS) $(AM_CFLAGS)' \
 	    KRB5_CPPFLAGS='$(KRB5_CPPFLAGS_GCC)'
 	$(MAKE) V=0 CFLAGS='$(WARNINGS_CFLAGS) $(AM_CFLAGS)' \
@@ -296,7 +296,7 @@ VALGRIND_COMMAND = $(PATH_VALGRIND) --leak-check=full			\
 	--log-file=$(abs_top_builddir)/tests/tmp/valgrind/log.%p
 
 # Used by maintainers to run the main test suite under valgrind.
-check-valgrind: $(check_PROGRAMS)
+check-valgrind: $(check_PROGRAMS) perl/blib/lib/Empty.pm
 	rm -rf $(abs_top_builddir)/tests/tmp
 	mkdir $(abs_top_builddir)/tests/tmp
 	mkdir $(abs_top_builddir)/tests/tmp/valgrind
