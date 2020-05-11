@@ -24,8 +24,8 @@ set -eux
 apt-get update -qq
 apt-get install aspell cpanminus cppcheck libevent-dev libkrb5-dev            \
         libpam0g-dev libperl-dev libpython-dev pkg-config libdevel-cover-perl \
-        libtest-pod-perl libtest-pod-coverage-perl libtest-strict-perl        \
-        libtest-synopsis-perl perl valgrind
+        libtest-pod-perl libtest-pod-coverage-perl libtest-spelling-perl      \
+        libtest-strict-perl libtest-synopsis-perl perl valgrind
 
 # Dependencies for Perl tests.
 cpanm Perl::Tidy
