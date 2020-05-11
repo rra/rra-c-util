@@ -1,7 +1,7 @@
 dnl Autoconf configuration for rra-c-util.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2000, 2003, 2013-2018 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2000, 2003, 2013-2018, 2020 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2002-2014
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -217,7 +217,7 @@ AC_CHECK_TYPES([sig_atomic_t], [], [],
 AC_CHECK_TYPES([ssize_t], [], [],
     [#include <sys/types.h>])
 RRA_FUNC_SNPRINTF
-AC_CHECK_FUNCS([setrlimit setsid])
+AC_CHECK_FUNCS([explicit_bzero setrlimit setsid])
 AC_REPLACE_FUNCS([asprintf daemon getopt issetugid mkstemp reallocarray])
 AC_REPLACE_FUNCS([setenv seteuid strndup])
 

@@ -2,6 +2,9 @@
 
 rra-c-util 8.2 (unreleased)
 
+    Use memset to implement explicit_bzero if the latter is not
+    available.
+
     Fix support for configuring Kerberos tests with their own krb5.conf
     file.  Path from Jeffrey Hutzelman.
 
