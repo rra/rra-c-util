@@ -1,4 +1,4 @@
-# rra-c-util 8.1
+# rra-c-util 8.2
 
 [![Build
 status](https://github.com/rra/rra-c-util/workflows/build/badge.svg)](https://github.com/rra/rra-c-util/actions)
