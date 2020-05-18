@@ -295,6 +295,7 @@ check-cppcheck:
 # testing.
 VALGRIND_COMMAND = $(PATH_VALGRIND) --leak-check=full			\
 	--trace-children=yes --trace-children-skip=/bin/sh		\
+	--suppressions=$(abs_top_srcdir)/tests/data/valgrind.supp	\
 	--log-file=$(abs_top_builddir)/tests/tmp/valgrind/log.%p
 
 # Used by maintainers to run the main test suite under valgrind.
