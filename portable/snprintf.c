@@ -37,7 +37,7 @@
 #endif
 
 /*
- * Older Clang doesn't support __attribute__((fallthrough)) properly and
+ * Older Clang doesn't support __attribute__((__fallthrough__)) properly and
  * complains about the empty statement that it is decorating.  Suppress that
  * warning.  Also suppress warnings about unknown attributes to handle older
  * Clang versions.
@@ -388,7 +388,7 @@ static int dopr (char *buffer, size_t maxlen, const char *format, va_list args)
 	break;
       case 'X':
 	flags |= DP_F_UP;
-        __attribute__((fallthrough));
+        __attribute__((__fallthrough__));
         /* fall through */
       case 'x':
 	flags |= DP_F_UNSIGNED;
@@ -411,7 +411,7 @@ static int dopr (char *buffer, size_t maxlen, const char *format, va_list args)
 	break;
       case 'E':
 	flags |= DP_F_UP;
-        __attribute__((fallthrough));
+        __attribute__((__fallthrough__));
         /* fall through */
       case 'e':
 	if (cflags == DP_C_LDOUBLE)
@@ -422,7 +422,7 @@ static int dopr (char *buffer, size_t maxlen, const char *format, va_list args)
 	break;
       case 'G':
 	flags |= DP_F_UP;
-        __attribute__((fallthrough));
+        __attribute__((__fallthrough__));
         /* fall through */
       case 'g':
         flags |= DP_F_FP_G;
