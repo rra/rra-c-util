@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 8.3 (unreleased)
+
+    Ignore files named changelog when checking for obsolete strings so
+    that the check will not trigger on old Debian changelog entries.
+
 rra-c-util 8.2 (2020-05-16)
 
     Use memset to implement explicit_bzero if the latter is not
