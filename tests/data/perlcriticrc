@@ -10,7 +10,7 @@
 # which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
 # Written by Russ Allbery <eagle@eyrie.org>
-# Copyright 2018-2019 Russ Allbery <eagle@eyrie.org>
+# Copyright 2018-2020 Russ Allbery <eagle@eyrie.org>
 # Copyright 2011-2013
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -41,6 +41,10 @@ verbose  = %f:%l:%c: [%p] %m (%e, Severity: %s)\n
 # Stanford really didn't like it, so this is my compromise to agree with a
 # group coding style.
 [-CodeLayout::ProhibitParensWithBuiltins]
+
+# This recommends using given/when, but Perl has marked those as experimental
+# and cautions against using when.
+[-ControlStructures::ProhibitCascadingIfElse]
 
 # Stanford's coding style allows postfix unless for flow control.  There
 # doesn't appear to be any way to allow it only for flow control (the logic

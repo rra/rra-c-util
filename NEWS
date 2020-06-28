@@ -5,6 +5,11 @@ rra-c-util 8.3 (unreleased)
     Ignore files named changelog when checking for obsolete strings so
     that the check will not trigger on old Debian changelog entries.
 
+    Suppress ControlStructures::ProhibitCascadingIfElse in perlcritic
+    checks.  It recommends using given/when instead, but this construct is
+    marked as experimental in Perl and was considered a mistake in some
+    quarters.
+
 rra-c-util 8.2 (2020-05-16)
 
     Use memset to implement explicit_bzero if the latter is not
