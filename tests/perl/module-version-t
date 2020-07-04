@@ -37,13 +37,12 @@ use Getopt::Long qw(GetOptions);
 # Return the current version and, optionally, the package name from the NEWS
 # file.  Munges the version to be appropriate for Perl if necessary.
 #
-# Returns: Scalar: The version number of the latest version in NEWS
-#          List: The version number and the package name
+# Returns: The version number and the package name as a list
 # Throws: Text exception if NEWS is not found or doesn't contain a version
 sub news_version {
     my ($package, $version, $news);
     for my $path ('NEWS', '../NEWS') {
-        if (-f $path) {
+        if (-e $path) {
             open($news, q{<}, $path) or die "$0: cannot open $path: $!\n";
         }
     }
@@ -69,8 +68,8 @@ sub news_version {
     $version =~ s{ [.] (\d) (?= [.] | \z ) }{.0$1}xmsg;
     $version =~ s{ ([.] \d+) [.] (\d+) }{$1$2}xms;
 
-    # Return the appropriate value based on context.
-    return wantarray ? ($version, $package) : $version;
+    # Return the version and package name.
+    return ($version, $package);
 }
 
 # Parse command-line arguments.

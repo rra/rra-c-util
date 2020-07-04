@@ -10,6 +10,11 @@ rra-c-util 8.3 (unreleased)
     marked as experimental in Perl and was considered a mistake in some
     quarters.
 
+    Fix style issues found in Perl code by Perl::Critic::Freenode and
+    install it as part of CI testing.  This avoids issues with reusing the
+    Perl tests with Perl modules tested with perl-tester Docker images,
+    which pre-install those Perl::Critic policies.
+
 rra-c-util 8.2 (2020-05-16)
 
     Use memset to implement explicit_bzero if the latter is not

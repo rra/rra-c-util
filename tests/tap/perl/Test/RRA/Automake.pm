@@ -107,7 +107,7 @@ sub all_files {
             $File::Find::prune = 1;
             return;
         }
-        if (-f $file) {
+        if (!-d $file) {
             push(@files, $path);
         }
     };
@@ -270,7 +270,7 @@ sub test_file_path {
   BASE:
     for my $base ($ENV{C_TAP_BUILD}, $ENV{C_TAP_SOURCE}) {
         next if !defined($base);
-        if (-f "$base/$file") {
+        if (-e "$base/$file") {
             return "$base/$file";
         }
     }

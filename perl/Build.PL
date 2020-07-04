@@ -7,10 +7,11 @@
 # requires a build script and a module.  This is a minimum build script, just
 # enough to let tests run.
 #
-# Copyright 2018 Russ Allbery <eagle@eyrie.org>
+# Copyright 2018, 2020 Russ Allbery <eagle@eyrie.org>
 #
 # SPDX-License-Identifier: MIT
 
+use 5.010;
 use strict;
 use warnings;
 
