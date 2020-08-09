@@ -7,6 +7,11 @@ rra-c-util 8.3 (unreleased)
     to maintain, and was only relevant for ancient proprietary UNIX
     versions that have been obsolete for many years.
 
+    Fix network tests on hosts with no IPv4 addresses.  In this case, the
+    network tests for binding all configured addresses will bind only to
+    IPv6, which broke some prior assumptions in the test suite.  Thanks to
+    Niko Tyni for the bug report.
+
     Ignore files named changelog when checking for obsolete strings so
     that the check will not trigger on old Debian changelog entries.
 
