@@ -1,6 +1,6 @@
 # Ignore list for Git.  -*- conf -*-
 #
-# Copyright 2008-2014, 2016, 2018 Russ Allbery <eagle@eyrie.org>
+# Copyright 2008-2014, 2016, 2018, 2020 Russ Allbery <eagle@eyrie.org>
 #
 # Copying and distribution of this file, with or without modification, are
 # permitted in any medium without royalty provided the copyright notice and
@@ -51,7 +51,6 @@
 /tests/portable/mkstemp-t
 /tests/portable/reallocarray-t
 /tests/portable/setenv-t
-/tests/portable/snprintf-t
 /tests/portable/strndup-t
 /tests/runtests
 /tests/tmp/

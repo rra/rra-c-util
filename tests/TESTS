@@ -1,6 +1,6 @@
 # Test list for rra-c-util.  -*- conf -*-
 #
-# Copyright 2008-2014, 2016, 2018 Russ Allbery <eagle@eyrie.org>
+# Copyright 2008-2014, 2016, 2018, 2020 Russ Allbery <eagle@eyrie.org>
 #
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -34,7 +34,6 @@ portable/inet_ntop      valgrind
 portable/mkstemp        valgrind
 portable/reallocarray   valgrind
 portable/setenv
-portable/snprintf       valgrind
 portable/strndup        valgrind
 style/obsolete-strings
 util/buffer             valgrind

@@ -2,6 +2,11 @@
 
 rra-c-util 8.3 (unreleased)
 
+    Stop providing a replacement for a broken snprintf and assume the libc
+    version works correctly.  This portability code has proven difficult
+    to maintain, and was only relevant for ancient proprietary UNIX
+    versions that have been obsolete for many years.
+
     Ignore files named changelog when checking for obsolete strings so
     that the check will not trigger on old Debian changelog entries.
 

@@ -143,14 +143,6 @@ extern int asprintf(char **, const char *, ...)
 extern int vasprintf(char **, const char *, va_list)
     __attribute__((__format__(printf, 2, 0)));
 #endif
-#if !HAVE_DECL_SNPRINTF
-extern int snprintf(char *, size_t, const char *, ...)
-    __attribute__((__format__(printf, 3, 4)));
-#endif
-#if !HAVE_DECL_VSNPRINTF
-extern int vsnprintf(char *, size_t, const char *, va_list)
-    __attribute__((__format__(printf, 3, 0)));
-#endif
 #if !HAVE_DAEMON
 extern int daemon(int, int);
 #endif

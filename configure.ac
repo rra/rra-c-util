@@ -206,7 +206,6 @@ dnl only used by fdflag.
 AC_HEADER_STDBOOL
 AC_CHECK_HEADERS([strings.h sys/bitypes.h sys/filio.h sys/uio.h sys/time.h])
 AC_CHECK_HEADERS([syslog.h])
-AC_CHECK_DECLS([snprintf, vsnprintf])
 RRA_C_C99_VAMACROS
 RRA_C_GNU_VAMACROS
 AC_TYPE_LONG_LONG_INT
@@ -216,7 +215,6 @@ AC_CHECK_TYPES([sig_atomic_t], [], [],
      #include <signal.h>])
 AC_CHECK_TYPES([ssize_t], [], [],
     [#include <sys/types.h>])
-RRA_FUNC_SNPRINTF
 AC_CHECK_FUNCS([explicit_bzero setrlimit setsid])
 AC_REPLACE_FUNCS([asprintf daemon getopt issetugid mkstemp reallocarray])
 AC_REPLACE_FUNCS([setenv seteuid strndup])
