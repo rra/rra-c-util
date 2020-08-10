@@ -12,7 +12,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2010-2011, 2014
+ * Copyright 2010-2011, 2014, 2020
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Copying and distribution of this file, with or without modification, are
@@ -50,6 +50,7 @@ k_haspag(void)
     int result;
     struct ViceIoctl iob;
 
+    pag = (uint32_t) -1;
     iob.in = NULL;
     iob.in_size = 0;
     iob.out = (void *) &pag;
