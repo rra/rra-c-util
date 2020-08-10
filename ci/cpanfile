@@ -8,14 +8,14 @@
 # SPDX-License-Identifier: MIT
 
 on 'test' => sub {
-    requires 'Devel::Cover';
-    requires 'IPC::System::Simple';
-    requires 'Perl::Critic::Freenode';
-    requires 'Test::MinimumVersion';
-    requires 'Test::Perl::Critic';
-    requires 'Test::Pod';
-    requires 'Test::Pod::Coverage';
-    requires 'Test::Spelling';
-    requires 'Test::Strict';
-    requires 'Test::Synopsis';
+    suggests 'Devel::Cover';
+    suggests 'IPC::System::Simple';
+    suggests 'Perl::Critic::Freenode';
+    suggests 'Test::MinimumVersion';
+    suggests 'Test::Perl::Critic';
+    suggests 'Test::Pod';
+    suggests 'Test::Pod::Coverage';
+    suggests 'Test::Spelling';
+    suggests 'Test::Strict';
+    suggests 'Test::Synopsis';
 }
