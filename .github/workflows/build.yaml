@@ -31,12 +31,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: install
         run: sudo -E ci/install
+
       - name: Get Perl version
         id: get-perl
         run: |
           perl -e 'print "::set-output name=version::", $^V, "\n"'
+
       - name: Cache Perl modules
         uses: actions/cache@v2
         with:
@@ -44,6 +47,7 @@ jobs:
           key: ${{ runner.os }}-perl-${{ steps.get-perl.outputs.version }}-${{ hashFiles('ci/cpanfile') }}
           restore-keys: |
             ${{ runner.os }}-perl-${{ steps.get-perl.outputs.version }}-
+
       - uses: perl-actions/install-with-cpanm@v1.1
         env:
           PERL5LIB: ${{ env.HOME }}/perl5
@@ -52,5 +56,6 @@ jobs:
           cpanfile: ci/cpanfile
           path: /usr/bin/cpanm
           sudo: false
+
       - name: test
         run: ci/test
