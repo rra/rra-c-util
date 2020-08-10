@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 8.4 (unreleased)
+
+    Add a more explicit statement of backward compatibility support,
+    namely that support for systems released more than fifteen years ago
+    will be dropped if that support becomes burdensome.
+
 rra-c-util 8.3 (2020-08-09)
 
     Stop providing a replacement for a broken snprintf and assume the libc

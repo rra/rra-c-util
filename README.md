@@ -38,12 +38,16 @@ packages.  You can think of it as my version of
 [Gnulib](https://www.gnu.org/software/gnulib/), with everything released
 under a permissive license (no GPL).
 
+The facilities in this package try to ensure portability and backward
+compatibility whenever reasonable, but I will drop support for systems
+that are older than fifteen years if supporting them becomes a burden.
+
 As well as C portability frameworks, Autoconf macros, and a general C
-utility library, this package has also accumulated a considerable
-collection of standard tests (for C and Perl packages) and a large library
-of test utilities and support functions.  It also includes extensive
-support for writing and testing PAM modules, and a portable implementation
-of AFS PAGs.
+utility library, this package has also accumulated a collection of
+standard tests (for C and Perl packages) and a small library of test
+utilities and support functions.  It also includes extensive support for
+writing and testing PAM modules, and a portable implementation of AFS
+PAGs.
 
 This package uses the infrastructure of C TAP Harness for testing, but is
 not the canonical version of `tests/runtests.c`, `tests/tap/basic.[ch]`,
