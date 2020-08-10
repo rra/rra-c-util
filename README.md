@@ -1,4 +1,4 @@
-# rra-c-util 8.2
+# rra-c-util 8.3
 
 [![Build
 status](https://github.com/rra/rra-c-util/workflows/build/badge.svg)](https://github.com/rra/rra-c-util/actions)
@@ -214,18 +214,17 @@ an example:
 * Create a portable directory and copy `macros.h`, `system.h`,
   `stdbool.h`, and `dummy.c` along with whatever additional functions that
   your package uses that may not be present on all systems.  If you use
-  much of the `util` directory (see below), you'll need `asprintf.c`,
-  `reallocarray.c`, and `snprintf.c` at least.  If you use
-  `util/network.c`, you'll also need `getaddrinfo.c`, `getaddrinfo.h`,
-  `getnameinfo.c`, `getnameinfo.h`, `inet_*.c`, and `socket.h`.  You'll
-  need `winsock.c` for networking portability to Windows.
+  much of the `util` directory (see below), you'll need `asprintf.c` and
+  `reallocarray.c` at least.  If you use `util/network.c`, you'll also
+  need `getaddrinfo.c`, `getaddrinfo.h`, `getnameinfo.c`, `getnameinfo.h`,
+  `inet_*.c`, and `socket.h`.  You'll need `winsock.c` for networking
+  portability to Windows.
 
 * Copy the necessary portions of `configure.ac` from this package into
   your package.  `configure.ac` is commented to try to give you a guide
   for what you need to copy over.  You will also need to make an `m4`
   subdirectory, add the code to `configure.ac` to load Autoconf macros
-  from `m4`, and copy over `m4/snprintf.m4` and possibly `m4/socket.m4`
-  and `m4/inet-ntoa.m4`.
+  from `m4`, and possibly copy over `m4/socket.m4` and `m4/inet-ntoa.m4`.
 
 * Copy the code from `Makefile.am` for building `libportable.a` into your
   package and be sure to link your package binaries with `libportable.a`.
