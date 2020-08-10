@@ -11,7 +11,10 @@
 
 set -eux
 
-# Build everything with Clang.
+# Configure Perl to use the cpanm installation paths.
+eval "$(perl -Mlocal::lib)"
+
+# Build everything with Clang with compiler warnings.
 ./bootstrap
 ./configure CC=clang
 make warnings

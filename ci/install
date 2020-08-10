@@ -3,16 +3,8 @@
 # Install packages for integration tests.
 #
 # This script is normally run via sudo in a test container or VM, such as via
-# GitHub Actions.
-#
-# Perl::Tidy, Perl::Critic, Perl::Critic::Freenode, and Test::Perl::Critic are
-# installed separately to get the latest version, since they sometimes change
-# formatting and style rules compared to the version in Ubuntu.
-# Test::MinimumVersion has to be included since it installs Perl::Critic.
-#
-# Allow the installation of Perl::Critic and Test::Perl::Critic to fail, since
-# sometimes the versions on CPAN won't install.  (We'll just skip the test if
-# it won't install.)
+# GitHub Actions.  Additional prerequisites are installed (and cached)
+# directly from the workflow in .github/workflows/build.yaml.
 #
 # Copyright 2015-2020 Russ Allbery <eagle@eyrie.org>
 #
@@ -20,16 +12,11 @@
 
 set -eux
 
-# Install packages.
-apt-get update -qq
-apt-get install aspell cpanminus cppcheck libevent-dev libkrb5-dev            \
-        libpam0g-dev libperl-dev libpython-dev pkg-config libdevel-cover-perl \
-        libtest-pod-perl libtest-pod-coverage-perl libtest-spelling-perl      \
-        libtest-strict-perl libtest-synopsis-perl perl valgrind
+# Install apt packages.
+apt-get install $(grep -v '^#' ci/apt-packages)
 
-# Dependencies for Perl tests.
-cpanm Perl::Tidy
-cpanm Perl::Critic           || true
-cpanm Perl::Critic::Freenode || true
-cpanm Test::MinimumVersion   || true
-cpanm Test::Perl::Critic     || true
+# If not running as a GitHub workflow, also install Perl packages.  Under the
+# GitHub workflow, this will be done (and cached) by actions.
+if [ -z "${GITHUB_WORKFLOW:-}" ]; then
+    cpanm --notest --cpanfile ci/cpanfile --installdeps .
+fi

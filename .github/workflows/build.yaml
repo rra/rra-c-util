@@ -1,3 +1,14 @@
+# Workflow for GitHub Actions testing.
+#
+# Perl::Tidy, Perl::Critic, Perl::Critic::Freenode, and Test::Perl::Critic
+# are installed separately to get the latest version, since they sometimes
+# change formatting and style rules compared to the version in Ubuntu.
+# Test::MinimumVersion has to be included since it installs Perl::Critic.
+#
+# Copyright 2015-2020 Russ Allbery <eagle@eyrie.org>
+#
+# SPDX-License-Identifier: MIT
+
 name: build
 
 on:
@@ -21,6 +32,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: install
-        run: sudo ci/install
+        run: sudo -E ci/install
+      - name: Get Perl version
+        id: get-perl
+        run: |
+          perl -e 'print "::set-output name=version::", $^V, "\n"'
+      - name: Cache Perl modules
+        uses: actions/cache@v2
+        with:
+          path: ~/perl5
+          key: ${{ runner.os }}-perl-${{ steps.get-perl.outputs.version }}-${{ hashFiles('ci/cpanfile') }}
+          restore-keys: |
+            ${{ runner.os }}-perl-${{ steps.get-perl.outputs.version }}-
+      - uses: perl-actions/install-with-cpanm@v1.1
+        env:
+          PERL5LIB: ${{ env.HOME }}/perl5
+        with:
+          args: "--local-lib=~/perl5"
+          cpanfile: ci/cpanfile
+          path: /usr/bin/cpanm
+          sudo: false
       - name: test
         run: ci/test
