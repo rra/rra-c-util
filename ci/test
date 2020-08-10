@@ -11,26 +11,18 @@
 
 set -eux
 
-# Configure the build.
-export AUTHOR_TESTING=1
-export C_TAP_VERBOSE=1
-
-# Build everything.
+# Build everything with Clang.
 ./bootstrap
-./configure CC="$COMPILER"
+./configure CC=clang
 make warnings
 
-# Run the regular tests with valgrind for one of the builds.  Arbitrarily pick
-# the GCC build.  (The assumption here is that other compilers won't produce
-# sufficiently different code as to create memory management problems.)
-if [ "$COMPILER" = 'gcc' ]; then
-    make check-valgrind
-else
-    make check
-fi
+# Rebuild everything with GCC for more compiler warnings.
+make distclean
+./configure CC=gcc
+make warnings
 
-# Run some additional checks for one of the builds.  Arbitrarily pick the GCC
-# build.
-if [ "$COMPILER" = 'gcc' ]; then
-    make check-cppcheck
-fi
+# Test with valgrind.
+make check-valgrind
+
+# Run some additional checks.
+make check-cppcheck
