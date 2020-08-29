@@ -94,7 +94,7 @@ sub all_files {
     my @files;
 
     # Turn the skip lists into hashes for ease of querying.
-    my %skip       = map { $_ => 1 } @GLOBAL_SKIP;
+    my %skip = map { $_ => 1 } @GLOBAL_SKIP;
     my %files_skip = map { $_ => 1 } @FILES_SKIP;
 
     # Wanted function for find.  Prune anything matching either of the skip
