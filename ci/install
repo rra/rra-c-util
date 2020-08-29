@@ -13,6 +13,7 @@
 set -eux
 
 # Install apt packages.
+apt-get update
 apt-get install $(grep -v '^#' ci/apt-packages)
 
 # If not running as a GitHub workflow, also install Perl packages.  Under the
