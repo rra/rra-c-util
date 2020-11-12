@@ -2,6 +2,9 @@
 
 rra-c-util 8.4 (unreleased)
 
+    Allow the RRA_PROG_C_FLAG Autoconf macro to be used to probe for flags
+    containing a comma.  Change suggested by Julien ÉLIE.
+
     Add a more explicit statement of backward compatibility support,
     namely that support for systems released more than fifteen years ago
     will be dropped if that support becomes burdensome.

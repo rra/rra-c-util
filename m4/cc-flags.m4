@@ -34,7 +34,7 @@ dnl SPDX-License-Identifier: ISC
 
 dnl Used to build the result cache name.
 AC_DEFUN([_RRA_PROG_CC_FLAG_CACHE],
-[translit([rra_cv_compiler_c_$1], [-=+], [___])])
+[translit([rra_cv_compiler_c_$1], [-=+,], [____])])
 
 dnl Check whether a given flag is supported by the compiler.
 AC_DEFUN([RRA_PROG_CC_FLAG],
