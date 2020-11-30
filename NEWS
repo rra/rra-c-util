@@ -6,7 +6,7 @@ rra-c-util 8.4 (unreleased)
     containing a comma.  Change suggested by Julien ÉLIE.
 
     Include string.h in the probe for AI_ADDRCONFIG support to avoid
-    problems on macOS X.  Thanks, Julien ÉLIE.
+    problems on macOS X.  Thanks, Bo Lindbergh.
 
     Add a more explicit statement of backward compatibility support,
     namely that support for systems released more than fifteen years ago
