@@ -46,6 +46,10 @@ AC_PROG_RANLIB
 dnl Only needed when running mkdir -p in Makefile.am.
 AC_PROG_MKDIR_P
 
+dnl Add hardening flags to the link step if supported.
+RRA_PROG_LD_FLAG([-Wl,-z,relro], [LDFLAGS="${LDFLAGS} -Wl,-z,relro"])
+RRA_PROG_LD_FLAG([-Wl,-z,now],   [LDFLAGS="${LDFLAGS} -Wl,-z,now"])
+
 dnl Probe for Perl.  This isn't used by this package except in tests, but
 dnl probe for it anyway to exercise the macros.  The Perl module is included
 dnl in core, so that test should always succeed.
