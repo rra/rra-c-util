@@ -11,6 +11,13 @@ rra-c-util 8.4 (unreleased)
     Include string.h in the probe for AI_ADDRCONFIG support to avoid
     problems on macOS X.  Thanks, Bo Lindbergh.
 
+    NetBSD prefers reallocarr to reallocarray and only prototypes the
+    latter if _OPENBSD_SOURCE is defined, which is not one of the macros
+    Autoconf defines by default.  Work around this for now by checking
+    whether reallocarray is declared, not only whether it's available, and
+    protyping it if it's not declared.  This uses the semi-hidden
+    deprecated symbol on NetBSD.
+
     In the getnameinfo replacement, handle musl libc's gethostbyaddr,
     which returns the string conversion of the IP address if the host
     doesn't resolve.  This only affects the test suite, since musl libc

@@ -210,6 +210,7 @@ dnl only used by fdflag.
 AC_HEADER_STDBOOL
 AC_CHECK_HEADERS([strings.h sys/bitypes.h sys/filio.h sys/uio.h sys/time.h])
 AC_CHECK_HEADERS([syslog.h])
+AC_CHECK_DECLS([reallocarray])
 RRA_C_C99_VAMACROS
 RRA_C_GNU_VAMACROS
 AC_TYPE_LONG_LONG_INT
