@@ -11,6 +11,11 @@ rra-c-util 8.4 (unreleased)
     Include string.h in the probe for AI_ADDRCONFIG support to avoid
     problems on macOS X.  Thanks, Bo Lindbergh.
 
+    In the getnameinfo replacement, handle musl libc's gethostbyaddr,
+    which returns the string conversion of the IP address if the host
+    doesn't resolve.  This only affects the test suite, since musl libc
+    supports IPv6 and thus doesn't need this replacement.
+
     Add a more explicit statement of backward compatibility support,
     namely that support for systems released more than fifteen years ago
     will be dropped if that support becomes burdensome.
