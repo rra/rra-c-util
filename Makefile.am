@@ -306,4 +306,4 @@ check-valgrind: $(check_PROGRAMS) perl/blib/lib/Empty.pm
 # excluding some files.
 reformat:
 	find . -name '*.[ch]' \! -name krb5-profile.c -print \
-	    | xargs clang-format-10 -style=file -i
+	    | xargs clang-format -style=file -i
