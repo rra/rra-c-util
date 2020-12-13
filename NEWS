@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 8.4 (unreleased)
+rra-c-util 8.4 (2020-12-13)
 
     Add a new RRA_PROG_LD_FLAG Autoconf macro to probe whether a given
     flag is supported when linking.  Patch from Julien ÉLIE.

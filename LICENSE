@@ -105,8 +105,8 @@ Files: configure.ac m4/apache.m4 m4/apr.m4 m4/aprutil.m4 m4/bdb.m4
  m4/kafs.m4 m4/krb5-config.m4 m4/krb5-pkinit.m4 m4/krb5.m4 m4/ld-version.m4
  m4/ldap.m4 m4/lib-depends.m4 m4/lib-helper.m4 m4/lib-pathname.m4
  m4/libevent.m4 m4/openssl.m4 m4/pam-const.m4 m4/pcre.m4 m4/remctl.m4
- m4/sasl.m4 m4/snprintf.m4 m4/sqlite.m4 m4/systemd.m4 m4/tinycdb.m4
- m4/vamacros.m4 m4/zlib.m4
+ m4/sasl.m4 m4/sqlite.m4 m4/systemd.m4 m4/tinycdb.m4 m4/vamacros.m4
+ m4/zlib.m4
 Copyright: 1999-2001, 2003, 2007, 2013-2018, 2020
     Russ Allbery <eagle@eyrie.org>
   2002-2014 The Board of Trustees of the Leland Stanford Junior University
@@ -178,16 +178,6 @@ License: MIT-Kerberos
  manner.  It does NOT prevent a commercial firm from referring to the
  MIT trademarks in order to convey information (although in doing so,
  recognition of their trademark status should be given).
-
-Files: portable/snprintf.c tests/portable/snprintf-t.c
-Copyright: 1995 Patrick Powell
-  2000-2006, 2018-2020 Russ Allbery <eagle@eyrie.org>
-  2001 Hrvoje Niksic
-  2009-2010 The Board of Trustees of the Leland Stanford Junior University
-License: Powell-snprintf
- This code is based on code written by Patrick Powell (papowell@astart.com)
- It may be used for any purpose as long as this notice remains intact
- on all source code distributions
 
 License: Expat
  Permission is hereby granted, free of charge, to any person obtaining a

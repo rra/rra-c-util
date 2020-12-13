@@ -12,7 +12,8 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2010-2011, 2014, 2020
+ * Copyright 2020 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2010-2011, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
  * Copying and distribution of this file, with or without modification, are
