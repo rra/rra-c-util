@@ -1,10 +1,5 @@
 # Workflow for GitHub Actions testing.
 #
-# Perl::Tidy, Perl::Critic, Perl::Critic::Freenode, and Test::Perl::Critic
-# are installed separately to get the latest version, since they sometimes
-# change formatting and style rules compared to the version in Ubuntu.
-# Test::MinimumVersion has to be included since it installs Perl::Critic.
-#
 # Copyright 2015-2020 Russ Allbery <eagle@eyrie.org>
 #
 # SPDX-License-Identifier: MIT
