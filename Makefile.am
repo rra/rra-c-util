@@ -131,9 +131,9 @@ distclean-local:
 # compiler warnings enabled as possible.
 warnings: perl/blib/lib/Empty.pm
 	$(MAKE) V=0 CFLAGS='$(WARNINGS_CFLAGS) $(AM_CFLAGS)' \
-	    KRB5_CPPFLAGS='$(KRB5_CPPFLAGS_GCC)'
+	    KRB5_CPPFLAGS='$(KRB5_CPPFLAGS_WARNINGS)'
 	$(MAKE) V=0 CFLAGS='$(WARNINGS_CFLAGS) $(AM_CFLAGS)' \
-	    KRB5_CPPFLAGS='$(KRB5_CPPFLAGS_GCC)' $(check_PROGRAMS)
+	    KRB5_CPPFLAGS='$(KRB5_CPPFLAGS_WARNINGS)' $(check_PROGRAMS)
 
 # The bits below are for the test suite, not for the main package.
 check_PROGRAMS = tests/runtests tests/kafs/basic tests/kafs/haspag-t	 \

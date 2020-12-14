@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 9.0 (unreleased)
+
+    Rename the KRB5_CPPFLAGS_GCC output variable from the RRA_LIB_KRB5
+    macro to KRB5_CPPFLAGS_WARNINGS to more accurately reflect its
+    intended use and to reflect that it works with Clang.
+
 rra-c-util 8.4 (2020-12-13)
 
     Add a new RRA_PROG_LD_FLAG Autoconf macro to probe whether a given
