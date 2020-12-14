@@ -47,7 +47,7 @@ jobs:
         env:
           PERL5LIB: ${{ env.HOME }}/perl5
         with:
-          args: "--local-lib=~/perl5 --with-suggests"
+          args: "--local-lib=~/perl5 --with-suggests --notest"
           cpanfile: ci/cpanfile
           path: /usr/bin/cpanm
           sudo: false
