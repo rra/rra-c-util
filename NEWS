@@ -2,6 +2,11 @@
 
 rra-c-util 9.0 (unreleased)
 
+    Rename all SQLite Autoconf macros from SQLITE to SQLITE3, including
+    their output variables and configure command-line options, to bring
+    the naming convention in line with common practice for software using
+    SQLite v3.
+
     Rename the KRB5_CPPFLAGS_GCC output variable from the RRA_LIB_KRB5
     macro to KRB5_CPPFLAGS_WARNINGS to more accurately reflect its
     intended use and to reflect that it works with Clang.
