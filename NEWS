@@ -11,6 +11,8 @@ rra-c-util 9.0 (unreleased)
     macro to KRB5_CPPFLAGS_WARNINGS to more accurately reflect its
     intended use and to reflect that it works with Clang.
 
+    Allow use of package variables from YAML::XS when running perlcritic.
+
 rra-c-util 8.4 (2020-12-13)
 
     Add a new RRA_PROG_LD_FLAG Autoconf macro to probe whether a given
