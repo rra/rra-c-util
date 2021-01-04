@@ -12,6 +12,11 @@ rra-c-util 9.0 (unreleased)
     macro to KRB5_CPPFLAGS_WARNINGS to more accurately reflect its
     intended use and to reflect that it works with Clang.
 
+    The m4/krb5.m4 Autoconf macros no longer define AM_CONDITIONAL as a
+    no-op of it's not already defined, since this may be unexpected when
+    loading a macro.  If you want to use those macros without Automake,
+    add m4_define_default([AM_CONDITIONAL], [:]) to configure.ac.
+
     Allow use of package variables from YAML::XS when running perlcritic.
 
 rra-c-util 8.4 (2020-12-13)
