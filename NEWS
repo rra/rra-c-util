@@ -20,6 +20,10 @@ rra-c-util 9.0 (unreleased)
     Add C stubs for sd_notify and sd_notifyf for portability for more APIs
     to systems without libsystemd.
 
+    Fix the RRA_PROG_PYTHON Python version test to work on Python 3.0 and
+    Python versions older than 2.7.  Tested with Python 2.3.0.  Thanks,
+    Julien ÉLIE.
+
     Fix the util/fdflag test on Solaris 11.  Thanks, Julien ÉLIE.
 
     Allow use of package variables from YAML::XS when running perlcritic.
