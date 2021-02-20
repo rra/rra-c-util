@@ -19,6 +19,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2021 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2010, 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -101,7 +102,7 @@ AC_DEFUN([_RRA_LIB_PCRE_INTERNAL],
  AS_IF([test x"$PCRE_CONFIG" != x && test -x "$PCRE_CONFIG"],
     [PCRE_CPPFLAGS=`"$PCRE_CONFIG" --cflags 2>/dev/null`
      PCRE_LIBS=`"$PCRE_CONFIG" --libs 2>/dev/null`
-     PCRE_CPPFLAGS=`echo "$PCRE_CPPFLAGS" | sed 's%-I/usr/include ?%%'`
+     PCRE_CPPFLAGS=`AS_ECHO(["$PCRE_CPPFLAGS"]) | sed 's%-I/usr/include ?%%'`
      _RRA_LIB_PCRE_CHECK([$1])],
     [_RRA_LIB_PCRE_PATHS
      _RRA_LIB_PCRE_MANUAL([$1])])])])

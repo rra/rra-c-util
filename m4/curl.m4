@@ -18,6 +18,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2021 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2010, 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -131,11 +132,11 @@ AC_DEFUN([RRA_LIB_CURL],
  AS_IF([test x"$CURL_CONFIG" != x && test -x "$CURL_CONFIG"],
     [CURL_CPPFLAGS=`"$CURL_CONFIG" --cflags 2>/dev/null`
      CURL_LIBS=`"$CURL_CONFIG" --libs 2>/dev/null`
-     CURL_CPPFLAGS=`echo "$CURL_CPPFLAGS" | sed 's%-I/usr/include ?%%'`
+     CURL_CPPFLAGS=`AS_ECHO(["$CURL_CPPFLAGS"]) | sed 's%-I/usr/include ?%%'`
      # Work around a bug in the Mac OS X curl-config script fixed in Tiger.
      AS_CASE([$host],
          [powerpc-apple-darwin7*],
-         [CURL_LIBS=`echo "$CURL_LIBS" | sed 's/-arch i386//g'`])
+         [CURL_LIBS=`AS_ECHO(["$CURL_LIBS"]) | sed 's/-arch i386//g'`])
      _RRA_LIB_CURL_CHECK],
     [_RRA_LIB_CURL_PATHS
      AS_IF([test x"$rra_reduced_depends" = xtrue],

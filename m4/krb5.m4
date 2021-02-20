@@ -275,7 +275,7 @@ AC_DEFUN([_RRA_LIB_KRB5_INTERNAL],
  AS_CASE([$KRB5_LIBS], [*-lcom_err*], [rra_krb5_uses_com_err=true])
  AM_CONDITIONAL([KRB5_USES_COM_ERR],
     [test x"$rra_krb5_uses_com_err" = xtrue])
- KRB5_CPPFLAGS_WARNINGS=`echo "$KRB5_CPPFLAGS" | sed -e 's/-I/-isystem /g'`])
+ KRB5_CPPFLAGS_WARNINGS=`AS_ECHO(["$KRB5_CPPFLAGS"]) | sed 's/-I/-isystem /g'`])
 
 dnl The main macro for packages with mandatory Kerberos support.
 AC_DEFUN([RRA_LIB_KRB5],

@@ -27,6 +27,9 @@ rra-c-util 9.0 (unreleased)
 
     Fix the util/fdflag test on Solaris 11.  Thanks, Julien ÉLIE.
 
+    Use AS_ECHO instead of echo in all Autoconf macros for slightly
+    improved portability.  Thanks, Julien ÉLIE.
+
     Allow use of package variables from YAML::XS when running perlcritic.
 
 rra-c-util 8.4 (2020-12-13)

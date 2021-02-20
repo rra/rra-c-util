@@ -16,6 +16,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2021 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2010
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -72,7 +73,8 @@ AC_DEFUN([RRA_LIB_APACHE],
      AS_IF([test x"$rra_apache_apxs" = xfalse],
         [AC_MSG_ERROR([cannot find usable apxs program])])])
  APACHE_CPPFLAGS=`"$rra_apache_apxs" -q CFLAGS 2>/dev/null`
- APACHE_CPPFLAGS=`echo "$APACHE_CPPFLAGS" | sed -e 's/ -g//' -e 's/ -O[0-9]//'`
+ APACHE_CPPFLAGS=`AS_ECHO(["$APACHE_CPPFLAGS"]) \
+    | sed -e 's/ -g//' -e 's/ -O[0-9]//'`
  rra_apache_includedir=`"$rra_apache_apxs" -q INCLUDEDIR 2>/dev/null`
  AS_IF([test -z "$rra_apache_includedir"],
     [AC_MSG_ERROR([apxs -q INCLUDEDIR failed or returned no value])])
