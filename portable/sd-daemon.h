@@ -1,12 +1,13 @@
 /*
  * Portability wrapper around systemd-daemon headers.
  *
- * Currently, only sd_listen_fds, sd_notify, and sd_notifyf are guaranteed to
- * be provided by this interface.  This takes the approach of stubbing out
- * these functions if the libsystemd-daemon library is not available, rather
- * than providing a local implementation, on the grounds that anyone who wants
- * systemd status reporting should be able to build with the systemd
- * libraries.
+ * Currently, only sd_is_socket, sd_listen_fds, sd_notify, and sd_notifyf are
+ * guaranteed to be provided by this interface.  This takes the approach of
+ * stubbing out these functions if the libsystemd-daemon library is not
+ * available, rather than providing a local implementation, on the grounds
+ * that anyone who wants systemd status reporting should be able to build with
+ * the systemd libraries.  In particular, sd_is_socket always returns false
+ * and does not perform its intended function.
  *
  * The stubs for sd_notify and sd_notifyf provided as functions, rather than
  * using #define, to allow for the variadic function and to avoid compiler
@@ -35,8 +36,9 @@
 #ifdef HAVE_SD_NOTIFY
 #    include <systemd/sd-daemon.h>
 #else
-#    define SD_LISTEN_FDS_START 3
-#    define sd_listen_fds(u)    0
+#    define SD_LISTEN_FDS_START       3
+#    define sd_is_socket(fd, f, t, l) 0
+#    define sd_listen_fds(u)          0
 int sd_notify(int, const char *);
 int sd_notifyf(int, const char *, ...);
 #endif

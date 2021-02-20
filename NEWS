@@ -17,8 +17,9 @@ rra-c-util 9.0 (unreleased)
     loading a macro.  If you want to use those macros without Automake,
     add m4_define_default([AM_CONDITIONAL], [:]) to configure.ac.
 
-    Add C stubs for sd_notify and sd_notifyf for portability for more APIs
-    to systems without libsystemd.
+    Add C stubs for sd_notify and sd_notifyf and a (non-functional)
+    preprocessor stub for sd_is_socket for portability for more APIs to
+    systems without libsystemd.
 
     Fix the RRA_PROG_PYTHON Python version test to work on Python 3.0 and
     Python versions older than 2.7.  Tested with Python 2.3.0.  Thanks,
