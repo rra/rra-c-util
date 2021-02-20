@@ -20,6 +20,8 @@ rra-c-util 9.0 (unreleased)
     Add C stubs for sd_notify and sd_notifyf for portability for more APIs
     to systems without libsystemd.
 
+    Fix the util/fdflag test on Solaris 11.  Thanks, Julien ÉLIE.
+
     Allow use of package variables from YAML::XS when running perlcritic.
 
 rra-c-util 8.4 (2020-12-13)

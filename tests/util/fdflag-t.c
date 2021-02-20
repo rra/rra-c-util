@@ -5,6 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2021 Russ Allbery <eagle@eyrie.org>
  * Copyright 2008-2009
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -113,8 +114,11 @@ main(void)
         if (read(data, buffer, sizeof(buffer)) < (ssize_t) sizeof(buffer))
             sysbail("read failed");
         fclose(stderr);
+
+        /* For some reason, echo doesn't work on Solaris 11 but printf does. */
         execlp("sh", "sh", "-c",
-               "printf 'not ' >&8; echo ok 7; echo 'ok 8' >&9", (char *) 0);
+               "printf 'not ' >&8; printf 'ok 7\n'; printf 'ok 8\n' >&9",
+               (char *) 0);
         sysbail("exec failed");
     }
     waitpid(child, NULL, 0);
