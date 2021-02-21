@@ -17,6 +17,11 @@ rra-c-util 9.0 (unreleased)
     loading a macro.  If you want to use those macros without Automake,
     add m4_define_default([AM_CONDITIONAL], [:]) to configure.ac.
 
+    The RRA_LIB_KRB5 and RRA_LIB_KRB5_OPTIONAL macros now also check that
+    at least one Kerberos header file was found and either abort with an
+    error or mark Kerberos as unusable depending on the choice of macro.
+    Thanks, Julien ÉLIE.
+
     Add C stubs for sd_notify and sd_notifyf and a (non-functional)
     preprocessor stub for sd_is_socket for portability for more APIs to
     systems without libsystemd.
