@@ -165,7 +165,8 @@ AC_DEFUN([_RRA_LIB_KRB5_REDUCED],
                             [KRB5_LIBS=""])])
                      _RRA_LIB_KRB5_CHECK_HEADER_COM_ERR])])])])
      _RRA_LIB_KRB5_CHECK_HEADER_KRB5([],
-        [KRB5_LIBS=
+        [KRB5_CPPFLAGS=
+         KRB5_LIBS=
          AS_IF([test x"$1" = xtrue],
             [AC_MSG_ERROR([cannot find usable Kerberos header])])])],
     [AS_IF([test x"$1" = xtrue],
@@ -225,7 +226,8 @@ AC_DEFUN([_RRA_LIB_KRB5_MANUAL],
                      [RRA_INCLUDES_KRB5])],
                  [_RRA_LIB_KRB5_CHECK_HEADER_COM_ERR])])])])
  _RRA_LIB_KRB5_CHECK_HEADER_KRB5([],
-    [KRB5_LIBS=
+    [KRB5_CPPFLAGS=
+     KRB5_LIBS=
      AS_IF([test x"$1" = xtrue],
         [AC_MSG_ERROR([cannot find usable Kerberos header])])])
  RRA_LIB_KRB5_RESTORE])
@@ -242,7 +244,12 @@ AC_DEFUN([_RRA_LIB_KRB5_CHECK],
          KRB5_CPPFLAGS=
          KRB5_LIBS=
          _RRA_LIB_KRB5_PATHS
-         _RRA_LIB_KRB5_MANUAL([$1])])])])
+         _RRA_LIB_KRB5_MANUAL([$1])])],
+    [RRA_LIB_KRB5_RESTORE
+     KRB5_CPPFLAGS=
+     KRB5_LIBS=
+     _RRA_LIB_KRB5_PATHS
+     _RRA_LIB_KRB5_MANUAL([$1])])])
 
 dnl Determine Kerberos compiler and linker flags from krb5-config.  Does the
 dnl additional probing we need to do to uncover error handling features, and
