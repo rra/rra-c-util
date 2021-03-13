@@ -35,6 +35,7 @@
 #include <portable/system.h>
 
 #include <errno.h>
+#include <signal.h>
 #include <sys/wait.h>
 
 #include <tests/tap/basic.h>
@@ -56,6 +57,7 @@ main(void)
     /* Parent will create the socket first to get the port number. */
     memset(&sin, '\0', sizeof(sin));
     sin.sin_family = AF_INET;
+    inet_pton(AF_INET, "127.0.0.1", &sin.sin_addr);
     master = socket(AF_INET, SOCK_STREAM, 0);
     if (master == -1)
         sysbail("socket creation failed");
@@ -107,12 +109,18 @@ main(void)
         testnum += 2;
     } else {
         data = socket(AF_INET, SOCK_STREAM, 0);
-        if (data < 0)
+        if (data < 0) {
+            kill(child, SIGTERM);
             sysbail("child socket failed");
-        if (connect(data, (struct sockaddr *) &sin, sizeof(sin)) < 0)
+        }
+        if (connect(data, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
+            kill(child, SIGTERM);
             sysbail("child connect failed");
-        if (read(data, buffer, sizeof(buffer)) < (ssize_t) sizeof(buffer))
+        }
+        if (read(data, buffer, sizeof(buffer)) < (ssize_t) sizeof(buffer)) {
+            kill(child, SIGTERM);
             sysbail("read failed");
+        }
         fclose(stderr);
 
         /* For some reason, echo doesn't work on Solaris 11 but printf does. */

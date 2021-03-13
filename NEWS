@@ -32,6 +32,11 @@ rra-c-util 9.0 (unreleased)
 
     Fix the util/fdflag test on Solaris 11.  Thanks, Julien ÉLIE.
 
+    Fix some bogus networking assumptions made by the util/fdflag test
+    that caused it to fail on OpenBSD, and clean up the child process if
+    anything goes wrong with the main process so that the test driver
+    doesn't hang.
+
     Use AS_ECHO instead of echo in all Autoconf macros for slightly
     improved portability.  Thanks, Julien ÉLIE.
 
