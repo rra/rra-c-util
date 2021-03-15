@@ -8,7 +8,7 @@
 // with the --xml flag and then add a suppression for the error id, file
 // location, and line.
 //
-// Copyright 2018-2020 Russ Allbery <eagle@eyrie.org>
+// Copyright 2018-2021 Russ Allbery <eagle@eyrie.org>
 //
 // Copying and distribution of this file, with or without modification, are
 // permitted in any medium without royalty provided the copyright notice and
@@ -69,3 +69,4 @@ redundantAssignment:tests/server/acl-t.c
 
 // (pam-krb5) cppcheck doesn't recognize the unused attribute on labels.
 unusedLabel:module/auth.c:895
+unusedLabelConfiguration:module/auth.c:895
