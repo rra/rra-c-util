@@ -33,6 +33,14 @@
 #ifndef PORTABLE_SD_DAEMON_H
 #define PORTABLE_SD_DAEMON_H 1
 
+#include <config.h>
+#include <portable/macros.h>
+
+BEGIN_DECLS
+
+/* Default to a hidden visibility for all portability functions. */
+#pragma GCC visibility push(hidden)
+
 #ifdef HAVE_SD_NOTIFY
 #    include <systemd/sd-daemon.h>
 #else
@@ -42,5 +50,10 @@
 int sd_notify(int, const char *);
 int sd_notifyf(int, const char *, ...);
 #endif
+
+/* Undo default visibility change. */
+#pragma GCC visibility pop
+
+END_DECLS
 
 #endif /* !PORTABLE_SD_DAEMON_H */

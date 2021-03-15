@@ -26,6 +26,9 @@ rra-c-util 9.0 (unreleased)
     preprocessor stub for sd_is_socket for portability for more APIs to
     systems without libsystemd.
 
+    Fix portable/sd-daemon.h to include necessary prerequisite headers and
+    not assume they were already included.
+
     Fix the RRA_PROG_PYTHON Python version test to work on Python 3.0 and
     Python versions older than 2.7.  Tested with Python 2.3.0.  Thanks,
     Julien ÉLIE.
