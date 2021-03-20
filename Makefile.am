@@ -1,7 +1,7 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <eagle@eyrie.org
-# Copyright 2015-2020 Russ Allbery <eagle@eyrie.org>
+# Copyright 2015-2021 Russ Allbery <eagle@eyrie.org>
 # Copyright 2008-2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -29,9 +29,9 @@ PERL_DIRECTORIES = perl perl/lib perl/t perl/t/api perl/t/data perl/t/docs \
 # Additional files to include in the distribution.
 EXTRA_DIST = .clang-format .github .gitignore LICENSE README.md bootstrap   \
 	ci/README ci/apt-packages ci/cpanfile ci/install ci/test	    \
-	docs/api/xmalloc.3 docs/api/xmalloc.pod docs/metadata m4/apache.m4  \
-	m4/apr.m4 m4/aprutil.m4 m4/curl.m4 m4/ld-version.m4 m4/ldap.m4	    \
-	m4/openssl.m4 m4/pcre.m4 m4/remctl.m4 m4/tinycdb.m4		    \
+	docs/api/xmalloc.3 docs/api/xmalloc.pod docs/docknot.yaml	    \
+	m4/apache.m4 m4/apr.m4 m4/aprutil.m4 m4/curl.m4 m4/ld-version.m4    \
+	m4/ldap.m4 m4/openssl.m4 m4/pcre.m4 m4/remctl.m4 m4/tinycdb.m4	    \
 	portable/winsock.c tests/README tests/TESTS			    \
 	tests/data/cppcheck.supp tests/data/generate-krb5-conf		    \
 	tests/data/krb5-pam.conf tests/data/perl.conf			    \
