@@ -12,7 +12,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2020 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2020-2021 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010-2011, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -66,10 +66,16 @@ k_haspag(void)
      * system call.  Fall back on analyzing the groups.
      */
     ngroups = getgroups(0, NULL);
+    if (ngroups < 0)
+        return 0;
     groups = calloc(ngroups, sizeof(*groups));
     if (groups == NULL)
         return 0;
     ngroups = getgroups(ngroups, groups);
+    if (ngroups < 0) {
+        free(groups);
+        return 0;
+    }
 
     /*
      * Strictly speaking, the single group PAG is only used on Linux, but

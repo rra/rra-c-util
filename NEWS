@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 9.1 (unreleased)
+
+    Fix portable k_haspag replacement to not attempt to allocate negative
+    memory if getgroups fails.  Thanks, Jeffrey Altman.
+
 rra-c-util 9.0 (2021-03-20)
 
     Rename all SQLite Autoconf macros from SQLITE to SQLITE3, including
