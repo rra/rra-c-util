@@ -66,13 +66,13 @@ k_haspag(void)
      * system call.  Fall back on analyzing the groups.
      */
     ngroups = getgroups(0, NULL);
-    if (ngroups < 0)
+    if (ngroups < 1)
         return 0;
     groups = calloc(ngroups, sizeof(*groups));
     if (groups == NULL)
         return 0;
     ngroups = getgroups(ngroups, groups);
-    if (ngroups < 0) {
+    if (ngroups < 1) {
         free(groups);
         return 0;
     }
