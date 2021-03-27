@@ -2,6 +2,8 @@
 
 rra-c-util 9.1 (unreleased)
 
+    Fix probe for SUN_LEN on macOS X Big Sur.  Thanks, Julien ÉLIE.
+
     Fix portable k_haspag replacement to not attempt to allocate negative
     memory if getgroups fails.  Thanks, Jeffrey Altman.
 
