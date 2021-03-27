@@ -35,6 +35,7 @@ dnl SPDX-License-Identifier: ISC
 
 dnl Source used by RRA_MACRO_SUN_LEN.
 AC_DEFUN([_RRA_MACRO_SUN_LEN_SOURCE], [[
+#include <string.h>
 #include <sys/types.h>
 #include <sys/un.h>
 
