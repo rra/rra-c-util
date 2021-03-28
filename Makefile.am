@@ -13,7 +13,7 @@ ACLOCAL_AMFLAGS = -I m4
 # These three lists of files are needed for Perl builds.  They're listed
 # here to be added to EXTRA_DIST and so that they can be copied over
 # properly for builddir != srcdir builds.
-PERL_FILES = perl/Build.PL perl/MANIFEST perl/MANIFEST.SKIP		    \
+PERL_FILES = perl/Build.PL perl/Changes perl/MANIFEST perl/MANIFEST.SKIP    \
 	perl/lib/Empty.pm perl/t/api/empty.t perl/t/data/perl.conf	    \
 	perl/t/docs/pod-coverage.t perl/t/docs/pod-spelling.t		    \
 	perl/t/docs/pod.t perl/t/docs/spdx-license.t perl/t/docs/synopsis.t \

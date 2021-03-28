@@ -1,7 +1,9 @@
 Build.PL
+Changes
 lib/Empty.pm
 MANIFEST			This list of files
 t/data/perl.conf
+t/docs/changes.t
 t/docs/pod-coverage.t
 t/docs/pod-spelling.t
 t/docs/pod.t
