@@ -1,7 +1,7 @@
 dnl Autoconf configuration for rra-c-util.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2000, 2003, 2013-2018, 2020 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2000, 2003, 2013-2018, 2020-2021 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2002-2014
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -206,10 +206,10 @@ RRA_LIB_ZLIB_OPTIONAL
 
 dnl These probes are needed by anything that uses portable/system.h, the other
 dnl portable replacements, and the messages utility library.  sys/filio.h is
-dnl only used by fdflag.
+dnl only used by fdflag.  sys/select.h is only used by the test for daemon.
 AC_HEADER_STDBOOL
-AC_CHECK_HEADERS([strings.h sys/bitypes.h sys/filio.h sys/uio.h sys/time.h])
-AC_CHECK_HEADERS([syslog.h])
+AC_CHECK_HEADERS([strings.h sys/bitypes.h sys/filio.h sys/select.h sys/uio.h])
+AC_CHECK_HEADERS([sys/time.h syslog.h])
 AC_CHECK_DECLS([reallocarray])
 RRA_C_C99_VAMACROS
 RRA_C_GNU_VAMACROS
