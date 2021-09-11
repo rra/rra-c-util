@@ -55,6 +55,7 @@ my @IGNORE = (
     qr{ \A (MY)? META [.] .* }xms,          # Generated file, no license itself
     qr{ [.] output \z }xms,                 # Test data
     qr{ pod2htm . [.] tmp \z }xms,          # Windows pod2html output
+    qr{ ~ \z }xms,                          # Backup files
 );
 my @IGNORE_PATHS = (
     qr{ \A [.] / [.] git/ }xms,               # Version control files
