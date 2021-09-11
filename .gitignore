@@ -1,6 +1,6 @@
 # Ignore list for Git.  -*- conf -*-
 #
-# Copyright 2008-2014, 2016, 2018, 2020 Russ Allbery <eagle@eyrie.org>
+# Copyright 2008-2014, 2016, 2018, 2020-2021 Russ Allbery <eagle@eyrie.org>
 #
 # Copying and distribution of this file, with or without modification, are
 # permitted in any medium without royalty provided the copyright notice and
@@ -20,6 +20,7 @@
 /config.log
 /config.status
 /configure
+/configure~
 /perl/Build
 /perl/MYMETA.json
 /perl/MYMETA.json.lock

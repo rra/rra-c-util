@@ -159,7 +159,7 @@ dnl conditional, remove the test around RRA_LIB_KAFS and run it
 dnl unconditionally.
 rra_build_kafs=false
 AC_ARG_ENABLE([kafs],
-    [AC_HELP_STRING([--enable-kafs], [Enable kafs library support])],
+    [AS_HELP_STRING([--enable-kafs], [Enable kafs library support])],
     [AS_IF([test x"$enableval" != xno], [RRA_LIB_KAFS])])
 AM_CONDITIONAL([NEED_KAFS], [test x"$rra_build_kafs" = xtrue])
 
@@ -264,5 +264,5 @@ RRA_MACRO_SUN_LEN
 
 dnl Output section.  This is generally the same for all packages.
 AC_CONFIG_FILES([Makefile])
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 AC_OUTPUT
