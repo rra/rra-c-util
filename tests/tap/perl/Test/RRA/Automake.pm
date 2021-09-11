@@ -59,7 +59,7 @@ our (@EXPORT_OK, $VERSION);
 # consistency is good).
 BEGIN {
     @EXPORT_OK = qw(
-      all_files automake_setup perl_dirs test_file_path test_tmpdir
+        all_files automake_setup perl_dirs test_file_path test_tmpdir
     );
 
     # This version should match the corresponding rra-c-util release, but with
@@ -71,15 +71,15 @@ BEGIN {
 # Directories to skip globally when looking for all files, or for directories
 # that could contain Perl files.
 my @GLOBAL_SKIP = qw(
-  .git .pc _build autom4te.cache build-aux perl/_build perl/blib
+    .git .pc _build autom4te.cache build-aux perl/_build perl/blib
 );
 
 # Additional paths to skip when building a list of all files in the
 # distribution.  This primarily skips build artifacts that aren't interesting
 # to any of the tests.  These match any path component.
 my @FILES_SKIP = qw(
-  .deps .dirstamp .libs aclocal.m4 config.h config.h.in config.h.in~ config.log
-  config.status configure
+    .deps .dirstamp .libs aclocal.m4 config.h config.h.in config.h.in~
+    config.log config.status configure configure~
 );
 
 # The temporary directory created by test_tmpdir, if any.  If this is set,
@@ -103,7 +103,7 @@ sub all_files {
         my $file = $_;
         my $path = $File::Find::name;
         $path =~ s{ \A [.]/ }{}xms;
-        if ($skip{$path} || $files_skip{$file} || $file =~ m{ [.] lo \z }xms) {
+        if ($skip{$path} || $files_skip{$file} || $file =~ m{ [.]lo\z }xms) {
             $File::Find::prune = 1;
             return;
         }

@@ -17,6 +17,11 @@ rra-c-util 9.1 (unreleased)
     programs because of perlcritic's unsuppressible warning about unknown
     policies.
 
+    Update perltidy configuration for somewhat better handling of nested
+    data structures and qw lists.
+
+    Add documentation of is_file_contents (provided by Test::RRA).
+
     Ignore all ~ backup files when checking for SPDX license identifiers.
 
     Suppress -Wformat-truncation warnings from GCC 10 in the portable
