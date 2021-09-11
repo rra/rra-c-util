@@ -10,6 +10,10 @@ rra-c-util 9.1 (unreleased)
     Modernize RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_SET_PKINIT_ARGS and
     RRA_LIB_KAFS to avoid deprecated macros from Autoconf 2.71.
 
+    Suppress -Wformat-truncation warnings from GCC 10 in the portable
+    replacement for getnameinfo.  The return status of snprintf is tested
+    for truncation, but GCC doesn't recognize that.
+
     Add a new t/docs/changes.t test for Perl modules that uses
     Test::CPAN::Changes to check the format of Changes files.
 
