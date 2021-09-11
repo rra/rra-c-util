@@ -7,6 +7,9 @@ rra-c-util 9.1 (unreleased)
     Fix portable k_haspag replacement to not attempt to allocate negative
     memory if getgroups fails.  Thanks, Jeffrey Altman.
 
+    Modernize RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_SET_PKINIT_ARGS to avoid
+    warnings for deprecated macros from Autoconf 2.71.
+
     Add a new t/docs/changes.t test for Perl modules that uses
     Test::CPAN::Changes to check the format of Changes files.
 
