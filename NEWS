@@ -13,6 +13,9 @@ rra-c-util 9.1 (unreleased)
     Add a new t/docs/changes.t test for Perl modules that uses
     Test::CPAN::Changes to check the format of Changes files.
 
+    In Perl modules, also check POD syntax and spelling for modules found
+    in t/lib.
+
 rra-c-util 9.0 (2021-03-20)
 
     Rename all SQLite Autoconf macros from SQLITE to SQLITE3, including
