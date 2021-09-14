@@ -38,9 +38,9 @@ dnl see.
 AC_DEFUN([_RRA_LIB_ARCH_NAME],
 [rra_lib_arch_name=lib
  AC_CHECK_SIZEOF([long])
- AS_IF([test "$ac_cv_sizeof_long" -eq 4 && test -d /usr/lib32],
+ AS_IF([test "$ac_cv_sizeof_long" -eq 4],
      [rra_lib_arch_name=lib32],
-     [AS_IF([test "$ac_cv_sizeof_long" -eq 8 && test -d /usr/lib64],
+     [AS_IF([test "$ac_cv_sizeof_long" -eq 8],
          [rra_lib_arch_name=lib64])])])
 
 dnl Set VARIABLE to -LPREFIX/lib{,32,64} or -LPREFIX/lib{,32,64}/SUFFIX as
@@ -56,9 +56,12 @@ AC_DEFUN([RRA_SET_LDFLAGS],
         [$1="[$]$1 -L$2/lib/$3"])])
  $1=`AS_ECHO(["[$]$1"]) | sed -e 's/^ *//'`])
 
-dnl Set libdir to PREFIX/lib{,32,64} as appropriate.
+dnl Set libdir to PREFIX/lib{,32,64} as appropriate.  Do this only if
+dnl /usr/lib32 or /usr/lib64 exist on the system, since Debian derivatives
+dnl don't use this system and will not recognize libraries installed into
+dnl those paths.
 AC_DEFUN([RRA_SET_LIBDIR],
 [AC_REQUIRE([_RRA_LIB_ARCH_NAME])
- AS_IF([test -d "$1/$rra_lib_arch_name"],
+ AS_IF([test -d "$1/$rra_lib_arch_name" && test -d "/usr/$rra_lib_arch_name"],
     [libdir="$1/${rra_lib_arch_name}"],
     [libdir="$1/lib"])])

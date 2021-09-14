@@ -4,6 +4,13 @@ rra-c-util 9.1 (unreleased)
 
     Fix probe for SUN_LEN on macOS X Big Sur.  Thanks, Julien ÉLIE.
 
+    Fix RRA_SET_LDFLAGS to always use the multilib directory (lib32 or
+    lib64) if it exists, even if the system does not (as with Debian
+    derivatives) use multilib.  The behavior of RRA_SET_LIBDIR is left
+    unchanged and only chooses the multilib directory if the corresponding
+    directory exists in /usr.  Hopefully fixes detection of the library
+    path for OpenSSL 3.0.  Thanks, Julien ÉLIE.
+
     Fix portable k_haspag replacement to not attempt to allocate negative
     memory if getgroups fails.  Thanks, Jeffrey Altman.
 
