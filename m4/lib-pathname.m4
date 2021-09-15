@@ -9,9 +9,6 @@ dnl the compilation environment.  If a suffix is given, a slash and that
 dnl suffix will be appended, to allow for adding a subdirectory of the library
 dnl directory.
 dnl
-dnl This file also provides the Autoconf macro RRA_SET_LIBDIR, which sets the
-dnl libdir variable to PREFIX/lib{,32,64} as appropriate.
-dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
@@ -55,13 +52,3 @@ AC_DEFUN([RRA_SET_LDFLAGS],
         [$1="[$]$1 -L$2/lib"],
         [$1="[$]$1 -L$2/lib/$3"])])
  $1=`AS_ECHO(["[$]$1"]) | sed -e 's/^ *//'`])
-
-dnl Set libdir to PREFIX/lib{,32,64} as appropriate.  Do this only if
-dnl /usr/lib32 or /usr/lib64 exist on the system, since Debian derivatives
-dnl don't use this system and will not recognize libraries installed into
-dnl those paths.
-AC_DEFUN([RRA_SET_LIBDIR],
-[AC_REQUIRE([_RRA_LIB_ARCH_NAME])
- AS_IF([test -d "$1/$rra_lib_arch_name" && test -d "/usr/$rra_lib_arch_name"],
-    [libdir="$1/${rra_lib_arch_name}"],
-    [libdir="$1/lib"])])

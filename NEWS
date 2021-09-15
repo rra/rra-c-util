@@ -1,8 +1,14 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 9.1 (unreleased)
+rra-c-util 10.0 (unreleased)
 
     Fix probe for SUN_LEN on macOS X Big Sur.  Thanks, Julien ÉLIE.
+
+    Remove the RRA_SET_LIBDIR macro.  I believe it was only used for PAM
+    module packages, and its logic is now incorrect on Debian usrmerge
+    systems.  My PAM module packages will instead document that setting
+    --libdir manually to specify the correct PAM module path is likely to
+    be necessary.
 
     Fix RRA_SET_LDFLAGS to always use the multilib directory (lib32 or
     lib64) if it exists, even if the system does not (as with Debian
