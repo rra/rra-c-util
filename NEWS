@@ -23,6 +23,8 @@ rra-c-util 10.0 (unreleased)
     Modernize RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_SET_PKINIT_ARGS and
     RRA_LIB_KAFS to avoid deprecated macros from Autoconf 2.71.
 
+    Perl tests and test support libraries now require Perl 5.10 or later.
+
     Update perlcritic configuration to remove (instead of tweaking) two
     warnings that I keep running into and have never found useful, and to
     cope with the renaming of Perl::Critic::Freenode to

@@ -15,7 +15,7 @@
 
 package Test::RRA::Automake;
 
-use 5.008;
+use 5.010;
 use base qw(Exporter);
 use strict;
 use warnings;

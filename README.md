@@ -82,7 +82,7 @@ calls.
 
 A dummy Perl module is built and tested as part of the rra-c-util build in
 order to exercise the included Perl test support libraries.  This requires
-Perl 5.8 or later and Module::Build (available from CPAN).  The included
+Perl 5.10 or later and Module::Build (available from CPAN).  The included
 components of rra-c-util are usable without Perl (by copying them to
 another package), even though the build will fail.
 
@@ -181,8 +181,8 @@ Do this instead of running the test program directly since it will ensure
 that necessary environment variables are set up.
 
 To run the full test suite, and to use the Perl test support libraries,
-Perl 5.8 or later is required.  The following additional Perl modules will
-be used if present:
+Perl 5.10 or later is required.  The following additional Perl modules
+will be used if present:
 
 * Devel::Cover
 * IPC::System::Simple

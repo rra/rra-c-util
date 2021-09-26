@@ -2,11 +2,11 @@
 #
 # Tiny test solely to get coverage information and let tests pass.
 #
-# Copyright 2018-2019 Russ Allbery <eagle@eyrie.org>
+# Copyright 2018-2019, 2021 Russ Allbery <eagle@eyrie.org>
 #
 # SPDX-License-Identifier: MIT
 
-use 5.008;
+use 5.010;
 use strict;
 use warnings;
 

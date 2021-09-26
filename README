@@ -84,9 +84,9 @@ REQUIREMENTS
 
   A dummy Perl module is built and tested as part of the rra-c-util build
   in order to exercise the included Perl test support libraries.  This
-  requires Perl 5.8 or later and Module::Build (available from CPAN).  The
-  included components of rra-c-util are usable without Perl (by copying
-  them to another package), even though the build will fail.
+  requires Perl 5.10 or later and Module::Build (available from CPAN).
+  The included components of rra-c-util are usable without Perl (by
+  copying them to another package), even though the build will fail.
 
   To bootstrap from a Git checkout, or if you change the Automake files
   and need to regenerate Makefile.in, you will need Automake 1.11 or
@@ -172,7 +172,7 @@ TESTING
   ensure that necessary environment variables are set up.
 
   To run the full test suite, and to use the Perl test support libraries,
-  Perl 5.8 or later is required.  The following additional Perl modules
+  Perl 5.10 or later is required.  The following additional Perl modules
   will be used if present:
 
   * Devel::Cover
