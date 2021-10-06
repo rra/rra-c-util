@@ -21,6 +21,9 @@ rra-c-util 10.0 (unreleased)
 
     Fix probe for SUN_LEN on macOS X Big Sur.  Thanks, Julien ÉLIE.
 
+    Add support for testing different arguments to pam_end, such as
+    PAM_DATA_SILENT, to the fakepam testing framework.
+
     Fix portable k_haspag replacement to not attempt to allocate negative
     memory if getgroups fails.  Thanks, Jeffrey Altman.
 
