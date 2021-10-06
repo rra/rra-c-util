@@ -2,8 +2,6 @@
 
 rra-c-util 10.0 (unreleased)
 
-    Fix probe for SUN_LEN on macOS X Big Sur.  Thanks, Julien ÉLIE.
-
     Remove the RRA_SET_LIBDIR macro.  I believe it was only used for PAM
     module packages, and its logic is now incorrect on Debian usrmerge
     systems.  My PAM module packages will instead document that setting
@@ -16,6 +14,12 @@ rra-c-util 10.0 (unreleased)
     unchanged and only chooses the multilib directory if the corresponding
     directory exists in /usr.  Hopefully fixes detection of the library
     path for OpenSSL 3.0.  Thanks, Julien ÉLIE.
+
+    Update RRA_LIB_PYTHON to use sysconfig by preference and only fall
+    back on distutils.sysconfig if sysconfig is not available, since
+    distutils.sysconfig has been deprecated in Python 3.10.
+
+    Fix probe for SUN_LEN on macOS X Big Sur.  Thanks, Julien ÉLIE.
 
     Fix portable k_haspag replacement to not attempt to allocate negative
     memory if getgroups fails.  Thanks, Jeffrey Altman.

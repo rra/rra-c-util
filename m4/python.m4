@@ -13,11 +13,11 @@ dnl     empty, it means that Python 2 is not supported).  The second argument
 dnl     is a Python version related to at least the 3.x series (if empty,
 dnl     it means that Python 3 or later is not supported).
 dnl
-dnl INN_PYTHON_CHECK_MODULE
+dnl RRA_PYTHON_CHECK_MODULE
 dnl     Checks for the existence of a Python module.  Runs the second argument
 dnl     if it is present and the third argument if it is not.
 dnl
-dnl INN_LIB_PYTHON
+dnl RRA_LIB_PYTHON
 dnl     Determines the flags required for embedding Python and sets
 dnl     PYTHON_CPPFLAGS and PYTHON_LIBS.
 dnl
@@ -32,6 +32,7 @@ dnl as well as Python 3.2.0 and later, to find the compiler and linker flags
 dnl to use to embed Python.  If the sysconfig module is not present, fall back
 dnl on using the distutils.sysconfig module shipped with Python 2.2.0 and
 dnl later until its removal in Python 3.12.0.
+dnl
 dnl This macro also expects libpython to be in the main library location,
 dnl which it is since Python 2.3.0.
 dnl
