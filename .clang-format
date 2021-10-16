@@ -17,7 +17,7 @@ Language: Cpp
 BasedOnStyle: LLVM
 AlignConsecutiveMacros: true
 AlignEscapedNewlines: Left
-AllowShortEnumsOnASingleLine: true
+AllowShortEnumsOnASingleLine: false
 AlwaysBreakAfterReturnType: AllDefinitions
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: WebKit
