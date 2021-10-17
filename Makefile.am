@@ -104,7 +104,8 @@ perl/blib/lib/Empty.pm: $(PERL_FILES)
 # Work around the GNU Coding Standards, which leave all the Autoconf and
 # Automake stuff around after make maintainer-clean, thus making that command
 # mostly worthless.
-DISTCLEANFILES = config.h.in~ perl/t/data/perlcriticrc perl/t/data/perltidyrc
+DISTCLEANFILES = config.h.in~ configure~ perl/t/data/perlcriticrc	\
+	perl/t/data/perltidyrc
 MAINTAINERCLEANFILES = Makefile.in aclocal.m4 build-aux/ar-lib		\
         build-aux/compile build-aux/config.guess build-aux/config.sub	\
         build-aux/depcomp build-aux/install-sh build-aux/missing	\
