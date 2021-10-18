@@ -10,9 +10,7 @@ rra-c-util 10.0 (2021-10-17)
 
     Fix RRA_SET_LDFLAGS to always use the multilib directory (lib32 or
     lib64) if it exists, even if the system does not (as with Debian
-    derivatives) use multilib.  The behavior of RRA_SET_LIBDIR is left
-    unchanged and only chooses the multilib directory if the corresponding
-    directory exists in /usr.  Hopefully fixes detection of the library
+    derivatives) use multilib.  Hopefully fixes detection of the library
     path for OpenSSL 3.0.  Thanks, Julien ÉLIE.
 
     Update RRA_LIB_PYTHON to use sysconfig by preference and only fall
