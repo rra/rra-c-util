@@ -82,6 +82,9 @@ docs:
       title: Test::RRA::Config
     - name: test-rra-moduleversion
       title: Test::RRA::ModuleVersion
+  developer:
+    - name: todo
+      title: To-do list
   extra:
     - title: Test scripts
       links:
