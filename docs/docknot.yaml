@@ -15,7 +15,7 @@ format: v1
 
 name: rra-c-util
 maintainer: Russ Allbery <eagle@eyrie.org>
-version: '9.0'
+version: '10.0'
 synopsis: Russ Allbery's utility libraries for C
 
 license:

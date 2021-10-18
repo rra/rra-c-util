@@ -48,20 +48,20 @@ License: all-permissive
  warranty.
 
 Files: Makefile.in
-Copyright: 1994-2020 Free Software Foundation, Inc.
+Copyright: 1994-2021 Free Software Foundation, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2015-2020 Russ Allbery <eagle@eyrie.org>
+  2015-2021 Russ Allbery <eagle@eyrie.org>
 License: FSF-unlimited and Expat
 
 Files: aclocal.m4
-Copyright: 1996-2020 Free Software Foundation, Inc.
+Copyright: 1996-2021 Free Software Foundation, Inc.
   2004 Scott James Remnant <scott@netsplit.com>
   2012-2015 Dan Nicholson <dbn.lists@gmail.com>
 License: FSF-unlimited, and GPL-2+ with Autoconf exception or Expat
 
 Files: build-aux/ar-lib build-aux/compile build-aux/depcomp
  build-aux/missing
-Copyright: 1996-2020 Free Software Foundation, Inc.
+Copyright: 1996-2021 Free Software Foundation, Inc.
 License: GPL-2+ with Autoconf exception or Expat
 
 Files: build-aux/config.guess build-aux/config.sub
@@ -96,7 +96,7 @@ License: X11
  Consortium.
 
 Files: configure
-Copyright: 1992-1996, 1998-2012 Free Software Foundation, Inc.
+Copyright: 1992-1996, 1998-2017, 2020-2021 Free Software Foundation, Inc.
 License: FSF-configure
  This script is free software; the Free Software Foundation gives unlimited
  permission to copy, distribute and modify it.
@@ -126,7 +126,7 @@ Copyright: 1991, 1994-2003 The Internet Software Consortium and Rich Salz
   1998-2003 The Internet Software Consortium
   2004-2011, 2016 Internet Systems Consortium, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2009, 2011, 2015, 2018 Julien ÉLIE <julien@trigofacile.com>
+  2009, 2011, 2015, 2018, 2021 Julien ÉLIE <julien@trigofacile.com>
   2014-2021 Russ Allbery <eagle@eyrie.org>
 License: ISC
  Permission to use, copy, modify, and distribute this software for any

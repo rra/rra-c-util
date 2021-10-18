@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 10.0 (unreleased)
+rra-c-util 10.0 (2021-10-17)
 
     Remove the RRA_SET_LIBDIR macro.  I believe it was only used for PAM
     module packages, and its logic is now incorrect on Debian usrmerge
