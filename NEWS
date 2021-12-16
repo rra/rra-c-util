@@ -1,5 +1,10 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 10.1 (unreleased)
+
+    Fix IN6_ARE_ADDR_EQUAL Autoconf probe on macOS, where it needs an
+    include of string.h.  Patch from Julien ÉLIE.
+
 rra-c-util 10.0 (2021-10-17)
 
     Remove the RRA_SET_LIBDIR macro.  I believe it was only used for PAM
