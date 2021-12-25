@@ -52,10 +52,11 @@ use_prereq('Devel::Cover');
 use_prereq('Test::Strict');
 
 # Build a list of test directories to use for coverage.
-my %ignore = map { $_ => 1 } qw(data docs style), @COVERAGE_SKIP_TESTS;
-opendir(my $testdir, 't')      or BAIL_OUT("cannot open t: $!");
+my %ignore = map { $_ => 1 } qw(config data docs lib style),
+  @COVERAGE_SKIP_TESTS;
+opendir(my $testdir, 't') or BAIL_OUT("cannot open t: $!");
 my @t_dirs = readdir($testdir) or BAIL_OUT("cannot read t: $!");
-closedir($testdir)             or BAIL_OUT("cannot close t: $!");
+closedir($testdir) or BAIL_OUT("cannot close t: $!");
 
 # Filter out ignored and system directories.
 @t_dirs = grep { !$ignore{$_} } File::Spec->no_upwards(@t_dirs);

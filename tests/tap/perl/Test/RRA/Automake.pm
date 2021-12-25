@@ -34,7 +34,7 @@ my ($PERL_BLIB_ARCH, $PERL_BLIB_LIB);
 # the results in a use lib command below.
 BEGIN {
     $PERL_BLIB_ARCH = File::Spec->catdir(qw(perl blib arch));
-    $PERL_BLIB_LIB  = File::Spec->catdir(qw(perl blib lib));
+    $PERL_BLIB_LIB = File::Spec->catdir(qw(perl blib lib));
 
     # If C_TAP_BUILD is set, we can come up with better values.
     if (defined($ENV{C_TAP_BUILD})) {
@@ -42,7 +42,7 @@ BEGIN {
         my @dirs = File::Spec->splitdir($dirs);
         pop(@dirs);
         $PERL_BLIB_ARCH = File::Spec->catdir(@dirs, qw(perl blib arch));
-        $PERL_BLIB_LIB  = File::Spec->catdir(@dirs, qw(perl blib lib));
+        $PERL_BLIB_LIB = File::Spec->catdir(@dirs, qw(perl blib lib));
     }
 }
 
@@ -94,7 +94,7 @@ sub all_files {
     my @files;
 
     # Turn the skip lists into hashes for ease of querying.
-    my %skip       = map { $_ => 1 } @GLOBAL_SKIP;
+    my %skip = map { $_ => 1 } @GLOBAL_SKIP;
     my %files_skip = map { $_ => 1 } @FILES_SKIP;
 
     # Wanted function for find.  Prune anything matching either of the skip
@@ -153,7 +153,7 @@ sub automake_setup {
 
     # Simplify relative paths at the end of the directory.
     my $ups = 0;
-    my $i   = $#dirs;
+    my $i = $#dirs;
     while ($i > 2 && $dirs[$i] eq File::Spec->updir) {
         $ups++;
         $i--;
@@ -186,7 +186,7 @@ sub automake_setup {
         @builddirs = File::Spec->splitdir($builddirs);
         pop(@builddirs);
         my $libdir = File::Spec->catdir(@builddirs, $LIBRARY_PATH);
-        my $path   = File::Spec->catpath($buildvol, $libdir, q{});
+        my $path = File::Spec->catpath($buildvol, $libdir, q{});
         if (-d "$path/.libs") {
             $path .= '/.libs';
         }
@@ -226,7 +226,7 @@ sub perl_dirs {
     }
 
     # Convert the skip lists into hashes for convenience.
-    my %skip       = map { $_ => 1 } @skip, 'tests';
+    my %skip = map { $_ => 1 } @skip, 'tests';
     my %skip_tests = map { $_ => 1 } @skip_tests;
 
     # Build the list of top-level directories to test.

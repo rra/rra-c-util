@@ -59,7 +59,7 @@ my %EXCLUDE = map { $_ => 1 } qw(.git blib);
 # Returns: 1 if it should be checked, undef otherwise.
 sub should_check {
     my ($file) = @_;
-    return   if $EXCLUDE{$file};
+    return if $EXCLUDE{$file};
     return 1 if -d $file;
     return 1 if $file =~ m{ [.] PL \z }xms;
     return;

@@ -42,9 +42,9 @@ if (@ARGV) {
 # Throws: Text exception if MYMETA.json is not found or doesn't contain a
 #         version
 sub dist_version {
-    my $json     = JSON::PP->new->utf8(1);
+    my $json = JSON::PP->new->utf8(1);
     my $metadata = $json->decode(scalar(slurp('MYMETA.json')));
-    my $version  = $metadata->{version};
+    my $version = $metadata->{version};
     if (!defined($version)) {
         die "$0: cannot find version number in MYMETA.json\n";
     }

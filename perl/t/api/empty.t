@@ -1,4 +1,4 @@
-#!/bin/perl
+#!/usr/bin/perl
 #
 # Tiny test solely to get coverage information and let tests pass.
 #

@@ -17,6 +17,7 @@ use warnings;
 
 use Module::Build;
 
+#<<<
 my $build = Module::Build->new(
     dist_abstract        => 'Empty test module',
     dist_author          => 'Russ Allbery <eagle@eyrie.org>',
@@ -26,4 +27,5 @@ my $build = Module::Build->new(
     add_to_cleanup       => [qw(MANIFEST.bak MYMETA.json.lock cover_db)],
     configure_requires   => { 'Module::Build' => 0.36 },
 );
+#>>>
 $build->create_build_script;
