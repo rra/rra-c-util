@@ -61,7 +61,6 @@ static const struct {
     int flag;
     const char *name;
 } FLAGS[] = {
-    /* clang-format off */
     {PAM_CHANGE_EXPIRED_AUTHTOK, "expired"  },
     {PAM_DELETE_CRED,            "delete"   },
     {PAM_DISALLOW_NULL_AUTHTOK,  "nonull"   },
@@ -71,7 +70,6 @@ static const struct {
     {PAM_REINITIALIZE_CRED,      "reinit"   },
     {PAM_SILENT,                 "silent"   },
     {PAM_UPDATE_AUTHTOK,         "update"   },
-    /* clang-format on */
 };
 
 

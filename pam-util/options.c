@@ -493,7 +493,7 @@ option_compare(const void *key, const void *member)
     if (p == NULL)
         return strcmp(string, option->name);
     else {
-        length = (size_t)(p - string);
+        length = (size_t) (p - string);
         if (length == 0)
             return -1;
         result = strncmp(string, option->name, length);

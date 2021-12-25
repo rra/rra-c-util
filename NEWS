@@ -9,6 +9,8 @@ rra-c-util 10.1 (unreleased)
     aligned should use the magical #<<< comments.  The default alignment
     is much too aggressive and makes the formatting unstable.
 
+    Update .clang-format for Clang 13.0.
+
 rra-c-util 10.0 (2021-10-17)
 
     Remove the RRA_SET_LIBDIR macro.  I believe it was only used for PAM
