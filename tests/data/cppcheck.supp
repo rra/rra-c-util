@@ -42,7 +42,7 @@ memleak:portable/getaddrinfo.c:236
 
 // Bug in cppcheck 1.89 (fixed in 2.3).  The address of this variable is
 // passed to a Windows function (albeit through a cast).
-nullPointer:portable/winsock.c:61
+nullPointer:portable/winsock.c:62
 
 // Bug in cppcheck 2.3.
 nullPointerRedundantCheck:portable/krb5-profile.c:61
