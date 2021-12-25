@@ -46,6 +46,8 @@ AC_DEFUN([RRA_PROG_CC_FLAG],
  AC_MSG_CHECKING([if $CC supports $1])
  AC_CACHE_VAL([_RRA_PROG_CC_FLAG_CACHE([$1])],
     [save_CFLAGS=$CFLAGS
+     AS_IF([test x"$CLANG" = xyes],
+        [CFLAGS="$CFLAGS -Werror=unknown-warning-option"])
      AS_CASE([$1],
         [-Wno-*], [CFLAGS="$CFLAGS `AS_ECHO(["$1"]) | sed 's/-Wno-/-W/'`"],
         [*],      [CFLAGS="$CFLAGS $1"])
@@ -63,6 +65,8 @@ AC_DEFUN([RRA_PROG_LD_FLAG],
  AC_MSG_CHECKING([if $CC supports $1 for linking])
  AC_CACHE_VAL([_RRA_PROG_LD_FLAG_CACHE([$1])],
     [save_LDFLAGS=$LDFLAGS
+     AS_IF([test x"$CLANG" = xyes],
+        [LDFLAGS="$LDFLAGS -Werror=unknown-warning-option"])
      LDFLAGS="$LDFLAGS $1"
      AC_LINK_IFELSE([AC_LANG_PROGRAM([], [int foo = 0;])],
         [_RRA_PROG_LD_FLAG_CACHE([$1])=yes],

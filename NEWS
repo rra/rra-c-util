@@ -5,6 +5,10 @@ rra-c-util 10.1 (unreleased)
     Fix IN6_ARE_ADDR_EQUAL Autoconf probe on macOS, where it needs an
     include of string.h.  Patch from Julien ÉLIE.
 
+    Fix RRA_PROG_CC_FLAG and RRA_PROG_LD_FLAG for Clang.  Previously they
+    would not reject unknown flags since unknown flags to Clang are only a
+    warning by default.  Thanks, Julien ÉLIE.  (#9)
+
     Disable vertical code alignment in perltidyrc.  Code that should be
     aligned should use the magical #<<< comments.  The default alignment
     is much too aggressive and makes the formatting unstable.
