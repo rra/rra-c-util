@@ -13,6 +13,10 @@ rra-c-util 10.1 (2021-12-25)
     aligned should use the magical #<<< comments.  The default alignment
     is much too aggressive and makes the formatting unstable.
 
+    Disable -Wreserved-identifier in RRA_PROG_CC_WARNING_FLAGS for Clang,
+    since it produces false positives with FD_ZERO and similar macros
+    defined in system headers under Clang 13.0.
+
     Update .clang-format for Clang 13.0.
 
 rra-c-util 10.0 (2021-10-17)
