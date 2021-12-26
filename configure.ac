@@ -14,7 +14,7 @@ dnl SPDX-License-Identifier: FSFULLR
 dnl I use this introductory boilerplate for all configure.ac files, changing
 dnl the AC_INIT arguments as appropriate.
 AC_PREREQ([2.64])
-AC_INIT([rra-c-util], [10.0], [eagle@eyrie.org])
+AC_INIT([rra-c-util], [10.1], [eagle@eyrie.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_LIBOBJ_DIR([portable])
 AC_CONFIG_MACRO_DIR([m4])

@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 10.1 (unreleased)
+rra-c-util 10.1 (2021-12-25)
 
     Fix IN6_ARE_ADDR_EQUAL Autoconf probe on macOS, where it needs an
     include of string.h.  Patch from Julien ÉLIE.
