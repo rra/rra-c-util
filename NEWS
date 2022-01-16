@@ -1,5 +1,11 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 10.2 (unreleased)
+
+    Update perlcritic and perltidy rules to tweak Perl formatting and to
+    not count the $self parameter when imposing a limit on the number of
+    arguments that can be passed to a method.
+
 rra-c-util 10.1 (2021-12-25)
 
     Fix IN6_ARE_ADDR_EQUAL Autoconf probe on macOS, where it needs an
