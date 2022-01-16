@@ -7,21 +7,28 @@ dnl the library.  Uses krb5-config where available unless reduced dependencies
 dnl is requested or --with-kadm5clnt-include or --with-kadm5clnt-lib are
 dnl given.
 dnl
-dnl Provides the macros RRA_LIB_KADM5CLNT and RRA_LIB_KADM5CLNT_OPTIONAL and
-dnl sets the substitution variables KADM5CLNT_CPPFLAGS, KADM5CLNT_LDFLAGS, and
-dnl KADM5CLNT_LIBS.  Also provides RRA_LIB_KADM5CLNT_SWITCH to set CPPFLAGS,
-dnl LDFLAGS, and LIBS to include the kadmin client libraries, saving the
-dnl ecurrent values, and RRA_LIB_KADM5CLNT_RESTORE to restore those settings
-dnl to before the last RRA_LIB_KADM5CLNT_SWITCH.  Defines HAVE_KADM5CLNT and
-dnl sets rra_use_KADM5CLNT to true if the library is found.
+dnl Provides the macro RRA_LIB_KADM5CLNT and sets the substitution variables
+dnl KADM5CLNT_CPPFLAGS, KADM5CLNT_LDFLAGS, and KADM5CLNT_LIBS.  Also provides
+dnl RRA_LIB_KADM5CLNT_SWITCH to set CPPFLAGS, LDFLAGS, and LIBS to include the
+dnl kadmin client library, saving the current values first, and
+dnl RRA_LIB_KADM5CLNT_RESTORE to restore those settings to before the last
+dnl RRA_LIB_KADM5CLNT_SWITCH.  Defines HAVE_KADM5CLNT and sets
+dnl rra_use_KADM5CLNT to true.
 dnl
-dnl Depends on the RRA_LIB helper routines.
+dnl Provides the RRA_LIB_KADM5CLNT_OPTIONAL macro, which should be used if
+dnl kadmin client library support is optional.  This macro will still always
+dnl set the substitution variables, but they'll be empty if the kadmin client
+dnl library is not found or if --without-kadm5clnt is given.  Defines
+dnl HAVE_KADM5CLNT and sets rra_use_KADM5CLNT to true if the SQLite library is
+dnl found and --without-kadm5clnt is not given.
+dnl
+dnl Depends on the lib-helper.m4 framework.
 dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2005-2009, 2011, 2013
+dnl Copyright 2005-2009, 2011, 2013, 2022
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
 dnl This file is free software; the authors give unlimited permission to copy

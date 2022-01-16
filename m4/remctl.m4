@@ -15,9 +15,10 @@ dnl RRA_LIB_REMCTL is used.
 dnl
 dnl Provides the RRA_LIB_REMCTL_OPTIONAL macro, which should be used if remctl
 dnl support is optional.  This macro will still always set the substitution
-dnl variables described above, but they'll be empty unless remctl libraries
-dnl are found.  Defines HAVE_REMCTL and sets rra_use_remctl to true if the
-dnl remctl library is found.
+dnl variables described above, but they'll be empty if the remctl libraries
+dnl are not found or if --without-remctl is given.  Defines HAVE_REMCTL and
+dnl sets rra_use_remctl to true if the remctl library is found and
+dnl --without-remctl is not given.
 dnl
 dnl Depends on RRA_ENABLE_REDUCED_DEPENDS, RRA_SET_LDFLAGS, and
 dnl RRA_LIB_GSSAPI.
@@ -26,6 +27,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Coypright 2022 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2008-2009, 2011, 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
