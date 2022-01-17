@@ -19,8 +19,8 @@ dnl Provides the RRA_LIB_KADM5CLNT_OPTIONAL macro, which should be used if
 dnl kadmin client library support is optional.  This macro will still always
 dnl set the substitution variables, but they'll be empty if the kadmin client
 dnl library is not found or if --without-kadm5clnt is given.  Defines
-dnl HAVE_KADM5CLNT and sets rra_use_KADM5CLNT to true if the SQLite library is
-dnl found and --without-kadm5clnt is not given.
+dnl HAVE_KADM5CLNT and sets rra_use_KADM5CLNT to true if the kadmin client
+dnl library is found and --without-kadm5clnt is not given.
 dnl
 dnl Depends on the lib-helper.m4 framework.
 dnl
