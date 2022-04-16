@@ -24,7 +24,8 @@ dnl Also provides RRA_INCLUDES_EVENT, which are the headers to include when
 dnl probing the libevent library properties.  This assumes that
 dnl AC_CHECK_HEADERS([event2/event.h]) has been called.
 dnl
-dnl Depends on the lib-helper.m4 framework.
+dnl Depends on the lib-helper.m4 framework and the Autoconf macros that come
+dnl with pkg-config.
 dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.

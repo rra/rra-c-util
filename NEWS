@@ -11,6 +11,9 @@ rra-c-util 10.2 (unreleased)
     handles read-only directories correctly.  Optionally depend on
     Perl::Critic::Community instead of Perl::Critic::Freenode.
 
+    Document the dependency some Autoconf macros have on the macros
+    provided by pkg-config.
+
 rra-c-util 10.1 (2021-12-25)
 
     Fix IN6_ARE_ADDR_EQUAL Autoconf probe on macOS, where it needs an

@@ -72,6 +72,11 @@ PAM libraries and headers are required to build the package as-is, since
 the PAM supporting library is built and tested by default.  Other code can
 be copied from this package without introducing a PAM dependency.
 
+The `libevent.m4`, `sqlite3.m4`, and `systemd.m4` Autoconf macro files
+require the
+[pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
+Autoconf macros when running `autoreconf` or the equivalent.
+
 To build the the kafs portability layer, one of Linux, Mac OS X, Solaris
 11, the kafs library that comes with either Heimdal or KTH Kerberos, the
 kopenafs library that comes with newer OpenAFS, AFS header files (on any
