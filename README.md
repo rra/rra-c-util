@@ -186,6 +186,7 @@ will be used if present:
 
 * Devel::Cover
 * IPC::System::Simple
+* Perl::Critic::Community
 * Test::MinimumVersion
 * Test::Perl::Critic
 * Test::Pod

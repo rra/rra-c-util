@@ -6,7 +6,7 @@
 # which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
 # Written by Russ Allbery <eagle@eyrie.org>
-# Copyright 2016, 2019, 2021 Russ Allbery <eagle@eyrie.org>
+# Copyright 2016, 2019, 2021-2022 Russ Allbery <eagle@eyrie.org>
 # Copyright 2012-2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -53,36 +53,12 @@ automake_setup();
 # Load prerequisite modules.
 use_prereq('Test::Perl::Critic');
 
-# Due to an annoying bug in Perl::Tidy 20130922, we cannot run tests if the
-# source directory is read-only.  It unconditionally tries to create a log
-# file in the current directory and fails to run any checks if it cannot.
-if (!-w File::Spec->curdir()) {
-    plan skip_all => 'Perl::Tidy needs writable source directory';
-}
-
 # Force the embedded Perl::Tidy check to use the correct configuration.
 local $ENV{PERLTIDY} = test_file_path('data/perltidyrc');
 
 # Import the configuration file.
-#
-# Probe for whether Perl::Critic::Community is installed and use that to
-# control whether to pass an exclusion to Perl::Critic.  This is the new name
-# of Perl::Critic::Freenode, and we have to customize one of our exclusions
-# based on its name or we get a spurious warning.
 my $config_path = test_file_path('data/perlcriticrc');
-eval { require Perl::Critic::Policy::Community::EmptyReturn };
-if ($@) {
-    Test::Perl::Critic->import(-profile => $config_path);
-} else {
-    Test::Perl::Critic->import(
-        -exclude => ['Community::EmptyReturn'],
-        -profile => $config_path,
-    );
-}
+Test::Perl::Critic->import(-profile => $config_path);
 
 # Finally, run the actual tests.
 all_critic_ok(perl_dirs({ skip => [@CRITIC_IGNORE] }));
-
-# On Debian with perltidy 20130922-1, a perltidy.LOG file gets left behind
-# in the current directory.  Remove it if it exists.
-unlink('perltidy.LOG');
