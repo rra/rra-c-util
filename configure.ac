@@ -1,7 +1,7 @@
 dnl Autoconf configuration for rra-c-util.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2000, 2003, 2013-2018, 2020-2021 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2000, 2003, 2013-2018, 2020-2022 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2002-2014
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -198,6 +198,7 @@ AS_IF([test x"$rra_use_BDB" = xtrue], [RRA_LIB_BDB_NDBM])
 RRA_LIB_CDB_OPTIONAL
 RRA_LIB_OPENSSL_OPTIONAL
 RRA_LIB_PCRE_OPTIONAL
+RRA_LIB_PCRE2_OPTIONAL
 RRA_LIB_REMCTL_OPTIONAL
 RRA_LIB_SASL_OPTIONAL
 RRA_LIB_SQLITE3_OPTIONAL

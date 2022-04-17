@@ -1,5 +1,9 @@
                           rra-c-util To-Do List
 
+Deprecations:
+
+ * Drop m4/pcre.m4 now that m4/pcre2.m4 exists.
+
 General:
 
  * Provide tools to dynamically generate system.h, krb5.h, krb5-extra.c,
@@ -20,6 +24,10 @@ Autoconf probes:
 
  * Check the usability of headers in library probes and treat the library
    as not found if the header isn't available.
+
+ * Use m4/lib-helper.m4 for all library probes.
+
+ * Support other bit sizes for PCRE2 besides 8-bit.
 
 Portability layer:
 

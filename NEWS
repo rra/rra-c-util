@@ -2,6 +2,12 @@
 
 rra-c-util 10.2 (unreleased)
 
+    Add new RRA_LIB_PCRE2 and RRA_LIB_PCRE2_OPTIONAL macros that detect
+    version 2 of the PCRE library (the current supported version).  PCRE
+    version 1 has been deprecated; users should switch to PCRE2.
+    RRA_LIB_PCRE_OPTIONAL will likely be dropped in a future version of
+    rra-c-util.
+
     Update perlcritic and perltidy rules to tweak Perl formatting and to
     not count the $self parameter when imposing a limit on the number of
     arguments that can be passed to a method.
