@@ -8,6 +8,10 @@ rra-c-util 10.2 (unreleased)
     RRA_LIB_PCRE_OPTIONAL will likely be dropped in a future version of
     rra-c-util.
 
+    Fix portable/sd-daemon.h on systems that do have libsystemd.  The GCC
+    pragmas to set visibility were in the wrong place, causing link
+    failures with libsystemd.
+
     Update perlcritic and perltidy rules to tweak Perl formatting and to
     not count the $self parameter when imposing a limit on the number of
     arguments that can be passed to a method.

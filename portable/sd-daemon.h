@@ -18,7 +18,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2021 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2021-2022 Russ Allbery <eagle@eyrie.org>
  * Copyright 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -38,21 +38,17 @@
 
 BEGIN_DECLS
 
-/* Default to a hidden visibility for all portability functions. */
-#pragma GCC visibility push(hidden)
-
 #ifdef HAVE_SD_NOTIFY
 #    include <systemd/sd-daemon.h>
 #else
+#    pragma GCC visibility push(hidden)
 #    define SD_LISTEN_FDS_START       3
 #    define sd_is_socket(fd, f, t, l) 0
 #    define sd_listen_fds(u)          0
 int sd_notify(int, const char *);
 int sd_notifyf(int, const char *, ...);
+#    pragma GCC visibility pop
 #endif
-
-/* Undo default visibility change. */
-#pragma GCC visibility pop
 
 END_DECLS
 
