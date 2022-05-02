@@ -24,6 +24,8 @@ rra-c-util 10.2 (unreleased)
     Document the dependency some Autoconf macros have on the macros
     provided by pkg-config.
 
+    Ignore some more PHP and Python files in the docs/spdx-license test.
+
 rra-c-util 10.1 (2021-12-25)
 
     Fix IN6_ARE_ADDR_EQUAL Autoconf probe on macOS, where it needs an
