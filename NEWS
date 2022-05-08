@@ -21,6 +21,10 @@ rra-c-util 10.2 (unreleased)
     handles read-only directories correctly.  Optionally depend on
     Perl::Critic::Community instead of Perl::Critic::Freenode.
 
+    Mark allocation functions in C support libraries with their
+    corresponding deallocation functions so that GCC 11 and later can
+    diagnose memory deallocation bugs.
+
     Document the dependency some Autoconf macros have on the macros
     provided by pkg-config.
 

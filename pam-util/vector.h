@@ -20,6 +20,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
+ * Copyright 2022 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010-2011, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -51,15 +52,18 @@ BEGIN_DECLS
 /* Default to a hidden visibility for all util functions. */
 #pragma GCC visibility push(hidden)
 
+/* Free the vector and all resources allocated for it. */
+void vector_free(struct vector *);
+
 /* Create a new, empty vector.  Returns NULL on memory allocation failure. */
-struct vector *vector_new(void) __attribute__((__malloc__));
+struct vector *vector_new(void) __attribute__((__malloc__(vector_free)));
 
 /*
  * Create a new vector that's a copy of an existing vector.  Returns NULL on
  * memory allocation failure.
  */
 struct vector *vector_copy(const struct vector *)
-    __attribute__((__malloc__, __nonnull__));
+    __attribute__((__malloc__(vector_free), __nonnull__));
 
 /*
  * Add a string to a vector.  Resizes the vector if necessary.  Returns false
@@ -81,9 +85,6 @@ bool vector_resize(struct vector *, size_t size) __attribute__((__nonnull__));
  * allocations if the vector will be reused).
  */
 void vector_clear(struct vector *) __attribute__((__nonnull__));
-
-/* Free the vector and all resources allocated for it. */
-void vector_free(struct vector *);
 
 /*
  * Split functions build a vector from a string.  vector_split_multi splits on
