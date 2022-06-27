@@ -1,5 +1,9 @@
                      User-Visible rra-c-util Changes
 
+rra-c-util 10.3 (unreleased)
+
+    Add new Perl module test that uses Test::Kwalitee.
+
 rra-c-util 10.2 (2022-05-08)
 
     Add new RRA_LIB_PCRE2 and RRA_LIB_PCRE2_OPTIONAL macros that detect

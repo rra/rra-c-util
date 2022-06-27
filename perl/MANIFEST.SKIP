@@ -31,8 +31,5 @@
 \bcover_db\b
 \bcovered\b
 
-# Avoid MYMETA files
-^MYMETA\.
-
 # Avoid archives of this distribution
 \bEmpty-[\d\.\_]+

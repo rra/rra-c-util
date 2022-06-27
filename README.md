@@ -192,6 +192,8 @@ will be used if present:
 * Devel::Cover
 * IPC::System::Simple
 * Perl::Critic::Community
+* Test::CPAN::Changes (part of CPAN-Changes)
+* Test::Kwalitee
 * Test::MinimumVersion
 * Test::Perl::Critic
 * Test::Pod
