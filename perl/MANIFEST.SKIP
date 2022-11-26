@@ -20,6 +20,10 @@
 # Avoid generated build files.
 \bblib/
 
+# Avoid ExtUtils::MakeMaker generated files.
+\bMakefile$
+\bpm_to_blib$
+
 # Avoid Module::Build generated and utility files.
 \bBuild$
 \b_build/
