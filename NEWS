@@ -7,6 +7,10 @@ rra-c-util 10.3 (unreleased)
     perl/MANIFEST.SKIP is now suitable for copying as-is into Perl module
     packages as a default MANIFEST.SKIP.
 
+    Fix the portable/getnameinfo test to skip some checks when 0.0.0.0
+    resolves to a hostname.  (Alas, someone was weird enough to put it in
+    DNS.)  Thanks, Julien ÉLIE.
+
 rra-c-util 10.2 (2022-05-08)
 
     Add new RRA_LIB_PCRE2 and RRA_LIB_PCRE2_OPTIONAL macros that detect
