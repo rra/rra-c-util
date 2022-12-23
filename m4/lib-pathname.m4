@@ -13,7 +13,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2021 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2021-2022 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2008-2009
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -36,9 +36,9 @@ AC_DEFUN([_RRA_LIB_ARCH_NAME],
 [rra_lib_arch_name=lib
  AC_CHECK_SIZEOF([long])
  AS_IF([test "$ac_cv_sizeof_long" -eq 4],
-     [rra_lib_arch_name=lib32],
-     [AS_IF([test "$ac_cv_sizeof_long" -eq 8],
-         [rra_lib_arch_name=lib64])])])
+    [rra_lib_arch_name=lib32],
+    [AS_IF([test "$ac_cv_sizeof_long" -eq 8],
+        [rra_lib_arch_name=lib64])])])
 
 dnl Set VARIABLE to -LPREFIX/lib{,32,64} or -LPREFIX/lib{,32,64}/SUFFIX as
 dnl appropriate.
