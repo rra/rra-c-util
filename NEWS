@@ -11,7 +11,8 @@ rra-c-util 10.3 (unreleased)
     resolves to a hostname.  (Alas, someone was weird enough to put it in
     DNS.)  Thanks, Julien ÉLIE.
 
-    Fix AS_CASE syntax in RRA_PROG_CC_FLAG.  Thanks, Julien ÉLIE.
+    Fix AS_CASE syntax in RRA_PROG_CC_FLAG and RRA_LIB_KAFS.  Thanks,
+    Julien ÉLIE.
 
     Avoid deprecated test -a syntax in systemd.m4.  Thanks, Julien ÉLIE.
 

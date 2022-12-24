@@ -35,7 +35,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2020-2021 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2020-2022 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2008-2010
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -231,7 +231,6 @@ AC_DEFUN([RRA_LIB_KAFS],
          AC_DEFINE([_REENTRANT], [1],
             [Define to 1 on Solaris for threaded errno handling.])],
 
-        [*],
         [rra_build_kafs=true
          _RRA_LIB_KAFS_PATHS
          RRA_LIB_KAFS_SWITCH
