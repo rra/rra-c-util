@@ -45,6 +45,12 @@ skip_unless_author('Distribution style tests');
 use_prereq('Test::Kwalitee', 'kwalitee_ok');
 
 # Do the testing.  Disable testing for use strict, since that's done as part
-# of a separate test.
-kwalitee_ok(qw(-use_strict));
+# of a separate test.  Disable testing for META.yml if it's not present, since
+# it's generated as part of the distribution process but isn't normally
+# present in a development tree.
+my @options = qw(-use_strict);
+if (!-e 'META.yml') {
+    push(@options, '-has_meta_yml');
+}
+kwalitee_ok(@options);
 done_testing();
