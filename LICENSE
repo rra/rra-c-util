@@ -14,8 +14,8 @@ Copyright: 1997, 2000-2002 Benjamin Sittler
 License: Expat
 
 Files: .clang-format docs/api/xmalloc.3 docs/api/xmalloc.pod
- kafs/sys-syscall.c pam-util/vector.c pam-util/vector.h portable/apr.h
- portable/asprintf.c portable/daemon.c portable/dummy.c
+ kafs/sys-syscall.c pam-util/vector.c pam-util/vector.h perl/MANIFEST.SKIP
+ portable/apr.h portable/asprintf.c portable/daemon.c portable/dummy.c
  portable/event-extra.c portable/event.h portable/getaddrinfo.c
  portable/getaddrinfo.h portable/getnameinfo.c portable/getnameinfo.h
  portable/gssapi-mech.c portable/gssapi.h portable/inet_aton.c

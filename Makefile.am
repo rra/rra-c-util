@@ -1,7 +1,7 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <eagle@eyrie.org
-# Copyright 2015-2021 Russ Allbery <eagle@eyrie.org>
+# Copyright 2015-2022 Russ Allbery <eagle@eyrie.org>
 # Copyright 2008-2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -13,14 +13,15 @@ ACLOCAL_AMFLAGS = -I m4
 # These three lists of files are needed for Perl builds.  They're listed
 # here to be added to EXTRA_DIST and so that they can be copied over
 # properly for builddir != srcdir builds.
-PERL_FILES = perl/Build.PL perl/Changes perl/MANIFEST perl/MANIFEST.SKIP \
-	perl/lib/Empty.pm perl/t/api/empty.t perl/t/data/perl.conf	 \
-	perl/t/docs/changes.t perl/t/docs/pod-coverage.t		 \
-	perl/t/docs/pod-spelling.t perl/t/docs/pod.t			 \
-	perl/t/docs/spdx-license.t perl/t/docs/synopsis.t		 \
-	perl/t/style/coverage.t perl/t/style/critic.t			 \
-	perl/t/style/minimum-version.t perl/t/style/module-version.t	 \
-	perl/t/style/obsolete-strings.t perl/t/style/strict.t
+PERL_FILES = perl/Build.PL perl/Changes perl/MANIFEST perl/MANIFEST.SKIP    \
+	perl/README perl/lib/Empty.pm perl/t/api/empty.t		    \
+	perl/t/data/perl.conf perl/t/docs/changes.t			    \
+	perl/t/docs/pod-coverage.t perl/t/docs/pod-spelling.t		    \
+	perl/t/docs/pod.t perl/t/docs/spdx-license.t perl/t/docs/synopsis.t \
+	perl/t/style/coverage.t perl/t/style/critic.t			    \
+	perl/t/style/kwalitee.t perl/t/style/minimum-version.t		    \
+	perl/t/style/module-version.t perl/t/style/obsolete-strings.t	    \
+	perl/t/style/strict.t
 
 # Directories that have to be created in builddir != srcdir builds before
 # copying PERL_FILES over.
