@@ -5,6 +5,11 @@ rra-c-util 10.4 (unreleased)
     Hopefully really fix the portable/getnameinfo test to skip checks when
     0.0.0.0 resolves to a hostname.  Thanks again, Julien ÉLIE.
 
+    Update perltidy rules with two new flags added in 20230309 that remove
+    the newline between a closing paren and opening brace or a closing
+    brace and a continuation such as an or statement.  Thanks, Julien
+    ÉLIE.
+
 rra-c-util 10.3 (2022-12-25)
 
     Add new Perl module test that uses Test::Kwalitee.
