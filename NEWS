@@ -1,6 +1,6 @@
                      User-Visible rra-c-util Changes
 
-rra-c-util 10.4 (unreleased)
+rra-c-util 10.4 (2023-03-31)
 
     Add serial numbers to every Autoconf macro provided by this package.
     This enables nicer behavior in Automake's aclocal tool, specifically

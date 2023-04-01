@@ -8,7 +8,7 @@ Comment: This file documents the copyright statements and licenses for
 
 Files: *
 Copyright: 1997, 2000-2002 Benjamin Sittler
-  2000-2002, 2004-2022 Russ Allbery <eagle@eyrie.org>
+  2000-2002, 2004-2023 Russ Allbery <eagle@eyrie.org>
   2001-2002, 2004-2014
     The Board of Trustees of the Leland Stanford Junior University
 License: Expat
@@ -35,7 +35,7 @@ Files: .clang-format docs/api/xmalloc.3 docs/api/xmalloc.pod
  tests/portable/reallocarray-t.c tests/portable/setenv-t.c
  tests/portable/strndup-t.c tests/util/buffer-t.c tests/util/vector-t.c
  util/macros.h util/vector.c util/vector.h
-Copyright: 2000-2022 Russ Allbery <eagle@eyrie.org>
+Copyright: 2000-2023 Russ Allbery <eagle@eyrie.org>
   2005-2014 The Board of Trustees of the Leland Stanford Junior University
   2015 Julien ÉLIE <julien@trigofacile.com>
 License: all-permissive
