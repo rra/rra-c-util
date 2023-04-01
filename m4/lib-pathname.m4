@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Determine the library path name.
 dnl
 dnl Red Hat systems and some other Linux systems use lib64 and lib32 rather

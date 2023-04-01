@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Find the compiler and linker flags for Apache modules.
 dnl
 dnl Finds the compiler and linker flags for building an Apache module.

@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Provides option to change library probes.
 dnl
 dnl This file provides RRA_ENABLE_REDUCED_DEPENDS, which adds the configure

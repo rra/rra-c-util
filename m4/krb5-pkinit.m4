@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Additional probes for Kerberos PKINIT support.
 dnl
 dnl Additional Kerberos library probes that check behavior of the library

@@ -2,6 +2,11 @@
 
 rra-c-util 10.4 (unreleased)
 
+    Add serial numbers to every Autoconf macro provided by this package.
+    This enables nicer behavior in Automake's aclocal tool, specifically
+    improved --install and --diff behavior, if the rra-c-util macros are
+    on the aclocal search path.
+
     Hopefully really fix the portable/getnameinfo test to skip checks when
     0.0.0.0 resolves to a hostname.  Thanks again, Julien ÉLIE.
 

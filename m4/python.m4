@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Probe for Python properties and, optionally, flags for embedding Python.
 dnl
 dnl Provides the following macros:

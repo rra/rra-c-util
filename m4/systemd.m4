@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Probe for systemd libraries and installation paths.
 dnl
 dnl Provides the RRA_WITH_SYSTEMD_UNITDIR macro, which adds the

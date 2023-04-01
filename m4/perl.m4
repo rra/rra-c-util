@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Probe for Perl properties and, optionally, flags for embedding Perl.
 dnl
 dnl Provides the following macros:

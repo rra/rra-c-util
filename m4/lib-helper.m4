@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Helper functions to manage compiler variables.
 dnl
 dnl These are a wide variety of helper macros to make it easier to construct

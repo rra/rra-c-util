@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Use krb5-config to get link paths for Kerberos libraries.
 dnl
 dnl Provides one macro, RRA_KRB5_CONFIG, which attempts to get compiler and

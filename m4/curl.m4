@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Find the compiler and linker flags for cURL.
 dnl
 dnl Finds the compiler and linker flags for linking with the cURL library.

@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Determine whether PAM uses const in prototypes.
 dnl
 dnl Linux marks several PAM arguments const, including the argument to

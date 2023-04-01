@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Check for a working inet_ntoa.
 dnl
 dnl Check whether inet_ntoa is present and working.  Since calling inet_ntoa

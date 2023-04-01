@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Find the compiler and linker flags for GSS-API.
 dnl
 dnl Finds the compiler and linker flags for linking with GSS-API libraries.

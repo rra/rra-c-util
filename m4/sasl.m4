@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Find the compiler and linker flags for Cyrus SASL.
 dnl
 dnl Finds the compiler and linker flags for linking with v2 of the Cyrus SASL

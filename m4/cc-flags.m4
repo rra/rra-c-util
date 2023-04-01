@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Check whether the compiler supports particular flags.
 dnl
 dnl Provides RRA_PROG_CC_FLAG and RRA_PROG_LD_FLAG, which checks whether a

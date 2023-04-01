@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Test for a libkafs library or replacement.
 dnl
 dnl Check for a working libkafs library, and if not present, check how we can

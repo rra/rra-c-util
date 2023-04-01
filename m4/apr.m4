@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Find the compiler and linker flags for APR.
 dnl
 dnl Finds the compiler and linker flags for building with APR.  Provides the

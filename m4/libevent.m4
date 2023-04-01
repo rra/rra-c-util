@@ -1,3 +1,5 @@
+# serial 1
+
 dnl Find the compiler and linker flags for libevent.
 dnl
 dnl Finds the compiler and linker flags for linking with the libevent library.
