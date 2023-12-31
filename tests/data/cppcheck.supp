@@ -1,4 +1,4 @@
-// Suppressions file for cppcheck.  -*- conf -*-
+// Suppressions file for cppcheck.
 //
 // This includes suppressions for all of my projects, including files that
 // aren't in rra-c-util, for ease of sharing between projects.  The ones that
@@ -8,7 +8,7 @@
 // with the --xml flag and then add a suppression for the error id, file
 // location, and line.
 //
-// Copyright 2018-2022 Russ Allbery <eagle@eyrie.org>
+// Copyright 2018-2023 Russ Allbery <eagle@eyrie.org>
 //
 // Copying and distribution of this file, with or without modification, are
 // permitted in any medium without royalty provided the copyright notice and
@@ -50,6 +50,11 @@ nullPointerRedundantCheck:portable/krb5-profile.c:61
 // Bug in cppcheck 2.3.
 nullPointerRedundantCheck:portable/krb5-renew.c:82
 nullPointerRedundantCheck:portable/krb5-renew.c:83
+
+// (krb5-strength) Bug in cppcheck 2.12.0.
+nullPointerRedundantCheck:tests/plugin/heimdal-t.c:81
+nullPointerRedundantCheck:tests/plugin/mit-t.c:91
+nullPointerRedundantCheck:tests/plugin/mit-t.c:97
 
 // Setting the variable to NULL explicitly after deallocation.
 redundantAssignment:tests/pam-util/options-t.c
