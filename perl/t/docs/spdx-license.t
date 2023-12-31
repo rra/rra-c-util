@@ -38,6 +38,7 @@ use warnings;
 use lib 't/lib';
 
 use Test::RRA qw(skip_unless_automated);
+use Test::RRA::Config qw(@SPDX_IGNORE);
 
 use File::Find qw(find);
 use Test::More;
@@ -60,6 +61,7 @@ my @IGNORE = (
     qr{ ~ \z }xms,                          # Backup files
 );
 my @IGNORE_PATHS = (
+    @SPDX_IGNORE,
     qr{ \A [.] / [.] git/ }xms,             # Version control files
     qr{ \A [.] / [.] pc/ }xms,              # quilt metadata files
     qr{ \A [.] /_build/ }xms,               # Module::Build metadata

@@ -26,7 +26,7 @@ BEGIN {
     @EXPORT_OK = qw(
         $COVERAGE_LEVEL @COVERAGE_SKIP_TESTS @CRITIC_IGNORE $LIBRARY_PATH
         $MINIMUM_VERSION %MINIMUM_VERSION @MODULE_VERSION_IGNORE
-        @POD_COVERAGE_EXCLUDE @STRICT_IGNORE @STRICT_PREREQ
+        @POD_COVERAGE_EXCLUDE @SPDX_IGNORE @STRICT_IGNORE @STRICT_PREREQ
     );
 
     # This version should match the corresponding rra-c-util release, but with
@@ -62,6 +62,7 @@ our $MINIMUM_VERSION = '5.010';
 our %MINIMUM_VERSION;
 our @MODULE_VERSION_IGNORE;
 our @POD_COVERAGE_EXCLUDE;
+our @SPDX_IGNORE;
 our @STRICT_IGNORE;
 our @STRICT_PREREQ;
 
@@ -76,7 +77,7 @@ __END__
 
 =for stopwords
 Allbery rra-c-util Automake perlcritic .libs namespace subdirectory sublicense
-MERCHANTABILITY NONINFRINGEMENT regexes
+MERCHANTABILITY NONINFRINGEMENT regexes SPDX
 
 =head1 NAME
 
@@ -159,6 +160,12 @@ testing.  Normally, all methods have to be documented in the POD for a Perl
 module, but methods matching any of these regexes will be considered private
 and won't require documentation.
 
+=item @SPDX_IGNORE
+
+Regexes that match files that should be excluded from SPDX license header
+checks, in addition to the standard exclusions.  The regular expression is
+matched against the file path relative to the top of the source tree.
+
 =item @STRICT_IGNORE
 
 Additional directories to ignore when doing recursive Test::Strict testing for
@@ -183,7 +190,7 @@ Russ Allbery <eagle@eyrie.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2015-2016, 2019, 2021 Russ Allbery <eagle@eyrie.org>
+Copyright 2015-2016, 2019, 2021, 2023 Russ Allbery <eagle@eyrie.org>
 
 Copyright 2013-2014 The Board of Trustees of the Leland Stanford Junior
 University
