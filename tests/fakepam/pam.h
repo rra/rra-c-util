@@ -75,7 +75,7 @@ struct output {
     struct {
         int priority;
         char *line;
-    } * lines;
+    } *lines;
 };
 
 BEGIN_DECLS
