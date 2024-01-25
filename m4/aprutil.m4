@@ -19,6 +19,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2024 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2010-2011
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -54,10 +55,10 @@ AC_DEFUN([_RRA_LIB_APRUTIL_PATHS],
     [AS_IF([test x"$rra_aprutil_root" != x],
         [RRA_SET_LDFLAGS([APRUTIL_LDFLAGS], [$rra_aprutil_root])])])
  AS_IF([test x"$rra_aprutil_includedir" != x],
-    [APRUTIL_CPPFLAGS="-I$rra_aprutil_includedir"],
+    [APRUTIL_CPPFLAGS="-isystem $rra_aprutil_includedir"],
     [AS_IF([test x"$rra_aprutil_root" != x],
         [AS_IF([test x"$rra_aprutil_root" != x/usr],
-            [APRUTIL_CPPFLAGS="-I${rra_aprutil_root}/include"])])])])
+            [APRUTIL_CPPFLAGS="-isystem ${rra_aprutil_root}/include"])])])])
 
 dnl The main macro for determining the flags for Apache modules.
 AC_DEFUN([RRA_LIB_APRUTIL],

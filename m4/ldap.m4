@@ -18,6 +18,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2024 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2010
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -53,10 +54,10 @@ AC_DEFUN([_RRA_LIB_LDAP_PATHS],
     [AS_IF([test x"$rra_ldap_root" != x],
         [RRA_SET_LDFLAGS([LDAP_LDFLAGS], [$rra_ldap_root])])])
  AS_IF([test x"$rra_ldap_includedir" != x],
-    [LDAP_CPPFLAGS="-I$rra_ldap_includedir"],
+    [LDAP_CPPFLAGS="-isystem $rra_ldap_includedir"],
     [AS_IF([test x"$rra_ldap_root" != x],
         [AS_IF([test x"$rra_ldap_root" != x/usr],
-            [LDAP_CPPFLAGS="-I${rra_ldap_root}/include"])])])])
+            [LDAP_CPPFLAGS="-isystem ${rra_ldap_root}/include"])])])])
 
 dnl The main macro.
 AC_DEFUN([RRA_LIB_LDAP],
