@@ -18,7 +18,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2021 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2021, 2024 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2010
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -80,7 +80,7 @@ AC_DEFUN([RRA_LIB_APACHE],
  rra_apache_includedir=`"$rra_apache_apxs" -q INCLUDEDIR 2>/dev/null`
  AS_IF([test -z "$rra_apache_includedir"],
     [AC_MSG_ERROR([apxs -q INCLUDEDIR failed or returned no value])])
- APACHE_CPPFLAGS="$APACHE_CPPFLAGS -I$rra_apache_includedir"
+ APACHE_CPPFLAGS="$APACHE_CPPFLAGS -isystem $rra_apache_includedir"
  AC_ARG_VAR([APR_CONFIG], [Path to apr-1-config or apr-config])
  AC_PATH_PROGS([APR_CONFIG], [apr-1-config apr-config], [false])
  AS_IF([test x"$APR_CONFIG" != xfalse],

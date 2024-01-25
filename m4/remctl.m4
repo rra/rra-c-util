@@ -29,7 +29,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Coypright 2022 Russ Allbery <eagle@eyrie.org>
+dnl Coypright 2022, 2024 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2008-2009, 2011, 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -65,10 +65,10 @@ AC_DEFUN([_RRA_LIB_REMCTL_PATHS],
     [AS_IF([test x"$rra_remctl_root" != x],
         [RRA_SET_LDFLAGS([REMCTL_LDFLAGS], [$rra_remctl_root])])])
  AS_IF([test x"$rra_remctl_includedir" != x],
-    [REMCTL_CPPFLAGS="-I$rra_remctl_includedir"],
+    [REMCTL_CPPFLAGS="-isystem $rra_remctl_includedir"],
     [AS_IF([test x"$rra_remctl_root" != x],
         [AS_IF([test x"$rra_remctl_root" != x/usr],
-            [REMCTL_CPPFLAGS="-I${rra_remctl_root}/include"])])])])
+            [REMCTL_CPPFLAGS="-isystem ${rra_remctl_root}/include"])])])])
 
 dnl Sanity-check the results of the remctl library search to be sure we can
 dnl really link a remctl program.

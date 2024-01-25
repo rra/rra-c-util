@@ -37,7 +37,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2020-2022 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2020-2021, 2024 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2008-2010
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -75,20 +75,21 @@ AC_DEFUN([_RRA_LIB_KAFS_PATHS],
     [AS_IF([test x"$rra_kafs_root" != x],
         [RRA_SET_LDFLAGS([KAFS_LDFLAGS], [$rra_kafs_root])])])
  AS_IF([test x"$rra_kafs_includedir" != x],
-    [KAFS_CPPFLAGS="-I$rra_kafs_includedir"],
+    [KAFS_CPPFLAGS="-isystem $rra_kafs_includedir"],
     [AS_IF([test x"$rra_kafs_root" != x],
         [AS_IF([test x"$rra_kafs_root" != x/usr],
-            [KAFS_CPPFLAGS="-I${rra_kafs_root}/include"])])])
+            [KAFS_CPPFLAGS="-isystem ${rra_kafs_root}/include"])])])
  AS_IF([test x"$rra_afs_libdir" != x],
     [KAFS_LDFLAGS="$KAFS_LDFLAGS -L$rra_afs_libdir"],
     [AS_IF([test x"$rra_afs_root" != x],
         [RRA_SET_LDFLAGS([KAFS_LDFLAGS], [$rra_afs_root])])
          RRA_SET_LDFLAGS([KAFS_LDFLAGS], [$rra_afs_root], [afs])])
  AS_IF([test x"$rra_afs_includedir" != x],
-    [KAFS_CPPFLAGS="-I$rra_afs_includedir"],
+    [KAFS_CPPFLAGS="-isystem $rra_afs_includedir"],
     [AS_IF([test x"$rra_afs_root" != x],
         [AS_IF([test x"$rra_afs_root" != x/usr],
-            [KAFS_CPPFLAGS="$KAFS_CPPFLAGS -I${rra_afs_root}/include"])])])])
+            [KAFS_CPPFLAGS="$KAFS_CPPFLAGS \
+                -isystem ${rra_afs_root}/include"])])])])
 
 dnl Probe for lsetpag in the AFS libraries.  This is required on AIX and IRIX
 dnl since we can't use the regular syscall interface there.
