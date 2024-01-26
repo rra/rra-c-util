@@ -112,7 +112,7 @@ dnl Check whether a given Python module can be loaded.  Runs the second
 dnl argument if it can, and the third argument if it cannot.
 AC_DEFUN([RRA_PYTHON_CHECK_MODULE],
 [AS_LITERAL_IF([$1], [], [m4_fatal([$0: requires literal arguments])])dnl
- AS_VAR_PUSHDEF([ac_Module], [inn_cv_python_module_$1])dnl
+ AS_VAR_PUSHDEF([ac_Module], [rra_cv_python_module_$1])dnl
  AC_CACHE_CHECK([for Python module $1], [ac_Module],
     [AS_IF(["$PYTHON" -c 'import $1' >/dev/null 2>&1],
         [AS_VAR_SET([ac_Module], [yes])],
