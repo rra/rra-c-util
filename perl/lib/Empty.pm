@@ -6,21 +6,11 @@
 #
 # SPDX-License-Identifier: MIT
 
-package Empty;
+package Empty v11.0.0;
 
-use 5.010;
+use 5.012;
 use strict;
 use warnings;
-
-# Declare variables that should be set in BEGIN for robustness.
-our $VERSION;
-
-# Set $VERSION and everything export-related in a BEGIN block for robustness
-# against circular module loading (not that we load any modules, but
-# consistency is good).
-BEGIN {
-    $VERSION = '10.05';
-}
 
 # Empty function for testing purposes.
 sub empty_function {
@@ -62,7 +52,7 @@ Russ Allbery <eagle@eyrie.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2018-2019, 2021 Russ Allbery <eagle@eyrie.org>
+Copyright 2018-2019, 2021, 2024 Russ Allbery <eagle@eyrie.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

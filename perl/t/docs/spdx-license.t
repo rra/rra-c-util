@@ -9,7 +9,7 @@
 # The canonical version of this file is maintained in the rra-c-util package,
 # which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
-# Copyright 2018-2021, 2023 Russ Allbery <eagle@eyrie.org>
+# Copyright 2018-2021, 2023-2024 Russ Allbery <eagle@eyrie.org>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -31,7 +31,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-use 5.010;
+use 5.012;
 use strict;
 use warnings;
 
@@ -48,10 +48,9 @@ use Test::More;
 ## no critic (RegularExpressions::ProhibitFixedStringMatches)
 #<<<
 my @IGNORE = (
-    qr{ \A Build ( [.] (?!PL) .* )? \z }ixms,  # Generated file from Build.PL
+    qr{ \A Build ([.] (?!PL) .*)? \z }ixms, # Generated file from Build.PL
     qr{ \A LICENSE \z }xms,                 # Generated file, no license itself
-    qr{ \A (Changes|NEWS|THANKS) \z }xms,   # Package license should be fine
-    qr{ \A TODO \z }xms,                    # Package license should be fine
+    qr{ \A (Changes|THANKS|TODO) \z }xms,   # Package license should be fine
     qr{ \A MANIFEST ( [.] .* )? \z }xms,    # Package license should be fine
     qr{ \A Makefile \z }xms,                # Generated file, no license itself
     qr{ \A (MY)? META [.] .* }xms,          # Generated file, no license itself
@@ -68,13 +67,9 @@ my @IGNORE_PATHS = (
     qr{ \A [.] /blib/ }xms,                 # Perl build system artifacts
     qr{ \A [.] /cover_db/ }xms,             # Artifacts from coverage testing
     qr{ \A [.] /debian/ }xms,               # Found in debian/* branches
-    qr{ \A [.] /docs/metadata/ }xms,        # Package license should be fine
     qr{ \A [.] /local/ }xms,                # Carton local lib
     qr{ \A [.] /README ( [.] .* )? \z }xms, # Package license should be fine
     qr{ \A [.] /share/ }xms,                # Package license should be fine
-    qr{ \A [.] /t/data/generate/ }xms,      # Test metadata
-    qr{ \A [.] /t/data/spin/ }xms,          # Test metadata
-    qr{ \A [.] /t/data/update/ }xms,        # Test output
     qr{ \A [.] /t/data .* [.] json \z }xms, # Test metadata
     qr{ \A [.] /t/tmp }xms,                 # Test metadata
 );

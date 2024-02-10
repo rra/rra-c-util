@@ -1,0 +1,1119 @@
+# rra-c-util Change log
+
+Beginning with version 11.0.0, rra-c-util is versioned with [semver](https://semver.org/). Changes to C warning flags, perlcritic configuration, and similar changes to style tests are not considered backward-incompatible changes.
+
+Versions older than 11.0.0 use a relaxed semver-like versioning scheme.
+
+Find changes for the upcoming release in the project's [changelog.d directory](https://github.com/rra/rra-c-util/tree/main/changelog.d/).
+
+<!-- scriv-insert-here -->
+
+## 11.0.0 (unreleased)
+
+## 10.4 (2023-03-31)
+
+### New features
+
+- Add serial numbers to every Autoconf macro provided by this package. This enables nicer behavior in Automake's `aclocal` tool, specifically improved `--install` and `--diff` behavior, if the rra-c-util macros are on the `aclocal` search path.
+- Update perltidy rules with two new flags added in 20230309 that remove the newline between a closing paren and opening brace or a closing brace and a continuation such as an or statement. Thanks, Julien ÉLIE.
+
+### Bug fixes
+
+- Hopefully really fix the portable/getnameinfo test to skip checks when 0.0.0.0 resolves to a hostname. Thanks again, Julien ÉLIE.
+
+## 10.3 (2022-12-25)
+
+### New features
+
+- Add new Perl module test that uses Test::Kwalitee.
+- `perl/MANIFEST.SKIP` is now suitable for copying as-is into Perl module packages as a default `MANIFEST.SKIP`.
+
+### Bug fixes
+
+- Fix the `portable/getnameinfo` test to skip some checks when 0.0.0.0 resolves to a hostname. (Alas, someone was weird enough to put it in DNS.) Thanks, Julien ÉLIE.
+- Fix `AS_CASE` syntax in `RRA_PROG_CC_FLAG` and `RRA_LIB_KAFS`. Thanks, Julien ÉLIE.
+- Avoid deprecated `test -a` syntax in `systemd.m4`. Thanks, Julien ÉLIE.
+
+## 10.2 (2022-05-08)
+
+### Backwards-incompatible changes
+
+- Drop workarounds for old perltidy and Perl::Critic::Community versions. Assume that perltidy as run by Test::Perl::Critic now handles read-only directories correctly. Optionally depend on Perl::Critic::Community instead of Perl::Critic::Freenode.
+
+### New features
+
+- Add new `RRA_LIB_PCRE2` and `RRA_LIB_PCRE2_OPTIONAL` macros that detect version 2 of the PCRE library (the current supported version). PCRE version 1 has been deprecated; users should switch to PCRE2. `RRA_LIB_PCRE_OPTIONAL` will likely be dropped in a future version of rra-c-util.
+- Update perlcritic and perltidy rules to tweak Perl formatting and to not count the `$self` parameter when imposing a limit on the number of arguments that can be passed to a method.
+- Mark allocation functions in C support libraries with their corresponding deallocation functions so that GCC 11 and later can diagnose memory deallocation bugs.
+
+### Bug fixes
+
+- Fix `portable/sd-daemon.h` on systems that do have libsystemd. The GCC pragmas to set visibility were in the wrong place, causing link failures with libsystemd.
+- Ignore some more PHP and Python files in the `docs/spdx-license` test.
+
+### Other changes
+
+- Document the dependency some Autoconf macros have on the macros provided by pkg-config.
+
+## 10.1 (2021-12-25)
+
+### Backwards-incompatible changes
+
+- Disable vertical code alignment in perltidyrc. Code that should be aligned should use the magical `#<<<` comments. The default alignment is much too aggressive and makes the formatting unstable.
+
+### New features
+
+- Update `.clang-format` for Clang 13.0.
+
+### Bug fixes
+
+- Fix `IN6_ARE_ADDR_EQUAL` Autoconf probe on macOS, where it needs an include of `string.h`. Patch from Julien ÉLIE.
+- Fix `RRA_PROG_CC_FLAG` and `RRA_PROG_LD_FLAG` for Clang. Previously they would not reject unknown flags since unknown flags to Clang are only a warning by default. Thanks, Julien ÉLIE. (#9)
+- Disable `-Wreserved-identifier` in `RRA_PROG_CC_WARNING_FLAGS` for Clang, since it produces false positives with `FD_ZERO` and similar macros defined in system headers under Clang 13.0.
+
+## 10.0 (2021-10-17)
+
+### Backwards-incompatible changes
+
+- Remove the `RRA_SET_LIBDIR` macro. I believe it was only used for PAM module packages, and its logic is now incorrect on Debian usrmerge systems. My PAM module packages will instead document that setting `--libdir` manually to specify the correct PAM module path is likely to be necessary.
+- Perl tests and test support libraries now require Perl 5.10 or later.
+- Update perltidy configuration for somewhat better handling of nested data structures and `qw` lists.
+
+### New features
+
+- Add support for testing different arguments to `pam_end`, such as `PAM_DATA_SILENT`, to the fakepam testing framework.
+- Update perlcritic configuration to remove (instead of tweaking) two warnings that I keep running into and have never found useful, and to cope with the renaming of Perl::Critic::Freenode to Perl::Critic::Community. The latter requires a workaround in the test programs because of perlcritic's unsuppressible warning about unknown policies.
+- Add a new `t/docs/changes.t` test for Perl modules that uses Test::CPAN::Changes to check the format of `Changes` files.
+- In Perl modules, also check POD syntax and spelling for modules found in `t/lib`.
+
+### Bug fixes
+
+- Fix `RRA_SET_LDFLAGS` to always use the multilib directory (`lib32` or `lib64`) if it exists, even if the system does not (as with Debian derivatives) use multilib. Hopefully fixes detection of the library path for OpenSSL 3.0. Thanks, Julien ÉLIE.
+- Update `RRA_LIB_PYTHON` to use sysconfig by preference and only fall back on distutils.sysconfig if sysconfig is not available, since distutils.sysconfig has been deprecated in Python 3.10.
+- Fix probe for `SUN_LEN` on macOS X Big Sur. Thanks, Julien ÉLIE.
+- Fix portable `k_haspag` replacement to not attempt to allocate negative memory if `getgroups` fails. Thanks, Jeffrey Altman.
+- Modernize `RRA_FUNC_KRB5_GET_INIT_CREDS_OPT_SET_PKINIT_ARGS` and `RRA_LIB_KAFS` to avoid deprecated macros from Autoconf 2.71.
+- Ignore all `~` backup files when checking for SPDX license identifiers.
+- Suppress `-Wformat-truncation` warnings from GCC 10 in the portable replacement for `getnameinfo`. The return status of `snprintf` is tested for truncation, but GCC doesn't recognize that.
+
+### Other changes
+
+- Add documentation of `is_file_contents` (provided by Test::RRA).
+
+## 9.0 (2021-03-20)
+
+### Backwards-incompatible changes
+
+- Rename all SQLite Autoconf macros from `SQLITE` to `SQLITE3`, including their output variables and configure command-line options, to bring the naming convention in line with common practice for software using SQLite v3. Clear the `SQLITE3` variables if the library was optional and no working library was found.
+- Rename the `KRB5_CPPFLAGS_GCC` output variable from the `RRA_LIB_KRB5` macro to `KRB5_CPPFLAGS_WARNINGS` to more accurately reflect its intended use and to reflect that it works with Clang.
+- The `m4/krb5.m4` Autoconf macros no longer define `AM_CONDITIONAL` as a no-op if it's not already defined, since this may be unexpected when loading a macro. If you want to use those macros without Automake, add `m4_define_default([AM_CONDITIONAL], [:])` to `configure.ac`.
+
+### New features
+
+- Add C stubs for `sd_notify` and `sd_notifyf` and a (non-functional) preprocessor stub for `sd_is_socket` for portability for more APIs to systems without libsystemd.
+
+### Bug fixes
+
+- The `RRA_LIB_KRB5` and `RRA_LIB_KRB5_OPTIONAL` macros now also check that at least one Kerberos header file was found and either abort with an error or mark Kerberos as unusable depending on the choice of macro. Thanks, Julien ÉLIE.
+- Fix `portable/sd-daemon.h` to include necessary prerequisite headers and not assume they were already included.
+- Fix the `RRA_PROG_PYTHON` Python version test to work on Python 3.0 and Python versions older than 2.7. Tested with Python 2.3.0. Thanks, Julien ÉLIE.
+- Fix the `util/fdflag` test on Solaris 11. Thanks, Julien ÉLIE.
+- Fix some bogus networking assumptions made by the `util/fdflag` test that caused it to fail on OpenBSD, and clean up the child process if anything goes wrong with the main process so that the test driver doesn't hang.
+- Allow use of package variables from YAML::XS when running perlcritic.
+
+### Other changes
+
+- Use `AS_ECHO` instead of echo in all Autoconf macros for slightly improved portability. Thanks, Julien ÉLIE.
+
+## 8.4 (2020-12-13)
+
+### New features
+
+- Add a new `RRA_PROG_LD_FLAG` Autoconf macro to probe whether a given flag is supported when linking. Patch from Julien ÉLIE.
+
+### Bug fixes
+
+- Allow the `RRA_PROG_C_FLAG` Autoconf macro to be used to probe for flags containing a comma. Change suggested by Julien ÉLIE.
+- Include `string.h` in the probe for `AI_ADDRCONFIG` support to avoid problems on macOS X. Thanks, Bo Lindbergh.
+- NetBSD prefers `reallocarr` to `reallocarray` and only prototypes the latter if `_OPENBSD_SOURCE` is defined, which is not one of the macros Autoconf defines by default. Work around this for now by checking whether `reallocarray` is declared, not only whether it's available, and protyping it if it's not declared. This uses the semi-hidden deprecated symbol on NetBSD.
+- In the `getnameinfo` replacement, handle musl libc's `gethostbyaddr`, which returns the string conversion of the IP address if the host doesn't resolve. This only affects the test suite, since musl libc supports IPv6 and thus doesn't need this replacement.
+
+### Other changes
+
+- Add a more explicit statement of backward compatibility support, namely that support for systems released more than fifteen years ago will be dropped if that support becomes burdensome.
+
+## 8.3 (2020-08-09)
+
+### Backwards-incompatible changes
+
+- Stop providing a replacement for a broken snprintf and assume the libc version works correctly. This portability code has proven difficult to maintain, and was only relevant for ancient proprietary UNIX versions that have been obsolete for many years.
+
+### New features
+
+- Fix style issues found in Perl code by Perl::Critic::Freenode and install it as part of CI testing. This avoids issues with reusing the Perl tests with Perl modules tested with perl-tester Docker images, which pre-install those Perl::Critic policies.
+
+### Bug fixes
+
+- Fix network tests on hosts with no IPv4 addresses. In this case, the network tests for binding all configured addresses will bind only to IPv6, which broke some prior assumptions in the test suite. Thanks to Niko Tyni for the bug report.
+- Ignore files named changelog when checking for obsolete strings so that the check will not trigger on old Debian changelog entries.
+- Suppress `ControlStructures::ProhibitCascadingIfElse` in perlcritic checks. It recommends using given/when instead, but this construct is marked as experimental in Perl and was considered a mistake in some quarters.
+
+## 8.2 (2020-05-16)
+
+### New features
+
+- Use `memset` to implement `explicit_bzero` if the latter is not available.
+- Add a definition of `PAM_MAX_RESP_SIZE` to `portable/pam.h`.
+
+### Bug fixes
+
+- Fix support for configuring Kerberos tests with their own `krb5.conf` file. Patch from Jeffrey Hutzelman.
+- Fix support for configuring Kerberos tests when the system `krb5.conf` file does not contain a `default_realm` setting.
+- Change `ENTRY` and `EXIT` logging macros for PAM modules to use do/while syntax so that it can be used like a function call.
+- Ignore files in `tests/config` other than README when checking for SPDX license identifiers.
+- Skip directories named `.pc` when enumerating all files for tests and when checking for SPDX license identifiers for Perl packages. This directory is used by quilt (and thus some Debian packaging) for metadata.
+- Ignore object files when checking for SPDX license identifiers.
+- Fix header ordering in some of the portability socket code to restore compatibility with some ancient UNIX systems. This was broken by the include reordering done by clang-format. Thanks, Julien ÉLIE.
+- Fix warnings with Clang 10 and GCC 10.
+
+## 8.1 (2020-01-05)
+
+### Backwards-incompatible changes
+
+- Drop support for Perl 5.6. Perl tests and supporting libraries now require Perl 5.8 or later. Not even CPAN testers are still testing Perl 5.6 and Travis-CI doesn't support it, so true support was dubious at best. Dropping support for Perl 5.6 allows cleaning up some old compatibility code.
+
+### Bug fixes
+
+- Update suppressions and fix issues found by cppcheck 1.89.
+- Remove `snprintf` tests that surpassed the promised precision of C floating point numbers.
+
+### Other changes
+
+- Reformat all C source using clang-format 10 and the formatting rules specified in `.clang-format`.
+
+## 8.0 (2019-09-01)
+
+### Backwards-incompatible changes
+
+- Test::RRA now must be imported before Test::More, and will check whether Test::More is available and skip the whole test if it is not (such as Red Hat systems with perl but not perl-core installed). All included tests written in Perl have been updated to import Test::RRA before Test::More.
+
+### New features
+
+- The `is_file_contents` Test::RRA function now falls back on printing the expected and seen output if diff does not work, primarily to support platforms like Windows with no standard diff program.
+- In `tests/docs/spdx-license-t` and the Perl equivalent, check for my legacy "see LICENSE" notice even in short files that are otherwise skipped by the test to ensure that all license notices are replaced with the new SPDX notices.
+
+### Bug fixes
+
+- Fix `RRA_LIB_KRB5_OPTIONAL` probing in the `--enable-reduced-depends` case when linking with libkrb5 is not possible but libcom\_err is present. The probes for com\_err were previously not skipped, resulting in a non-empty `KRB5_LIBS` containing only `-lcom_err`, which incorrectly caused the macro to indicate that Kerberos libraries were present.
+- Work around Test::Strict not skipping `.git` directories by testing an explicit list of files and directories in the Perl `t/style/strict.t` test. This means that test now assumes the only interesting files are in subdirectories or end in `*.PL`. It also now skips `blib`, so no longer double-checks library files and scripts.
+- Don't erroneously exclude Build.PL files from SPDX license identifier checks in Perl packages.
+- Ignore Changes when checking Perl files for obsolete strings.
+- Minor updates to fix warnings and tests with GCC 9.2.1, perltidy 20190601, and Perl::Critic 1.134.
+
+### Other changes
+
+- rra-c-util now tests the Perl test utilities that it includes, and therefore builds and tests a dummy Perl module during its build. Therefore, Perl 5.6.2 or later and the Module::Build module are now required to build rra-c-util (but not to use its components).
+- Updated to C TAP Harness 4.5.
+
+## 7.2 (2018-06-03)
+
+### New features
+
+- Add new Python Autoconf macros `RRA_PROG_PYTHON`, `RRA_PYTHON_MODULE`, and `RRA_LIB_PYTHON` written by Julien ÉLIE and based on earlier work in INN. The first finds Python through an environment variable or a `PATH` search, checking for a sufficiently high version, and supports requiring Python 2, Python 3, or either. The second checks whether a Python module can be loaded by the discovered Python interpreter, and the third reports the flags required to link with the Python library to embed it in another program.
+- The Autoconf `RRA_PROG_PERL` macro now also makes `PERL` a substitution variable. Thanks, Julien ÉLIE.
+- Rename the `docs/urls` test (for both Perl and non-Perl packages) to `style/obsolete-strings`, which more correctly reflects its purpose. Add a check for `RRA_MAINTAINER_TESTS`, which has been replaced by Lancaster Consensus environment variables.
+
+### Bug fixes
+
+- The Autoconf `RRA_LIB_PERL` macro now checks for the `EXTERN.h` header and for `perl_alloc` in the libperl library, to double-check that the discovered linkage information actually works. (It may not on, for example, a Debian host without libperl-dev installed.)
+- The Autoconf `RRA_LIB_BDB`, `RRA_LIB_OPENSSL`, `RRA_LIB_SASL`, and `RRA_LIB_ZLIB` macros, and their `_OPTIONAL` counterparts, all now check that the library's key header can be found as well as the library. The `_OPTIONAL` versions treat the library as missing if the header is not present; the non-optional versions will abort configure with an error if the header is not present.
+- Fix updating of Perl module versions using the new-style package syntax by `tests/perl/module-version-t -u`. Previous versions were quoting two-part version numbers, but this is a syntax error when the version is set with the package directive.
+- Skip more Automake files in the `all_files` function of Test::RRA::Automake.
+- Add more exclusions to the spdx-license tests.
+
+## 7.1 (2018-05-06)
+
+### New features
+
+- Add maintainer `check-cppcheck` target to run cppcheck across the source base with a standard configuration. Fix all issues found by cppcheck.
+- Define `UINT32_MAX` for systems that don't have it.
+- Add SPDX-License-Identifier headers to all substantial source files, and add a test to check for them.
+- Rework the check-valgrind target to use the new C TAP Harness valgrind support and automatically check the valgrind log files for errors at the end of the test suite.
+- Add support for running remctld under valgrind when spawning it for test cases.
+
+### Bug fixes
+
+- Fix misplaced `va_end` in the pam-util `putil_log_failure` function.
+- Avoid testing the client IP address when accepting TCP and UDP client connections using `network_bind_all`. Some hosts with unusual network configurations may rewrite client packets to appear to come from an IP address other than 127.0.0.1, resulting in false positives in earlier versions of this test.
+- Skip checking for krb5-config on the path if an install prefix was provided to the corresponding configure flag. This was harmless but resulted in confusing output.
+- Skip more Autoconf and Automake files in the all_files function of Test::RRA::Automake.
+- Update perlcriticrc for Perl tests to disable a false positive on postfix dereferencing and allow package variables in another module.
+
+### Other changes
+
+- Switch the license of the essentially public domain source files from a license statement I borrowed from the IETF to a more standard FSF all-permissive license.
+- Update to C TAP Harness 4.3:
+
+## 7.0 (2017-12-30)
+
+### Backwards-incompatible changes
+
+- Drop the `SA_LEN` macro from `portable/socket.h`. This macro came from INN's portability code, and can be useful when adding IPv6 support to old code bases that didn't pass address lengths. But it was fairly easy to remove the remaining uses of it from INN, and it's never caught on and been standardized. It wasn't necessary in any of my other projects and was causing warnings with some new warning options in GCC 7, so drop it entirely.
+- `network_sockaddr_sprint` now takes a `socklen_t` instead of a `size_t` as its second argument for better compatibility with other networking functions it calls.
+
+### New features
+
+- Allow `bail_krb5` and `diag_krb5` TAP library functions to take either a `krb5_error_code` or a `kadm5_ret_t` as their second argument.
+- Fix new warnings in GCC 7. Add `-Wformat-overflow=2`, `-Wformat-truncation=2`, `-Walloc-zero`, `-Wduplicated-branches`, `-Wconversion -Wno-sign-conversion`, `-Wmissing-declarations`, and `-Wrestrict` to the default GCC warning flags, and fix resulting issues. Remove various warning options that are now the default or implied by other flags.
+- Flesh out support for Clang warnings and compile cleanly under Clang with most warnings enabled (`-Weverything` with some exclusions). See `m4/cc-flags.m4` for the list of Clang warning options excluded.
+- Support testing flags containing `+` characters using `RRA_PROG_CC_FLAG`. This character has to be replaced when creating cache variables. Thanks to Julien ÉLIE for the report.
+
+### Bug fixes
+
+- Fix all warnings from the Clang static analyzer. Ensure that allocations in `reallocarray` replacements have a minimum size of 1 and that `pam-util/vector.c` always allocates the strings array with a minimum size of 1 to simplify static analysis.
+- Update valgrind configuration to exclude more false positives from MIT and Heimdal libraries doing load-time allocations.
+
+### Other changes
+
+- Update to C TAP Harness 4.2.
+
+## 6.2 (2016-12-24)
+
+### New features
+
+- Add new `is_file_contents` function to Test::RRA for Perl tests. This compares a string with the contents of a file and displays a diff if they don't match.
+- Add a new test (`tests/docs/urls-t`, and `perl/t/docs/urls.t` for Perl modules) for bad URLs or other strings in all distribution files, initially just checking for non-https www.eyrie.org URLs and my old email address. In the process, add a new `all_files` function to Test::RRA::Automake that returns all "interesting" files in the distribution that a test may want to look at.
+
+### Bug fixes
+
+- Correctly handle -Wno-* options in `RRA_PROG_CC_FLAG`. GCC and Clang both don't produce fatal errors for unknown `-Wno-*` flags, so test the corresponding positive `-W` flag instead when determining if they're supported. Thanks to Guillem Jover for the information.
+- In `RRA_PROG_CC_WARNINGS_FLAGS`, always add `-Werror` to warning flags for both GCC and Clang, rather than probing for whether it's supported in GCC and not using it with Clang.
+- Require version 0.25 of Test::Strict or later in `tests/perl/strict-t` and `perl/t/style/strict.t`, since that version is required to know that use 5.012 or later automatically implies use strict.
+
+## 6.1 (2016-10-10)
+
+### New features
+
+- New `RRA_PROG_CC_FLAG` macro, from INN, which determines whether the compiler supports a given flag. New `RRA_PROG_CC_WARNINGS_FLAGS` macro, replacing the `WARNINGS` variable in `Makefile.am`, to calculate all of the warning flags supported by the current compiler, and use it for the warnings target. The warning flags have been updated for new flags available in GCC 6.1.0.
+
+### Bug fixes
+
+- Correct the return-value checks for `snprintf` to avoid an off-by-one error when verifying the output was not truncated. (All locations should have been safe anyway for other reasons, but be certain.) Based on a patch by Yuriy M. Kaminskiy to INN.
+- Test::RRA::Config could not load perl.conf when run outside the test suite under current Perl (5.22.2) because the semantics of `do` with relative paths changed. Fix by making the relative search paths more explicit. This fixes running `module-version-t -u` outside the test suite to bump version numbers.
+
+## 6.0 (2016-05-07)
+
+### Backwards-incompatible changes
+
+- Remove the portable replacements for `strlcat` and `strlcpy`. These had various bugs around edge cases, and I've been convinced that these interfaces are a bad idea. They're no longer used by any of the utility libraries and should normally be replaced with `asprintf` or similar functions.
+- Use `C_TAP_SOURCE` and `C_TAP_BUILD` environment variables in all test support code instead of `SOURCE` and `BUILD`, following the change in C TAP Harness 4.0. Upgrading to any test support libraries from this release will also require upgrading the test suite driver to C TAP Harness 4.0 or later.
+
+### New features
+
+- `network_set_freebind`, `network_set_reuseaddr`, and `network_set_v6only` are now public functions for clients that need additional control over when these options are set or can't use the `network_bind` functions.
+- Add a new `RRA_PROG_PERL` macro that finds the path of a Perl interpreter of the given version or newer. Add a new `RRA_PERL_CHECK_MODULE` macro that checks whether a given module can be loaded by Perl. Add a new `RRA_LIB_PERL` macro that finds the compiler and linker flags for embedding Perl. These are based on the configure macros used in INN.
+- Add a replacement for `gss_oid_equal` for older versions of Heimdal.
+
+### Bug fixes
+
+- Fix the `m4/openssl.m4` probe for OpenSSL to look for `SSL_accept` instead of `SSL_library_init`, fixing OpenSSL 1.1.0 detection. Thanks, Julien ÉLIE.
+
+### Other changes
+
+- Rewrite `vector_join` and `cvector_join` to use `memcpy` instead of `strlcpy` and `strlcat`.
+- Rename the script to bootstrap from a Git checkout to `bootstrap`, matching the emerging consensus in the Autoconf world.
+
+## 5.10 (2016-01-17)
+
+### New features
+
+- New option, `@MODULE_VERSION_IGNORE`, for the test perl.conf configuration that excludes certain modules from the version consistency check. This allows different versioning to be used for modules that provide DBIx::Class schemata.
+- Move common code between `tests/perl/module-version-t` and `perl/t/style/module-version.t` into a new Test::RRA::ModuleVersion test module. This adds support for the Perl 5.12 module version syntax to the `tests/perl/module-version-t` version of the test.
+
+### Bug fixes
+
+- Fix the Perl `docs/synopsis.t` test to not use UNIX-specific path delimiters to exclude files in `blib/script`. This fixes portability to older builds of Perl on Windows.
+- The `util/network/server-t` test has been made more robust against additional ways that IPv6 could not be available, such as the restrictions in the current Travis-CI build environment.
+
+## 5.9 (2015-11-27)
+
+### New features
+
+- Fix the portability defines for the anonymous principal strings to correctly define the Heimdal API, and add `KRB5_ANON_REALM`.
+- Add `PAM_SESSION_ERR` to the error codes supported by the PAM testing framework.
+
+### Bug fixes
+
+- In the PAM testing framework, clear `errno` when a module calls `pam_modutil_getpwnam` with an unrecognized username. Returning `NULL` with a 0 errno makes other testing easier.
+
+## 5.8 (2015-08-18)
+
+### New features
+
+- Add portability code for `kadm5_init_krb5_context` for programs that use libkadm5clnt without needing libkrb5.
+
+### Bug fixes
+
+- Add missing `va_end` in the `xasprintf` implementation.
+- Fix segfault in `buffer_find_string` if passed a buffer that's never had any data. Found by Richard Kettlewell.
+- Fix the logic in Test::RRA::Automake for stripping relative directories from the paths created by Automake to cope with multiple ascending relative paths in a row, as is now used by current Automake dist checking.
+
+### Other changes
+
+- Update to C TAP Harness 3.4.
+
+## 5.7 (2015-04-26)
+
+### New features
+
+- Add portability defines for Mac OS X 10's PAM implementation, which doesn't support the `PAM_DATA_REPLACE` and `PAM_DATA_SILENT` options for `pam_set_data` and doesn't define `PAM_BAD_ITEM`. Thanks to Meno Abels for the report.
+- Add new `RRA_HEADER_PAM_STRERROR_CONST` macro that checks whether `pam_strerror` wants its first argument declared const. This is required to build the fakepam library for testing on Mac OS X, which declares the first argument const (unlike other PAM implementations).
+- Prefer libsystemd to libsystemd-daemon if it is available, since upstream merged the systemd libraries together. The macro is still called `RRA_LIB_SYSTEMD_DAEMON_OPTIONAL` for now, since it only checks for those functions and will support libsystemd-daemon on older installations.
+- Port the Kerberos Autoconf macros and portability framework to the included Kerberos in Solaris 10 by adding some more entries to the header search paths.
+- Add a macro to probe for whether the compiler is Clang, and use that to determine appropriate warning flags for Clang versus gcc.
+
+### Bug fixes
+
+- Avoid `$()` in the probe for systemd support, since Solaris 10 `/bin/sh` is still used by configure and doesn't support this syntax.
+
+### Other changes
+
+- Update to C TAP Harness 3.3.
+
+## 5.6 (2014-12-25)
+
+### New features
+
+- Add a `style/module-version.t` test and helper script for regular Perl modules. This is similar to `tests/perl/module-version-t` except that it expects a Perl module layout instead of Perl modules embedded in a larger distribution, does not do the Automake integration, and supports the Perl 5.12 package syntax. (Common code should someday be factored out into Test::RRA.)
+- `network_connect`, `network_connect_host`, and `network_client_create` now accept "any" as a source as well as "all", as a synonym for letting the operating system pick, for parallelism with `network_bind_ipv4` and `network_bind_ipv6`.
+- The `portable/socket.h` portability layer now provides a `socket_set_errno_einval` macro to set the current socket error to an equivalent of `EINVAL`. Windows uses a different error code for this case.
+- Add a new `portable/socket-unix.h` portability layer that includes `sys/un.h` and defines `SUN_LEN` if the implementation does not do so. (Use in combination with the `RRA_MACRO_SUN_LEN` Autoconf macro.)
+- Add `PIPE_READ` and `PIPE_WRITE` macros to `util/macros.h` to name the elements of the array passed to pipe.
+- Add full support for `PAM_RHOST`, `PAM_RUSER`, and `PAM_TTY` and read-only support for `PAM_SERVICE` (returning the service name given to `pam_start`) and `PAM_USER_PROMPT` (returning "login: ") to the fake PAM library for testing. Patch from Jeffrey Hutzelman.
+- In the TAP add-on for Kerberos testing, add a new flag, `TAP_KRB_NEEDS_PKINIT`, to the `kerberos_setup` function. This indicates that configuration for PKINIT authentications is required for this test case.
+
+### Bug fixes
+
+- Check for integer overflow when determining the size of the results of `vector_join` and `vector_cjoin`.
+- Avoid `strlcpy` in the `getnameinfo` replacement (use `memcpy` instead) and the `setenv` replacement (use `asprintf` instead).
+- Fix visibility for `util/buffer.c` functions and for `inet_aton` and `inet_ntoa` replacements to match the default hidden visibility of other portability and util functions. Thanks, Julien ÉLIE.
+- `network_addr_match` now always fails (returns false) if either of the strings are the empty string. AIX 7.1's `inet_aton` treats the empty string as equivalent to `0.0.0.0`, but we want to treat it as a syntax error since it's too easy to get an empty string by accident.
+
+### Other changes
+
+- Update to C TAP Harness 3.2.
+
+## 5.5 (2014-07-02)
+
+### New features
+
+- Add a replacement for `reallocarray` for systems (currently anything that isn't OpenBSD) that don't have it. This function is the same as `realloc` but takes `calloc`-style arguments and checks for size overflow before calling `realloc`.
+- Add `xreallocarray` to the util library, which is a checked version of `reallocarray` similar to what `xrealloc` is for `realloc`.
+- `portable/system.h` now also guarantees the inclusion of `inttypes.h` (which it had included for years as an implementation detail) and `limits.h` (to ensure the availability of `SIZE_TYPE` on older systems).
+- `RRA_LIB_KRB5` and `RRA_LIB_KRB5_OPTIONAL` now also provide a `KRB5_CPPFLAGS_GCC` Makefile variable that can be used in combination with gcc warnings (such as the make warnings target) to suppress warnings from Kerberos headers in non-system paths.
+- The `util/messages-krb5` test can now be included in a package that may or may not be built with Kerberos support and will be skipped if Kerberos support is not enabled.
+
+### Bug fixes
+
+- In `network_read` and `network_write` with a timeout, restart the I/O attempt if a system call failed with `EINTR` instead of aborting the operation.
+- Use `calloc` in preference to calculating a `malloc` size with multiplication everywhere, and `reallocarray` in preference to calculating a `realloc` size. In most places this caution was probably not necessary, but uniformity is easier to audit and no one will ever notice the speed difference between `malloc` and `calloc`.
+- Fix compilation of `portable/pam.h` with a C++ compiler. Caught by cppcheck.
+
+### Other changes
+
+- Update to C TAP Harness 3.1.
+
+## 5.4 (2014-03-25)
+
+### Backwards-incompatible changes
+
+- Rename `skip_unless_maintainer` to `skip_unless_author` in Test::RRA and add a `skip_unless_automated` function that skips the test unless author, release, or automated testing is requested. Use the new function for many of the Perl tests that don't uncover functionality issues. Switch from `RRA_MAINTAINER_TESTS` to use the environment variables from the Perl Lancaster Consensus (`AUTHOR_TESTING`, `AUTOMATED_TESTING`, and `RELEASE_TESTING`) for consistency with other Perl packages.
+
+### New features
+
+- Add Autoconf support for SQLite in the form of `RRA_LIB_SQLITE` and `RRA_LIB_SQLITE_OPTIONAL` macros and corresponding `RRA_LIB_SQLITE_SWITCH` and `RRA_LIB_SQLITE_RESTORE` macros. These only look for SQLite 3 with the `sqlite3_open_v2` interface, since that should be old enough to be present nearly everywhere.
+
+## 5.3 (2014-03-18)
+
+### New features
+
+- The standard Perl script test for strict and warnings now supports a new configuration option, `@STRICT_PREREQ`, which lists modules that are required for meaningful script testing. If any of those modules is not installed, Perl scripts will not be checked. This allows correct handling of supporting scripts or optional utilities whose dependencies are not installed when tests are run.
+
+### Bug fixes
+
+- Work around a bug caused by the combination of Perl::Tidy 20130922, which unconditionally writes a log file, and Perl::Critic, which doesn't suppress it, by removing stray `perltidy.LOG` files after testing.
+- Skip Perl critic tests for right now if the source directory is not writable, since Perl::Tidy 20130922 tries to unconditionally create a log file in the current directory, the current directory needs to be the root of the source directory for some testing to work properly, and Perl::Tidy fails all checks if it cannot create the log file.
+
+## 5.2 (2014-01-28)
+
+### New features
+
+- Add Autoconf support for libevent in the form of `RRA_LIB_EVENT` and `RRA_LIB_EVENT_OPTIONAL` macros and corresponding `RRA_LIB_EVENT_SWITCH` and `RRA_LIB_EVENT_RESTORE` macros. Add a portability wrapper around the libevent include files and Autoconf probes, defines, and code to support using libevent 1.4 via the libevent 2.0 API (with some degradation of functionality).
+- Add new `message_handlers_reset` function to the messages utility API. This function resets all handlers to their defaults and frees any memory allocated by the `message_handlers` functions. This is primarily useful to allow freeing all memory when doing exhaustive memory allocation testing.
+
+### Bug fixes
+
+- Suppress shell errors from the systemd unit directory probe when pkg-config is not available.
+- In the process TAP add-on, flush output from the process after stopping it instead of before and include the exit status if available. Use a cleaner method to wait for the process to stop that doesn't terminate the test with `SIGALRM` if the process doesn't stop fast enough and instead clearly reports the problem with bail. Fix a memory leak when starting a process under fakeroot.
+- Port the Kerberos TAP add-on to the new `test_cleanup_register` API and free allocated memory in child processes as well as the primary process.
+- Fix syntax error when building `portable/krb5.h` with a C++ compiler.
+
+### Other changes
+
+- Add additional suppressions for MIT Kerberos and Heimdal to the valgrind suppression file.
+- Update to C TAP Harness 3.0
+
+## 5.1 (2014-01-05)
+
+### New features
+
+- Add Autoconf support for systemd. This provides two macros: `RRA_WITH_SYSTEMD_UNITDIR`, which defines the `HAVE_SYSTEMD` Automake conditional and the systemdsystemunitdir substitution variable, and `RRA_LIB_SYSTEMD_DAEMON_OPTIONAL`, which probes for the optional libsystemd-daemon library (used for socket notification and startup synchronization). It also provides `portable/sd-daemon.h`, which wraps the `systemd/sd-daemon.h` include file and stubs out `sd_notify` and `sd_listen_fds` if libsystemd-daemon was not available.
+
+### Bug fixes
+
+- Fix a cut and paste error that prevented `process_start_fakeroot` from working properly.
+
+## 5.0 (2013-12-27)
+
+### Backwards-incompatible changes
+
+- The `network_bind_*` functions now take a socket type as an additional argument so that they can be used with UDP-based services.
+
+### New features
+
+- `network_bind_all` now returns a boolean, which will be false if no sockets could be bound due to some error. Callers may check this instead of checking if the socket count is zero.
+- New `network_wait_any` function that waits for an array of file descriptors and returns the first one that selects ready for read. This can be used by UDP servers similar to `network_accept_any` for TCP servers.
+- `vector_free` and `cvector_free` now accept a NULL argument and silently do nothing. This allows for more concise cleanup code.
+- Provide new `process_start`, `process_start_fakeroot`, and `process_stop` functions in the process TAP add-on. Note that these require an Autoconf probe for `sys/select.h` and a replacement for a missing `mkstemp`. Rewrite the remctl TAP add-on to use this new API to start and stop remctld.
+- Add new `RRA_LIB_ZLIB` and `RRA_LIB_ZLIB_OPTIONAL` macros to probe for zlib, based on the Autoconf macros in INN. Contributed by Julien ÉLIE.
+- Add new `RRA_LIB_BDB`, `RRA_LIB_BDB_OPTIONAL`, and `RRA_LIB_BDB_NDBM` macros to probe for Berkeley DB and its ndbm compatibility layer, based on the Autoconf macros in INN. Contributed by Julien ÉLIE.
+
+### Bug fixes
+
+- The `network_bind_*` functions now more reliably set the socket errno on failure and log somewhat more informative error messages with warn.
+- The remctl TAP add-on now aborts if the remctld PID file already exists rather than removing it and continuing. Since the process is automatically stopped and the PID file removed on any normal test exit, its continued existence probably implies there's a random remctld process still running.
+
+### Other changes
+
+- Update to C TAP Harness 2.4.
+
+## 4.12 (2013-12-09)
+
+### New features
+
+- Add new `RRA_LIB_SASL` and `RRA_LIB_SASL_OPTIONAL` macros based on Autoconf macros in INN. Contributed by Julien ÉLIE. Currently, these only deal with Cyrus SASL, not GNU SASL.
+- Provide `KADM5_MISSING_KRB5_CONF_PARAMS` in `portable/kadmin.h` for kadmin implementations that don't define it, such as Heimdal.
+- Add `test_tmpdir` to Test::RRA::Automake. This works the same as the corresponding function in the C and shell TAP libraries: it creates a temporary directory for tests to use, returns the path, and attempts to remove the directory when the process exits.
+
+### Bug fixes
+
+- Fix a bug in the `*_OPTIONAL` version of all Autoconf macros using `lib-helper.m4` that would add `yes/include` and `yes/lib` to the compiler and linker search paths. Found by Julien ÉLIE.
+
+### Other changes
+
+- Add an ignore rule to the valgrind suppression file for memory allocated by dlopen on Linux, which appears to be unavoidable and not freed on dlclose.
+
+## 4.11 (2013-11-14)
+
+### Backwards-incompatible changes
+
+- `RRA_LIB_KRB5` and `RRA_LIB_KRB5_OPTIONAL` now define `HAVE_KRB5` instead of `HAVE_KERBEROS` and set `rra_use_KRB5` instead of `rra_use_kerberos`, for consistency with other macros, with the macro names, and with the other shell variables those macros set. All utility code, libraries, and tests included in rra-c-util have been updated accordingly.
+- `RRA_LIB_OPENSSL` and `RRA_LIB_OPENSSL_OPTIONAL` now define `HAVE_OPENSSL` instead of `HAVE_SSL` if the library is found to make the define consistent with the macro names and shell variables.
+
+### New features
+
+- All `*_OPTIONAL` m4 macros now set the corresponding `rra_use_*` shell variable to true if no explicit configure flags are given but the libraries are found at configure time, paralleling how the `HAVE_*` C preprocessor variables are defined.
+- `portable/socket.h` now defines `EAI_ADDRFAMILY` to `EAI_FAMILY` if it's not defined to let code compare against this obsolete error code unconditionally. Some older systems may have an `EAI_ADDRFAMILY` error code distinct from `EAI_FAMILY`.
+
+### Bug fixes
+
+- `RRA_LIB_KRB5_OPTIONAL` now correctly configures the package to not use Kerberos instead of failing if neither the new Kerberos error APIs nor `libcom_err` could be found.
+- Don't require use of Automake when using the Kerberos Autoconf macros. The `AM_CONDITIONAL` for the use of `libcom_err` is now ignored if Automake is not in use.
+- `RRA_LIB_OPENSSL_OPTIONAL` no longer aborts if libcrypto could not be found, and both it and `RRA_LIB_OPENSSL` now properly restore the default CPPFLAGS, LDFLAGS, and LIBS after probing for the libraries. Patch from Julien ÉLIE.
+- `RRA_LIB_OPENSSL` and `RRA_LIB_OPENSSL_OPTIONAL` now probe for `-ldl` first and add it to the dependency libraries unless `--enable-reduced-depends` is given. This is required to link with OpenSSL on AIX. Reported by Julien ÉLIE.
+- In `xasprintf` and `xvasprintf`, distinguish between failure to allocate memory and failure to format the output. Report the latter by passing 0 to the failure handler, and special-case that in the default failure handler to report a different error message.
+- Check the return status of `snprintf` when converting port numbers to strings in `network_bind_all` and `network_connect_host`, and use the correct format for the port number for the latter.
+- Check the return status of `vsnprintf` in the syslog message handlers for `die`, `warn`, and friends, and report an error with warn if `vsnprintf` fails.
+- In the `vasprintf` replacement, preserve errno if `snprintf` fails when formatting the string into the newly-allocated buffer.
+- Check the return status of `snprintf` in the `getnameinfo` and `inet_ntop` replacement functions instead of assuming that it will always succeed.
+
+### Other changes
+
+- Update to C TAP Harness 2.3.
+
+## 4.10 (2013-10-04)
+
+### Backwards-incompatible changes
+
+- The Autoconf macros for probing for the OpenSSL libraries have been renamed to `RRA_LIB_OPENSSL` instead of `RRA_LIB_SSL`, and all the substitution variables have similarly been changed. The m4 file is now `openssl.m4` and depends on `lib-helper.m4`. There is a new macro, `RRA_LIB_OPENSSL_OPTIONAL`, for packages with optional OpenSSL support. `HAVE_SSL` is now defined if the OpenSSL libraries were found.
+
+### New features
+
+- Add Autoconf macros for finding build flags for the TinyCDB library.
+- In the `use_prereq` function in Test::RRA, support version numbers containing underscores and report the required version number, if any, in the skip message printed if the test is skipped.
+- Support a `@STRICT_IGNORE` variable in the `perl.conf` configuration file for the standard tests for Perl scripts.
+- Include in `portable/kadmin.h` the header file defining kadmin error codes, add a probe for one of the two possible namings for that file, and adjust for the missing `KADM5_PASS_Q_GENERIC` error code in Heimdal.
+
+### Bug fixes
+
+- Replace `krb5_free_default_realm` with `krb5_xfree` on Heimdal, not `free`.
+- Add the appropriate gcc attribute to avoid leaking the dummy symbol used to keep the portability library from being empty when it is included in a shared object.
+
+## 4.9 (2013-08-14)
+
+### New features
+
+- Add support for `k_pioctl` to the portability layer for libkafs by providing a fallback to `lpioctl` when using the AFS libraries and a system call failure define if no library was found.
+- Improve the standard Perl tests to check POD under `examples`, `usr/bin`, and `usr/sbin` directories, not check SYNOPSIS sections for scripts, work correctly with packages missing `Build.PL` or a `t` directory, and also check style in files under a `usr` directory.
+- Add new `tests/perl/module-version-t` test for packages that have embedded Perl modules. This checks that the embedded Perl module versions match the package version and can optionally update all of the version numbers.
+
+### Bug fixes
+
+- Prototype the libkafs functions if the library was found but no header file was since some AFS builds don't provide headers.
+- `network_connect`, when given a timeout, now resumes waiting for the nonblocking connect after being interrupted by a signal. This can mean that a connect can take longer than the timeout if interrupted; hopefully both timeouts and catching signals are rare enough that this won't pose a serious issue.
+- Increase buffer sizes in the network timeout test to work properly with newer Linux kernels.
+- The PCRE Autoconf probe macros now correctly handle the case where the PCRE library exists but its header file does not, such as on Mac OS X.
+
+### Other changes
+
+- Update to C TAP Harness 2.2.
+
+## 4.8 (2013-03-15)
+
+### New features
+
+- Add new Test::RRA, Test::RRA::Automake, and Test::RRA::Config Perl modules collecting useful utility functions for tests written in Perl in packages that use the rra-c-util layout and structure. The tests in `tests/docs` and `tests/perl` now use these libraries, so packages using those test scripts should also include the `tests/tap/perl` directory in the distribution.
+- The `tests/perl/critic-t` and `tests/perl/minimum-version-t` tests now use `tests/data/perl.conf` for per-package configuration, making it easier to use the tests verbatim in multiple packages with different ignore lists or minimum version requirements.
+- Add a new `perl/t` directory that contains generic test programs suitable for standalone Perl modules or for projects that embed a Perl module build inside the project.
+
+### Bug fixes
+
+- The `tests/perl/strict-t` test now works properly for Perl scripts that make use of a Perl module that's built as part of the larger package build.
+- The Perl tests now more correctly handle testing of packages when the build directory is a subdirectory of the source directory.
+
+### Other changes
+
+- Update the perlcritic and perltidy configuration used for checking Perl coding style to match the current Stanford Perl coding style.
+- All C code in the package now cleanly passes `clang --analyze` with Clang 3.0.
+- Update to C TAP Harness 2.1.
+
+## 4.7 (2012-12-19)
+
+### New features
+
+- Add new portability wrapper for `sys/statvfs.h` that converts `statvfs` code to `statfs` code for older systems.
+- `portable/apr.h` now includes `apr_errno.h`, `apr_file_info.h`, and `apr_file_io.h` and handles backwards compatibility of the `APR_FOPEN_*` flags and `APR_FPROT_*` constants to APR 0.9.
+- Update `tests/docs/pod-t` and `tests/docs/pod-spelling-t` to use File::Spec rather than assuming UNIX paths, use Test::Spelling instead of hand-rolling its functionality, ignore `.git` and `perl` directories, and use my current Perl coding style. These tests are now more suitable for copying into other packages.
+- Add new generic tests for packages containing Perl: `tests/perl/critic-t`, `tests/perl/minimum-version-t`, and `tests/perl/strict-t`. Add configuration for perlcritic and perltidy for use with the test suite to `tests/data`. The minimum version test may require some configuration when copied into another package.
+- Add a valgrind suppression file in `tests/data` that is suitable for other projects using rra-c-util, particularly ones using Kerberos.
+
+### Bug fixes
+
+- When probing for Heimdal's libroken, probe for `roken_concat` (present since at least Heimdal 0.4) instead of `rk_simple_execve` (not present until Heimdal 1.3).
+- Probe for Kerberos headers using file existence checks instead of the compiler if a Kerberos root or include path was given. Otherwise, the compiler may find the wrong header in the system default include path and incorrectly assume `krb5.h` should be used instead of `krb5/krb5.h`.
+
+## 4.6 (2012-09-17)
+
+### New features
+
+- Add an `RRA_INCLUDES_APACHE` macro to `m4/apache.m4` that can be used to include a basic set of Apache headers when probing for declarations relevant to Apache modules.
+
+### Backwards-incompatible changes
+
+- Drop `concat` and `concatpath` from the util library. `asprintf` or `xasprintf`, provided by the portability and util libraries respectively, are entirely superior alternatives to `concat`. `concatpath` was only used in INN and will be reintroduced if I end up using it in my other software.
+- `xasprintf` and `xvasprintf` (in the util library) and `basprintf` and `bvasprintf` (in the TAP add-on) are now void functions and always call the xmalloc failure handler on any error, not just on `ENOMEM` errors. The faint chance that the underlying `asprintf` function could return some other error isn't worth the additional code complexity of still having to check the return status and then probably abort anyway.
+
+### Bug fixes
+
+- In the replacement kafs library, fix a compilation failure on Solaris 11 or later.
+- Strip `-g` and `-On` flags from `APACHE_CPPFLAGS` as returned by apxs to avoid forcing debugging and optimization strategy for Apache modules.
+
+### Other changes
+
+- Add POD documentation for `xmalloc`, `xcalloc`, and `xrealloc`.
+
+## 4.5 (2012-05-31)
+
+### New features
+
+- In the PAM utility library, cope with a NULL `pam_args` structure in `putil_args_free` and in `EXIT` logging to make handling of failure to allocate the pam_args structure simpler.
+- Add `KRB5_WELLKNOWN_NAME` and `KRB5_ANON_NAME` to the Kerberos portability header, used to form the anonymous principal name.
+- Add a replacement for `krb5_free_string` to the Kerberos portability header.
+
+### Bug fixes
+
+- In the PAM testing library, do not set a default value for the user but use the user member of the config struct without modification, even if it's NULL. This allows testing of PAM calls where no user is set.
+
+## 4.4 (2012-05-11)
+
+### Backwards-incompatible changes
+
+- Support for the `%*` wildcard in output in PAM test scripts has been removed. Use regular expressions instead.
+- The fakepam library now separates the priority from the log line when recording output from the PAM module instead of appending a string representation of the priority to the beginning of the output line. The layout of the output struct (returned by `pam_output`) has changed accordingly.
+- In the PAM testing framework, don't copy the provided password into the `PAM_AUTHTOK` item. Instead, take new configuration parameters `authtok` and `oldauthtok` that, if provided, are copied into the PAM data before running the script. This allows separate testing of a saved password and a password provided at a prompt. Document in the fakepam README file all of the possible configuration parameters.
+
+### New features
+
+- Add regular expression support to the PAM test library. Both output lines and PAM prompts can now be extended regular expressions instead of strings, indicated by surrounding them with slashes (`/`), and the actual output or prompt will be matched against the regular expression. If regular expression support is not available, the test will be skipped.
+- Various minor improvements to the scripted PAM testing framework: add `PAM_AUTHINFO_UNAVAIL` to the recognized PAM error codes, report output and prompt lines starting from 1 instead of 0, and report an error message rather than segfaulting if necessary parameters for a testing script are not provided.
+
+### Bug fixes
+
+- In the PAM utility logging functions, do not include a colon, space, and the PAM error if the provided PAM status was `PAM_SUCCESS`.
+- The `RRA_KRB5_CONFIG` helper macro for Kerberos library probes now checks whether `--deps` is supported by krb5-config and, if so, passes it in unless `--enable-reduced-depends` was passed to configure. This will fix link issues on some platforms where all dependency libraries need to be linked to ensure proper behavior.
+- `RRA_LIB_GSSAPI` and `RRA_LIB_KRB5` have been modified to use `RRA_KRB5_CONFIG` instead of duplicating their own krb5-config logic. This includes picking up the above change to use `--deps` if available. If including `m4/gssapi.m4` or `m4/krb5.m4` in another package, one must now also copy `m4/krb5-config.m4`.
+- `RRA_LIB_GSSAPI` no longer calls krb5-config with no arguments if the gssapi argument isn't supported and instead falls back to manual library probing. This is only relevant for very old versions of Kerberos.
+- In the Kerberos TAP add-on, fix cleanup handling of user password configuration and repeatedly-generated `krb5.conf` files.
+- Avoid using local in the `remctl.sh` and `kerberos.sh` TAP libraries and instead use a `tap_` prefix on variables, for portability to Solaris `/bin/sh`. Also avoid using `test_file_path` or `test_tmpdir` in backquotes inside double quotes to avoid a quoting bug in Solaris `/bin/sh`.
+- Make the `__attribute__` handling in `portable/macros.h` more aware of different versions and compilers. All attributes are now suppressed for GCC older than 2.96 (instead of 2.7), since `__malloc__` became available then. `__alloc_size__` is suppressed for GCC older than 4.3. Warnings about unknown diagnostics are suppressed for LLVM and Clang, which pretend to be GCC but don't support all the same attributes.
+- Fix several portability bugs in the network test suite. Patch from Jeffrey Hutzelman.
+
+### Other changes
+
+- Update to C TAP Harness 1.12.
+
+## 4.3 (2012-04-26)
+
+### Backwards-incompatible changes
+
+- Remove the bool arguments to `buffer_sprintf` and `buffer_vsprintf` and instead introduce new `buffer_append_sprintf` and `_vsprintf` functions to append to the buffer, which is what the functions did with a true argument. This avoids having a bool argument to functions, the meaning of which is often obscure in the calling code.
+
+### New features
+
+- Add a new `RRA_INCLUDES_GSSAPI` macro that can be used to get a set of standard includes when probing for GSS-API library features.
+- Move the probes for GSS-API include files and OID definitions into `RRA_LIB_GSSAPI`, since there's no downside to always running them.
+- Add parameter expansion support in the PAM options section to the PAM test script parser.
+
+### Bug fixes
+
+- Probe for GSS-API headers using file existence checks instead of the compiler if a GSS-API root or include path was given. Otherwise, the compiler may find the wrong header in the system default include path and incorrectly assume `gssapi/gssapi.h` should be used instead of `gssapi.h`. Thanks to Jeffrey Hutzelman for the idea.
+- Set `rra_use_remctl` to true in `RRA_LIB_REMCTL_OPTIONAL` if remctl libraries were found, following the documentation.
+
+### Other changes
+
+- Update to C TAP Harness 1.11.
+
+## 4.2 (2012-02-29)
+
+### Backwards-incompatible changes
+
+- Add reading of Kerberos username and password configuration to `kerberos_setup` in the Kerberos TAP add-on and always return a struct of configuration. Return the path to the keytab configuration and the corresponding principal, if present, and the principal, username, realm, and password from a password configuration, if present. Support requiring one or both configurations and calling `skip_all` if they're missing. Remove the alternative implementation of the Kerberos utility functions that doesn't require the Kerberos libraries and instead use `#ifdef` inside the primary implementation to handle this.
+- Significantly improve the remctl TAP add-on. Get the path to remctld from a `#define` via `Makefile.am` rather than requiring all test programs pass it in. Shut down remctld automatically at the end of the test suite to remove the requirement for explicit cleanup. Take the Kerberos configuration struct from the new `kerberos_setup` function and get the required configuration information from it. Add support for running remctld under fakeroot, and correctly handle shutting down remctld when run under fakeroot or valgrind.
+
+### New features
+
+- Add new `network_read` and `network_write` functions to the network utility library, which read from and write to network sockets with an optional timeout.
+- Update the `kerberos.sh` and `remctl.sh` TAP add-ons for the new `tests/config` location of Kerberos configuration and to use `test_tmpdir` for temporary files.
+
+### Bug fixes
+
+- Fix replacement `strndup` function to not assume that the string being duplicated is nul-terminated.
+- Avoid excessive memory allocation when duplicating short nul-terminated strings in `xstrndup`.
+- Fix the skipped test counts in the network utility test suite for systems that don't have IPv6 configured. Thanks, Felix Geyer.
+
+### Other changes
+
+- Add `-D_FORTIFY_SOURCE=2` to the default warning flags for more checks on glibc systems, and fix the resulting warnings in some of the test suite programs.
+- Update to C TAP Harness 1.10.
+
+## 4.1 (2011-12-29)
+
+### Backwards-incompatible changes
+
+- Remove Kerberos v4 portability code: Autoconf probes, the portability header, and the lifetime function replacements. None of my packages support Kerberos v4 any more and I can no longer test this code.
+
+### New features
+
+- Add a replacement for a missing `krb5_cc_get_full_name` function to the Kerberos portability layer.
+
+### Bug fixes
+
+- In the PAM utility library, when Kerberos support is available, fix initialization of time values in the module configuration on platforms (like S/390X) where `krb5_deltat` is not equivalent to long.
+
+## 4.0 (2011-12-24)
+
+### Backwards-incompatible changes
+
+- The fake PAM library now supports `PAM_AUTHTOK`, `PAM_OLDAUTHTOK`, and `PAM_CONV` items and more correctly implements the PAM environment. It also supports intercepting `getpwnam` calls and returning a synthetic structure, and intercepting Kerberos `krb5_kuserok` calls and using the configured home directory to find `.k5login`. Log output is now returned as an array of strings rather than concatenating all the messages together. The fake PAM library now depends on the TAP library and uses its facilities for allocating memory so that memory allocation failures are reported with bail.
+- The `kerberos_setup` TAP utility function now expects a test keytab to be in `tests/config/keytab` instead of `tests/data/test.keytab` and uses `tests/tmp` for the temporary ticket cache. It no longer needs the principal found in the keytab to be explicitly configured in `tests/data/test.principal`; instead, it reads the principal from the keytab.
+- Remove mkusage. This idea turns out to not be as useful as it looked, and the package of mine that was previously using it no longer is.
+
+### New features
+
+- The fake PAM library for testing now also supports a script-driven test infrastructure that uses configuration files to specify the PAM options, calls, flags, return status, prompts, responses, and logging output and supports callbacks to check the PAM status before it's closed. See `tests/fakepam/README` for more information.
+- Add `portable/pam.h` support for `PAM_EXTERN`.
+- In the Kerberos library probes, probe for both `krb5.h` and `krb5/krb5.h` and use the latter if the former isn't found. Add an `RRA_INCLUDES_KRB5` macro that expands into the headers to use for Kerberos probes. This allows the header to be found on NetBSD systems. Thanks to Fredrik Pettai for the report.
+- Add a probe for Kerberos kadmin client libraries. This uses a new framework for library probes (`m4/lib-helper.m4` and `m4/krb5-config.m4`) that may eventually be used for the other library probes. Add a portability wrapper around `kadm5/admin.h` and some example probes in `configure.ac`.
+- Add new TAP library add-on that defines `basprintf` and `bvasprintf`, which wrap `asprintf` and `vasprintf`, checking their return status and calling bail if they fail.
+- Add new Kerberos TAP utility functions `bail_krb5` and `diag_krb5` to append a Kerberos error message, `kerberos_config_password` to return Kerberos principal and password information from a file in `tests/config`, and `kerberos_keytab_principal` to return the first principal found in a keytab file (so that the user doesn't have to explicitly configure which principal to use once they've created the keytab)
+- Add a `kerberos_generate_conf` TAP utility function to generate a `krb5.conf` file for testing. The last supports changing the default realm, removing configuration that may interfere with what's being tested, and honoring a `krb5.conf` file put in `tests/config`. It uses a helper program, `generate-krb5-conf`, which must be in `tests/data`.
+- Add a Kerberos TAP utility function that uses the kadmin client library to set a password expiration time on a principal for software that needs to test behavior of expired passwords.
+
+### Bug fixes
+
+- Do not call `krb5_get_error_message` with a NULL context. Older versions of Heimdal will dereference the context unconditionally and segfault.
+- When logging the entrance to PAM functions in pam-util, convert flags into symbolic names. Also close a memory leak in `putil_log_failure` and allow for systems where `__func__` is defined by the system headers even though the compiler doesn't indicate a new enough C standard version (such as NetBSD).
+- When overriding defaults during PAM option parsing in pam-util, free any memory allocated for the old settings.
+- Fix `RRA_LIB_REMCTL_OPTIONAL` to not define `HAVE_REMCTL` even if the library wasn't found and to clear the variables used in Makefiles if the library isn't found.
+- Include `config.h` in `stdbool.h` unless it has already been included.
+
+### Other changes
+
+- Update to C TAP Harness 1.9.
+
+## 3.11 (2011-12-01)
+
+### New features
+
+- Add a portability wrapper around some common APR headers that provides macros missing from APR 0.9.
+
+### Bug fixes
+
+- In the network utility library, when a connection with a timeout concludes, properly store the recovered error code in errno where the caller can pick it up.  Fix some problems with the test suite for connect with timeout on systems where this cannot be tested by using a short listen queue.
+
+## 3.10 (2011-10-31)
+
+### New features
+
+- Provide `ssize_t` in `portable/system.h` if the system doesn't define it (Windows does not). Requires an additional check in `configure.ac` for users of `portable/system.h`. Patch from Matthew Loar.
+
+### Bug fixes
+
+- Correctly handle empty vectors in `vector_join` and `cvector_join`. Thanks to Richard Kettlewell for the test suite addition.
+- Fix the syntax of the typedefs for missing `socklen_t` and `sig_atomic_t`. Patch from Matthew Loar.
+- Fix the stripping of `-I/usr/include` from the output of krb5-config. The previous code used extended regular expressions, which cannot be relied on inside sed, and would have stripped include paths that start with `/usr/include`. Just use two sed invocations, with and without a trailing space. Thanks to Ken Dreyer for the report.
+- Fix `RRA_LIB_KRB5_OPTIONAL` to make Kerberos libraries really optional when called without `--enable-reduced-depends` and without setting a path to the Kerberos libraries.
+- Fix `RRA_LIB_REMCTL_OPTIONAL` to not require the remctl library be found when neither `--with-remctl` nor `--without-remctl` was given.
+
+## 3.9 (2011-09-23)
+
+### Backwards-incompatible changes
+
+- Stop providing or using `INADDR_LOOPBACK` in the socket portability code and instead use `htonl(0x7f000001UL)`. The byte-order of `INADDR_LOOPBACK` appears to be undefined in practice, so neither using it directly nor using it with `htonl` works reliably.
+
+### Bug fixes
+
+- The replacement for the Solaris and BSD function `issetugid` was mistakenly called `issetuidgid` instead, causing it to always be built. Use the correct function name so that the native function is used on platforms that provide it.
+- Always include `gssapi/gssapi_krb5.h` in `portable/gssapi.h` if it's available. Prefer `gssapi/gssapi.h` to `gssapi.h` in sample configure probes.
+- Use `typedef` instead of `#define` for defining `socklen_t` and `sig_atomic_t` if they're missing, following the recommendation in the Autoconf manual.
+- The Kerberos test setup TAP extension now registers its cleanup function as an `atexit` handler so the caller doesn't need to explicitly clean up. It also frees all allocated memory, including the returned principal and the stored environment variables, for cleaner valgrind analysis.
+- In the kinit and shell versions of the Kerberos test setup TAP extension, try to suppress getting new AFS tokens in Heimdal so that the test doesn't override a user's existing tokens.
+- Wait longer for remctld to start in the remctl setup TAP extension to allow time for running everything under valgrind.
+
+## 3.8 (2011-09-02)
+
+### Backwards-incompatible changes
+
+- The `network_connect` utility functions now take an optional timeout. If non-zero, a non-blocking connect is done with that timeout, rather than blocking on connect until the TCP stack gives up. The network utility code now depends on the fdflag code.
+- Use `PATH_KRB5_CONFIG` as the environment variable to set the path to krb5-config rather than `KRB5_CONFIG` in all the Autoconf macros that use it (`krb5.m4`, `gssapi.m4`, and `krb4.m4`), since the latter is used by the Kerberos libraries to specify an alternative path to `krb5.conf`.
+- Improve the `is_function_output` TAP add-on interface to take an opaque data pointer and pass it into the called function.
+
+### New features
+
+- Provide a function to free the results of `network_bind_all`.
+- Add an implementation of `fdflag_nonblocking` for Windows and allow `fdflag.c` to be built on Windows.
+- In the generic PAM option parser, add support for time configuration options. If Kerberos is available, these have a type of `krb5_deltat` and are parsed using the Kerberos library routine to parse a time interval. Without Kerberos, they fall back to longs and are parsed as numbers.
+- Support `pam_get_item` and `pam_set_item` in the fake PAM library used for testing PAM modules.
+- Add replacement for `krb5_verify_init_creds_opt_init`, which is missing from the AIX NAS Kerberos implementation in at least some versions.
+- Define the C preprocessor symbol `HAVE_KERBEROS` if `RRA_LIB_KRB5` is used, rather than only if `RRA_LIB_KRB5_OPTIONAL` is used and Kerberos was found. This simplifies reuse of code between mandatory-Kerberos and optional-Kerberos packages.
+- Check for `krb5_get_init_creds_opt_set_change_password_prompt`, `krb5_set_password`, and `krb5_get_init_creds_opt_set_pkinit`, replacing them as needed, and add new Autoconf macros to handle old nine-argument forms of the latter.
+- Add `RRA_LIB_REMCTL_OPTIONAL` to `m4/remctl.m4` for packages where the remctl dependency is not required. Define `HAVE_REMCTL` if remctl is present, including when using the non-optional macro.
+- Add a new `run_setup` TAP add-on function that runs a given command and calls bail if it fails, used for doing test setup in an external command. (Some things are easier to do in shell than in C.)
+
+### Bug fixes
+
+- In the Autoconf Kerberos macros, avoid krb5-config and use manual library probing if either `--with-krb5-include` or `--with-krb5-lib` is given. Similarly avoid use of krb5-config in the GSS-API Autoconf macros if `--with-gssapi-include` or `--with-gssapi-lib` are given. One generally doesn't specify specific directories like that unless krb5-config will be wrong.
+- Fix sample `configure.ac` probe for `krb5_kt_free_entry` prototype.
+- Define some macros missing from Solaris PAM in `portable/pam.h`.
+- Fix use of long long in `portable/mkstemp.c`.
+- Make the `getaddrinfo` replacement portable to systems that don't declare `h_errno` and don't define the `netdb.h` error constants.
+- Fix argument type for `network_bind_all` on Windows.
+
+### Other changes
+
+- Change Kerberos v5 to just Kerberos in various files. Version 5 has been the default version of Kerberos for over a decade.
+- Update to C TAP Harness 1.8.
+
+## 3.7 (2011-07-25)
+
+### New features
+
+- Add a new set of utility functions for managing a data buffer. A buffer dynamically resizes and has a concept of used and unused data, making it suitable for buffering and processing data from an input stream. It has associated functions for adding data to the buffer in various ways. Taken from work Russ Allbery did for INN's library, based on buffer code originally found in innd.
+- Add Autoconf macros for finding build flags for the APR and APR-Util libraries.
+- Add `ARRAY_SIZE` and `ARRAY_END` macros to `util/macros.h`.
+
+### Bug fixes
+
+- Fix error handling when `krb5_appdefault_string` returns without setting the result string. Fixes a possible segfault during configuration parsing on Mac OS X 10.7.
+- Abort during configure if building the replacement kafs library on a platform that uses regular system calls and `afs/param.h` is not found. The system call interface can't be built without the AFS headers, and it's better to fail with a descriptive message at configure time than with an obscure message at compile time.
+- Include `strings.h` in `portable/system.h` if it exists. Some platforms, such as FreeBSD, follow POSIX closely and only define `strncasecmp` here.
+- Prefer `gssapi/gssapi.h` to `gssapi.h` in `portable/gssapi.h`. On FreeBSD, `gssapi.h` is marked as deprecated and emits a warning.
+- Fix compiler warning in `util/messages.c` when printing an error about failed memory allocation.
+- Fix detection of whether the PAM API uses const on FreeBSD. Thanks to Julien ÉLIE for the report and testing.
+- When building rra-c-util itself, only build kafs support if `--enable-kafs` is passed to configure. This avoids having rra-c-util fail to build on platforms that require the OpenAFS headers or libraries when AFS is not installed.
+
+### Other changes
+
+- Add a pointer to rra-c-util to all files meant to be copied into other software packages.
+
+## 3.6 (2011-06-07)
+
+### Bug fixes
+
+- Fix error handling in `network_accept_any` if select returns with no error but without setting any of the sockets as ready. This should be a rare edge case.
+- Fix `pam_getenvlist` in the fakepam testing library to return an empty environment instead of NULL when no environment variables have been set.
+
+## 3.5 (2011-05-31)
+
+### New features
+
+- Add new `network_accept_any` function, which takes an array of file descriptors (similar to what's returned by `network_bind_all`) and blocks accepting incoming connections on any of those file descriptors.
+- The `remctld_start` function of the TAP remctl add-on now takes optional additional arguments to remctld.
+
+### Bug fixes
+
+- When binding an IPv6-only socket with `network_bind_ipv6` and not binding to all local addresses, use `IP_FREEBIND` if it's available. This allows binding to addresses that are not yet configured, which is much more common with IPv6 given IPv6 autoconfiguration.
+- Skip `portable/getaddrinfo` test on systems where invalid hostnames still resolve.
+
+## 3.4 (2011-05-05)
+
+### Bug fixes
+
+- The `gssapi.m4` fix for Heimdal without libroken was incomplete. It now doesn't attempt to link with libroken when probing for GSS-API symbols. Thanks, Antoine Verheijen.
+- Remove an unused variable in `snprintf` testing and properly check the return status of `xasprintf` and `xvasprintf`.
+- Add casts to the pam-util library in places where signed to unsigned conversions have been confirmed to not be bugs, in preparation for using `-Wconversion`. This warning flag is still unused by default due a bug in handling htons.
+
+### Other changes
+
+- Update GCC warning flags for make warnings to 4.6.1, adding `-Wjump-misses-init`, `-Wlogical-op`, and `-Wredundant-decls`.
+
+## 3.3 (2011-04-28)
+
+### Backwards-incompatible changes
+
+- When binding IPv6 sockets, restrict them to only IPv6 connections rather than also allowing IPv4 connections where possible. The default behavior, for maximum backward compatibility, is for IPv6-bound sockets to accept IPv4 connections and expose those connections as IPv4 mapped addresses. This causes various problems, however, such as with reuse of bound ports (which was causing test suite failures) and requirements to handle IPv4 mapped addresses. The network model (also used by BSD systems) where IPv6 sockets only accept IPv6 connections is cleaner, even if it requires juggling multiple sockets in some situations.
+
+### Bug fixes
+
+- The `gssapi.m4` Autoconf macros now handle the bundled Heimdal on OpenBSD that doesn't have a separate libroken. Thanks to Antoine Verheijen for the analysis.
+- Define the `KRB5_USES_COM_ERR` Automake conditional to false when `--without-krb5` is used rather than leaving it undefined, since the latter can cause configure failures. Patch from Andrew Deason.
+- Fix underquoting in `m4/socket.m4`.
+- Add a test of `krb5_realm` to `configure.ac` so that pam-util will compile with Heimdal. Also fix kafs compilation flags to build properly with Heimdal kafs if it's in a non-standard path.
+
+### Other changes
+
+- Update to C TAP Harness 1.7.
+
+## 3.2 (2011-03-03)
+
+### Bug fixes
+
+- In the `strndup` replacement, check if the string being duplicated is NULL, and if so, return NULL and set errno to `EINVAL` rather than segfaulting. Thanks, Carsten Hey.
+- Zero `sockaddr_in` and `sockaddr_in6` in the network library before using one, just in case non-zeroed padding bytes might cause problems. Thanks, Bo Lindbergh.
+
+## 3.1 (2011-01-23)
+
+### New features
+
+- Add a replacement for a missing `strndup` (not available on Mac OS X).
+- Add a new type of configuration parameter to the pam-util option parser that stores a vector but takes its default value as a string (which will be split the way that a PAM option setting would be split).
+
+### Bug fixes
+
+- Fix compilation of the embedded kafs layer for Mac OS X 10.6 and hopefully fix detection of whether AFS is present. Thanks, Andy Cobaugh.
+- Add `vector_copy`, `vector_exec`, and `vector_exec_env` to the pam-util vector library. Fix `vector_clear` to not attempt to free strings that are NULL.
+- Fix broken GCC attribute markers on the pam-util vector library, which could cause compilation problems with non-GCC compilers.
+- When probing for Kerberos libraries, always add any supplemental libraries found to that point to the link command. This will fix configure failures on platforms without working transitive shared library dependencies.
+- When probing for `ibm_svc/krb5_svc.h` (part of AIX's bundled Kerberos implementation), include `krb5.h` before attempting to include that header to quiet confusing Autoconf warnings. Reported by Wilfried Weiss.
+
+### Other changes
+
+- Add explicit license statements to the files meant to be copied into other packages rather than referring to LICENSE.
+
+## 3.0 (2010-12-29)
+
+### Backwards-incompatible changes
+
+- Move `kafs/kafs.h` to `portable/kafs.h`, since it's more a portability header than a header solely for the kafs replacement library.
+
+### New features
+
+- Add a PAM utility library to assist in developing PAM modules. This utility library provides functions for logging and table-driven option parsing, including reading options from `krb5.conf`. It also provides a version of the `util/vector.c` library that doesn't die on memory allocation failure and hence is suitable for use in PAM modules.
+- Add a fake PAM library used for testing PAM modules. This fake PAM library provides just enough of the PAM library functionality to make PAM module function calls into a single module, but doesn't look at the system-wide configuration, allowing PAM modules to be more easily tested without changes to the system configuration. It also allows test programs to inspect the internals of the PAM state.
+- Add untested support for the ioctl AFS system call methods on Mac OS X and Solaris 11 to the kafs replacement library.
+- Add a replacement for `k_haspag` for use with either the kafs replacement library or for systems with a libkafs or libkopenafs that don't have that function.
+- Export `k_pioctl` from the kafs replacement library and provide a definition of `struct ViceIoctl`. This is mainly for the use of `k_haspag`, but may prove useful for making other AFS system calls.
+- Add handling of `krb5_free_default_realm` and `krb5_init_secure_context` to the Kerberos portability layer.
+- Add a replacement for missing `krb5_appdefault_*` functions for compatibility with AIX's included Kerberos, which provides the profile library but not the Kerberos interface to query it.
+
+### Bug fixes
+
+- Fix the `--with-libkafs-lib` and `--with-libkafs-include` configure     options to work properly.
+- Properly include prerequisite Kerberos and ioctl headers before including the Heimdal `kafs.h` header.
+- Fix broken GCC attribute markers causing problems with compilation on Windows (and likely any non-GCC compiler).
+
+### Other changes
+
+- Update to C TAP Harness 1.6.
+
+## 2.7 (2010-09-20)
+
+### Bug fixes
+
+- For Kerberos and GSS-API checks, look for krb5-config in `/usr/kerberos/bin` after checking the user's PATH. This is the default location on Red Hat Enterprise prior to RHEL6.
+
+### Other changes
+
+- Enable all configure logic in `configure.ac` that was previously commented out so that it is tested when building rra-c-util. Building this package directly will now require working GSS-API libraries, but since it already required working Kerberos libraries, this should not make a noticeable difference.
+
+## 2.6 (2010-08-25)
+
+### New features
+
+- Add portability code for old MIT Kerberos and Heimdal libraries without `krb5_get_init_creds_opt_free`.
+- Add new test library function `ktutil_list` to output details of the contents of a keytab, used to compare two keytabs.
+
+### Bug fixes
+
+- When probing for Apache module build flags, call `apr-config --includes` and add it to the preprocessor flags. Fixes build failures on Red Hat Enterprise Linux 4 and 5.
+- When probing for UNIX domain sockets, include `sys/types.h` before `sys/socket.h` so that the test program compiles on OpenBSD. Thanks, Wim Lewis.
+- Fix determination of the test principal in the `kerberos.sh` and `remctl.sh` test libraries.
+- Properly include the Apache, cURL, OpenLDAP, OpenSSL, PCRE, and `ld --version-script` M4 checks in the distribution.
+
+## 2.5 (2010-07-07)
+
+### New features
+
+- Add an Autoconf macro set to locate the compiler and linker flags for Apache modules, allowing those modules to be built without using apxs to do the compilation and linking.
+- Add Autoconf macros for detecting cURL, OpenLDAP, and OpenSSL libraries.
+- Add an Autoconf macro that checks whether the linker supports the `--version-script` flag with a simple version script that just assigns symbol versions and marks some symbols as local.
+- Add `vector_split_multi` and `cvector_split_multi` functions to `util/vector.h`, which split a string into a vector using any character found in a string of separators as a separator.
+- Add a replacement for the Solaris `issetuidgid` function.
+- Add Kerberos portability glue for `krb5_data_free` versus `krb5_free_data_contents` and improve checking for `krb5_kt_free_entry` with older versions of MIT Kerberos.
+- Allow users to suppress including `config.h` in `portable/krb5.h` so that the Kerberos portability code can be used in situations where a stripped-down `config.h` is needed, such as Apache modules.
+
+### Bug fixes
+
+- The `krb5.m4` Autoconf macros now handle the bundled Heimdal on OpenBSD that doesn't have a separate libroken. 
+- If `KRB5_CPPFLAGS`, `KRB5_LDFLAGS`, or `KRB5_LIBS` are set before calling the macro, their values will be preserved and added to whatever the macro sets, which allows the caller to set up custom values for particular operating systems.
+- Restore the default `CPPFLAGS`, `LDFLAGS`, and `LIBS` after probing for GSS-API libraries with `--enable-reduced-depends`. Previously, the default variables were left containing extra GSS-API-specific flags.
+
+### Other changes
+
+- Update to C TAP Harness 1.4.
+
+## 2.4 (2010-04-22)
+
+### New features
+
+- Add Autoconf macros to probe for the PCRE library, using pcre-config where possible and falling back on direct probing.
+
+### Bug fixes
+
+- Fix definition of replacement `krb5_free_error_message` to not be static.
+- Fix header guard for `util/xwrite.h`. Previously, the header would be incorrectly skipped if `util/xmalloc.h` was already included.
+
+### Other changes
+
+- Update to C TAP Harness 1.2.
+
+## 2.3 (2010-02-15)
+
+### New features
+
+- Add a portability layer for the Kerberos API, which supplies something close to the Heimdal Kerberos API on either MIT or Heimdal and adjusts with functions missing from older versions. Use it in the Kerberos TAP test module.
+- Add `die` and `warn` wrappers for Kerberos errors to the utility library.
+- Add a portability wrapper around PAM libraries and replacements for `pam_syslog` and `pam_vsyslog`, and an Autoconf macro to determine whether the PAM library headers use const.
+- Add a new TAP add-on for running a function in a separate process and then checking its exit status and output.
+
+### Bug fixes
+
+- Disable the xmalloc test except for maintainers. It's too fragile, and isn't catching problems with `xmalloc` itself.
+- Adjust the Kerberos TAP test library add-ons for the split of `util/util.h`.
+
+## 2.2 (2010-01-18)
+
+### Backwards-incompatible changes
+
+- Break `util/util.h` apart into separate header files for every utility function grouping. This requires include changes in all packages importing rra-c-util, but makes it much easier to update header file changes for only those components that a downstream package users.
+
+### New features
+
+- Add the GCC function attributes `alloc_size`, `malloc`, and `nonnull` to the prototypes for utility functions where appropriate, and add the format attribute to `xasprintf`.
+- `kafs/kafs.h` now defines `HAVE_KAFS` if any form of AFS support is available. This allows programs using it to, for instance, display different help output based on whether AFS support is compiled in (as opposed to available on the current system, which is what `k_hasafs` determines).
+
+### Bug fixes
+
+- Improve error handling when `network_connect` or `network_client_create` are called with an unknown address domain for the source address.
+
+### Other changes
+
+- Switch to `AC_TYPE_LONG_LONG_INT` instead of `AC_CHECK_TYPES([long long])` as provided by newer Autoconfs, and change the `snprintf` replacement to assume the compiler provides long double.
+- Remove unnecessary dependencies on the util library in the portable test suite.
+
+## 2.1 (2009-11-25)
+
+### New features
+
+- Add a new Autoconf macro, `RRA_SET_LIBDIR`, which sets the `libdir` variable based on the size of an integer in the compilation environment and whether `/usr/lib32` or `/usr/lib64` exist.
+
+### Bug fixes
+
+- Use a `socket_type` typedef rather than int directly to store the file descriptors of sockets and, on Windows, typedef that to `SOCKET` instead of int. Update the function signatures of the network utility functions appropriately. Compare `socket_type` variables against an `INVALID_SOCKET` define instead of -1. Fixes portability issues to 64-bit Windows. Thanks, Jeffrey Altman.
+- Add a cast to the log handler for Windows so that it works properly on 64-bit Windows. Thanks, Jeffrey Altman.
+
+## 2.0 (2009-08-15)
+
+### New features
+
+- Add a replacement for the libkafs library for AFS PAG and token manipulation. This is a minimal version of the library with no external dependencies on Linux and only minimal AFS dependencies on other platforms that implements just enough of libkafs functionality to support pam-afs-session and kstart. This is a somewhat-modified version of the kafs replacement files in kstart 3.14 that uses a separate library directory and Automake conditionals rather than `AC_LIBOBJ` and the portable directory and supports more specific configure options.
+- Add a replacement for `mkstemp` on systems that don't have it.
+- Add `m4/krb4.m4`, which probes for Kerberos v4 libraries in the same ways that `m4/krb5.m4` probes for Kerberos v5 libraries.
+- Add a portability wrapper around Kerberos v4 headers and replacements for Kerberos v4 lifetime functions for implementations that don't have them.
+- Add `m4/socket-unix.m4`, which contains some probes for UNIX domain socket support taken from INN with modifications by Julien ÉLIE.
+- `RRA_SET_LDFLAGS` (`m4/lib-pathname.m4`) now appends to the variable rather than only setting it and takes an optional third argument naming a subdirectory of the library directory to add to the library search path.
+- Enable GCC format string checking for the replacement `asprintf` function.
+- Enable Automake silent rules. For a quieter build, pass the `--enable-silent-rules` option to configure or build with `make V=0`.
+
+### Bug fixes
+
+- If krb5-config produces results that don't work for Kerberos v5 of GSS-API probes, fall back on manual library probing rather than just failing. This fixes problems with GSS-API probes on Solaris where krb5-config is present but doesn't know about GSS-API. Thanks to Andy Cobaugh for the report.
+- Suppress error output from krb5-config in Kerberos v5 and GSS-API probes so that it's not mixed in with configure output.
+- Do not try to use a non-executable krb5-config for GSS-API probes and prefer the `KRB5_CONFIG` environment variable over a path constructed from the `--with-gssapi` argument.
+- Use `AS_HELP_STRING` instead of the deprecated `AC_HELP_STRING` in all Autoconf m4 files.
+- Fix network test suite failures when IPv6 is available but disabled in the kernel.
+
+### Other changes
+
+- Revert the separation of the message functions that call exit into a separate source file. Unfortunately, even as a separate source file, it's still linked into shared libraries, so the additional code duplication isn't worth it.
+- Update to C TAP Harness 1.1.
+
+## 1.0 (2009-05-22)
+
+Initial public release based on the portability code that shipped with remctl 2.13 with some additional files from other current releases of my software packages. The changes below are relative to that version.
+
+### Backwards-incompatible changes
+
+- Separate out the message functions that call exit to a separate source file and therefore a separate object file. This will mean that shared libraries that don't call die won't link this file and hence won't include a reference to exit, which will avoid errors from some package test tools.
+- Remove `RRA_LIB_*_SET` functions. When using Automake, one should never put one's own flags into the `CPPFLAGS`, `CFLAGS`, and `LDFLAGS` variables, since the user may override them. Instead, `AM_*` versions should be set in `Makefile.am`. This can be done using the existing substitution variables, so the `*_SET` functions were always wrong.
+
+### New features
+
+- Add a `vector_addn` function that adds a counted string to a vector (similar to `strndup`). There is no cvector equivalent.
+- Updated test suite to the current version of C TAP Harness and its C TAP library. Rewrite the extra functions that were in libtest as add-ons to the TAP library.
+- Add a TAP test library Kerberos initialization function to use the native Kerberos library functions as well as a version that calls kinit. The former will be more useful for packages that already depend on the Kerberos libraries.
+- Add TAP test library functions to clean up the Kerberos ticket cache and to cleanly shut down remctld.
+- Add TAP shell libraries for initializing Kerberos and starting and stopping remctld.
+
+### Bug fixes
+
+- On BSD/OS, despite the `AI_ADDRCONFIG` flag being present in the system headers, passing it into `getaddrinfo` results in an error. Test for this at configure time and, if it doesn't work, hide the system `AI_ADDRCONFIG` definition.
+- Declare `message_fatal_cleanup` extern in `util.h`. Fixes compilation problems on Mac OS X and probably elsewhere.
+- Update GSS-API probes for portability to Solaris 10's native generic GSS-API libraries. Thanks, Peter Eriksson.
+- Change from `AC_TRY_*` to `AC_*_IFELSE` for all Autoconf macros.
+- Specify a mode when creating a sentinel in the daemon test. This fixes compiler warnings with newer gcc.
+- Make the xmalloc test suite robust against builddir != srcdir builds that change the default file name of the test program.
+
+### Other changes
+
+- Update the example configure.ac for Autoconf 2.63, adding `AC_CONFIG_MACRO_DIR` and using `AC_USE_SYSTEM_EXTENSIONS` instead of `AC_AIX` and `AC_GNU_SOURCE`.

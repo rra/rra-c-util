@@ -9,7 +9,7 @@
 # The canonical version of this file is maintained in the rra-c-util package,
 # which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
-# Copyright 2016, 2018-2021 Russ Allbery <eagle@eyrie.org>
+# Copyright 2016, 2018-2021, 2024 Russ Allbery <eagle@eyrie.org>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -43,7 +43,10 @@ use File::Find qw(find);
 use Test::More;
 
 # Bad patterns to search for.
-my @BAD_REGEXES = (qr{ http:// \S+ [.]eyrie[.]org }xms);
+my @BAD_REGEXES = (
+    qr{ http:// \S+ [.]eyrie[.]org }xms,
+    qr{ \$VERSION \s+ = \s+ }xms,
+);
 my @BAD_STRINGS = qw(rra@stanford.edu RRA_MAINTAINER_TESTS);
 
 # File or directory names to always skip.
