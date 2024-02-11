@@ -13,7 +13,7 @@
 # SPDX-License-Identifier: MIT
 
 use 5.012;
-use strict;
+use autodie;
 use warnings;
 
 # C_TAP_SOURCE may not be set if we're running this script manually to update
@@ -45,7 +45,8 @@ sub news_version {
     my ($package, $version, $changelog, $path);
     for my $path (qw(CHANGELOG.md ../CHANGELOG.md)) {
         if (-e $path) {
-            open($changelog, q{<}, $path) or die "$0: cannot open $path: $!\n";
+            open($changelog, q{<}, $path);
+            last;
         }
     }
     if (!$changelog) {
@@ -63,7 +64,7 @@ sub news_version {
         }
         ## use critic
     }
-    close($changelog) or die "$0: error reading from CHANGELOG.md: $!\n";
+    close($changelog);
     if (!defined($package)) {
         die "$0: cannot find package name in CHANGELOG.md\n";
     }

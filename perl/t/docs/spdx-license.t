@@ -32,7 +32,7 @@
 # SPDX-License-Identifier: MIT
 
 use 5.012;
-use strict;
+use autodie;
 use warnings;
 
 use lib 't/lib';
@@ -104,7 +104,7 @@ sub check_file {
 
     # Scan the file.
     my ($saw_legacy_notice, $saw_spdx, $skip_spdx);
-    open(my $file, '<', $filename) or BAIL_OUT("Cannot open $path");
+    open(my $file, '<', $filename);
     while (defined(my $line = <$file>)) {
         if ($line =~ m{ \b See \s+ LICENSE \s+ for \s+ licensing }xms) {
             $saw_legacy_notice = 1;
@@ -118,7 +118,7 @@ sub check_file {
             last;
         }
     }
-    close($file) or BAIL_OUT("Cannot close $path");
+    close($file);
 
     # If there is a legacy license notice, report a failure regardless of file
     # size.  Otherwise, skip files under 1KB.  They can be rolled up into the

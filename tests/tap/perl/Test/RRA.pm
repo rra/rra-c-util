@@ -11,8 +11,8 @@
 package Test::RRA v11.0.0;
 
 use 5.012;
+use autodie;
 use base qw(Exporter);
-use strict;
 use warnings;
 
 use Carp qw(croak);
@@ -57,9 +57,9 @@ sub is_file_contents {
     my ($got, $expected, $message) = @_;
 
     # If they're equal, this is simple.
-    open(my $fh, '<', $expected) or BAIL_OUT("Cannot open $expected: $!\n");
+    open(my $fh, '<', $expected);
     my $data = do { local $/ = undef; <$fh> };
-    close($fh) or BAIL_OUT("Cannot close $expected: $!\n");
+    close($fh);
     if ($got eq $data) {
         is($got, $data, $message);
         return;

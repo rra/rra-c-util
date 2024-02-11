@@ -16,8 +16,8 @@
 package Test::RRA::Automake v11.0.0;
 
 use 5.012;
+use autodie;
 use base qw(Exporter);
-use strict;
 use warnings;
 
 use Exporter;
@@ -151,7 +151,7 @@ sub automake_setup {
         pop(@dirs);
     }
     my $root = File::Spec->catpath($vol, File::Spec->catdir(@dirs), q{});
-    chdir($root) or BAIL_OUT("cannot chdir to $root: $!");
+    chdir($root);
 
     # If C_TAP_BUILD is a subdirectory of C_TAP_SOURCE, add it to the global
     # ignore list.
@@ -218,14 +218,14 @@ sub perl_dirs {
     my %skip_tests = map { $_ => 1 } @skip_tests;
 
     # Build the list of top-level directories to test.
-    opendir(my $rootdir, q{.}) or BAIL_OUT("cannot open .: $!");
+    opendir(my $rootdir, q{.});
     my @dirs = grep { -d && !$skip{$_} } readdir($rootdir);
     closedir($rootdir);
     @dirs = File::Spec->no_upwards(@dirs);
 
     # Add the list of subdirectories of the tests directory.
     if (-d 'tests') {
-        opendir(my $testsdir, q{tests}) or BAIL_OUT("cannot open tests: $!");
+        opendir(my $testsdir, q{tests});
 
         # Skip if found in %skip_tests or if not a directory.
         my $is_skipped = sub {

@@ -12,7 +12,7 @@
 # SPDX-License-Identifier: MIT
 
 use 5.012;
-use strict;
+use autodie;
 use warnings;
 
 use lib 't/lib';

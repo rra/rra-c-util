@@ -9,8 +9,8 @@
 package Test::RRA::ModuleVersion v11.0.0;
 
 use 5.012;
+use autodie;
 use base qw(Exporter);
-use strict;
 use warnings;
 
 use File::Find qw(find);
@@ -69,15 +69,15 @@ sub _module_files {
 #  Throws: Text exception on I/O failure or inability to find version
 sub _module_version {
     my ($file) = @_;
-    open(my $data, q{<}, $file) or die "$0: cannot open $file: $!\n";
+    open(my $data, q{<}, $file);
     while (defined(my $line = <$data>)) {
         if ($line =~ $REGEX_VERSION_PACKAGE) {
             my ($prefix, $version, $suffix) = ($1, $2, $3);
-            close($data) or die "$0: error reading from $file: $!\n";
+            close($data);
             return $version;
         }
     }
-    close($data) or die "$0: error reading from $file: $!\n";
+    close($data);
     die "$0: cannot find version number in $file\n";
 }
 
@@ -93,9 +93,8 @@ sub _update_module_version {
     my ($file, $version) = @_;
 
     # Scan for the version and replace it.
-    open(my $in, q{<}, $file) or die "$0: cannot open $file: $!\n";
-    open(my $out, q{>}, "$file.new")
-      or die "$0: cannot create $file.new: $!\n";
+    open(my $in, q{<}, $file);
+    open(my $out, q{>}, "$file.new");
   SCAN:
     while (defined(my $line = <$in>)) {
         if ($line =~ s{ $REGEX_VERSION_PACKAGE }{$1$version$3}xms) {
@@ -107,12 +106,11 @@ sub _update_module_version {
 
     # Copy the rest of the input file to the output file.
     print {$out} <$in> or die "$0: cannot write to $file.new: $!\n";
-    close($out) or die "$0: cannot flush $file.new: $!\n";
-    close($in) or die "$0: error reading from $file: $!\n";
+    close($out);
+    close($in);
 
     # All done.  Rename the new file over top of the old file.
-    rename("$file.new", $file)
-      or die "$0: cannot rename $file.new to $file: $!\n";
+    rename("$file.new", $file);
     return;
 }
 

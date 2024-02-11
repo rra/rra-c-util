@@ -31,8 +31,8 @@
 #
 # SPDX-License-Identifier: MIT
 
-use 5.010;
-use strict;
+use 5.012;
+use autodie;
 use warnings;
 
 use lib 't/lib';
@@ -72,24 +72,24 @@ sub check_file {
     return if !-T $filename;
 
     # Scan the file.
-    open(my $fh, '<', $filename) or BAIL_OUT("Cannot open $File::Find::name");
+    open(my $fh, '<', $filename);
     while (defined(my $line = <$fh>)) {
         for my $regex (@BAD_REGEXES) {
             if ($line =~ $regex) {
                 ok(0, "$File::Find::name contains $regex");
-                close($fh) or BAIL_OUT("Cannot close $File::Find::name");
+                close($fh);
                 return;
             }
         }
         for my $string (@BAD_STRINGS) {
             if (index($line, $string) != -1) {
                 ok(0, "$File::Find::name contains $string");
-                close($fh) or BAIL_OUT("Cannot close $File::Find::name");
+                close($fh);
                 return;
             }
         }
     }
-    close($fh) or BAIL_OUT("Cannot close $File::Find::name");
+    close($fh);
     ok(1, $File::Find::name);
     return;
 }
