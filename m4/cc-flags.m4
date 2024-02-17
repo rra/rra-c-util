@@ -17,7 +17,7 @@ dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
-dnl Copyright 2016-2023 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2016-2024 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2006, 2009, 2016
 dnl     by Internet Systems Consortium, Inc. ("ISC")
 dnl
@@ -97,7 +97,7 @@ dnl
 dnl   -Wcast-qual                     Some structs require casting away const
 dnl   -Wdisabled-macro-expansion      Triggers on libc (sigaction.sa_handler)
 dnl   -Wpadded                        Not an actual problem
-dnl   -Wreserved-id-macros            Autoconf sets several of these normally
+dnl   -Wreserved-id-macro             Autoconf sets several of these normally
 dnl   -Wreserved-identifer            False positive with FD_ZERO
 dnl   -Wsign-conversion               Too many fiddly changes for the benefit
 dnl   -Wtautological-pointer-compare  False positives with for loops
