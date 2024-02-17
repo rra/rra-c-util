@@ -1,4 +1,4 @@
-# serial 1
+# serial 2
 
 dnl Helper functions to manage compiler variables.
 dnl

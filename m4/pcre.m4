@@ -1,4 +1,4 @@
-# serial 1
+# serial 2
 
 dnl Find the compiler and linker flags for PCRE.
 dnl

@@ -1,4 +1,4 @@
-# serial 1
+# serial 2
 
 dnl Test for a libkafs library or replacement.
 dnl
