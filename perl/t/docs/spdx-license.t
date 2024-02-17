@@ -46,7 +46,6 @@ use Test::More;
 # File name (the file without any directory component) and path patterns to
 # skip for this check.
 ## no critic (RegularExpressions::ProhibitFixedStringMatches)
-#<<<
 my @IGNORE = (
     qr{ \A Build ([.] (?!PL) .*)? \z }ixms, # Generated file from Build.PL
     qr{ \A LICENSE \z }xms,                 # Generated file, no license itself
@@ -61,19 +60,18 @@ my @IGNORE = (
 );
 my @IGNORE_PATHS = (
     @SPDX_IGNORE,
-    qr{ \A [.] / [.] git/ }xms,             # Version control files
-    qr{ \A [.] / [.] pc/ }xms,              # quilt metadata files
-    qr{ \A [.] /_build/ }xms,               # Module::Build metadata
-    qr{ \A [.] /blib/ }xms,                 # Perl build system artifacts
-    qr{ \A [.] /cover_db/ }xms,             # Artifacts from coverage testing
-    qr{ \A [.] /debian/ }xms,               # Found in debian/* branches
-    qr{ \A [.] /local/ }xms,                # Carton local lib
-    qr{ \A [.] /README ( [.] .* )? \z }xms, # Package license should be fine
-    qr{ \A [.] /share/ }xms,                # Package license should be fine
-    qr{ \A [.] /t/data .* [.] json \z }xms, # Test metadata
-    qr{ \A [.] /t/tmp }xms,                 # Test metadata
+    qr{ \A [.] / [.] git/ }xms,               # Version control files
+    qr{ \A [.] / [.] pc/ }xms,                # quilt metadata files
+    qr{ \A [.] /_build/ }xms,                 # Module::Build metadata
+    qr{ \A [.] /blib/ }xms,                   # Perl build system artifacts
+    qr{ \A [.] /cover_db/ }xms,               # Artifacts from coverage testing
+    qr{ \A [.] /debian/ }xms,                 # Found in debian/* branches
+    qr{ \A [.] /local/ }xms,                  # Carton local lib
+    qr{ \A [.] /README ( [.] .* )? \z }xms,   # Package license should be fine
+    qr{ \A [.] /share/ }xms,                  # Package license should be fine
+    qr{ \A [.] /t/data .* [.] json \z }xms,   # Test metadata
+    qr{ \A [.] /t/tmp }xms,                   # Test metadata
 );
-#>>>
 ## use critic
 
 # Only run this test during automated testing, since failure doesn't indicate
