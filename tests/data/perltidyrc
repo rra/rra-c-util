@@ -35,5 +35,4 @@
 -wtc=m          # add trailing commas to all multi-line lists
 -atc            # add trailing commas where needed
 -dtc            # delete trailing commas where needed
--dwic           # remove commas interfering with welds
 -viu            # align trailing unless with if (not that I use unless)
