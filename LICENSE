@@ -8,7 +8,7 @@ Comment: This file documents the copyright statements and licenses for
 
 Files: *
 Copyright: 1997, 2000-2002 Benjamin Sittler
-  2000-2002, 2004-2023 Russ Allbery <eagle@eyrie.org>
+  2000-2002, 2004-2024 Russ Allbery <eagle@eyrie.org>
   2001-2002, 2004-2014
     The Board of Trustees of the Leland Stanford Junior University
 License: Expat
@@ -35,7 +35,7 @@ Files: .clang-format docs/api/xmalloc.3 docs/api/xmalloc.pod
  tests/portable/reallocarray-t.c tests/portable/setenv-t.c
  tests/portable/strndup-t.c tests/util/buffer-t.c tests/util/vector-t.c
  util/macros.h util/vector.c util/vector.h
-Copyright: 2000-2023 Russ Allbery <eagle@eyrie.org>
+Copyright: 2000-2024 Russ Allbery <eagle@eyrie.org>
   2005-2014 The Board of Trustees of the Leland Stanford Junior University
   2015 Julien ÉLIE <julien@trigofacile.com>
 License: all-permissive
@@ -47,7 +47,7 @@ License: all-permissive
 Files: Makefile.in
 Copyright: 1994-2021 Free Software Foundation, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2015-2021 Russ Allbery <eagle@eyrie.org>
+  2015-2022 Russ Allbery <eagle@eyrie.org>
 License: FSF-unlimited and Expat
 
 Files: aclocal.m4
@@ -105,7 +105,7 @@ Files: configure.ac m4/apache.m4 m4/apr.m4 m4/aprutil.m4 m4/bdb.m4
  m4/libevent.m4 m4/openssl.m4 m4/pam-const.m4 m4/pcre.m4 m4/pcre2.m4
  m4/remctl.m4 m4/sasl.m4 m4/sqlite3.m4 m4/systemd.m4 m4/tinycdb.m4
  m4/vamacros.m4 m4/zlib.m4
-Copyright: 1999-2001, 2003, 2007, 2013-2018, 2020-2022
+Copyright: 1999-2001, 2003, 2007, 2013-2018, 2020-2022, 2024
     Russ Allbery <eagle@eyrie.org>
   2002-2014 The Board of Trustees of the Leland Stanford Junior University
   2007-2008 Markus Moeller
@@ -123,8 +123,8 @@ Copyright: 1991, 1994-2003 The Internet Software Consortium and Rich Salz
   1998-2003 The Internet Software Consortium
   2004-2011, 2016 Internet Systems Consortium, Inc.
   2008-2014 The Board of Trustees of the Leland Stanford Junior University
-  2009, 2011, 2015, 2018, 2021 Julien ÉLIE <julien@trigofacile.com>
-  2014-2022 Russ Allbery <eagle@eyrie.org>
+  2009, 2011, 2015, 2018, 2021, 2024 Julien ÉLIE <julien@trigofacile.com>
+  2014-2024 Russ Allbery <eagle@eyrie.org>
 License: ISC
  Permission to use, copy, modify, and distribute this software for any
  purpose with or without fee is hereby granted, provided that the above
