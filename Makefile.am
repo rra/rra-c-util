@@ -1,7 +1,7 @@
 # Automake makefile for rra-c-util.
 #
 # Written by Russ Allbery <eagle@eyrie.org
-# Copyright 2015-2022 Russ Allbery <eagle@eyrie.org>
+# Copyright 2015-2022, 2024 Russ Allbery <eagle@eyrie.org>
 # Copyright 2008-2014
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -295,10 +295,11 @@ check-local: $(check_PROGRAMS) perl/blib/lib/Empty.pm
 # Used by maintainers to check the source code with cppcheck.
 check-cppcheck:
 	cd $(abs_top_srcdir) &&						\
-	    find . -name .git -prune -o -name '*.[ch]' -print		\
+	    find . -name .git -prune -o -name '*.c' -print		\
 	    | cppcheck -q --force --error-exitcode=2 --file-list=-	\
 		--suppressions-list=tests/data/cppcheck.supp		\
-		--enable=warning,performance,portability,style
+		--enable=warning,performance,portability,style		\
+		--check-level=exhaustive
 
 # The full path to valgrind and its options, used when doing valgrind
 # testing.
