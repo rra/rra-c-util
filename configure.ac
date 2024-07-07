@@ -1,7 +1,8 @@
 dnl Autoconf configuration for rra-c-util.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2000, 2003, 2013-2018, 2020-2022 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2000, 2003, 2013-2018, 2020-2022, 2024
+dnl     Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2002-2014
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
@@ -18,8 +19,8 @@ AC_INIT([rra-c-util], [10.4], [eagle@eyrie.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_LIBOBJ_DIR([portable])
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE([1.11 check-news dist-xz foreign silent-rules subdir-objects
-    -Wall -Werror])
+AM_INIT_AUTOMAKE([1.11 dist-xz foreign silent-rules subdir-objects -Wall
+    -Werror])
 AM_MAINTAINER_MODE
 
 dnl Detect unexpanded macros.
