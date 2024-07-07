@@ -49,9 +49,9 @@ main(void)
     struct addrinfo *ai, *first;
     struct addrinfo hints;
     struct sockaddr_in *saddr;
-    struct hostent *host;
+    const struct hostent *host;
     struct in_addr addr, *addrs;
-    struct servent *service;
+    const struct servent *service;
     int i, result, count;
     int found;
 

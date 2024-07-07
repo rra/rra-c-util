@@ -9,7 +9,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2017, 2020 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017, 2020, 2024 Russ Allbery <eagle@eyrie.org>
  * Copyright 2010-2011, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -51,7 +51,7 @@
 int
 pam_get_data(const pam_handle_t *pamh, const char *name, const void **data)
 {
-    struct fakepam_data *item;
+    const struct fakepam_data *item;
 
     for (item = pamh->data; item != NULL; item = item->next)
         if (strcmp(item->name, name) == 0) {

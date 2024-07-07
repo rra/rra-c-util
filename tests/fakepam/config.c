@@ -10,7 +10,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2017-2018, 2020 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017-2018, 2020, 2024 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011-2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -157,7 +157,8 @@ static char *
 readline(FILE *file)
 {
     char buffer[BUFSIZ];
-    char *line, *first;
+    char *line;
+    const char *first;
 
     do {
         line = fgets(buffer, sizeof(buffer), file);
@@ -426,7 +427,7 @@ static void
 split_options(char *string, struct options *options,
               const struct script_config *config)
 {
-    char *opt;
+    const char *opt;
     size_t size, count;
 
     for (opt = strtok(string, " "); opt != NULL; opt = strtok(NULL, " ")) {
@@ -462,7 +463,8 @@ static void
 parse_options(FILE *script, struct work *work,
               const struct script_config *config)
 {
-    char *line, *group, *token;
+    char *line, *token;
+    const char *group;
     size_t length = 0;
     enum group_type type;
 
@@ -497,9 +499,10 @@ parse_options(FILE *script, struct work *work,
  * action struct to fill in with the call and the option flags.
  */
 static void
-parse_call(char *token, struct action *action)
+parse_call(const char *token, struct action *action)
 {
-    char *flags, *flag;
+    char *flags;
+    const char *flag;
 
     action->flags = 0;
     flags = strchr(token, '(');
@@ -528,7 +531,8 @@ static struct action *
 parse_run(FILE *script)
 {
     struct action *head = NULL, *current = NULL, *next;
-    char *line, *token, *call;
+    char *line, *token;
+    const char *call;
     size_t length = 0;
 
     for (line = readline(script); line != NULL; line = readline(script)) {
@@ -576,7 +580,8 @@ parse_run(FILE *script)
 static int
 parse_end(FILE *script)
 {
-    char *line, *token, *flag;
+    char *line, *token;
+    const char *flag;
     size_t length = 0;
     int flags = PAM_SUCCESS;
 
@@ -622,7 +627,8 @@ parse_end(FILE *script)
 static struct output *
 parse_output(FILE *script, const struct script_config *config)
 {
-    char *line, *token, *message;
+    char *line, *message;
+    const char *token;
     struct output *output;
     int priority;
 
@@ -662,7 +668,8 @@ parse_prompts(FILE *script, const struct script_config *config)
 {
     struct prompts *prompts = NULL;
     struct prompt *prompt;
-    char *line, *token, *style, *end;
+    char *line, *token, *end;
+    const char *style;
     size_t size, count, i;
     size_t length = 0;
 

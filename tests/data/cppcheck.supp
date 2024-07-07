@@ -17,6 +17,10 @@
 //
 // SPDX-License-Identifier: FSFAP
 
+// I'm not going to add const to every callback function and then cast the
+// function type when passing in the callback.
+constParameterCallback
+
 // I like declaring variables at the top of a function rather than cluttering
 // every if and loop body with declarations.
 variableScope
@@ -24,6 +28,13 @@ variableScope
 // strlen of a constant string is more maintainable code than hard-coding the
 // string length.
 constArgument:tests/runtests.c:804
+
+// cppcheck doesn't understand some cases where prototypes have to match
+// or where const is added via macros such as PAM_CONST.
+constParameterPointer:pam-util/options.c:469
+constParameterPointer:tests/fakepam/data.c:150
+constParameterPointer:tests/fakepam/general.c:131
+constParameterPointer:tests/fakepam/logging.c:100
 
 // False positive due to recursive function.
 knownConditionTrueFalse:portable/getopt.c:146
@@ -59,6 +70,11 @@ nullPointerRedundantCheck:tests/plugin/mit-t.c:97
 // Setting the variable to NULL explicitly after deallocation.
 redundantAssignment:tests/pam-util/options-t.c
 
+// Bug in cppcheck 2.7.  Two possible struct layouts are chosen based on the
+// ABI, and the one chosen is used, but cppcheck always warns about both even
+// if the preprocessor conditionals are identical.
+unusedStructMember:kafs/sys-solaris.c
+
 // (remctl) Bug in cppcheck 1.89 (fixed in 2.3).  The address of these
 // variables are passed to a PHP function.
 uninitvar:php/php_remctl.c:119
@@ -75,8 +91,3 @@ redundantAssignment:tests/server/acl-t.c
 // (pam-krb5) cppcheck doesn't recognize the unused attribute on labels.
 unusedLabel:module/auth.c:895
 unusedLabelConfiguration:module/auth.c:895
-
-// Bug in cppcheck 2.7.  Two possible struct layouts are chosen based on the
-// ABI, and the one chosen is used, but cppcheck always warns about both even
-// if the preprocessor conditionals are identical.
-unusedStructMember:kafs/sys-solaris.c
