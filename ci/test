@@ -5,7 +5,7 @@
 # This script is normally run in a test container or VM, such as via GitHub
 # Actions.
 #
-# Copyright 2015-2020 Russ Allbery <eagle@eyrie.org>
+# Copyright 2015-2020, 2024 Russ Allbery <eagle@eyrie.org>
 #
 # SPDX-License-Identifier: MIT
 
@@ -27,5 +27,6 @@ make warnings
 # Test with valgrind.
 make check-valgrind
 
-# Run some additional checks.
-make check-cppcheck
+# Run some additional checks.  (Temporarily disabled until the GitHub runners
+# use a new enough version of cppcheck to support --check-level=exhaustive.)
+#make check-cppcheck
