@@ -9,6 +9,7 @@ Find changes for the upcoming release in the project's [changelog.d directory](h
 <!-- scriv-insert-here -->
 
 <a id='changelog-11.0.0'></a>
+
 ## 11.0.0 (2024-07-07)
 
 ### Backwards-incompatible changes
