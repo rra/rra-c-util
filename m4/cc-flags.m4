@@ -1,4 +1,4 @@
-# serial 2
+# serial 3
 
 dnl Check whether the compiler supports particular flags.
 dnl
@@ -17,7 +17,7 @@ dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
-dnl Copyright 2016-2024 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2016-2025 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2006, 2009, 2016
 dnl     by Internet Systems Consortium, Inc. ("ISC")
 dnl
@@ -116,9 +116,10 @@ AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
      m4_foreach_w([flag],
         [-Weverything -Wno-cast-qual -Wno-disabled-macro-expansion -Wno-padded
          -Wno-sign-conversion -Wno-reserved-id-macro -Wno-reserved-identifier
-         -Wno-tautological-pointer-compare -Wno-undef -Wno-unreachable-code
-         -Wno-unreachable-code-return -Wno-unsafe-buffer-usage
-         -Wno-unused-macros -Wno-used-but-marked-unused],
+         -Wno-switch-default -Wno-tautological-pointer-compare -Wno-undef
+         -Wno-unreachable-code -Wno-unreachable-code-return
+         -Wno-unsafe-buffer-usage -Wno-unused-macros
+         -Wno-used-but-marked-unused],
         [RRA_PROG_CC_FLAG(flag,
             [WARNINGS_CFLAGS="${WARNINGS_CFLAGS} flag"])])],
     [WARNINGS_CFLAGS="-g -O2 -D_FORTIFY_SOURCE=2 -Werror"
