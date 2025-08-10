@@ -10,7 +10,7 @@
 # which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
 # Written by Russ Allbery <eagle@eyrie.org>
-# Copyright 2018-2022 Russ Allbery <eagle@eyrie.org>
+# Copyright 2018-2022, 2025 Russ Allbery <eagle@eyrie.org>
 # Copyright 2011-2013
 #     The Board of Trustees of the Leland Stanford Junior University
 #
@@ -46,11 +46,7 @@ verbose  = %f:%l:%c: [%p] %m (%e, Severity: %s)\n
 # Subroutines::RequireFinalReturn, and I prefer the brevity of the simple
 # return statement.  I don't think the empty list versus undef behavior is
 # that confusing.
-#
-# This should be Community::EmptyReturn, which is the new name of the module,
-# but currently ignores have to use the Freenode::EmptyReturn name instead.
 [-Community::EmptyReturn]
-[-Freenode::EmptyReturn]
 
 # This recommends using given/when, but Perl has marked those as experimental
 # and cautions against using when.
