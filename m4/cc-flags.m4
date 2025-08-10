@@ -100,6 +100,7 @@ dnl   -Wpadded                        Not an actual problem
 dnl   -Wreserved-id-macro             Autoconf sets several of these normally
 dnl   -Wreserved-identifer            False positive with FD_ZERO
 dnl   -Wsign-conversion               Too many fiddly changes for the benefit
+dnl   -Wswitch-default                False positives with switches on enums
 dnl   -Wtautological-pointer-compare  False positives with for loops
 dnl   -Wundef                         Conflicts with Autoconf probe results
 dnl   -Wunreachable-code              Happens with optional compilation
