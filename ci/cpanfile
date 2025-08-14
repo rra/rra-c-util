@@ -12,6 +12,7 @@ on 'test' => sub {
     suggests 'IPC::System::Simple';
     suggests 'Perl6::Slurp';
     suggests 'Perl::Critic::Community';
+    suggests 'Perl::Critic::Pulp';
     suggests 'Test::Kwalitee';
     suggests 'Test::MinimumVersion';
     suggests 'Test::Perl::Critic';
