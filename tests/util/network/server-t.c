@@ -118,7 +118,7 @@ ipv6_works(void)
  * true, expects to succeed in connecting; otherwise, fail the test (by
  * exiting with a non-zero status) if the connection is successful.
  *
- * If the succeed argument is true, this is guarateed to never return.
+ * If the succeed argument is true, this is guaranteed to never return.
  */
 static void
 client_writer(const char *host, const char *source, bool succeed)
@@ -174,7 +174,7 @@ client_ipv4_udp_writer(const char *source)
 
 
 /*
- * The same as client_ipv4_udp_writer, but sents the packet via IPv6 instead.
+ * The same as client_ipv4_udp_writer, but sends the packet via IPv6 instead.
  * If somehow this was called without IPv6 being available (which should be
  * impossible), do nothing and exit with a non-zero status.
  */
@@ -512,7 +512,7 @@ test_any(void)
     /* Bind our socket.
      *
      * If the host has no IPv4 addresses, we may have only an IPv6 socket and
-     * thus can't us an IPv4 client.  Determine the address family of the
+     * thus can't use an IPv4 client.  Determine the address family of the
      * first socket so that we can use an appropriate client.
      */
     if (!network_bind_all(SOCK_STREAM, 11119, &fds, &count))
@@ -568,7 +568,7 @@ test_any_udp(void)
      * Bind our UDP socket.
      *
      * If the host has no IPv4 addresses, we may have only an IPv6 socket and
-     * thus can't us an IPv4 client.  Determine the address family of the
+     * thus can't use an IPv4 client.  Determine the address family of the
      * first socket so that we can use an appropriate client.
      */
     if (!network_bind_all(SOCK_DGRAM, 11119, &fds, &count))

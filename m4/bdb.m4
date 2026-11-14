@@ -22,7 +22,7 @@ dnl if the Berkeley DB library is found and --without-bdb is not given.
 dnl
 dnl This file also provides RRA_LIB_BDB_NDBM, which checks whether the
 dnl Berkeley DB library has ndbm support.  It then defines HAVE_BDB_NDBM and
-dnl sets rra_cv_lib_bdb_ndbm to yes if ndbm compatibility layer for Berkely DB
+dnl sets rra_cv_lib_bdb_ndbm to yes if ndbm compatibility layer for Berkeley DB
 dnl is available.  Either RRA_LIB_BDB or RRA_LIB_BDB_OPTIONAL must be called
 dnl before calling this macro.
 dnl
