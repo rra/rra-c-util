@@ -21,7 +21,7 @@ dnl macros, their values will be added to whatever the macros discover.
 dnl
 dnl KRB5_CPPFLAGS_WARNINGS will be set to the same value as KRB5_CPPFLAGS but
 dnl with any occurrences of -I changed to -isystem.  This may be useful to
-dnl suppress warnings from the Kerberos header files when building with and
+dnl suppress warnings from the Kerberos header files when building with
 dnl aggressive warning flags.  Be aware that this change will change the
 dnl compiler header file search order as well.
 dnl
