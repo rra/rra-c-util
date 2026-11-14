@@ -71,7 +71,7 @@ bool network_bind_all(int type, unsigned short port, socket_type **fds,
 void network_bind_all_free(socket_type *fds);
 
 /*
- * Wait on an array of file descriptor for one of them to select ready for
+ * Wait on an array of file descriptors for one of them to select ready for
  * read, and return the first file descriptor that does so.  This is primarily
  * intended for UDP services listening on multiple file descriptors.  TCP
  * services will probably want to use network_accept_any instead.
