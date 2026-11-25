@@ -5,7 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2005, 2013, 2016-2018, 2020 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2005, 2013, 2016-2018, 2020, 2026 Russ Allbery <eagle@eyrie.org>
  * Copyright 2009-2013
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -154,8 +154,13 @@ main(void)
 
     /* Test setting various socket options. */
     fd = socket(PF_INET6, SOCK_STREAM, IPPROTO_IP);
-    if (fd == INVALID_SOCKET)
+    if (fd == INVALID_SOCKET) {
+        if (socket_errno == EAFNOSUPPORT || socket_errno == EPROTONOSUPPORT) {
+            skip_block(6, "IPv6 sockets not supported");
+            return 0;
+        }
         sysbail("cannot create socket");
+    }
     network_set_reuseaddr(fd);
 #ifdef SO_REUSEADDR
     flag = 0;
