@@ -13,7 +13,7 @@
  * documentation is at <https://www.eyrie.org/~eagle/software/c-tap-harness/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2009-2019, 2021, 2024 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2009-2019, 2021, 2024, 2026 Russ Allbery <eagle@eyrie.org>
  * Copyright 2001-2002, 2004-2008, 2011-2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -956,10 +956,6 @@ test_file_path_free(char *path)
  * directory if it does not.  Returns the path to the temporary directory in
  * newly allocated memory, and calls bail on any failure.  The return value
  * should be freed with test_tmpdir_free.
- *
- * This function uses sprintf because it attempts to be independent of all
- * other portability layers.  The use immediately after a memory allocation
- * should be safe without using snprintf or strlcpy/strlcat.
  */
 char *
 test_tmpdir(void)

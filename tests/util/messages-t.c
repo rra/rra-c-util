@@ -5,7 +5,8 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2002, 2004-2005, 2015, 2017, 2020 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2002, 2004-2005, 2015, 2017, 2020, 2026
+ *     Russ Allbery <eagle@eyrie.org>
  * Copyright 2009-2012
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -286,7 +287,7 @@ main(void)
     is_function_output(test12, NULL, 0, "7 0 warning\n", "test12");
     is_function_output(test13, NULL, 1, "5 0 fatal\n", "test13");
 
-    sprintf(buff, "%d", EPERM);
+    snprintf(buff, sizeof(buff), "%d", EPERM);
 
     xasprintf(&output, "7 %d warning\n7 %d warning\n", EPERM, EPERM);
     is_function_output(test14, NULL, 0, output, "test14");
