@@ -10,7 +10,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2017-2018, 2020, 2024 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2017-2018, 2020, 2024, 2026 Russ Allbery <eagle@eyrie.org>
  * Copyright 2011-2012, 2014
  *     The Board of Trustees of the Leland Stanford Junior University
  *
@@ -499,7 +499,7 @@ parse_options(FILE *script, struct work *work,
  * action struct to fill in with the call and the option flags.
  */
 static void
-parse_call(const char *token, struct action *action)
+parse_call(char *token, struct action *action)
 {
     char *flags;
     const char *flag;
@@ -531,8 +531,7 @@ static struct action *
 parse_run(FILE *script)
 {
     struct action *head = NULL, *current = NULL, *next;
-    char *line, *token;
-    const char *call;
+    char *line, *token, *call;
     size_t length = 0;
 
     for (line = readline(script); line != NULL; line = readline(script)) {
