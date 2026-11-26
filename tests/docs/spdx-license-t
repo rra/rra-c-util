@@ -9,7 +9,7 @@
 # The canonical version of this file is maintained in the rra-c-util package,
 # which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 #
-# Copyright 2018-2024 Russ Allbery <eagle@eyrie.org>
+# Copyright 2018-2024, 2026 Russ Allbery <eagle@eyrie.org>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -122,7 +122,7 @@ sub check_file {
         if ($line =~ m{ \b See \s+ LICENSE \s+ for \s+ licensing }xms) {
             $saw_legacy_notice = 1;
         }
-        if ($line =~ m{ \b SPDX-License-Identifier: \s+ \S+ }xms) {
+        if ($line =~ m{ \b SPDX\\?-License\\?-Identifier: \s+ \S+ }xms) {
             $saw_spdx = 1;
             last;
         }
