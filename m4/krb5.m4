@@ -21,7 +21,7 @@ dnl macros, their values will be added to whatever the macros discover.
 dnl
 dnl KRB5_CPPFLAGS_WARNINGS will be set to the same value as KRB5_CPPFLAGS but
 dnl with any occurrences of -I changed to -isystem.  This may be useful to
-dnl suppress warnings from the Kerberos header files when building with and
+dnl suppress warnings from the Kerberos header files when building with
 dnl aggressive warning flags.  Be aware that this change will change the
 dnl compiler header file search order as well.
 dnl
@@ -52,7 +52,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2018, 2020-2022 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2018, 2020-2022, 2026 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2005-2011, 2013-2014
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl

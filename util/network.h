@@ -5,7 +5,7 @@
  * which can be found at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
  *
  * Written by Russ Allbery <eagle@eyrie.org>
- * Copyright 2014, 2016-2017 Russ Allbery <eagle@eyrie.org>
+ * Copyright 2014, 2016-2017, 2026 Russ Allbery <eagle@eyrie.org>
  * Copyright 2009-2013
  *     The Board of Trustees of the Leland Stanford Junior University
  * Copyright 2004-2010 Internet Systems Consortium, Inc. ("ISC")
@@ -71,7 +71,7 @@ bool network_bind_all(int type, unsigned short port, socket_type **fds,
 void network_bind_all_free(socket_type *fds);
 
 /*
- * Wait on an array of file descriptor for one of them to select ready for
+ * Wait on an array of file descriptors for one of them to select ready for
  * read, and return the first file descriptor that does so.  This is primarily
  * intended for UDP services listening on multiple file descriptors.  TCP
  * services will probably want to use network_accept_any instead.

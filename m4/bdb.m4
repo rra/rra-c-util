@@ -22,9 +22,9 @@ dnl if the Berkeley DB library is found and --without-bdb is not given.
 dnl
 dnl This file also provides RRA_LIB_BDB_NDBM, which checks whether the
 dnl Berkeley DB library has ndbm support.  It then defines HAVE_BDB_NDBM and
-dnl sets rra_cv_lib_bdb_ndbm to yes if ndbm compatibility layer for Berkely DB
-dnl is available.  Either RRA_LIB_BDB or RRA_LIB_BDB_OPTIONAL must be called
-dnl before calling this macro.
+dnl sets rra_cv_lib_bdb_ndbm to yes if ndbm compatibility layer for Berkeley
+dnl DB is available.  Either RRA_LIB_BDB or RRA_LIB_BDB_OPTIONAL must be
+dnl called before calling this macro.
 dnl
 dnl Depends on the lib-helper.m4 framework.
 dnl
@@ -32,7 +32,7 @@ dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
 dnl Written by Russ Allbery <eagle@eyrie.org>
-dnl Copyright 2018, 2022 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2018, 2022, 2026 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2013
 dnl     The Board of Trustees of the Leland Stanford Junior University
 dnl
