@@ -17,7 +17,7 @@ dnl
 dnl The canonical version of this file is maintained in the rra-c-util
 dnl package, available at <https://www.eyrie.org/~eagle/software/rra-c-util/>.
 dnl
-dnl Copyright 2016-2025 Russ Allbery <eagle@eyrie.org>
+dnl Copyright 2016-2026 Russ Allbery <eagle@eyrie.org>
 dnl Copyright 2006, 2009, 2016
 dnl     by Internet Systems Consortium, Inc. ("ISC")
 dnl
@@ -94,9 +94,13 @@ dnl
 dnl For Clang, we try to use -Weverything, but we have to disable some of the
 dnl warnings:
 dnl
+dnl   -Wc++-keyword                   Intended for C++, not applicable to C
 dnl   -Wcast-qual                     Some structs require casting away const
 dnl   -Wdisabled-macro-expansion      Triggers on libc (sigaction.sa_handler)
+dnl   -Wimplicit-void-ptr-cast        Intended for C++, not applicable to C
 dnl   -Wpadded                        Not an actual problem
+dnl   -Wpre-c11-compat                False positives with glibc headers
+dnl   -Wpre-c23-compat                False positive with bool
 dnl   -Wreserved-id-macro             Autoconf sets several of these normally
 dnl   -Wreserved-identifer            False positive with FD_ZERO
 dnl   -Wsign-conversion               Too many fiddly changes for the benefit
@@ -116,9 +120,12 @@ AC_DEFUN([RRA_PROG_CC_WARNINGS_FLAGS],
  AS_IF([test x"$CLANG" = xyes],
     [WARNINGS_CFLAGS="-Werror"
      m4_foreach_w([flag],
-        [-Weverything -Wno-cast-qual -Wno-disabled-macro-expansion -Wno-padded
-         -Wno-sign-conversion -Wno-reserved-id-macro -Wno-reserved-identifier
-         -Wno-switch-default -Wno-tautological-pointer-compare -Wno-undef
+        [-Weverything -Wno-c++-keyword -Wno-cast-qual
+         -Wno-disabled-macro-expansion -Wno-implicit-void-ptr-cast
+         -Wno-padded -Wno-pre-c11-compat -Wno-pre-c23-compat
+         -Wno-sign-conversion -Wno-reserved-id-macro
+         -Wno-reserved-identifier -Wno-switch-default
+         -Wno-tautological-pointer-compare -Wno-undef
          -Wno-unknown-warning-option -Wno-unreachable-code
          -Wno-unreachable-code-return -Wno-unsafe-buffer-usage
          -Wno-unused-macros -Wno-used-but-marked-unused],
