@@ -37,6 +37,12 @@
 
 #include <errno.h>
 #include <signal.h>
+#ifdef HAVE_SYS_SELECT_H
+#    include <sys/select.h>
+#endif
+#ifdef HAVE_SYS_TIME_H
+#    include <sys/time.h>
+#endif
 #include <sys/wait.h>
 
 #include <tests/tap/basic.h>
@@ -59,12 +65,21 @@ static bool
 ipv6_works(void)
 {
     socket_type fd, client, server;
+    fd_set set;
+    struct timeval tv;
 
     /*
      * Create the socket and then try to connect to it with a short timeout
      * and accept it on the server side.  If this works, IPv6 is supported.
+     * The socket has to listen.  Otherwise, some systems like macOS silently
+     * drop the connection attempt instead of refusing it.
      */
     fd = network_bind_ipv6(SOCK_STREAM, "::1", 11119);
+    if (fd != INVALID_SOCKET)
+        if (listen(fd, 1) < 0) {
+            close(fd);
+            fd = INVALID_SOCKET;
+        }
     if (fd != INVALID_SOCKET) {
         fdflag_nonblocking(fd, true);
         client = network_connect_host("::1", 11119, NULL, 1);
@@ -73,6 +88,16 @@ ipv6_works(void)
             if (socket_errno == ETIMEDOUT || socket_errno == ENETUNREACH)
                 return false;
         } else {
+            /*
+             * Even though the connect already returned, it's necessary to
+             * wait for the listening file server to be readable before
+             * calling accept on some operating systems such as OpenBSD.
+             */
+            FD_ZERO(&set);
+            FD_SET(fd, &set);
+            tv.tv_sec = 1;
+            tv.tv_usec = 0;
+            select(fd + 1, &set, NULL, NULL, &tv);
             server = accept(fd, NULL, NULL);
             close(fd);
             if (server == INVALID_SOCKET) {
@@ -119,6 +144,10 @@ ipv6_works(void)
  * true, expects to succeed in connecting; otherwise, fail the test (by
  * exiting with a non-zero status) if the connection is successful.
  *
+ * When the connection is expected to fail, use a short timeout.  Some
+ * systems, like macOS, silently drop connection attempts when a socket isn't
+ * listening instead of refusing them.
+ * 
  * If the succeed argument is true, this is guaranteed to never return.
  */
 static void
@@ -127,7 +156,7 @@ client_writer(const char *host, const char *source, bool succeed)
     socket_type fd;
     FILE *out;
 
-    fd = network_connect_host(host, 11119, source, 0);
+    fd = network_connect_host(host, 11119, source, succeed ? 0 : 1);
     if (fd == INVALID_SOCKET) {
         if (succeed)
             _exit(1);
