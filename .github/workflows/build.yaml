@@ -1,6 +1,6 @@
 # Workflow for GitHub Actions testing.
 #
-# Copyright 2015-2020, 2022, 2025 Russ Allbery <eagle@eyrie.org>
+# Copyright 2015-2020, 2022, 2025-2026 Russ Allbery <eagle@eyrie.org>
 #
 # SPDX-License-Identifier: MIT
 
@@ -33,7 +33,7 @@ jobs:
       - name: Get Perl version
         id: get-perl
         run: |
-          perl -e 'print "::set-output name=version::", $^V, "\n"'
+          perl -e 'print "version=", $^V, "\n"' >> $GITHUB_OUTPUT
 
       - name: Cache Perl modules
         uses: actions/cache@v6
