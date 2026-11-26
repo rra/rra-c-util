@@ -1,4 +1,4 @@
-# serial 4
+# serial 5
 
 dnl Check whether the compiler supports particular flags.
 dnl
